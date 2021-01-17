@@ -14,32 +14,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.3}A Note on Custom Gradients}{2}{section.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.4}Updating TensorFlow Variables After Applying Gradients}{2}{section.1.4}
+\contentsline {section}{\numberline {1.4}Updating TensorFlow Variables After Applying Gradients}{3}{section.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.5}Other Considerations}{3}{section.1.5}
+\contentsline {section}{\numberline {1.5}Other Considerations}{4}{section.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Technical Approach}{4}{chapter.2}
+\contentsline {chapter}{\numberline {2}Technical Approach}{5}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Section}{4}{section.2.1}
+\contentsline {section}{\numberline {2.1}Section}{5}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.1}Example Subsection}{4}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.1}Example Subsection}{5}{subsection.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Example Subsubsection}{4}{subsubsection*.4}
+\contentsline {subsubsection}{Example Subsubsection}{5}{subsubsection*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Results}{6}{chapter.3}
+\contentsline {chapter}{\numberline {3}Results}{7}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Discussion}{7}{chapter.4}
+\contentsline {chapter}{\numberline {4}Discussion}{8}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{8}{chapter.5}
+\contentsline {chapter}{\numberline {5}Conclusion}{9}{chapter.5}
 \defcounter {refsection}{0}\relax 
 \renewcommand {\cftchappresnum }{Appendix }
 \defcounter {refsection}{0}\relax 
 \renewcommand {\cftchapnumwidth }{6em}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Experimental Equipment}{10}{Appendix.1.A}
+\contentsline {chapter}{\numberline {A}Experimental Equipment}{11}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Data Processing}{11}{Appendix.1.B}
+\contentsline {chapter}{\numberline {B}Data Processing}{12}{Appendix.1.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{12}{chapter*.6}
+\contentsline {chapter}{References}{13}{chapter*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Vita}{13}{chapter*.7}
+\contentsline {chapter}{Vita}{14}{chapter*.7}

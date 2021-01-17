@@ -230,6 +230,22 @@
   \field{year}{2015}
 \endentry
 
+\entry{keras}{misc}{}
+  \true{moreauthor}
+  \name{author}{1}{}{%
+    {{}%
+     {Chollet}{C.}%
+     {Fran\c{c}ois}{F.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CF+1}
+  \strng{fullhash}{CF+1}
+  \field{howpublished}{\url{https://keras.io}}
+  \field{title}{Keras}
+  \field{year}{2015}
+\endentry
+
 \entry{tensorflowprobability}{article}{}
   \name{author}{10}{}{%
     {{}%
