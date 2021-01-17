@@ -444,7 +444,7 @@ and show that they provide only a partial solution at best. Taken together, our 
   year    = {2017},
 }
 
-@Misc{keras,
+@Misc{Keras,
   author       = {Chollet, Fran\c{c}ois and others},
   howpublished = {\url{https://keras.io}},
   title        = {Keras},

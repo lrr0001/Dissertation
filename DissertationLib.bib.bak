@@ -437,4 +437,18 @@ and show that they provide only a partial solution at best. Taken together, our 
   url    = {https://www.tensorflow.org/},
 }
 
+@Article{tensorflowprobability,
+  author  = {Dillon, Joshua V and Langmore, Ian and Tran, Dustin and Brevdo, Eugene and Vasudevan, Srinivas and Moore, Dave and Patton, Brian and Alemi, Alex and Hoffman, Matt and Saurous, Rif A},
+  journal = {arXiv preprint arXiv:1711.10604},
+  title   = {Tensorflow distributions},
+  year    = {2017},
+}
+
+@Misc{keras,
+  author       = {Chollet, Fran\c{c}ois and others},
+  howpublished = {\url{https://keras.io}},
+  title        = {Keras},
+  year         = {2015},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
