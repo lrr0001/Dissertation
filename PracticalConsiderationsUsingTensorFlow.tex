@@ -13,33 +13,49 @@ Trainable TensorFlow variables declared outside of any Keras layer will not be a
 TensorFlow offers a well-documented means of replacing TensorFlow's gradient computations of an operation with specified custom gradient computations. However, if the operation involves multiple tensors that are inputs or trainable variables, the standard approach replaces all the gradients with custom gradients. If TensorFlow's gradient computations are sufficient for some tensors but not others, a workaround is necessary. This workaround is best explained by example.
 
 Suppose the operation is the following:
-\begin{equation}
+\begin{lstlisting}
 z = f(x,y)
-\end{equation}
+\end{lstlisting}
 
 for which the standard TensorFlow gradient computations of $f$ are desired in respect to $x$, but custom gradient computations are desired in respect to $y$ is $g(\nabla_z \text{LOSS})$. This can be rewritten as the following:
 
-\begin{equation}
-z = f(x,\operatorname{tf.stop\_gradient}(y))
-\end{equation}
-\begin{equation}
+\begin{lstlisting}
+@tf.custom_gradient
+def h(z,y):
+    def grad_fun(grad):
+        return (tf.identity(grad),g(grad))
+    return z,grad_fun
+
+z = f(x,tf.stop_gradient(y))
 z = h(z,y)
-\end{equation}
+\end{lstlisting}
 
-where
-
-\begin{equation}
-h(z,y) = z
-\end{equation}
-
-Specify the custom gradient of operation $h$ in respect $z$ using the tf.identity($\nabla_z \text{LOSS}$) and the custom gradient of $h$ in respect to $y$ as $g(\nabla_z \text{LOSS})$. \TODO{These should be code snipets, not equations, but I guess I will fix it later.}
+The function $h$ does nothing on the forward pass, but in the backward pass computes the custom gradient in respect to $y$ as intended.
 
 \section{Updating TensorFlow Variables After Applying Gradients}
 To update TensorFlow Variables after applying gradients, it is necessary to track which variables are affected and what their corresponding update functions are. To accomplish this, I store the update functions in a Python dictionary using variable names as the dictionary keys. This Python dictionary needs to be widely accessible so that layers can add update functions when they are initialized; a simple way to do this is to make the update function Python dictionary a class attribute. The keys need to be unique, but TensorFlow variable names can conflict. It is easy to avoid this problem by checking for conflicts before adding a new update function.
 
+\begin{lstlisting}
+class PostProcess:
+    update = {}
+    def add_update(varName,update_fun):
+        assert varName not in PostProcess.update
+        PostProcess.update[varName] = update_fun
+\end{lstlisting}
+
 
 In the standard Keras training paradigm, models are trained using the fit function, a method in the Keras model object. The fit function calls the function train\_step, where gradients are applied.  To update TensorFlow Variables after gradients are applied, train\_step is the function to modify. The only change that needs to be made is adding a function call to all update functions that correspond to the model's list of trainable variables.
 
+\begin{lstlisting}
+class Model_subclass(tf.keras.Model):
+    def train_step(self,data):
+        trainStepOutputs = tf.keras.Model.train_step(self,data)
+        update_ops = []
+        for tv in self.trainable_variables:
+            if tv.name in PostProcess.update:
+                PostProcess.update[tv.name]()
+        return trainStepOutputs
+\end{lstlisting}
 
 Changes to Tensorflow variables in the update function must use the assign command (or its variants: assign\_add, assign\_sub, ect). Otherwise, TensorFlow will detect that computations lie outside of its computational graph and throw an error. Note that using the assign command on Python variables that are not TensorFlow variables will produce some very cryptic error messages, so be sure to use the assign command correctly. If the value change of one TensorFlow variable depends on the value of another TenorFlow variable value pre-update, it may be necessary to use the Tensorflow control\_dependencies command to get TensorFlow to track that dependency. TensorFlow has a useful tool called TensorBoard that helps visualize TensorFlow's dependencies, but a workaround is required to use TensorBoard on update functions that are called after applying gradients. To use TensorBoard to visualize dependencies in an update function, temporarily call the update function in the layer's call method, use TensorBoard to verify all necessary dependancies are being tracked, then remove the update function call from the layer's call method.
 
