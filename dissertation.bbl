@@ -1,0 +1,296 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{tensorflow}{misc}{}
+  \name{author}{40}{}{%
+    {{}%
+     {Abadi}{A.}%
+     {Mart\'{\i}n}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Agarwal}{A.}%
+     {Ashish}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Barham}{B.}%
+     {Paul}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brevdo}{B.}%
+     {Eugene}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chen}{C.}%
+     {Zhifeng}{Z.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Citro}{C.}%
+     {Craig}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Corrado}{C.}%
+     {Greg~S.}{G.~S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Davis}{D.}%
+     {Andy}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dean}{D.}%
+     {Jeffrey}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Devin}{D.}%
+     {Matthieu}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ghemawat}{G.}%
+     {Sanjay}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Goodfellow}{G.}%
+     {Ian}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Harp}{H.}%
+     {Andrew}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Irving}{I.}%
+     {Geoffrey}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Isard}{I.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jia}{J.}%
+     {Yangqing}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jozefowicz}{J.}%
+     {Rafal}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kaiser}{K.}%
+     {Lukasz}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kudlur}{K.}%
+     {Manjunath}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Levenberg}{L.}%
+     {Josh}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Man\'{e}}{M.}%
+     {Dandelion}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Monga}{M.}%
+     {Rajat}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Moore}{M.}%
+     {Sherry}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Murray}{M.}%
+     {Derek}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Olah}{O.}%
+     {Chris}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schuster}{S.}%
+     {Mike}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Shlens}{S.}%
+     {Jonathon}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Steiner}{S.}%
+     {Benoit}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sutskever}{S.}%
+     {Ilya}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Talwar}{T.}%
+     {Kunal}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tucker}{T.}%
+     {Paul}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vanhoucke}{V.}%
+     {Vincent}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vasudevan}{V.}%
+     {Vijay}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vi\'{e}gas}{V.}%
+     {Fernanda}{F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vinyals}{V.}%
+     {Oriol}{O.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Warden}{W.}%
+     {Pete}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wattenberg}{W.}%
+     {Martin}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wicke}{W.}%
+     {Martin}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yu}{Y.}%
+     {Yuan}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zheng}{Z.}%
+     {Xiaoqiang}{X.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{AMAABPBECZCCCGSDADJDMGSGIHAIGIMJYJRKLKMLJMDMRMSMDOCSMSJSBSITKTPVVVVVFVOWPWMWMYYZX1}
+  \strng{fullhash}{AMAABPBECZCCCGSDADJDMGSGIHAIGIMJYJRKLKMLJMDMRMSMDOCSMSJSBSITKTPVVVVVFVOWPWMWMYYZX1}
+  \field{note}{Software available from tensorflow.org}
+  \field{title}{{TensorFlow}: Large-Scale Machine Learning on Heterogeneous
+  Systems}
+  \verb{url}
+  \verb https://www.tensorflow.org/
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{tensorflowprobability}{article}{}
+  \name{author}{10}{}{%
+    {{}%
+     {Dillon}{D.}%
+     {Joshua~V}{J.~V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Langmore}{L.}%
+     {Ian}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tran}{T.}%
+     {Dustin}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brevdo}{B.}%
+     {Eugene}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vasudevan}{V.}%
+     {Srinivas}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Moore}{M.}%
+     {Dave}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Patton}{P.}%
+     {Brian}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Alemi}{A.}%
+     {Alex}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hoffman}{H.}%
+     {Matt}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Saurous}{S.}%
+     {Rif~A}{R.~A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{DJVLITDBEVSMDPBAAHMSRA1}
+  \strng{fullhash}{DJVLITDBEVSMDPBAAHMSRA1}
+  \field{title}{Tensorflow distributions}
+  \field{journaltitle}{arXiv preprint arXiv:1711.10604}
+  \field{year}{2017}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

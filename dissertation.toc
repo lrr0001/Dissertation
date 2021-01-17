@@ -1,0 +1,45 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Acknowledgments}{v}{Doc-Start}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{List of Tables}{viii}{chapter*.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{List of Figures}{ix}{chapter*.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Practical Considerations Concerning Tensorflow}{1}{chapter.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{1}{section.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Shared Weights Between Layers}{1}{section.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.3}A Note on Custom Gradients}{2}{section.1.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.4}Updating TensorFlow Variables After Applying Gradients}{2}{section.1.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.5}Other Considerations}{3}{section.1.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Technical Approach}{4}{chapter.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Section}{4}{section.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.1}Example Subsection}{4}{subsection.2.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Example Subsubsection}{4}{subsubsection*.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Results}{6}{chapter.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Discussion}{7}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{8}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\renewcommand {\cftchappresnum }{Appendix }
+\defcounter {refsection}{0}\relax 
+\renewcommand {\cftchapnumwidth }{6em}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}Experimental Equipment}{10}{Appendix.1.A}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {B}Data Processing}{11}{Appendix.1.B}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{References}{12}{chapter*.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Vita}{13}{chapter*.7}
