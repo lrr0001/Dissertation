@@ -17,22 +17,22 @@ Suppose the operation is the following:
 z = f(x,y)
 \end{equation}
 
-for which the standard TensorFlow gradient computations of $f$ are desired in respect to $x$, but custom gradient computations are desired in respect to $y$. This can be rewritten as the following:
+for which the standard TensorFlow gradient computations of $f$ are desired in respect to $x$, but custom gradient computations are desired in respect to $y$ is $g(\nabla_z \text{LOSS})$. This can be rewritten as the following:
 
 \begin{equation}
 z = f(x,\operatorname{tf.stop\_gradient}(y))
 \end{equation}
 \begin{equation}
-z = g(z,y)
+z = h(z,y)
 \end{equation}
 
 where
 
 \begin{equation}
-g(z,y) = z
+h(z,y) = z
 \end{equation}
 
-Specify the custom gradient computations for the gradient of operation $f$ in respect to $y$ as the custom gradient for operation $g$ in respect to $y$. Specify the custom gradient of operation $g$ in respect $z$ as tf.identity($z$). \TODO{These should be code snipets, not equations, but I guess I will fix it later.}
+Specify the custom gradient of operation $h$ in respect $z$ using the tf.identity($\nabla_z \text{LOSS}$) and the custom gradient of $h$ in respect to $y$ as $g(\nabla_z \text{LOSS})$. \TODO{These should be code snipets, not equations, but I guess I will fix it later.}
 
 \section{Updating TensorFlow Variables After Applying Gradients}
 To update TensorFlow Variables after applying gradients, it is necessary to track which variables are affected and what their corresponding update functions are. To accomplish this, I store the update functions in a Python dictionary using variable names as the dictionary keys. This Python dictionary needs to be widely accessible so that layers can add update functions when they are initialized; a simple way to do this is to make the update function Python dictionary a class attribute. The keys need to be unique, but TensorFlow variable names can conflict. It is easy to avoid this problem by checking for conflicts before adding a new update function.
