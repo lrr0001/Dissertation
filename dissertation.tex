@@ -21,12 +21,22 @@
 %\usepackage{pythonhighlight}
 \usepackage{listings}
 \usepackage{color}
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{lightgray}{rgb}{0.97,0.97,0.97}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
+\lstnewenvironment{code}[1][]%
+{
+   \noindent
+   \minipage{\linewidth} 
+   %\vspace{0.5\baselineskip} 
+   \lstset{xleftmargin=35pt,
+  xrightmargin=35pt,
+  backgroundcolor=\color{lightgray},
   language=Python,
   aboveskip=3mm,
   belowskip=3mm,
@@ -40,8 +50,12 @@
   stringstyle=\color{mauve},
   breaklines=true,
   breakatwhitespace=true,
-  tabsize=3
-}
+  tabsize=4,#1
+} }
+{\endminipage}
+%{\endminipage}
+
+
 
 
 \newcommand\TODO[1]{}
