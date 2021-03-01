@@ -1,15 +1,22 @@
 \chapter{Practical Considerations Concerning Tensorflow}
-Most of the computations for my research rely on TensorFlow version 2.3.1 \cite{tensorflow}, a Python library for machine learning specializing in building models with differentiable, parameterizable composite functions and learning model parameters using gradient descent or other gradient-based optimization methods. TensorFlow is a common platform for researchers and developers working on artificial neural netwokrs, and there are many tutorials and exampes freely available online, so I will not replicate that work here. This chapter assumes the reader already has some familiarity with TensorFlow and Keras \cite{keras} (a high-level library inside TensorFlow). The goal of this chaper is to provide the reader with the tools and workarounds to be able to replicate my work without resorting to hacking things together with gradient tape and/or TensorFlow-1-style code.
+\section{Boundary Handling}
 
-\section{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}
+\section{Removing Low-Frequency Signal Content}
+
+\subsection{JPEG Artifact Removal}
+
+\section{Tensorflow and Keras}
+Most of the computations for my research rely on TensorFlow version 2.3.1 \cite{tensorflow}, a Python library for machine learning specializing in building models with differentiable, parameterizable composite functions and learning model parameters using gradient descent or other gradient-based optimization methods. TensorFlow is a common platform for researchers and developers working on artificial neural netwokrs, and there are many tutorials and exampes freely available online, so I will not replicate that work here. This chapter section the reader already has some familiarity with TensorFlow and Keras \cite{keras} (a high-level library inside TensorFlow). The goal of this section is to provide the reader with the tools and workarounds to be able to replicate my work without resorting to hacking things together with gradient tape and/or TensorFlow-1-style code.
+
+\subsection{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}
 Keras offers a high-level environment. Code written in Keras's framework is easier to integrate with other work. Gradient tape is great for hacking something together or debugging, but promotes styles of coding that are less readable, less maintainable, and less portable. Keras also has a lower learning curve than the broader TensorFlow library.
 \TODO{I should write more for this section or possibly remove it. Might help to read through Keras documentation and endorsements to see why they think it's necessary.}
 
 
-\section{Shared Weights Between Layers}
+\subsection{Shared Weights Between Layers}
 Trainable TensorFlow variables declared outside of any Keras layer will not be automatically added to a Keras model's list of trainable variables. In most cases, this limitation is not a problem; it is intuitive to declare a layer's weights inside that layer. However, sometimes the same variable is needed in multiple distinct layers. To be include a variable in the model's trainable variables, it is sufficient to declare the variable in one layer and pass the variable (or the layer it was initialized in) as an input argument to the \_\_init\_\_ function of the other layers that share that variable. This will work even if the Keras model does not use the layer that declared the variable. \footnote{One could instead declare the variable outside any layers, pass it into the \_\_init\_\_ functions of all the variables that depend on it, and then manually add the variable to the model's list of trainable variables, but I do not recommend this approach. The resulting code will be less readable and much less maintainable.}
 
-\section{A Note on Custom Gradients}
+\subsection{Custom Partial Gradients}
 TensorFlow offers a well-documented means of replacing TensorFlow's gradient computations of an operation with specified custom gradient computations. However, if the operation involves multiple tensors that are inputs or trainable variables, the standard approach replaces all the gradients with custom gradients. If TensorFlow's gradient computations are sufficient for some tensors but not others, a workaround is necessary. This workaround is best explained by example.
 
 Suppose the operation is the following:
@@ -19,7 +26,7 @@ Suppose the operation is the following:
 z = f(x,y)
 \end{code}
 
-for which the standard TensorFlow gradient computations of $f$ are desired in respect to $x$, but custom gradient computations are desired in respect to $y$ is $g(\nabla_z L)$. This can be rewritten as the following:
+for which the standard TensorFlow gradient computations of $f$ are desired in respect to $x$, but the custom gradient computations desired in respect to $y$ are specified in function $g(\nabla_z \L)$. This can be rewritten as the following:
 
 \begin{code}
 @tf.custom_gradient
@@ -33,7 +40,7 @@ z = h(z,y)
 
 The function $h$ does nothing on the forward pass, but in the backward pass computes the custom gradient in respect to $y$ as intended.
 
-\section{Updating TensorFlow Variables After Applying Gradients}
+\subsection{Updating TensorFlow Variables After Applying Gradients}
 To update TensorFlow Variables after applying gradients, it is necessary to track which variables are affected and what their corresponding update functions are. To accomplish this, I store the update functions in a Python dictionary using variable names as the dictionary keys. This Python dictionary needs to be widely accessible so that layers can add update functions when they are initialized; a simple way to do this is to make the update function Python dictionary a class attribute. The keys need to be unique, but TensorFlow variable names can conflict. It is easy to avoid this problem by checking for conflicts before adding a new update function.
 
 \begin{code}
@@ -60,5 +67,7 @@ class Model_subclass(tf.keras.Model):
 
 Changes to Tensorflow variables in the update function must use the assign command (or its variants: assign\_add, assign\_sub, ect). Otherwise, TensorFlow will detect that computations lie outside of its computational graph and throw an error. Note that using the assign command on Python variables that are not TensorFlow variables will produce some very cryptic error messages, so be sure to use the assign command correctly. If the value change of one TensorFlow variable depends on the value of another TenorFlow variable value pre-update, it may be necessary to use the Tensorflow control\_dependencies command to get TensorFlow to track that dependency. TensorFlow has a useful tool called TensorBoard that helps visualize TensorFlow's dependencies, but a workaround is required to use TensorBoard on update functions that are called after applying gradients. To use TensorBoard to visualize dependencies in an update function, temporarily call the update function in the layer's call method, use TensorBoard to verify all necessary dependancies are being tracked, then remove the update function call from the layer's call method.
 
-\section{Other Considerations}
-The TensorFlow Probability version 0.11.1 \cite{tensorflowprobability} is an extension of TensorFlow mosly used for probabilistic models. The library contains a Cholesky update function, but the function does not properly handle complex inputs. To compute Cholesky updates for complex inputs, users should either write their own implementation or use my code (included in supplementary material).
+\subsection{The Perils of Using Built-In Functions for Complex Tensors and Arrays}
+The TensorFlow Probability version 0.11.1 \cite{tensorflowprobability} is an extension of TensorFlow mosly used for probabilistic models. The library contains a Cholesky update function, but the function does not properly handle complex inputs. To compute Cholesky updates for complex inputs, users should either write their own implementation or use my code (included in supplementary material). Similarly, the Randomized SVD algorithm in the Python scikit-learn library does not properly handle complex inputs.
+
+Errors like these are fairly common, so when dealing with complex data, researchers and practitioners should carefully verify that the function libraries they rely on are properly handling complex numbers.

@@ -1,0 +1,97 @@
+\documentclass{article}
+\begin{document}
+Title Page
+
+Approval Page
+
+Acknowledgements
+
+Table of Contents
+
+List of Tables
+
+List of Figures
+
+List of Symbols
+
+Summary
+
+\section{Introduction}
+\subsection{Dictionaries and Dictionary Learning}
+Dictionaries are great! Just look at all the wonderful applications! Destinguish sparse coding and dictionary learning.
+\subsubsection{Convolutional Dictionaries}
+Define and explore the merits of convolutional dictionaries for signals with spatially or temporally invariant properties.
+\subsection{Convolutional Neural Networks}
+So many successful convolutional neural networks over past decade!
+\subsection{Multi-Layer Dictionaries}
+Reference Elad research tying convolutional neural networks to dictionary learning. Mention Zeiler, ect. Define multi-layer dictionary. Describe needs of multilayer dictionary (specifically the need to be able to handle multi-channel signals).
+\subsection{Layout of rest of dissertation}
+Be sure to highlight novel contributions!
+
+
+\section{Learning Dictionaries for Multi-Channel Signals}
+\subsection{Introduction}
+Explain the problem and its connection to the rest of dissertation. Focus on the CSC problem.
+\subsection{Dictionary Types}
+Explain the types of dictionaries for multi-channel signals and explain why I am focusing on multi-channel dictionaries (as opposed to single-channel dictionaries or some of the tensor-based approaches).
+\subsection{Literature Review}
+\subsubsection{CSC}
+FISTA, ADMM, Chodosh and Lucey 2020, Wholberg comparisons
+\subsubsection{Multi-Channel Variants}
+Why not ADMM? FISTA, Consensus ADMM, tight-frame assumption trick
+\subsection{My Novel ADMM Variant}
+Low-rank approximation, problem substitution for stronger constraint (simplifying problem), the normalization trick
+\subsection{Conclusion}
+Be sure to mention drawback of fixed rho
+
+\section{Learning Multi-Layer Dictionaries}
+\subsection{Introduction}
+Explain model, where it would be useful, and the corresponding problems to solve.
+\subsection{Literature Review}
+Zeiler 2010, Elad nature of neural networks, Carin probabilistic pruning networks, Murdock and Lucey, Chodosh and Lucey, (Might also want to dig into mulit-layer ISTA and LISTA, ect.) I expect some redundancy between this section and some material in the introductory chapter, though this section should go into more depth.
+\subsection{My Novel Approach}
+\subsection{Conclusion}
+I'm not sure if this chapter will need a conclusion or not.
+
+\section{JPEG Artifact Removal}
+\subsection{Introduction}
+\subsection{JPEG Algorithm}
+\subsection{Literature Review}
+\subsection{My Model}
+\subsection{Handling Quantization}
+\subsection{Experiments}
+\subsubsection{Experiment Setup}
+\subsubsection{Results}
+\subsection{Conclusion}
+
+\section{Non-Rigid Structure From Motion}
+\subsection{Introduction}
+\subsection{Literature Review}
+\subsubsection{Model}
+\subsection{Low-Rank Approximation, Constraints, and Derivations}
+\subsection{Experiments}
+\subsubsection{Experiment Setup}
+\subsubsection{Results}
+\subsection{Conclusion}
+
+\section{Practical Considerations}
+\subsection{Boundary Handling}
+\subsection{Removing Low-Frequency Signal Content}
+\subsubsection{JPEG Artifact Removal}
+\subsubsection{Non-Rigid Structure From Motion}
+\subsection{Tensorflow and Keras}
+\subsubsection{Using Shared Weights and Shared Layers}
+\subsubsection{Custom Partial Derivatives}
+\subsubsection{Updating Tensorflow Variables After Applying Gradients}
+\subsubsection{The Perils of Using Built-In Functions For Complex Data}
+
+\section{Conclusion}
+A brief review of my novel contributions and how it relates to other research.
+
+\section{Appendices}
+\subsection{Diagonalization of Factored Rank-2 Matrices, Edge Cases}
+\subsection{No Minimizer? No Problem! Use an Infimumizer Instead}
+\subsection{Stonger Constraint for Low-Rank Approximation: How Much Stonger is it, Really?}
+
+\section{References}
+\end{document}
