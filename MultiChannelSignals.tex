@@ -1,10 +1,16 @@
 \chapter{Learning Dictionaries for Multi-Channel Signals}
 
 \section{Introduction}
+When using a multi-layer dictionary model, the coefficients corresponding to a dictionary from one layer become the "signal" for the subsequent layer.  The number of channels for this "signal" is the number of dictionary filters from the previous layer.  Much of the literature on learning convolutional dictionaries is tailored to applications with signals that only have a small number of channels.  This chapter presents a novel method for learning convolutional dictionaries from and for multi-channel signals. 
 \section{Dictionary Types}
+There are many ways to construct a convolutional sparse representation of a multi-channel signal, but broadly the distinctions reduce down to if and how signal channels share dictionaries and coefficients, and if and how those non-shared entities interact across channels.
+
+It is common in many applications for dictionary models to share dictionaries across channels, which requires the use multi-channel coefficients. If such models were used in a multi-layer dictionary model, the tensor rank would increase with each subsequent layer.
+
+For this work, I focus instead on the multi-channel dictionary with shared coefficients. This structure matches that of convolutional neural networks, and the number of channels for a subsequent dictionary is the number of filters for the dictionary from the previous layer.
+
 \section{Literature Review}
 \subsection{Convolutional Sparse Coding}
-\subsection{Multi-Channel Variants}
 \section{ADMM with Low-Rank Updates}
 \section{Conclusion}
 

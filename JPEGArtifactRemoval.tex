@@ -1,6 +1,11 @@
 \chapter{JPEG Artifact Removal}
 \section{Introduction}
+Despite the existance of better compression algorithms, use of the JPEG compression algorithm is ubiquitous: it is the most commonly used image compression algorithm.  Overzealous JPEG compression can produce visible distortions, and image restoration from these distortions is a challenging problem. There are two aspects of JPEG compression which make the restoration process more challenging than simpler restoration problems like deblurring or removing salt-and-pepper noise: JPEG's block-based approach is not spatially invariant, and the quantization is nonlinear. This chapter describes a novel approach to address the challenges of JPEG image restoration using the ADMM-based convolutional sparse coding for a multi-layer dictionary model.
 \section{JPEG Algorithm}
+
+The JPEG compression process begins with an RGB image input, and consists of five steps. The first is a color transformation, transitioning from RGB to YUV. Then, the U and V color channels are downsampled.  The DCT for each $8 \times 8$ block is computed (separately for each channel).  The DCT coefficients are then quantized using a quantization matrix determined by a user-chosen JPEG quality factor. Finally, these quantized coefficients are reodered and encoded using a lossless variable length coding process.
+
+The standard reconstruction process reverses the lossless encoding, computes the IDCT of the blocks, upsamples the color channels, and reverses the color transform.
 \section{Literature Review}
 \section{Modelling Compressed JPEG Images}
 \section{Handling Quantization}

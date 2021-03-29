@@ -16,6 +16,151 @@
   {}
 \endgroup
 
+\entry{zeiler2010deconvolutional}{inproceedings}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Zeiler}{Z.}%
+     {Matthew~D}{M.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Krishnan}{K.}%
+     {Dilip}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Taylor}{T.}%
+     {Graham~W}{G.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fergus}{F.}%
+     {Rob}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{ZMDKDTGWFR1}
+  \strng{fullhash}{ZMDKDTGWFR1}
+  \field{booktitle}{2010 IEEE Computer Society Conference on computer vision
+  and pattern recognition}
+  \field{pages}{2528\bibrangedash 2535}
+  \field{title}{Deconvolutional networks}
+  \field{year}{2010}
+\endentry
+
+\entry{Goodfellow2016-DeepLearningBook}{book}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Goodfellow}{G.}%
+     {Ian}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bengio}{B.}%
+     {Yoshua}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Courville}{C.}%
+     {Aaron}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {MIT Press}%
+  }
+  \strng{namehash}{GIBYCA1}
+  \strng{fullhash}{GIBYCA1}
+  \field{note}{\url{http://www.deeplearningbook.org}}
+  \field{title}{Deep Learning}
+  \field{year}{2016}
+\endentry
+
+\entry{Rangamani2018DictLandAE}{inproceedings}{}
+  \name{author}{7}{}{%
+    {{}%
+     {Rangamani}{R.}%
+     {Akshay}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mukherjee}{M.}%
+     {Anirbit}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Basu}{B.}%
+     {Amitabh}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Arora}{A.}%
+     {Ashish}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ganapathi}{G.}%
+     {Tejaswini}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chin}{C.}%
+     {Sang}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tran}{T.}%
+     {Trac~D}{T.~D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{RAMABAAAGTCSTTD1}
+  \strng{fullhash}{RAMABAAAGTCSTTD1}
+  \field{booktitle}{2018 IEEE International Symposium on Information Theory
+  (ISIT)}
+  \field{pages}{36\bibrangedash 40}
+  \field{title}{Sparse coding and autoencoders}
+  \field{year}{2018}
+\endentry
+
+\entry{papyan2017convolutional}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Papyan}{P.}%
+     {Vardan}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Romano}{R.}%
+     {Yaniv}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Elad}{E.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {JMLR. org}%
+  }
+  \strng{namehash}{PVRYEM1}
+  \strng{fullhash}{PVRYEM1}
+  \field{number}{1}
+  \field{pages}{2887\bibrangedash 2938}
+  \field{title}{Convolutional neural networks analyzed via convolutional sparse
+  coding}
+  \field{volume}{18}
+  \field{journaltitle}{The Journal of Machine Learning Research}
+  \field{year}{2017}
+\endentry
+
 \entry{tensorflow}{misc}{}
   \name{author}{40}{}{%
     {{}%
