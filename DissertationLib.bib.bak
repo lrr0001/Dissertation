@@ -204,7 +204,7 @@ and show that they provide only a partial solution at best. Taken together, our 
 }
 
 @Article{chen2013deep,
-  author    = {Chen, Bo and Polatkan, Gungor and Sapiro, Guillermo and Blei, David and Dunson, David and Carin, Lawrence},
+  author    = {ar},
   journal   = {IEEE transactions on pattern analysis and machine intelligence},
   title     = {Deep learning with hierarchical convolutional factor analysis},
   year      = {2013},

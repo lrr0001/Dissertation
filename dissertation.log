@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  31 MAR 2021 11:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  4 APR 2021 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -819,7 +819,7 @@ l.18 \end{titlepage}
 
 ] (./Intro.tex
 Chapter 1.
-<figures/exampleFigure.png, id=292, 792.9625pt x 434.62375pt>
+<figures/exampleFigure.png, id=307, 792.9625pt x 434.62375pt>
 File: figures/exampleFigure.png Graphic file (type png)
 
 <use figures/exampleFigure.png>
@@ -835,23 +835,25 @@ l.1 \chapter
 
 ] [2 <./figures/exampleFigure.png>]
 Chapter 2.
+[3
+
+] [4] [5] [6] [7] [8] [9]
 File: figures/exampleFigure.png Graphic file (type png)
-<use figures/exampleFigure.png>
-Package pdftex.def Info: figures/exampleFigure.png used on input line 19.
+ <use figures/exampleFigure.png>
+Package pdftex.def Info: figures/exampleFigure.png used on input line 191.
 (pdftex.def)             Requested size: 650.43001pt x 356.50652pt.
- [3
-
-]) (./MultiLayerDictionaries.tex [4] [5]
+)
+(./MultiLayerDictionaries.tex [10] [11]
 Chapter 3.
-[6
+[12
 
-]) (./JPEGArtifactRemoval.tex [7]
+]) (./JPEGArtifactRemoval.tex [13]
 Chapter 4.
-) (./PracticalConsiderationsUsingTensorFlow.tex [8
+) (./PracticalConsiderationsUsingTensorFlow.tex [14
 
-] [9]
+] [15]
 Chapter 5.
-[10
+[16
 
 ] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -860,31 +862,34 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 25.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [11] [12] [13])
-(./appendix.tex [14]
+) [17] [18] [19])
+(./appendix.tex [20]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
- [15
+ [21
 
 ]
 Appendix A.
-[16
+[22
 
 ]
 Appendix B.
-) [17
+) [23
 
 ]
+LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 272.
+
 Overfull \hbox (2.5002pt too wide) in paragraph at lines 272--272
 []\OT1/ptm/m/n/12 I. Good-fel-low, Y. Ben-gio, and A. Courville, \OT1/ptm/m/it/
 12 Deep Learn-ing\OT1/ptm/m/n/12 . MIT Press, 2016, []$\OT1/pcr/m/n/12 http :
  []
 
-[18
+[24
 
-] (./vita.tex [19])
+] (./vita.tex [25])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 285.
- [20
+ [26
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 285.
@@ -892,33 +897,44 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 285.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 285.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 285.
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: 5A7D7AA87D042E883304ECA0DE2D078C;3212.
+(rerunfilecheck)             Checksum: BAF6ACD76E2409B003CB500B0C57EC00;3424.
 Package logreq Info: Writing requests to 'dissertation.run.xml'.
 \openout1 = `dissertation.run.xml'.
 
  )
 (\end occurred when \iftrue on line 91 was incomplete) 
 Here is how much of TeX's memory you used:
- 14774 strings out of 493029
- 229289 string characters out of 6136233
- 421569 words of memory out of 5000000
- 17948 multiletter control sequences out of 15000+600000
- 26456 words of font info for 67 fonts, out of 8000000 for 9000
+ 14828 strings out of 493029
+ 230127 string characters out of 6136233
+ 420569 words of memory out of 5000000
+ 17961 multiletter control sequences out of 15000+600000
+ 26963 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,8n,48p,1226b,1206s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,10n,48p,1226b,1206s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf
 -dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/font
-s/type1/urw/times/utmri8a.pfb>
-Output written on dissertation.pdf (31 pages, 211448 bytes).
+blic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/times/utmri8a.pfb>
+Output written on dissertation.pdf (37 pages, 324094 bytes).
 PDF statistics:
- 491 PDF objects out of 1000 (max. 8388607)
- 443 compressed objects within 5 object streams
- 115 named destinations out of 1000 (max. 500000)
- 382 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 629 PDF objects out of 1000 (max. 8388607)
+ 562 compressed objects within 6 object streams
+ 156 named destinations out of 1000 (max. 500000)
+ 406 words of extra memory for PDF output out of 10000 (max. 10000000)
 

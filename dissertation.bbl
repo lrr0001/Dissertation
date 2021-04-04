@@ -16,6 +16,111 @@
   {}
 \endgroup
 
+\entry{boyd2011distributed}{article}{}
+  \true{moreauthor}
+  \name{author}{5}{}{%
+    {{}%
+     {Boyd}{B.}%
+     {Stephen}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Parikh}{P.}%
+     {Neal}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chu}{C.}%
+     {Eric}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Peleato}{P.}%
+     {Borja}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Eckstein}{E.}%
+     {Jonathan}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Now Publishers, Inc.}%
+  }
+  \strng{namehash}{BSPNCEPBEJ+1}
+  \strng{fullhash}{BSPNCEPBEJ+1}
+  \field{number}{1}
+  \field{pages}{1\bibrangedash 122}
+  \field{title}{Distributed optimization and statistical learning via the
+  alternating direction method of multipliers}
+  \field{volume}{3}
+  \field{journaltitle}{Foundations and Trends{\textregistered} in Machine
+  learning}
+  \field{year}{2011}
+\endentry
+
+\entry{eckstein1994parallel}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Eckstein}{E.}%
+     {Jonathan}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{EJ1}
+  \strng{fullhash}{EJ1}
+  \field{number}{1}
+  \field{pages}{39\bibrangedash 62}
+  \field{title}{Parallel alternating direction multiplier decomposition of
+  convex programs}
+  \field{volume}{80}
+  \field{journaltitle}{Journal of Optimization Theory and Applications}
+  \field{year}{1994}
+\endentry
+
+\entry{nishihara2015general}{inproceedings}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Nishihara}{N.}%
+     {Robert}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lessard}{L.}%
+     {Laurent}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Recht}{R.}%
+     {Ben}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Packard}{P.}%
+     {Andrew}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jordan}{J.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {PMLR}%
+  }
+  \strng{namehash}{NRLLRBPAJM1}
+  \strng{fullhash}{NRLLRBPAJM1}
+  \field{booktitle}{International Conference on Machine Learning}
+  \field{pages}{343\bibrangedash 352}
+  \field{title}{A general analysis of the convergence of ADMM}
+  \field{year}{2015}
+\endentry
+
 \entry{zeiler2010deconvolutional}{inproceedings}{}
   \name{author}{4}{}{%
     {{}%

@@ -9,15 +9,16 @@ It is common in many applications for dictionary models to share dictionaries ac
 
 For this work, I focus instead on the multi-channel dictionary with shared coefficients. This structure matches that of convolutional neural networks, and the number of channels for a subsequent dictionary is the number of filters for the dictionary from the previous layer.
 \section{Pursuit and Sparse Coding}
+\label{section:sparse coding}
 The dictionary model decomposes the signal $\vs_i$ into a dictionary $\mD$ (which generalizes to other signals) and the coefficients $\vx_i$ (which are specific to the signal $\vs_i$:
 
 \begin{equation}
 \vs_i \approx \mD\vx_i
 \end{equation}
 
-(Here the subscript $i$ specifies a particular signal and its corresponding coefficients.) A pursuit algorithm finds the coefficients $\vx_i$ corresponding to a particular signal $\vs_i$ for known dictionary $\mD$. If the number of dictionary atoms (columns) is larger than the dimension of the signal, then the number of unknowns is larger than the number of equations, and many solutions for $\vx_i$ represent $\vs_i$ equally well (at least in an L$2$ sense). Researchers and practitioners commonly either impose a sparsity constraint on the coefficients or ad a coefficient L$1$ penalty to the objective function, which removes the ambiguity from the problem construction. When such a penalty or constraint is added, pursuit is sometimes called sparse coding. With the added coefficient L$1$ penalty, the pursuit optimization problem looks like this:
+(Here the subscript $i$ specifies a particular signal and its corresponding coefficients.) A pursuit algorithm finds the coefficients $\vx_i$ corresponding to a particular signal $\vs_i$ for known dictionary $\mD$. If the number of dictionary atoms (columns) is larger than the dimension of the signal, then the number of unknowns is larger than the number of equations, and many solutions for $\vx_i$ represent $\vs_i$ equally well (at least in an L$2$ sense). Researchers and practitioners commonly either impose a sparsity constraint on the coefficients or add a coefficient L$1$ penalty to the objective function, which removes the ambiguity from the problem construction. When such a penalty or constraint is added, pursuit is sometimes called sparse coding. With the added coefficient L$1$ penalty, the pursuit optimization problem looks like this:
 
-\begin{equation}
+\begin{equation}\label{equation:sparse coding}
 \vx_i = \arg\min_{\vx} \frac{1}{2}\|\vs_i - \mD\vx\|_2^2 + \lambda \|\vx\|_1
 \end{equation}
 
@@ -25,11 +26,14 @@ where $\lambda$ is a hyperparameter greater than zero controlling how much the L
 
 \section{ADMM}
 ADMM is a convex-optimization algorithm used to solve the optimization problem:
-\begin{equation}
-\mA\vx + \mB\vy + \vc = 0 
+\begin{equation} \label{equation:ADMM}
+\begin{aligned}
+\minimize_{\vx,\vy} & f(\vx) + g(\vy) \\
+\text{subject to } & \mA\vx + \mB\vy + \vc = \vzero 
+\end{aligned}
 \end{equation}
 
-where $f$ and $g$ are convex functions. (I will address how to put the sparse coding problem in this form in the next section.)
+where $f$ and $g$ are convex functions \cite{boyd2011distributed}. (I will address how to put the sparse coding problem in this form in the next section.)
 
 The ADMM algorithm makes use of the augmented Lagrangian, a particular expression that has a saddle point at the solution to the constrained optimization problem:
 
@@ -44,26 +48,26 @@ At the saddle-point solution, the augmented Lagrangian is at a minimum in respec
 The ADMM algorithm is an iterative search for the saddle point of the augmented Lagrangian. Each iteration consists of a primal update for $\vx$, a primal update for $\vy$, and a dual update for $\vu$:
 
 \begin{equation}
-\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)}
+\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)})
 \end{equation}
 
 \begin{equation}
-\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k)}
+\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k)})
 \end{equation}
 
 \begin{equation}
 \vu^{(k + 1)} = \vu^{(k)} + \rho(\mA\vx^{(k + 1)} + \mB\vy^{(k + 1)} + \vc)
 \end{equation}
 
-The primal updates serve to move towards the minimum of the augmented lagrangian in respect to $\vx$ and $\vy$ with $\vu$ fixed, and the dual update fixes $\vx$ and $\vy$, and performs gradient ascent on $\vu$ with stepsize $\rho$. Under very mild assumptions, this process converges to the saddle point of the augmented lagrangian, which matches the solution to the constrained optimization problem.
+The primal updates serve to move towards the minimum of the augmented Lagrangian in respect to $\vx$ and $\vy$ with $\vu$ fixed, and the dual update fixes $\vx$ and $\vy$, and performs gradient ascent on $\vu$ with stepsize $\rho$. Under very mild assumptions, this process converges to the saddle point of the augmented Lagrangian, which matches the solution to the constrained optimization problem.
 
-There are two common variations of the ADMM algorithm that it is important to be aware of.  The first is the scaled form, which comes from completing the square for the augmented lagrangian function:
+There are two common variations of the ADMM algorithm that this work will make use of.  The first is the scaled form, which comes from completing the square for the augmented lagrangian function:
 
 \begin{equation}
 \operatorname{L}_{\rho}(\vx,\vy,\vu) = f(\vx) + g(\vy) + \frac{\rho}{2}\|\mA\vx + \mB\vy + \vc + \frac{\vu}{\rho}\|_2^2 - \frac{1}{2\rho}\|\vu\|_2^2
 \end{equation}
 
-The term $-\frac{1}{2\rho}\|\vu\|_2^2$ can be ignored for the primal updates because it has no dependence on the primal variables. For this reason, it is sometimes more convenient to keep track of $\frac{\vu}{\rho}$ instead of $\vu$, since that is the form that appears in the augmented lagrangian after completing the square.
+The term $-\frac{1}{2\rho}\|\vu\|_2^2$ can be ignored for the primal updates because it has no dependence on the primal variables. For this reason, it is sometimes more convenient to keep track of $\frac{\vu}{\rho}$ instead of $\vu$, since that is the form that appears in the augmented Lagrangian after completing the square.
 
 \begin{equation}
 \frac{\vu^{(k + 1)}}{\rho} = \frac{\vu^{(k)}}{\rho} + \mA\vx^{(k + 1)} + \mB\vy^{(k + 1)} + \vc
@@ -71,9 +75,9 @@ The term $-\frac{1}{2\rho}\|\vu\|_2^2$ can be ignored for the primal updates bec
 
 This form is known as scaled ADMM.
 
-The other common variation of ADMM is distinct in that it updates the dual variable more frequently.
+The other common variation of ADMM updates the dual variable more frequently.
 \begin{equation}
-\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)}
+\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)})
 \end{equation}
 
 \begin{equation}
@@ -81,17 +85,102 @@ The other common variation of ADMM is distinct in that it updates the dual varia
 \end{equation}
 
 \begin{equation}
-\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k + \frac{1}{2})}
+\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k + \frac{1}{2})})
 \end{equation}
 
 \begin{equation}
 \vu^{(k + 1)} = \vu^{(k + \frac{1}{2})} + \rho(\mA\vx^{(k + 1)} + \mB\vy^{(k + 1)} + \vc)
 \end{equation}
 
-When $\alpha > 1$, this is known as overrelaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have chozen to notate over/under relaxation differently than what is standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation instead adds the term $-(1 - \alpha)(\mA\vx^{(k + 1)} + \mB\vy^{(k)} + \vc)$ to $\mA\vx^{(k + 1)}$ and substitutes that expression for $\mA\vx^{(k + 1)}$ in subsequent equations. I believe my notation is preferable in that it offers more insight to what $\alpha$ does in ADMM.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation with $\alpha \in \[1.5,1.8\]$ converges faster than without overrelaxation. For this reason, ADMM is commonly used with over-relaxation.
+When $\alpha > 1$, this is known as overrelaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have chozen to notate over/under relaxation differently than what is standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation instead adds the term $-(1 - \alpha)(\mA\vx^{(k + 1)} + \mB\vy^{(k)} + \vc)$ to $\mA\vx^{(k + 1)}$ and substitutes that expression for $\mA\vx^{(k + 1)}$ in subsequent equations.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without overrelaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
 
 
 \section{Applying ADMM to the Sparse Coding Problem}
+Recall from section \ref{section:sparse coding}, equation \ref{equation:sparse coding} for sparse coding.
+
+\begin{equation}
+\vx_i = \arg\min_{\vx} \frac{1}{2}\|\vs_i - \mD\vx\|_2^2 + \lambda \|\vx\|_1
+\end{equation}
+
+This can be rewritten to match the ADMM form from equation \ref{equation:ADMM}:
+\begin{equation} \label{equation:SC Opt Prob}
+\begin{aligned}
+\minimize_{\vx,\vy} & \frac{1}{2} \|\vs_i - \mD\vx\|_2^2 + \lambda\|\vy\|_1 \\
+         \text{subject to } & \vy - \vx = \vzero
+\end{aligned}
+\end{equation}
+
+Given sufficient iterations, $\vx$ and $\vy$ will both be close to the optimal, but they may not be equal. Either can be used an approximate solution to the sparse coding problem.
+
+Computing the augmented Lagrangian of convex optimization problem in expression \ref{equation:SC Opt Prob} yields the following equation:
+
+\begin{equation}
+\operatorname{L}_{\rho}(\vx,\vy,\vu) = \frac{1}{2} \|\vs_i - \mD\vx\|_2^2 + \lambda\|\vy\|_1 + \frac{\rho}{2}\|\vy - \vx + \frac{\vu}{\rho}\|_2^2 - \frac{1}{2\rho}\|\vu\|_2^2
+\end{equation}
+
+Starting with the $\vx$-update:
+\begin{equation}
+\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)})
+\end{equation}
+
+Since the minimim is desired, setting the gradient to zero will produce the solution.
+
+\begin{equation}
+\nabla_{\vx^{(k + 1)}} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy{(k)},\vu{(k)}) = \vzero
+\end{equation}
+
+\begin{equation}
+\vzero = \mD^T\mD\vx^{(k + 1)} - \mD^T\vs_i + \rho\vx^{(k + 1)} - \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho})
+\end{equation}
+
+\begin{equation}
+(\rho\mId + \mD^T\mD)\vx^{(k + 1)} = \mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho})
+\end{equation}
+
+\begin{equation}
+\vx^{(k + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho}))
+\end{equation}
+
+At the end of this section, there is a discussion of the implications of this update equation, how to compute it for cases in which the signal has a low number of channels, and the challenges it poses for signals with many channels.
+
+If using over-relaxation, there is a dual update:
+\begin{equation}
+\frac{\vu^{(k + \frac{1}{2})}}{\rho} = \frac{\vu^{(k)}}{\rho} + (\alpha - 1)(\vy^{(k)} - \vx^{(k + 1)})
+\end{equation}
+
+Moving on to the $\vy$-update:
+\begin{equation}
+\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k + \frac{1}{2})})
+\end{equation}
+
+Excluding the terms that don't include $\vy$, I have
+\begin{equation}
+\vy^{(k + 1)} = \arg\min_{\vy} \lambda\|\vy\|_1 + \frac{\rho}{2}\|\vy - \vx^{(k + 1)} + \frac{\vu^{(k + \frac{1}{2})}}{\rho}\|_2^2
+\end{equation}
+
+This is a well-known problem, whose solution is
+\begin{equation}
+\vy^{(k + 1)} = \operatorname{S}_{\frac{\lambda}{\rho}}(\vx^{(k + 1)} - \frac{\vu^{(k + \frac{1}{2})}}{\rho})
+\end{equation}
+where $\operatorname{S}$ is the shrinkage operator:
+\begin{equation}
+\operatorname{S}_{b}(x) = \begin{cases} x - b & x > b \\ 0 & -b < x < b \\ x + b & x < - b \end{cases}
+\end{equation}
+In the case of a vector, matrix, or tensor input, the shrinkage operator is applied element by element.
+
+Finally, the last update equation for the dual variable:
+\begin{equation}
+\frac{\vu^{(k + 1)}}{\rho} = \frac{\vu^{(k + \frac{1}{2})}}{\rho} + \vy^{(k + 1)} - \vx^{(k + 1)}
+\end{equation}
+
+Now, returning to the $\vx$ update:
+\begin{equation}
+\vx^{(k + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho}))
+\end{equation}
+
+For problems using a dictionary with convolutional structure, this inverse for the convolutional sparse coding problem is very structured. Exploiting this structure is important for efficient computation, because the matrix $\rho\mId + \mD^T\mD$ is a large matrix.
+
+
 \section{Literature Review}
 \subsection{Convolutional Sparse Coding}
 \section{ADMM with Low-Rank Updates}
