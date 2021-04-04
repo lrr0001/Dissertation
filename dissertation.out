@@ -14,35 +14,34 @@
 \BOOKMARK [1][-]{section.2.2}{Dictionary Types}{chapter.2}% 14
 \BOOKMARK [1][-]{section.2.3}{Literature Review}{chapter.2}% 15
 \BOOKMARK [2][-]{subsection.2.3.1}{Convolutional Sparse Coding}{section.2.3}% 16
-\BOOKMARK [2][-]{subsection.2.3.2}{Multi-Channel Variants}{section.2.3}% 17
-\BOOKMARK [1][-]{section.2.4}{ADMM with Low-Rank Updates}{chapter.2}% 18
-\BOOKMARK [1][-]{section.2.5}{Conclusion}{chapter.2}% 19
-\BOOKMARK [0][-]{chapter.3}{Learning Multi-Layer Dictionaries}{}% 20
-\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 21
-\BOOKMARK [1][-]{section.3.2}{Literature Review}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.3}{Multi-Layer ADMM with Low-Rank Updates}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.4}{Summary}{chapter.3}% 24
-\BOOKMARK [0][-]{chapter.4}{JPEG Artifact Removal}{}% 25
-\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.2}{JPEG Algorithm}{chapter.4}% 27
-\BOOKMARK [1][-]{section.4.3}{Literature Review}{chapter.4}% 28
-\BOOKMARK [1][-]{section.4.4}{Modelling Compressed JPEG Images}{chapter.4}% 29
-\BOOKMARK [1][-]{section.4.5}{Handling Quantization}{chapter.4}% 30
-\BOOKMARK [1][-]{section.4.6}{Experiments}{chapter.4}% 31
-\BOOKMARK [2][-]{subsection.4.6.1}{Experiment Setup}{section.4.6}% 32
-\BOOKMARK [2][-]{subsection.4.6.2}{Results}{section.4.6}% 33
-\BOOKMARK [1][-]{section.4.7}{Conclusion}{chapter.4}% 34
-\BOOKMARK [0][-]{chapter.5}{Practical Considerations Concerning Tensorflow}{}% 35
-\BOOKMARK [1][-]{section.5.1}{Boundary Handling}{chapter.5}% 36
-\BOOKMARK [1][-]{section.5.2}{Removing Low-Frequency Signal Content}{chapter.5}% 37
-\BOOKMARK [2][-]{subsection.5.2.1}{JPEG Artifact Removal}{section.5.2}% 38
-\BOOKMARK [1][-]{section.5.3}{Tensorflow and Keras}{chapter.5}% 39
-\BOOKMARK [2][-]{subsection.5.3.1}{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{section.5.3}% 40
-\BOOKMARK [2][-]{subsection.5.3.2}{Shared Weights Between Layers}{section.5.3}% 41
-\BOOKMARK [2][-]{subsection.5.3.3}{Custom Partial Gradients}{section.5.3}% 42
-\BOOKMARK [2][-]{subsection.5.3.4}{Updating TensorFlow Variables After Applying Gradients}{section.5.3}% 43
-\BOOKMARK [2][-]{subsection.5.3.5}{The Perils of Using Built-In Functions for Complex Tensors and Arrays}{section.5.3}% 44
-\BOOKMARK [0][-]{Appendix.1.A}{Experimental Equipment}{}% 45
-\BOOKMARK [0][-]{Appendix.1.B}{Data Processing}{}% 46
-\BOOKMARK [0][-]{chapter*.7}{References}{}% 47
-\BOOKMARK [0][-]{chapter*.8}{Vita}{}% 48
+\BOOKMARK [1][-]{section.2.4}{ADMM with Low-Rank Updates}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.5}{Conclusion}{chapter.2}% 18
+\BOOKMARK [0][-]{chapter.3}{Learning Multi-Layer Dictionaries}{}% 19
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.2}{Literature Review}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.3}{Multi-Layer ADMM with Low-Rank Updates}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.4}{Summary}{chapter.3}% 23
+\BOOKMARK [0][-]{chapter.4}{JPEG Artifact Removal}{}% 24
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.2}{JPEG Algorithm}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.3}{Literature Review}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.4}{Modelling Compressed JPEG Images}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.5}{Handling Quantization}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.6}{Experiments}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.6.1}{Experiment Setup}{section.4.6}% 31
+\BOOKMARK [2][-]{subsection.4.6.2}{Results}{section.4.6}% 32
+\BOOKMARK [1][-]{section.4.7}{Conclusion}{chapter.4}% 33
+\BOOKMARK [0][-]{chapter.5}{Practical Considerations Concerning Tensorflow}{}% 34
+\BOOKMARK [1][-]{section.5.1}{Boundary Handling}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.2}{Removing Low-Frequency Signal Content}{chapter.5}% 36
+\BOOKMARK [2][-]{subsection.5.2.1}{JPEG Artifact Removal}{section.5.2}% 37
+\BOOKMARK [1][-]{section.5.3}{Tensorflow and Keras}{chapter.5}% 38
+\BOOKMARK [2][-]{subsection.5.3.1}{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{section.5.3}% 39
+\BOOKMARK [2][-]{subsection.5.3.2}{Shared Weights Between Layers}{section.5.3}% 40
+\BOOKMARK [2][-]{subsection.5.3.3}{Custom Partial Gradients}{section.5.3}% 41
+\BOOKMARK [2][-]{subsection.5.3.4}{Updating TensorFlow Variables After Applying Gradients}{section.5.3}% 42
+\BOOKMARK [2][-]{subsection.5.3.5}{The Perils of Using Built-In Functions for Complex Tensors and Arrays}{section.5.3}% 43
+\BOOKMARK [0][-]{Appendix.1.A}{Experimental Equipment}{}% 44
+\BOOKMARK [0][-]{Appendix.1.B}{Data Processing}{}% 45
+\BOOKMARK [0][-]{chapter*.7}{References}{}% 46
+\BOOKMARK [0][-]{chapter*.8}{Vita}{}% 47
