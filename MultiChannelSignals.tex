@@ -180,6 +180,57 @@ Now, returning to the $\vx$ update:
 
 For problems using a dictionary with convolutional structure, this inverse for the convolutional sparse coding problem is very structured. Exploiting this structure is important for efficient computation, because the matrix $\rho\mId + \mD^T\mD$ is a large matrix.
 
+Writing $\mD$ in a block structure, I have
+
+\begin{equation}
+\mD = \begin{bmatrix}
+\mD_{1,1}, & \hdots, & \mD_{1,M}\\
+\vdots & \ddots & \vdots\\
+\mD_{C,1}, & \hdots, & \mD_{C,M}
+\end{bmatrix}
+\end{equation}
+
+where $\mD_{c,m}$ is a toplitz matrix capturing channel $c$ of the $m$th filter of the dictionary. Toplitz matrices are diagonalizable with Fourier eigenvectors:
+
+\begin{equation}
+\mD = \begin{bmatrix}
+\F^{-1}\hat{\mD}_{1,1}\F, & \hdots, & \F^{-1}\hat{\mD}_{1,M}\F\\
+\vdots & \ddots & \vdots\\
+\F^{-1}\hat{\mD}_{C,1}\F, & \hdots, & \F^{-1}\hat{\mD}_{C,M}\F
+\end{bmatrix}
+\end{equation}
+
+where $\hat{\mD}_{c,m}$ is a diagonal matrix whose elements are the discrete Fourier transform of channel $c$ of the $m$th dictionary filter.
+
+This sparsely banded structure is a useful form in analyzing the structure of the inverse problem:
+\begin{equation}
+(\rho \mId + \mD^T\mD)^{-1} = \F^{-1}(\rho\mId + \hat{\mD}^H\hat{\mD})^{-1}\F
+\end{equation}
+
+where
+\begin{equation}
+\hat{\mD} = \begin{bmatrix}
+\hat{\mD}_{1,1}, & \hdots, & \hat{\mD}_{1,M}\\
+\vdots & \ddots & \vdots\\
+\hat{\mD}_{C,1}, & \hdots, & \hat{\mD}_{C,M}
+\end{bmatrix}
+\end{equation}
+
+and in a slight abuse of notation, $\F$ computes the FFT separately on the coefficients for each filter.  In \cite{Bristow2013fast}, Bristow et al. observe the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ is sparsely banded, so the inverse can be broken down into much smaller inverse problems, and one only needs to compute the inverse of an $M \times M$ matrix for every pixel in the image. ($\rho\mId + \hat{\mD}^H\hat{\mD}$ is an $M \times M$ block matrix, whose blocks are diagonal.  Each submatrix collects one element from the diagonal of each of the blocks.)
+
+Furthermore, the maximum rank of these submatrices is $C$, so if $C$ is small, these inverses can be computed even more efficiently using the Woodbury matrix identity \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient}.
+
+According to the Woodbury matrix identity, for any invertible matrix $\mU$ and any matrix $\mV$:
+\begin{equation}
+(\mU + \mV^H\mV)^{-1} = \mU^{-1} - \mU^{-1}\mV^H(\mId + \mV\mU^{-1}\mV^H)^{-1}\mV\mU^{-1}
+\end{equation}
+
+So,
+\begin{equation}
+(\rho\mId + \hat{\mD}^H\hat{\mD})^{-1} = \frac{1}{\rho}\mId - \frac{1}{\rho}\hat{\mD}^H(\rho\mId + \hat{\mD}\hat{\mD}^H)^{-1}\hat{\mD}
+\end{equation}
+
+This means that instead of computing the inverse of an $M \times M$ matrix for every pixel in the image, one could instead choose to compute the inverse of a $C \times C$ matrix for each pixel in the image.\footnote{Generally, Cholesky or LDLT decomposition would be preferable to explicitly computing the inverse. The efficiency gains due to the Woodbury matrix identity are relevant regardless of the chosen representation of the inverse.}
 
 \section{Literature Review}
 \subsection{Convolutional Sparse Coding}
