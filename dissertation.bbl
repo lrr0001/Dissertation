@@ -221,6 +221,141 @@
   \field{year}{2015}
 \endentry
 
+\entry{chodosh2018deep}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Chodosh}{C.}%
+     {Nathaniel}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wang}{W.}%
+     {Chaoyang}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{CNWCLS1}
+  \strng{fullhash}{CNWCLS1}
+  \field{booktitle}{Asian Conference on Computer Vision}
+  \field{pages}{499\bibrangedash 513}
+  \field{title}{Deep convolutional compressed sensing for lidar depth
+  completion}
+  \field{year}{2018}
+\endentry
+
+\entry{murdock2018deep}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Murdock}{M.}%
+     {Calvin}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chang}{C.}%
+     {MingFang}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{MCCMLS1}
+  \strng{fullhash}{MCCMLS1}
+  \field{booktitle}{Proceedings of the European Conference on Computer Vision
+  (ECCV)}
+  \field{pages}{820\bibrangedash 836}
+  \field{title}{Deep component analysis via alternating direction neural
+  networks}
+  \field{year}{2018}
+\endentry
+
+\entry{beck2009fast}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Beck}{B.}%
+     {Amir}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Teboulle}{T.}%
+     {Marc}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {SIAM}%
+  }
+  \strng{namehash}{BATM1}
+  \strng{fullhash}{BATM1}
+  \field{number}{1}
+  \field{pages}{183\bibrangedash 202}
+  \field{title}{A fast iterative shrinkage-thresholding algorithm for linear
+  inverse problems}
+  \field{volume}{2}
+  \field{journaltitle}{SIAM journal on imaging sciences}
+  \field{year}{2009}
+\endentry
+
+\entry{chodosh2020use}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Chodosh}{C.}%
+     {Nathaniel}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CNLS1}
+  \strng{fullhash}{CNLS1}
+  \field{booktitle}{Proceedings of the IEEE/CVF Conference on Computer Vision
+  and Pattern Recognition}
+  \field{pages}{8226\bibrangedash 8235}
+  \field{title}{When to use Convolutional Neural Networks for Inverse Problems}
+  \field{year}{2020}
+\endentry
+
+\entry{xu2013block}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Xu}{X.}%
+     {Yangyang}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yin}{Y.}%
+     {Wotao}{W.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {SIAM}%
+  }
+  \strng{namehash}{XYYW1}
+  \strng{fullhash}{XYYW1}
+  \field{number}{3}
+  \field{pages}{1758\bibrangedash 1789}
+  \field{title}{A block coordinate descent method for regularized multiconvex
+  optimization with applications to nonnegative tensor factorization and
+  completion}
+  \field{volume}{6}
+  \field{journaltitle}{SIAM Journal on imaging sciences}
+  \field{year}{2013}
+\endentry
+
 \entry{zeiler2010deconvolutional}{inproceedings}{}
   \name{author}{4}{}{%
     {{}%

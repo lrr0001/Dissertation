@@ -25,6 +25,7 @@ The dictionary model decomposes the signal $\vs_i$ into a dictionary $\mD$ (whic
 where $\lambda$ is a hyperparameter greater than zero controlling how much the L$1$ norm of the coefficients is penalized. Researchers have proposed many ways to solve this problem. If the dictionary is convolutional and the number of channels is low, a standard approach is to use the Alternating direction Method of Multipliers (ADMM) algorithm.
 
 \section{ADMM}
+\label{section:ADMM}
 ADMM is a convex-optimization algorithm used to solve the optimization problem:
 \begin{equation} \label{equation:ADMM}
 \begin{aligned}
@@ -96,6 +97,7 @@ When $\alpha > 1$, this is known as overrelaxation, and if $\alpha < 1$, this is
 
 
 \section{Applying ADMM to the Sparse Coding Problem}
+\label{section:Applying ADMM}
 Recall from section \ref{section:sparse coding}, equation \ref{equation:sparse coding} for sparse coding.
 
 \begin{equation}
@@ -235,8 +237,94 @@ So,
 This means that instead of computing the inverse of an $M \times M$ matrix for every pixel in the image, one could instead choose to compute the inverse of a $C \times C$ matrix for each pixel in the image.\footnote{Generally, Cholesky or LDLT decomposition would be preferable to explicitly computing the inverse, and the efficiency gains due to the Woodbury matrix identity are relevant regardless of the chosen representation.}
 
 \section{Literature Review}
-\subsection{Convolutional Sparse Coding}
+In applying ADMM to the convolutional sparse coding problem, \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient} exploit the low-rank structure of the inverse problem in the $\vx$ update for efficient computation. Unfortunately, this relies on the number of channels being small. This section reviews sparse coding methods that avoid or simplify this challenging inverse problem.
+
+In \cite{chodosh2018deep}\cite{murdock2018deep}, the authors use the ADMM algorithm for sparse coding. They observe that if the dictionary is a tight frame, that is, $\mD\mD^T = \mId$, then the inverse can be simplied without using the frequency representation.
+
+\begin{equation}
+(\rho\mId + \mD^T\mD)^{-1} = \frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD
+\end{equation}
+
+This produces an update equation for $\vx$ that avoids computing inverses altogether.
+
+\begin{equation}
+\vx^{(k + 1)} = \frac{1}{\rho + 1}\mD^T\vs + (\mId - \frac{1}{\rho + 1}\mD^T\mD)(\vz^{(k)} - \frac{\vgamma^{(k)}}{\rho})
+\end{equation}
+
+In their work, they use the equations built on the assumption that the dictionary is a tight frame, but develop no mechanism to ensure that their assumption is accurate. Thus, ultimately $\frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD$ serves as an approximation to $(\rho\mId + \mD^T\mD)^{-1}$. The dictionaries they learn are not tight frames.
+
+Other works avoid the ADMM algorithm entirely.
+
+The iterative shrinkage thresholding algorithm (ISTA) is an iterative algorithm that minimizes the sum of two convex functions $f$ and $g$. $f$ is required to be smooth. It is helpful for $f$ to be easily differentiable and $g$ to have a simple proximal operator.
+
+\begin{equation}
+\prox_g(\vmu) = \arg \min_{\vnu} \frac{1}{2}\|\vnu - \vmu\|_2^2 + g(\vnu)
+\end{equation}
+
+Then, ISTA has the following update equation, where the constant $L$ constrols step size.
+
+\begin{equation}
+\vx^{(k + 1)} = \prox_g(\vx^{(k)} - \frac{1}{L}\nabla_{\vx} f(\vx^{(k)}))
+\end{equation}
+
+FISTA is similar to ISTA, but adds momentum \cite{beck2009fast}.
+\begin{equation}
+\vz^{(k + 1)} = \prox_g(\vx^{(k)} - \frac{1}{L}\nabla_{\vx}f(x^{(k)}))
+\end{equation}
+\begin{equation}
+t^{(k + 1)} = \frac{1}{2}(1 + \sqrt{1 + 4(t^{(k)})^2})
+\end{equation}
+\begin{equation}
+\vx^{(k + 1)} = \vz^{(k + 1)} + \frac{t^{(k)} - 1}{t^{(k + 1)}}(\vz^{(k + 1)} - \vx^{(k)})
+\end{equation}
+
+Applying FISTA to the sparse coding problem, $\frac{1}{2}\|\vs - \mD\vx\|_2^2$ is straightforward to differentiate and $\lambda\|\vx\|_1$ has a simple proximal operator.
+
+\begin{equation}
+\nabla_{\vx}(\frac{1}{2}\|\vs - \mD\vx\|_2^2) = \mD^T\mD\vx - \mD^T\vs
+\end{equation}
+
+\begin{equation}
+\prox_{\lambda\|\cdot\|_1}(\cdot) = \operatorname{S}_{\lambda}
+\end{equation}
+
+So, the FISTA equations for convolutional basis pursuit are the following:
+\begin{equation}
+\vz^{(k + 1)} = \operatorname{S}_{\lambda}(\vx^{(k)} - \frac{1}{L}\mD^T(\mD\vx^{(k)} - \vs))
+\end{equation}
+\begin{equation}
+t^{(k + 1)} = \frac{1}{2}(1 + \sqrt{1 + 4(t^{(k)})^2})
+\end{equation}
+\begin{equation}
+\vx^{(k + 1)} = \vz^{(k + 1)} + \frac{t^{(k)} - 1}{t^{(k + 1)}}(\vz^{(k + 1)} - \vx^{(k)})
+\end{equation}
+
+In \cite{wohlberg2015efficient}, Wohlberg compares FISTA to ADMM on a sparse coding task and finds FISTA converges much slower than ADMM. However, the comparison is made on signals with few channels, so ADMM is able to exploit the structure of $\mD$ for efficient $\vx$ updates.
+
+In a recent work \cite{chodosh2020use}, Chodosh and Lucey use updates prox-linear updates using more general convex solver methods detailed in \cite{xu2013block}.
+
+The updates come from the formula:
+\begin{equation}
+\vx^{(k + 1)} = \arg\min_{\vx} (\nabla f(\bar{\vx}^{(k)}))^T(\vx - \bar{\vx}^{(k)}) + \frac{L}{2}\|\vx - \bar{\vx}^{(k)}\|_2^2 + \lambda\|\vx\|_1
+\end{equation}
+
+where $\bar{\vx}^{(k)} = \vx^{(k)} + \omega_k(\vx^{(k)} - \vx^{(k - 1)})$ and $\omega_k$ is a momentum factor.
+
+This yields the update equation\footnote{In their paper, they add a non-negativity constraint and allow different $\lambda$ for the coefficients of each filter (and possibly spatially varied as well). They also are constucting the equations specifically for a multi-layer network. I simplified their equations to illistrate how their approach relates to the FISTA algorithm.}:
+\begin{equation}
+\vx^{(k + 1)} = \operatorname{S}_{\frac{\lambda}{L}}(\bar{\vx}^{(k)} + \mD^T(\vs - \mD\bar{\vx}))
+\end{equation}
+
+While neither Chodosh and Lucey nor the work they cite mentions FISTA, the resemblance is very close. There are two distinctions:
+\begin{enumerate}
+\item Momentum is computed slightly differently: to match FISTA, the prox-linear updates would need to use $\vx^{(k)} - \bar{\vx}^{(k - 1)}$ for momentum. Instead, they use $\vx^{(k)} - \vx^{(k - 1)}$.
+\item The prox-linear approach scales the momentum steps differently.
+\end{enumerate}
+
+Given these similarities, it is likely the performance between the two methods is similar.
+
 \section{ADMM with Low-Rank Updates}
+In this section, I present a novel approach to sparse coding for signals with a large number of channels. The approach uses the ADMM algorithm described in section \ref{section:ADMM} and will share many similarities to the standard ADMM sparse coding approach described in section \ref{section:Applying ADMM} for signals with few channels.
 \section{Conclusion}
 
 % This is a figure in landscape orientation
