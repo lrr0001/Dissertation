@@ -141,7 +141,7 @@ Since the minimim is desired, setting the gradient to zero will produce the solu
 \vx^{(k + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho}))
 \end{equation}
 
-At the end of this section, there is a discussion of the implications of this update equation, how to compute it for cases in which the signal has a low number of channels, and the challenges it poses for signals with many channels.
+In subsection \ref{subsection:SC xupdate}, there is a discussion of the implications of this update equation, how to compute it for cases in which the signal has a low number of channels, and the challenges it poses for signals with many channels.
 
 If using over-relaxation, there is a dual update:
 \begin{equation}
@@ -173,7 +173,9 @@ Finally, the last update equation for the dual variable:
 \frac{\vu^{(k + 1)}}{\rho} = \frac{\vu^{(k + \frac{1}{2})}}{\rho} + \vy^{(k + 1)} - \vx^{(k + 1)}
 \end{equation}
 
-Now, returning to the $\vx$ update:
+\subsection{Exploiting Dictionary Structure for the Inverse Problem}
+\label{subsection:SC xupdate}
+Returning to the $\vx$ update:
 \begin{equation}
 \vx^{(k + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho}))
 \end{equation}
@@ -200,7 +202,7 @@ where $\mD_{c,m}$ is a toplitz matrix capturing channel $c$ of the $m$th filter 
 \end{bmatrix}
 \end{equation}
 
-where $\hat{\mD}_{c,m}$ is a diagonal matrix whose elements are the discrete Fourier transform of channel $c$ of the $m$th dictionary filter.
+where $\hat{\mD}_{c,m}$ is a diagonal matrix whose elements are the discrete Fourier transform (FFT) of channel $c$ of the $m$th dictionary filter.
 
 This sparsely banded structure is a useful form in analyzing the structure of the inverse problem:
 \begin{equation}
@@ -230,7 +232,7 @@ So,
 (\rho\mId + \hat{\mD}^H\hat{\mD})^{-1} = \frac{1}{\rho}\mId - \frac{1}{\rho}\hat{\mD}^H(\rho\mId + \hat{\mD}\hat{\mD}^H)^{-1}\hat{\mD}
 \end{equation}
 
-This means that instead of computing the inverse of an $M \times M$ matrix for every pixel in the image, one could instead choose to compute the inverse of a $C \times C$ matrix for each pixel in the image.\footnote{Generally, Cholesky or LDLT decomposition would be preferable to explicitly computing the inverse. The efficiency gains due to the Woodbury matrix identity are relevant regardless of the chosen representation of the inverse.}
+This means that instead of computing the inverse of an $M \times M$ matrix for every pixel in the image, one could instead choose to compute the inverse of a $C \times C$ matrix for each pixel in the image.\footnote{Generally, Cholesky or LDLT decomposition would be preferable to explicitly computing the inverse, and the efficiency gains due to the Woodbury matrix identity are relevant regardless of the chosen representation.}
 
 \section{Literature Review}
 \subsection{Convolutional Sparse Coding}

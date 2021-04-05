@@ -121,6 +121,106 @@
   \field{year}{2015}
 \endentry
 
+\entry{Bristow2013fast}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Bristow}{B.}%
+     {Hilton}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Eriksson}{E.}%
+     {Anders}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BHEALS1}
+  \strng{fullhash}{BHEALS1}
+  \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}
+  \field{pages}{391\bibrangedash 398}
+  \field{title}{Fast convolutional sparse coding}
+  \field{year}{2013}
+\endentry
+
+\entry{vsorel2016fast}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {{\v{S}}orel}{{\v{S}}.}%
+     {Michal}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{\v{S}}roubek}{{\v{S}}.}%
+     {Filip}{F.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Elsevier}%
+  }
+  \strng{namehash}{SMSF1}
+  \strng{fullhash}{SMSF1}
+  \field{pages}{44\bibrangedash 51}
+  \field{title}{Fast convolutional sparse coding using matrix inversion lemma}
+  \field{volume}{55}
+  \field{journaltitle}{Digital Signal Processing}
+  \field{year}{2016}
+\endentry
+
+\entry{heide2015fast}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Heide}{H.}%
+     {Felix}{F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Heidrich}{H.}%
+     {Wolfgang}{W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wetzstein}{W.}%
+     {Gordon}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HFHWWG1}
+  \strng{fullhash}{HFHWWG1}
+  \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}
+  \field{pages}{5135\bibrangedash 5143}
+  \field{title}{Fast and flexible convolutional sparse coding}
+  \field{year}{2015}
+\endentry
+
+\entry{wohlberg2015efficient}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wohlberg}{W.}%
+     {Brendt}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{WB1}
+  \strng{fullhash}{WB1}
+  \field{number}{1}
+  \field{pages}{301\bibrangedash 315}
+  \field{title}{Efficient algorithms for convolutional sparse representations}
+  \field{volume}{25}
+  \field{journaltitle}{IEEE Transactions on Image Processing}
+  \field{year}{2015}
+\endentry
+
 \entry{zeiler2010deconvolutional}{inproceedings}{}
   \name{author}{4}{}{%
     {{}%
