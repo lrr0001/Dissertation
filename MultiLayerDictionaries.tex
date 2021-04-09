@@ -5,5 +5,377 @@ A multi-layer dictionary model is composed of multiple dictionaries; the model t
 In 2010, Zeiler et al. proposed a multi-layer dictionary model termed a deconvolutional network. The learning process for dictionary filters is entirely unsupervised, and they learn their filters layer-by-layer. Their algorithm is greedy in the sense that there is no feedback from subsequent layers to influence the learning process on the previous layer. This approach was tested both on the task of removing added gaussian noise to images, and also as a feature extraction method for object recognition on the Caltech-101 dataset \cite{fei2004-Caltech101}. While this research drew a lot of attention at the time, as the success of alternative models like convolutional neural networks grew, the popularity of deconolutional networks decreased.
 
 Multi-layer dictionaries also appear in Bayesian models, going by names such as hierarchical convolutional factor analysis \cite{chen2011hierarchical}\cite{chen2013deep} and deep deconvolutional learning \cite{pu2014generative}. These networks use probabilistic models to prune network architecture and provide interpretable dictionaries. Inference can be slow.
+
+In more recent work, \cite{murdock2018deep} and \cite{chodosh2018deep} use ADMM for pursuit on a multi-layer dictionary model. Their pursuit algorithm attempts to solve the minimization problem:
+\begin{equation}
+\minimize_{\vx} = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vx_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vx_{\ell}\|_1
+\end{equation}
+where $\vx_0 = \vs$ is the signal. They convert this to a constrained optimization for the ADMM algorithm.
+\begin{equation}
+\begin{aligned}
+\min_{\vx,\vz} & \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1 \\
+\text{subject to } & \vz_{\ell} - \vx_{\ell} = 0
+\end{aligned}
+\end{equation}
+where $\vz_0 = \vs$ is the signal. The $\vx$ updates involve solving an inverse problem. They use a tight-frame assumption to approximate the inverse.
+
+Finally, in \cite{chodosh2020use}, Chodosh and Lucey use a similar model to \cite{murdock2018deep} and \cite{chodosh2018deep}, but replace the ADMM approach with FISTA-like linear-proximal iterative steps.
+
 \section{Multi-Layer ADMM with Low-Rank Updates}
+This chapter demostrates how to apply the novel sparse coding method for multi-channel signals to a multi-layer dictionary pursuit problem.
+
+To start off, it is helpful to write a multi-layer dictionary optimization problem. To keep things compact, let $\vx_0 = \vs$.
+
+I use the same multi-layer dictionary model as \cite{murdock2018deep} and \cite{chodosh2018deep}, but I use different ADMM constraints:
+
+\begin{equation}
+\minimize_{\vx} = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vx_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vx_{\ell}\|_1
+\end{equation}
+
+Applying the ADMM algorithm, I add a secondary primal variable $\vz_{\ell}$ for each layer $\ell$ and constrain it to be equal to $\vx_{\ell}$. As in the previous chapter, I scale this constraint so that the inverse representation can be updated efficiently without losing the normalized quality of the dictionary. This replaces the tight-frame assumption used in \cite{murdock2018deep} and \cite{chodosh2018deep}. Again, keeping things compact, let $\vz_0 = \vs$.
+
+\begin{equation}
+\begin{aligned}
+\min_{\vx,\vz} & \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1 \\
+\text{subject to } & \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vz_{\ell} - \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vx_{\ell} = 0
+\end{aligned}
+\end{equation}
+
+where $\vz_0 = \vs$ is not a primal variable, but instead the signal itself.
+
+This optimization problem has the augmented Lagrangian function:
+
+\begin{equation}
+\operatorname{L}_{\rho}(\vx,\vz,\vgamma) = f(\vx,\vz)  +  \sum_{\ell = 1}^L \frac{\rho}{2}\|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2  - \frac{1}{2\rho}\|\vgamma_{\ell}\|_2^2
+\end{equation}
+
+where 
+\begin{equation}
+f(\vx,\vz) = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1
+\end{equation}
+
+Recall that the ADMM algoritm (with relaxation) iteratively alternates between primal and dual updates, using $4$ update equations:
+\begin{equation} \label{equation:general x-update ADMM}
+\vx^{(t + 1)} = \arg\min_{\vx} \L(\vx,\vz^{(t)},\vgamma^{(t)})
+\end{equation}
+
+\begin{equation}
+\frac{\vgamma^{\left(t + \frac{1}{2}\right)}}{\rho} = \frac{\vgamma^{(t)}{\rho} + (\alpha - 1)(\mA\vx^{(t + 1)} + \mB\vz^{(t)} + \vc)
+\end{equation}
+
+\begin{equation}
+\vz^{(t + 1)} = \arg\min_{\vz} \L(\vx^{(t + 1)},\vz,\vgamma^{\left(t + \frac{1}{2}\right)})
+\end{equation}
+
+\begin{equation}
+\frac{\vgamma^{(t + 1)}}{\rho} = \frac{\vgamma^{\left(t + \frac{1}{2}\right)}{\rho} + \mA\vx^{(t + 1)} + \mB\vz^{(t)} + \vc
+\end{equation}
+
+where $\mA\vx + \mB\vz + \vc = \vzero$ are the affine constraints.
+
+The first of these updates is the $\vx$ update, which updates the coefficients.
+
+
+\section{Coefficients Update Equation}
+The coefficients update comes from equation \ref{equation:general x-update ADMM}, which can be found through setting the gradient of the Lagrangian equal to zero and solving for $\vx$.
+
+\begin{equation}
+\nabla_{\vx_{\ell}} f(\vx,\vz) = \mu_{\ell}\mD_{\ell}^H\mD_{\ell}\vx_{\ell} - \mu_{\ell}\mD_{\ell}^H\vz_{\ell - 1}
+\end{equation}
+
+\begin{equation}
+\nabla_{\vx_{\ell}} \frac{1}{2}\|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2 = \mu_{\ell}\mR_{\ell}^{-2}\vx - \mu_{\ell}\mR_{\ell}^{-2}\vz_{\ell} - \frac{\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}}{\rho}
+\end{equation}
+
+Therefore,
+
+\begin{equation}
+\nabla_{\vx_{\ell}} \operatorname{L}_{\rho}(\vx,\vz,\vgamma) = \mu_{\ell}\mD_{\ell}^H\mD_{\ell}\vx_{\ell} - \mu_{\ell}\mD_{\ell}^H\vz_{\ell - 1} + \rho(\mu_{\ell}\mR_{\ell}^{-2}\vx - \mu_{\ell}\mR_{\ell}^{-2}\vz_{\ell} - \frac{\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}}{\rho})
+\end{equation}
+
+For $\vx$, $\vz$, $\vgamma$, such that $\nabla_{\vx_{\ell}} \operatorname{L}_{\rho}(\vx_1,\hdots,\vx_L,\vz_0,\hdots,\vz_L,\vgamma_0,\hdots,\vgamma_L) = 0$:
+
+\begin{equation}
+\mu_{\ell}(\rho \mR_{\ell}^{-2} + \mD_{\ell}^H\mD_{\ell})\vx_{\ell} = \mu_{\ell}\mD_{\ell}^H\vz_{\ell - 1} + \rho \mu_{\ell}\mR_{\ell}^{-2}\vz_{\ell} + \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}
+\end{equation}
+
+\begin{equation}
+(\rho \mR_{\ell}^{-2} + \mD_{\ell}^H\mD_{\ell})\vx_{\ell} = \mD_{\ell}^H\vz_{\ell - 1} + \rho \mR_{\ell}^{-2}\vz_{\ell} + \frac{\mR_{\ell}^{-1}\vgamma_{\ell}}{\sqrt{\mu_{\ell}}}
+\end{equation}
+
+\begin{equation}
+\vx_{\ell} = (\rho \mR_{\ell}^{-2} + \mD_{\ell}^H\mD_{\ell})^{-1}(\mD_{\ell}^H\vz_{\ell - 1} + \rho \mR_{\ell}^{-2}\vz_{\ell} + \frac{\mR_{\ell}^{-1}\vgamma_{\ell}}{\sqrt{\mu_{\ell}}})
+\end{equation}
+
+\begin{equation}
+\vx_{\ell} = \mR_{\ell}(\rho \mId + (\mD_{\ell}\mR_{\ell})^H\mD_{\ell}\mR_{\ell})^{-1}\mR_{\ell}(\mD_{\ell}^H\vz_{\ell - 1} + \rho \mR_{\ell}^{-2}\vz_{\ell} + \frac{\mR_{\ell}^{-1}\vgamma_{\ell}}{\sqrt{\mu_{\ell}}})
+\end{equation}
+
+\begin{equation}
+\mR_{\ell}^{-1}\vx_{\ell} = (\rho \mId + (\mD_{\ell}\mR_{\ell})^H\mD_{\ell}\mR_{\ell})^{-1}((\mD_{\ell}\mR_{\ell})^H\vz_{\ell - 1} + \rho \mR_{\ell}^{-1}\vz_{\ell} + \frac{\vgamma_{\ell}}{\sqrt{\mu_{\ell}}})
+\end{equation}
+
+\begin{equation}
+\mR_{\ell}^{-1}\vx_{\ell} = (\rho \mId + (\mD_{\ell}\mR_{\ell})^H\mD_{\ell}\mR_{\ell})^{-1}((\mD_{\ell}\mR_{\ell})^H\vz_{\ell - 1} + \rho (\mR_{\ell}^{-1}\vz_{\ell} + \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}))
+\end{equation}
+
+Note that here there is a dependance on an unscaled $\vz_{\ell - 1}$. If $\mR_{\ell - 1}^{-1} \vz_{\ell - 1}$ is used instead, it will have to be rescaled before the unnormalized dictionary is applied.
+
+\section{Proximal Updates}
+
+Briefly ignore the positive constraint, I will return to it.
+
+For $\vx$, $\vz$, $\vgamma$, such that $\nabla_{\vz_{\ell}} \operatorname{L}_{\rho}(\vx_1,\hdots,\vx_L,\vz_0,\hdots,\vz_L,\vgamma_0,\hdots,\vgamma_L) = 0$:
+
+\begin{equation}
+\nabla_{\vz} \frac{\mu_{\ell + 1}}{2}\|\vz_{\ell} - \mD_{\ell + 1}\vx_{\ell + 1}\|_2^2 + \|\vb_{\ell} \cdot \vz_{\ell}\|_1 + \frac{\rho}{2} \|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2 = 0
+\end{equation}
+
+Something important to note here is that each element of $\vz_{\ell}$ can be treated independently, that is:
+
+\begin{equation}
+\nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \vb_{\ell}[i]|\vz_{\ell}[i]| + \frac{\rho}{2} (\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}[i](\vz_{\ell}[i] - \vx_{\ell}[i]) + \frac{\vgamma_{\ell}[i]}{\rho})^2 = 0
+\end{equation}
+
+
+\begin{equation}
+\nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \vb_{\ell}[i]|\vz_{\ell}[i]| + \frac{\rho\mu_{\ell}}{2\mR_{\ell}^2[i]} (\vz_{\ell}[i] - \vx_{\ell}[i] + \frac{\mR_{\ell}[i]\vgamma_{\ell}[i]}{\rho\sqrt{\mu_{\ell}}})^2 = 0
+\end{equation}
+
+For the sake of brevity and convenience, I will now drop the indexing:
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}^2 - 2(\mD_{\ell + 1}\vx_{\ell + 1})z_{\ell}) + \vb_{\ell}|\vz_{\ell}| + \frac{\rho\mu_{\ell}}{2\mR_{\ell}^2} (\vz_{\ell}^2 - 2\vx_{\ell}\vz_{\ell} + \frac{2\mR_{\ell}\vgamma_{\ell}\vz_{\ell}}{\rho\sqrt{\mu_{\ell}}}) = 0
+\end{equation}
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{1}{2}(\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2})\vz_{\ell}^2 - \mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}\vz_{\ell} - \rho\mu_{\ell}\mR_{\ell}^{-2}\vx_{\ell}\vz_{\ell} + \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}\vz_{\ell} + \vb_{\ell}|\vz_{\ell}| = 0
+\end{equation}
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{1}{2}\vz_{\ell}^2 - \frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}\vx_{\ell} - \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\vz_{\ell} + \frac{\vb_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}|\vz_{\ell}| = 0
+\end{equation}
+
+\begin{equation}
+\vz_{\ell} = \operatorname{S}_{\frac{\vb_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}}(\frac{\mu_{\ell + 1}(\mD_{\ell + 1}\vx_{\ell + 1}) + \rho\mu_{\ell}\mR_{\ell}^{-2}(\vx_{\ell} - \frac{\mR_{\ell}\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}})}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}})
+\end{equation}
+
+\begin{equation}
+\vz_{\ell} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{S}_{\vb_{\ell}}(\mu_{\ell + 1}(\mD_{\ell + 1}\mR_{\ell + 1}\mR_{\ell + 1}^{-1}\vx_{\ell + 1}) + \rho\mu_{\ell}\mR_{\ell}^{-1}(\mR_{\ell}^{-1}\vx_{\ell} - \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}))
+\end{equation}
+
+To add nonnegative constraint, swap the shrinkage operator for a rectified linear unit.
+
+\begin{equation}
+\vz_{\ell} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{RELU}(\mu_{\ell + 1}(\mD_{\ell + 1}\mR_{\ell + 1}\mR_{\ell + 1}^{-1}\vx_{\ell + 1}) + \rho\mu_{\ell}\mR_{\ell}^{-1}(\mR_{\ell}^{-1}\vx_{\ell} - \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}) - \vb_{\ell})
+\end{equation}
+
+\subsection{Relaxation}
+\begin{equation}
+\nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \vb_{\ell}[i]|\vz_{\ell}[i]| + \frac{\rho}{2} (\mA_{\ell}[i]\vx_{\ell}[i] + \mB_{\ell}[i]\vz_{\ell}[i] + \frac{\vgamma_{\ell}[i]}{\rho})^2 = 0
+\end{equation}
+
+Once again, removing indexing for brevity:
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell} - (\mD_{\ell + 1}\vx_{\ell + 1}))^2 + \vb_{\ell}|\vz_{\ell}| + \frac{\rho}{2} (\mA_{\ell}\vx_{\ell} + \mB_{\ell}\vz_{\ell} + \frac{\vgamma_{\ell}}{\rho})^2 = 0
+\end{equation}
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}^2 - 2(\mD_{\ell + 1}\vx_{\ell + 1})\vz_{\ell}) + \vb_{\ell}|\vz_{\ell}| + \frac{\rho}{2} (2\mB_{\ell}\mA_{\ell}\vx_{\ell}\vz_{\ell} + \mB_{\ell}^2\vz_{\ell}^2 + \frac{2\mB_{\ell}\vgamma_{\ell}}{\rho}) = 0
+\end{equation}
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{1}{2}(\vz -\frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} - \rho(\mB_{\ell}\mA_{\ell}\vx_{\ell} + \frac{\mB_{\ell}\vgamma_{\ell}}{\rho})}{\mu_{\ell + 1} + \rho\mB_{\ell}^2})^2 + \frac{\vb_{\ell}}{\mu_{\ell + 1} + \rho\mB_{\ell}^2}|\vz_{\ell}| = 0
+\end{equation}
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{1}{2}(\vz -\frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} - \rho(\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\mA_{\ell}\vx_{\ell} + \frac{\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}}{\rho})}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}})^2 + \frac{\vb_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}|\vz_{\ell}| = 0
+\end{equation}
+
+\begin{equation}
+\nabla_{\vz_{\ell}} \frac{1}{2}(\vz -\frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} - \rho\mu_{\ell}\mR_{\ell}^{-1}(\frac{\mA_{\ell}\vx_{\ell}}{\sqrt{\mu_{\ell}}} + \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}})}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}})^2 + \frac{\vb_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}|\vz_{\ell}| = 0
+\end{equation}
+
+\begin{equation}
+\vz_{\ell} = \operatorname{S}_{\frac{\vb_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}}(\frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} - \rho\mu_{\ell}\mR_{\ell}^{-1}(\frac{\mA_{\ell}\vx_{\ell}}{\sqrt{\mu_{\ell}}} + \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}})}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}})
+\end{equation}
+
+\begin{equation}
+\vz_{\ell} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{S}_{\vb_{\ell}}(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} - \rho\mu_{\ell}\mR_{\ell}^{-1}(\frac{\mA_{\ell}\vx_{\ell}}{\sqrt{\mu_{\ell}}} + \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}))
+\end{equation}
+
+For over-relaxation or under-relaxation, replace $\mA_{\ell}\vx_{\ell}^{(k + 1)}$ with the expression $\alpha_k\mA_{\ell}\vx_{\ell}^{(k + 1)} + (1 - \alpha_k)(\mB_{\ell}\vz_{\ell}^{(k)} + \mC)$, where $\alpha_k \in (0,2)$ is the relaxation factor.
+
+\begin{equation}
+\vz_{\ell}^{(k + 1)} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{S}_{\vb_{\ell}}(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}^{(k + 1)} - \rho\mu_{\ell}\mR_{\ell}^{-1}((1 - \alpha_k)\mR_{\ell}^{-1}\vz_{\ell}^{(k)} - \alpha_k\mR_{\ell}^{-1}\vx_{\ell}^{(k + 1)} + \frac{\vgamma_{\ell}^{(k)}}{\rho\sqrt{\mu_{\ell}}}))
+\end{equation}
+
+To add the nonnegativity constraint, use a rectified linear unit instead of a shrinkage operator:
+
+\begin{equation}
+\vz_{\ell} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{RELU}(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} - \rho\mu_{\ell}\mR_{\ell}^{-1}(\frac{\mA_{\ell}\vx_{\ell}}{\sqrt{\mu_{\ell}}} + \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}) - \vb_{\ell})
+\end{equation}
+
+\begin{equation}
+\vz_{\ell}^{(k + 1)} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{RELU}(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}^{(k + 1)} - \rho\mu_{\ell}\mR_{\ell}^{-1}((1 - \alpha_k)\mR_{\ell}^{-1}\vz_{\ell}^{(k)} - \alpha_k\mR_{\ell}^{-1}\vx_{\ell}^{(k + 1)} + \frac{\vgamma_{\ell}^{(k)}}{\rho\sqrt{\mu_{\ell}}}) - \vb_{\ell})
+\end{equation}
+
+\subsection{Proximal Update for Last Layer}
+\begin{equation}
+\nabla_{\vz_L} \frac{\rho}{2}\|\mA_L\vx_L + \mB_L\vz_L + \frac{\vgamma_L}{\rho}\|_2^2 + \|\vb_L\cdot \vz_L\|_1 = 0
+\end{equation}
+\begin{equation}
+\nabla_{\vz_L} \frac{\rho}{2}\|\mA_L\vx_L + \sqrt{\mu_L}\mR_L^{-1}\vz_L + \frac{\vgamma_L}{\rho}\|_2^2 + \|\vb_L\cdot \vz_L\|_1 = 0
+\end{equation}
+\begin{equation}
+\nabla_{\vz_L[i]} \frac{\rho}{2}((\mA_L\vx_L)[i] + \sqrt{\mu_L}\mR_L^{-1}[i]\vz_L[i] + \frac{\vgamma_L[i]}{\rho})^2 + \vb_L[i]|\vz_L[i]| = 0
+\end{equation}
+\begin{equation}
+\nabla_{\vz_L[i]} \frac{\rho\mu_L\mR_L^{-2}}{2}(\vz_L[i] + \frac{(\mA_L\vx_L)[i] + \frac{\vgamma_L[i]}{\rho}}{\sqrt{\mu_L}\mR_L^{-1}})^2 + \vb_L[i]|\vz_L[i]| = 0
+\end{equation}
+
+\begin{equation}
+\nabla_{\vz_L[i]} \frac{1}{2}(\vz_L[i] + \frac{(\mA_L\vx_L)[i] + \frac{\vgamma_L[i]}{\rho}}{\sqrt{\mu_L}\mR_L^{-1}})^2 + \frac{\vb_L[i]|}{\rho\mu_L\mR_L^{-2}}|\vz_L[i]| = 0
+\end{equation}
+
+\begin{equation}
+\vz_L = \operatorname{S}_{\frac{\mR_L^2\vb_L}{\rho\mu_L}}(-\frac{\mR_L\mA_L\vx_L}{\sqrt{\mu_L}} - \frac{\mR_L\vgamma_L[i]}{\rho\sqrt{\mu_L}})
+\end{equation}
+
+\begin{equation}
+\vz_L = \mR_{\ell}\operatorname{S}_{\frac{\mR_L\vb_L}{\rho\mu_L}}(-\frac{\mA_L\vx_L}{\sqrt{\mu_L}} - \frac{\vgamma_L}{\rho\sqrt{\mu_L}})
+\end{equation}
+
+So, using a relaxation parameter, I have:
+
+\begin{equation}
+\vz_L^{(k + 1)} = \mR_{\ell}\operatorname{S}_{\frac{\mR_L\vb_L}{\rho\mu_L}}(\alpha_k\mR_{\ell}^{-1}\vx_{\ell}^{(k + 1)} - (1 - \alpha_k)\mR_{\ell}^{-1}\vz_{\ell}^{(k)} - \frac{\vgamma_L^{(k)}}{\rho\sqrt{\mu_L}})
+\end{equation}
+
+Or, if not using an overrelaxation parameter:
+\begin{equation}
+\vz_L^{(k + 1)} = \mR_{\ell}\operatorname{S}_{\frac{\mR_L\vb_L}{\rho\mu_L}}(\mR_L^{-1}\vx_L^{(k + 1)} - \frac{\vgamma_L^{(k)}}{\rho\sqrt{\mu_L}})
+\end{equation}
+
+
+To constrain $\vz_L$ to be nonnegative replace the shrinkage operator with a rectified linear unit.
+
+\begin{equation}
+\vz_L^{(k + 1)} = \mR_{\ell}\operatorname{RELU}(-\frac{\mA_L\vx_L^{(k + 1)}}{\sqrt{\mu_L}} - \frac{\vgamma_L^{(k)}}{\rho\sqrt{\mu_L}} - \frac{\mR_L\vb_L}{\rho\mu_L})
+\end{equation}
+
+\begin{equation}
+\vz_L^{(k + 1)} = \mR_{\ell}\operatorname{RELU}(\alpha_k\mR_{\ell}^{-1}\vx_{\ell}^{(k + 1)} - (1 - \alpha_k)\mR_{\ell}^{-1}\vz_{\ell}^{(k)} - \frac{\vgamma_L}{\rho\sqrt{\mu_L}} - \frac{\mR_L\vb_L}{\rho\mu_L})
+\end{equation}
+
+
+
+Or, if not using overrelaxation:
+\begin{equation}
+\vz_L^{(k + 1)} = \mR_{\ell}\operatorname{RELU}(\mR_L^{-1}\vx_L^{(k + 1)} - \frac{\vgamma_L^{(k)}}{\rho\sqrt{\mu_L}} - \frac{\mR_L\vb_L}{\rho\mu_L})
+\end{equation}
+
+%\subsection{Update for $\vz_0$}
+
+\begin{equation}
+\nabla_{\vz_0} \frac{\mu_1}{2}\|\vz_0 - \mD_1\vx_1\|_2^2 + \frac{\rho}{2}\|\mA_0\vx_0 + \mB\vz_0 + \mC_0 + \frac{\vgamma_0}{\rho}\|_2^2 = 0
+\end{equation}
+
+where $\mA_0\vx_0$ is zero unless overrelaxation is used.
+
+\begin{equation}
+\nabla_{\vz_0} \frac{\mu_1}{2}\|\vz_0 - \mD_1\vx_1\|_2^2 + \frac{\rho}{2}\|\mA_0\vx_0 + \mW\vz_0 - \vs + \frac{\vgamma_0}{\rho}\|_2^2 = 0
+\end{equation}
+
+\begin{equation}
+\mu_1(\vz_0 - \mD_1\vx_1) + \rho(\mW^T\mW\vz_0 + \mW^T(\mA_0\vx_0 - \vs + \frac{\vgamma_0}{\rho})) = 0
+\end{equation}
+
+\begin{equation}
+(\mu_1\mId + \rho\mW^T\mW)\vz_0 = \mu_1\mD_1\vx_1 + \rho\mW^T(\vs - \mA_0\vx_0 - \frac{\vgamma_0}{\rho})
+\end{equation}
+
+\begin{equation}
+\vz_0 = (\mu_1\mId + \rho\mW^T\mW)^{-1}(\mu_1\mD_1\vx_1 + \rho\mW^T(\vs - \mA_0\vx_0 - \frac{\vgamma_0}{\rho}))
+\end{equation}
+
+\begin{equation}
+\vz_0^{(k + 1)} = (\mu_1\mId + \rho\mW^T\mW)^{-1}(\mu_1\mD_1\vx_1^{(k + 1)} + \rho\mW^T(\vs - (1 - \alpha_k)(\mW\vz_0^{(k)} - \vs) - \frac{\vgamma_0^{(k)}}{\rho}))
+\end{equation}
+
+\begin{equation}
+\vz_0^{(k + 1)} = (\mu_1\mId + \rho\mW^T\mW)^{-1}(\mu_1\mD_1\vx_1^{(k + 1)} + \rho\mW^T((2 - \alpha_k)\vs - (1 - \alpha_k)\mW\vz_0^{(k)} - \frac{\vgamma_0^{(k)}}{\rho}))
+\end{equation}
+
+\begin{equation}
+\mu_1\mId + \rho\mW^T\mW = \mu_1(\mId - \mW^T\mW + \mW^T\mW) + \rho\mW^T\mW 
+\end{equation}
+
+\begin{equation}
+\mu_1\mId + \rho\mW^T\mW = \mu_1(\mId - \mW^T\mW) + (\rho + \mu_1)\mW^T\mW 
+\end{equation}
+
+\begin{equation}
+(\mu_1\mId + \rho\mW^T\mW)^{-1} = \frac{1}{\mu_1}(\mId - \mW^T\mW) + \frac{1}{\rho + \mu_1}\mW^T\mW 
+\end{equation}
+
+\begin{equation}
+\vz_0^{(k + 1)} = (\frac{1}{\mu_1}(\mId - \mW^T\mW) + \frac{1}{\rho + \mu_1}\mW^T\mW)(\mu_1\mD_1\vx_1^{(k + 1)} + \rho\mW^T((2 - \alpha_k)\vs - (1 - \alpha_k)\mW\vz_0^{(k)} - \frac{\vgamma_0^{(k)}}{\rho}))
+\end{equation}
+
+\begin{equation}
+\vz_0^{(k + 1)} = ((\mId - \mW^T\mW) + \frac{\mu_1}{\rho + \mu_1}\mW^T\mW)\mD_1\vx_1^{(k + 1)} + \frac{\rho\mW^T}{\rho + \mu_1}((2 - \alpha_k)\vs - (1 - \alpha_k)\mW\vz_0^{(k)} - \frac{\vgamma_0^{(k)}}{\rho}
+\end{equation}
+
+\section{Dual Update}
+
+\begin{equation}
+\vgamma_{\ell}^{(k + 1)} = \vgamma_{\ell}^{(k)} + \rho(\mA_{\ell}\vx_{\ell}^{(k + 1)} + \mB_{\ell}\vz_{\ell}^{(k + 1)})
+\end{equation}
+
+\begin{equation}
+\vgamma_{\ell}^{(k + 1)} = \vgamma_{\ell}^{(k)} + \rho((1 - \alpha_k)\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vz_{\ell}^{(k)} - \alpha_k\sqrt{\mu_{\ell}}\mR^{-1}\vx_{\ell}^{(k + 1)} + \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vz_{\ell}^{(k + 1)})
+\end{equation}
+
+\begin{equation}
+\frac{\vgamma_{\ell}^{(k + 1)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{(k)}}{\rho\sqrt{\mu_{\ell}}} + (1 - \alpha_k)\mR_{\ell}^{-1}\vz_{\ell}^{(k)} - \alpha_k\mR^{-1}\vx_{\ell}^{(k + 1)} + \mR_{\ell}^{-1}\vz_{\ell}^{(k + 1)}
+\end{equation}
+
+Or, if $\alpha_k = 1$:
+
+\begin{equation}
+\vgamma_{\ell}^{(k + 1)} = \vgamma_{\ell}^{(k)} + \rho(\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vz_{\ell}^{(k + 1)} - \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vx_{\ell}^{(k + 1)}) 
+\end{equation}
+
+\begin{equation}
+\frac{\vgamma_{\ell}^{(k + 1)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{(k)}}{\rho\sqrt{\mu_{\ell}}} + \mR_{\ell}^{-1}\vz_{\ell}^{(k + 1)} - \mR_{\ell}^{-1}\vx_{\ell}^{(k + 1)}
+\end{equation}
+
+%\section{Update for $\gamma_0$}
+\begin{equation}
+\vgamma_0^{(k + 1)} = \vgamma_0^{(k)} + \rho(\mA_0\vx_0^{(k + 1)} + \mB_0\vz_0^{(k + 1)} + \mC_0)
+\end{equation}
+
+\begin{equation}
+\vgamma_0^{(k + 1)} = \vgamma_0^{(k)} + \rho((1 - \alpha_k)(\mW\vz_0^{(k)} - \vs) + \mW\vz_0^{(k + 1)} - \vs)
+\end{equation}
+
+\begin{equation}
+\vgamma_0^{(k + 1)} = \vgamma_0^{(k)} + \rho((1 - \alpha_k)\mW\vz_0^{(k)} + \mW\vz_0^{(k + 1)} - (2 - \alpha_k)\vs)
+\end{equation}
+
+\begin{equation}
+\frac{\vgamma_0^{(k + 1)}}{\rho} = \frac{\vgamma_0^{(k)}}{\rho} + (1 - \alpha_k)\mW\vz_0^{(k)} + \mW\vz_0^{(k + 1)} - (2 - \alpha_k)\vs
+\end{equation}
+
+Or, if $\alpha_k = 1$:
+
+\begin{equation}
+\vgamma_0^{(k + 1)} = \vgamma_0^{(k)} + \rho(\mW\vz_0^{(k + 1)} - \vs)
+\end{equation}
+
+\begin{equation}
+\frac{\vgamma_0^{(k + 1)}}{\rho} = \frac{\vgamma_0^{(k)}}{\rho} + \mW\vz_0^{(k + 1)} - \vs
+\end{equation}
 \section{Summary}

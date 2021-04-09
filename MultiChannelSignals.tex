@@ -49,15 +49,15 @@ At the saddle-point solution, the augmented Lagrangian is at a minimum in respec
 The ADMM algorithm is an iterative search for the saddle point of the augmented Lagrangian. Each iteration consists of a primal update for $\vx$, a primal update for $\vy$, and a dual update for $\vu$:
 
 \begin{equation}
-\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)})
+\vx^{(t + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
 \end{equation}
 
 \begin{equation}
-\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k)})
+\vy^{(t + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(t + 1)},\vy,\vu^{(t)})
 \end{equation}
 
 \begin{equation}
-\vu^{(k + 1)} = \vu^{(k)} + \rho(\mA\vx^{(k + 1)} + \mB\vy^{(k + 1)} + \vc)
+\vu^{(t + 1)} = \vu^{(t)} + \rho(\mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc)
 \end{equation}
 
 The primal updates serve to move towards the minimum of the augmented Lagrangian in respect to $\vx$ and $\vy$ with $\vu$ fixed, and the dual update fixes $\vx$ and $\vy$, and performs gradient ascent on $\vu$ with stepsize $\rho$. Under very mild assumptions, this process converges to the saddle point of the augmented Lagrangian, which matches the solution to the constrained optimization problem.
@@ -71,29 +71,29 @@ There are two common variations of the ADMM algorithm that this work will make u
 The term $-\frac{1}{2\rho}\|\vu\|_2^2$ can be ignored for the primal updates because it has no dependence on the primal variables. For this reason, it is sometimes more convenient to keep track of $\frac{\vu}{\rho}$ instead of $\vu$, since that is the form that appears in the augmented Lagrangian after completing the square.
 
 \begin{equation}
-\frac{\vu^{(k + 1)}}{\rho} = \frac{\vu^{(k)}}{\rho} + \mA\vx^{(k + 1)} + \mB\vy^{(k + 1)} + \vc
+\frac{\vu^{(t + 1)}}{\rho} = \frac{\vu^{(t)}}{\rho} + \mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc
 \end{equation}
 
 This form is known as scaled ADMM.
 
 The other common variation of ADMM updates the dual variable more frequently.
 \begin{equation}
-\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)})
+\vx^{(t + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
 \end{equation}
 
 \begin{equation}
-\vu^{(k + \frac{1}{2})} = \vu^{(k)} + (\alpha - 1)\rho(\mA\vx^{(k + 1)} + \mB\vy^{(k)} + \vc)
+\vu^{(t + \frac{1}{2})} = \vu^{(t)} + (\alpha - 1)\rho(\mA\vx^{(t + 1)} + \mB\vy^{(t)} + \vc)
 \end{equation}
 
 \begin{equation}
-\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k + \frac{1}{2})})
+\vy^{(t + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(t + 1)},\vy,\vu^{(t + \frac{1}{2})})
 \end{equation}
 
 \begin{equation}
-\vu^{(k + 1)} = \vu^{(k + \frac{1}{2})} + \rho(\mA\vx^{(k + 1)} + \mB\vy^{(k + 1)} + \vc)
+\vu^{(t + 1)} = \vu^{(t + \frac{1}{2})} + \rho(\mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc)
 \end{equation}
 
-When $\alpha > 1$, this is known as overrelaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have chozen to notate over/under relaxation differently than what is standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation instead adds the term $-(1 - \alpha)(\mA\vx^{(k + 1)} + \mB\vy^{(k)} + \vc)$ to $\mA\vx^{(k + 1)}$ and substitutes that expression for $\mA\vx^{(k + 1)}$ in subsequent equations.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without overrelaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
+When $\alpha > 1$, this is known as overrelaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have chozen to notate over/under relaxation differently than what is standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation instead adds the term $-(1 - \alpha)(\mA\vx^{(t + 1)} + \mB\vy^{(t)} + \vc)$ to $\mA\vx^{(t + 1)}$ and substitutes that expression for $\mA\vx^{(t + 1)}$ in subsequent equations.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without overrelaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
 
 
 \section{Applying ADMM to the Sparse Coding Problem}
@@ -122,47 +122,47 @@ Computing the augmented Lagrangian of convex optimization problem in expression 
 
 Starting with the $\vx$-update:
 \begin{equation}
-\vx^{(k + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(k)},\vu^{(k)})
+\vx^{(t + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
 \end{equation}
 
 Since the minimim is desired, setting the gradient to zero will produce the solution.
 
 \begin{equation}
-\nabla_{\vx^{(k + 1)}} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy{(k)},\vu{(k)}) = \vzero
+\nabla_{\vx^{(t + 1)}} \operatorname{L}_{\rho}(\vx^{(t + 1)},\vy{(t)},\vu{(t)}) = \vzero
 \end{equation}
 
 \begin{equation}
-\vzero = \mD^T\mD\vx^{(k + 1)} - \mD^T\vs_i + \rho\vx^{(k + 1)} - \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho})
+\vzero = \mD^T\mD\vx^{(t + 1)} - \mD^T\vs_i + \rho\vx^{(t + 1)} - \rho(\vy^{(t)} + \frac{\vu^{(t)}}{\rho})
 \end{equation}
 
 \begin{equation}
-(\rho\mId + \mD^T\mD)\vx^{(k + 1)} = \mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho})
+(\rho\mId + \mD^T\mD)\vx^{(t + 1)} = \mD^T\vs_i + \rho(\vy^{(t)} + \frac{\vu^{(t)}}{\rho})
 \end{equation}
 
 \begin{equation}
-\vx^{(k + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho}))
+\vx^{(t + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(t)} + \frac{\vu^{(t)}}{\rho}))
 \end{equation}
 
 In subsection \ref{subsection:SC xupdate}, there is a discussion of the implications of this update equation, how to compute it for cases in which the signal has a low number of channels, and the challenges it poses for signals with many channels.
 
-If using over-relaxation, there is a dual update:
+If using over-relaxation\footnote{or under-relaxation}, there is a dual update:
 \begin{equation}
-\frac{\vu^{(k + \frac{1}{2})}}{\rho} = \frac{\vu^{(k)}}{\rho} + (\alpha - 1)(\vy^{(k)} - \vx^{(k + 1)})
+\frac{\vu^{(t + \frac{1}{2})}}{\rho} = \frac{\vu^{(t)}}{\rho} + (\alpha - 1)(\vy^{(t)} - \vx^{(t + 1)})
 \end{equation}
 
 Moving on to the $\vy$-update:
 \begin{equation}
-\vy^{(k + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(k + 1)},\vy,\vu^{(k + \frac{1}{2})})
+\vy^{(t + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(t + 1)},\vy,\vu^{(t + \frac{1}{2})})
 \end{equation}
 
 Excluding the terms that don't include $\vy$, I have
 \begin{equation}
-\vy^{(k + 1)} = \arg\min_{\vy} \lambda\|\vy\|_1 + \frac{\rho}{2}\|\vy - \vx^{(k + 1)} + \frac{\vu^{(k + \frac{1}{2})}}{\rho}\|_2^2
+\vy^{(t + 1)} = \arg\min_{\vy} \lambda\|\vy\|_1 + \frac{\rho}{2}\|\vy - \vx^{(t + 1)} + \frac{\vu^{(t + \frac{1}{2})}}{\rho}\|_2^2
 \end{equation}
 
 This is a well-known problem, whose solution is
 \begin{equation}
-\vy^{(k + 1)} = \operatorname{S}_{\frac{\lambda}{\rho}}(\vx^{(k + 1)} - \frac{\vu^{(k + \frac{1}{2})}}{\rho})
+\vy^{(t + 1)} = \operatorname{S}_{\frac{\lambda}{\rho}}(\vx^{(t + 1)} - \frac{\vu^{(t + \frac{1}{2})}}{\rho})
 \end{equation}
 where $\operatorname{S}$ is the shrinkage operator:
 \begin{equation}
@@ -172,14 +172,14 @@ In the case of a vector, matrix, or tensor input, the shrinkage operator is appl
 
 Finally, the last update equation for the dual variable:
 \begin{equation}
-\frac{\vu^{(k + 1)}}{\rho} = \frac{\vu^{(k + \frac{1}{2})}}{\rho} + \vy^{(k + 1)} - \vx^{(k + 1)}
+\frac{\vu^{(t + 1)}}{\rho} = \frac{\vu^{(t + \frac{1}{2})}}{\rho} + \vy^{(t + 1)} - \vx^{(t + 1)}
 \end{equation}
 
 \subsection{Exploiting Dictionary Structure for the Inverse Problem}
 \label{subsection:SC xupdate}
 Returning to the $\vx$ update:
 \begin{equation}
-\vx^{(k + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(k)} + \frac{\vu^{(k)}}{\rho}))
+\vx^{(t + 1)} = \left(\rho\mId + \mD^T\mD\right)^{-1}\left(\mD^T\vs_i + \rho(\vy^{(t)} + \frac{\vu^{(t)}}{\rho})\right)
 \end{equation}
 
 For problems using a dictionary with convolutional structure, this inverse for the convolutional sparse coding problem is very structured. Exploiting this structure is important for efficient computation, because the matrix $\rho\mId + \mD^T\mD$ is a large matrix.
@@ -224,7 +224,7 @@ and in a slight abuse of notation, $\F$ computes the FFT separately on the coeff
 
 Furthermore, the maximum rank of these submatrices is $C$, so if $C$ is small, these inverses can be computed even more efficiently using the Woodbury matrix identity \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient}.
 
-According to the Woodbury matrix identity, for any invertible matrix $\mU$ and any matrix $\mV$:
+According to the Woodbury matrix identity \cite{henderson1981deriving}, for any invertible matrix $\mU$ and any matrix $\mV$:
 \begin{equation}
 (\mU + \mV^H\mV)^{-1} = \mU^{-1} - \mU^{-1}\mV^H(\mId + \mV\mU^{-1}\mV^H)^{-1}\mV\mU^{-1}
 \end{equation}
@@ -236,8 +236,8 @@ So,
 
 This means that instead of computing the inverse of an $M \times M$ matrix for every pixel in the image, one could instead choose to compute the inverse of a $C \times C$ matrix for each pixel in the image.\footnote{Generally, Cholesky or LDLT decomposition would be preferable to explicitly computing the inverse, and the efficiency gains due to the Woodbury matrix identity are relevant regardless of the chosen representation.}
 
-\section{Literature Review}
-In applying ADMM to the convolutional sparse coding problem, \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient} exploit the low-rank structure of the inverse problem in the $\vx$ update for efficient computation. Unfortunately, this relies on the number of channels being small. This section reviews sparse coding methods that avoid or simplify this challenging inverse problem.
+\section{Sparse Coding for Multi-Channel Signals: Alternatives to My Novel Approach}
+In applying ADMM to the convolutional sparse coding problem, \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient} exploit the low-rank structure of the inverse problem in the $\vx$ update for efficient computation. Unfortunately, this relies on the number of channels being small. Broadly, there are two main approaches to avoid or simplify this challenging inverse problem: either construct a variant of the ADMM algorithm that simplifies the inverse problem, or use a proximal gradient approach that avoids it altogether.
 
 In \cite{chodosh2018deep}\cite{murdock2018deep}, the authors use the ADMM algorithm for sparse coding. They observe that if the dictionary is a tight frame, that is, $\mD\mD^T = \mId$, then the inverse can be simplied without using the frequency representation.
 
@@ -248,10 +248,10 @@ In \cite{chodosh2018deep}\cite{murdock2018deep}, the authors use the ADMM algori
 This produces an update equation for $\vx$ that avoids computing inverses altogether.
 
 \begin{equation}
-\vx^{(k + 1)} = \frac{1}{\rho + 1}\mD^T\vs + (\mId - \frac{1}{\rho + 1}\mD^T\mD)(\vz^{(k)} - \frac{\vgamma^{(k)}}{\rho})
+\vx^{(t + 1)} = \frac{1}{\rho + 1}\mD^T\vs + \left(\mId - \frac{1}{\rho + 1}\mD^T\mD\right)\left(\vz^{(t)} - \frac{\vgamma^{(t)}}{\rho}\right)
 \end{equation}
 
-In their work, they use the equations built on the assumption that the dictionary is a tight frame, but develop no mechanism to ensure that their assumption is accurate. Thus, ultimately $\frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD$ serves as an approximation to $(\rho\mId + \mD^T\mD)^{-1}$. The dictionaries they learn are not tight frames.
+In their work, they use the equations built on the assumption that the dictionary is a tight frame, but develop no mechanism to ensure that their assumption is accurate. Thus, ultimately $\frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD$ merely serves as an approximation to $(\rho\mId + \mD^T\mD)^{-1}$. Empirically, they observe the algorithm converges, but the dictionaries they learn are not tight frames.
 
 Other works avoid the ADMM algorithm entirely.
 
@@ -264,24 +264,24 @@ The iterative shrinkage thresholding algorithm (ISTA) is an iterative algorithm 
 Then, ISTA has the following update equation, where the constant $L$ constrols step size.
 
 \begin{equation}
-\vx^{(k + 1)} = \prox_g(\vx^{(k)} - \frac{1}{L}\nabla_{\vx} f(\vx^{(k)}))
+\vx^{(t + 1)} = \prox_g\left(\vx^{(t)} - \frac{1}{L}\nabla_{\vx} f(\vx^{(t)})\right)
 \end{equation}
 
 FISTA is similar to ISTA, but adds momentum \cite{beck2009fast}.
 \begin{equation}
-\vz^{(k + 1)} = \prox_g(\vx^{(k)} - \frac{1}{L}\nabla_{\vx}f(x^{(k)}))
+\vz^{(t + 1)} = \prox_g\left(\vx^{(t)} - \frac{1}{L}\nabla_{\vx}f(x^{(t)})\right)
 \end{equation}
 \begin{equation}
-t^{(k + 1)} = \frac{1}{2}(1 + \sqrt{1 + 4(t^{(k)})^2})
+r^{(t + 1)} = \frac{1}{2}\left(1 + \sqrt{1 + 4(r^{(t)})^2}\right)
 \end{equation}
 \begin{equation}
-\vx^{(k + 1)} = \vz^{(k + 1)} + \frac{t^{(k)} - 1}{t^{(k + 1)}}(\vz^{(k + 1)} - \vx^{(k)})
+\vx^{(t + 1)} = \vz^{(t + 1)} + \frac{r^{(t)} - 1}{r^{(t + 1)}}(\vz^{(t + 1)} - \vx^{(t)})
 \end{equation}
 
 Applying FISTA to the sparse coding problem, $\frac{1}{2}\|\vs - \mD\vx\|_2^2$ is straightforward to differentiate and $\lambda\|\vx\|_1$ has a simple proximal operator.
 
 \begin{equation}
-\nabla_{\vx}(\frac{1}{2}\|\vs - \mD\vx\|_2^2) = \mD^T\mD\vx - \mD^T\vs
+\nabla_{\vx}\left(\frac{1}{2}\|\vs - \mD\vx\|_2^2\right) = \mD^T\mD\vx - \mD^T\vs
 \end{equation}
 
 \begin{equation}
@@ -290,13 +290,13 @@ Applying FISTA to the sparse coding problem, $\frac{1}{2}\|\vs - \mD\vx\|_2^2$ i
 
 So, the FISTA equations for convolutional basis pursuit are the following:
 \begin{equation}
-\vz^{(k + 1)} = \operatorname{S}_{\lambda}(\vx^{(k)} - \frac{1}{L}\mD^T(\mD\vx^{(k)} - \vs))
+\vz^{(t + 1)} = \operatorname{S}_{\lambda}\left(\vx^{(t)} - \frac{1}{L}\mD^T(\mD\vx^{(t)} - \vs)\right)
 \end{equation}
 \begin{equation}
-t^{(k + 1)} = \frac{1}{2}(1 + \sqrt{1 + 4(t^{(k)})^2})
+r^{(t + 1)} = \frac{1}{2}\left(1 + \sqrt{1 + 4(r^{(t)})^2}\right)
 \end{equation}
 \begin{equation}
-\vx^{(k + 1)} = \vz^{(k + 1)} + \frac{t^{(k)} - 1}{t^{(k + 1)}}(\vz^{(k + 1)} - \vx^{(k)})
+\vx^{(t + 1)} = \vz^{(t + 1)} + \frac{r^{(t)} - 1}{r^{(t + 1)}}(\vz^{(t + 1)} - \vx^{(t)})
 \end{equation}
 
 In \cite{wohlberg2015efficient}, Wohlberg compares FISTA to ADMM on a sparse coding task and finds FISTA converges much slower than ADMM. However, the comparison is made on signals with few channels, so ADMM is able to exploit the structure of $\mD$ for efficient $\vx$ updates.
@@ -305,28 +305,258 @@ In a recent work \cite{chodosh2020use}, Chodosh and Lucey use updates prox-linea
 
 The updates come from the formula:
 \begin{equation}
-\vx^{(k + 1)} = \arg\min_{\vx} (\nabla f(\bar{\vx}^{(k)}))^T(\vx - \bar{\vx}^{(k)}) + \frac{L}{2}\|\vx - \bar{\vx}^{(k)}\|_2^2 + \lambda\|\vx\|_1
+\vx^{(t + 1)} = \arg\min_{\vx} \left(\nabla f(\bar{\vx}^{(t)})\right)^T(\vx - \bar{\vx}^{(t)}) + \frac{L}{2}\|\vx - \bar{\vx}^{(t)}\|_2^2 + \lambda\|\vx\|_1
 \end{equation}
 
-where $\bar{\vx}^{(k)} = \vx^{(k)} + \omega_k(\vx^{(k)} - \vx^{(k - 1)})$ and $\omega_k$ is a momentum factor.
+where $\bar{\vx}^{(t)} = \vx^{(t)} + \omega_k(\vx^{(t)} - \vx^{(t - 1)})$ and $\omega_t$ is a momentum factor.
 
 This yields the update equation\footnote{In their paper, they add a non-negativity constraint and allow different $\lambda$ for the coefficients of each filter (and possibly spatially varied as well). They also are constucting the equations specifically for a multi-layer network. I simplified their equations to illistrate how their approach relates to the FISTA algorithm.}:
 \begin{equation}
-\vx^{(k + 1)} = \operatorname{S}_{\frac{\lambda}{L}}(\bar{\vx}^{(k)} + \mD^T(\vs - \mD\bar{\vx}))
+\vx^{(t + 1)} = \operatorname{S}_{\frac{\lambda}{L}}\left(\bar{\vx}^{(t)} + \mD^T(\vs - \mD\bar{\vx})\right)
 \end{equation}
 
 While neither Chodosh and Lucey nor the work they cite mentions FISTA, the resemblance is very close. There are two distinctions:
 \begin{enumerate}
-\item Momentum is computed slightly differently: to match FISTA, the prox-linear updates would need to use $\vx^{(k)} - \bar{\vx}^{(k - 1)}$ for momentum. Instead, they use $\vx^{(k)} - \vx^{(k - 1)}$.
+\item Momentum is computed slightly differently: to match FISTA, the prox-linear updates would need to use $\vx^{(t)} - \bar{\vx}^{(t - 1)}$ for momentum. Instead, they use $\vx^{(t)} - \vx^{(t - 1)}$.
 \item The prox-linear approach scales the momentum steps differently.
 \end{enumerate}
 
 Given these similarities, it is likely the performance between the two methods is similar.
 
-\section{ADMM with Low-Rank Updates}
+\section{A Novel Approach to Sparse Coding: ADMM with Low-Rank Updates}
 In this section, I present a novel approach to sparse coding for signals with a large number of channels. The approach uses the ADMM algorithm described in section \ref{section:ADMM} and will share many similarities to the standard ADMM sparse coding approach described in section \ref{section:Applying ADMM} for signals with few channels.
-\section{Conclusion}
 
+\subsection{Low-Rank Updates}
+
+Under many circumstances, inverse representations can be updated efficiently, provided the update adheres to a low-rank structure. Recall the freqeuncy representation of the convolutional dictionary:
+
+\begin{equation}
+\hat{\mD} = \begin{bmatrix}
+\hat{\mD}_{1,1}, & \hdots, & \hat{\mD}_{1,M}\\
+\vdots & \ddots & \vdots\\
+\hat{\mD}_{C,1}, & \hdots, & \hat{\mD}_{C,M}
+\end{bmatrix}
+\end{equation}
+
+where $\hat{\mD}_{c,m}$ is diagonal for all $c$ and $m$. Let $\hat{\mD}_{c,m}[\hat{k}]$ be the $\hat{k}$th element of the diagonal and let
+
+\begin{equation}
+\hat{\mD}[\hat{k}] = \begin{bmatrix}
+\hat{\mD}_{1,1}[\hat{k}], & \hdots, & \hat{\mD}_{1,M}[\hat{k}]\\
+\vdots & \ddots & \vdots\\
+\hat{\mD}_{C,1}[\hat{k}], & \hdots, & \hat{\mD}_{C,M}[\hat{k}]
+\end{bmatrix}
+\end{equation}
+
+Then $\hat{\mD}[\hat{k}]$ is a $C \times M$ matrix collecting the $\hat{k}$th freqency of all channels and filters of $\mD$.
+
+Thus, $(\rho\mId + \hat{\mD}^H\hat{\mD})^{-1}$ really consists of $\hat{k}$ separate inverse problems: $(\rho\mId + \hat{\mD}^H[\hat{k}]\hat{\mD}[\hat{k}])^{-1}$.
+
+Consider the update equation.
+
+\begin{equation}
+\hat{\mD}[\hat{k}]^{(n + 1)} = \hat{\mD}[\hat{k}]^{(n)} + \mU\mV[\hat{k}]^H
+\end{equation}
+
+where $\mU$ is an orthogonal matrix of size $C \times L$ and $\mV[\hat{k}]$ is an orthogonal matrix of size $M \times L$.\footnote{$\mU$ and $\mV$ are also iteration specific, but to notate that would over-clutter the equations. For efficient, low-rank updates to the inverse representation, I could allow both $\mU$ and $\mV$ to vary in respect to frequency $\hat{k}$ (instead of just $\mV$). However, I also need to limit the spatial support of the dictionary (so that the filter size is small), and preventing $\mU$ from varying across frequency is part of a means to satisfy that constraint.}
+
+Then,
+
+\begin{equation}
+(\rho\mId + (\hat{\mD}^{(n + 1)})^H[\hat{k}]\hat{\mD}^{(n + 1)}[\hat{k}])^{-1} = \rho\mId + (\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])^H(\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])
+\end{equation}
+
+For brevity and simplicity, I will drop the notation indexing the frequency $\hat{k}$ and selecting the iteration $n$ for matrix $\hat{\mD}^{(n)}[\hat{k}]$ and simply use $\hat{\mD}$ instead. However, the reader should keep in mind the $\hat{\mD}$ here is a dense $C \times M$ matrix capturing the component of the dictionary $\mD$ for implicit frequency $\hat{k}$, not the sparsely banded $\hat{\mD}$ of size $KC \times M$ from earlier in this section.
+
+\begin{equation}
+(\rho\mId + \hat{\mD}^H\hat{\mD})^{-1} = \rho\mId + \mD^H\mD + \mV\mU^H \mU\mV^H + \mV\mU^H\mD + \mD^H\mU\mV^H
+\end{equation}
+
+Given that $\mV$ and $\mU$ are orthogonal matrices, $\mV\mU^H\mU\mV^H$ can easily be broken into $L$ rank-one Hermitian updates.
+
+\begin{equation}
+\mV\mU^H\mU\mV^H = \sum_{\ell = 1}^L \vu_{\ell}^H\vu_{\ell}\vv_{\ell}\vv_{\ell}^H
+\end{equation}
+
+Similarly, $\mV\mU^H\mD + \mD^H\mU\mV^H$ can be broken into $L$ Hermitian, rank-two updates:
+
+\begin{equation}
+\mV\mU^H\mD + \mD^H\mU\mV^H = \sum_{\ell = 1}^{L} \vv_{\ell}\vu_{\ell}^H\mD + \mD^H\vu_{\ell}\vv_{\ell}^H
+\end{equation}
+
+
+Inverse representations can be efficiently updated if the update is Hermitian and rank one. The details of such updates are discussed in the appendix.
+
+The Hermitian rank-two update consists of two rank-one terms, but the terms are not Hermitian, complicating the update process. However, this can be resolved through eigendecomposition.  
+
+\begin{equation}
+\vv_{\ell}\vu_{\ell}^H \hat{\mD} + \hat{\mD}\vu_{\ell}\vv_{\ell}^H = \begin{bmatrix}
+\vv_{\ell} & \hat{\mD}^H\vu_{\ell} 
+\end{bmatrix}
+\begin{bmatrix}
+\hat{\mD}^H\vu_{\ell} & \vv_{\ell}
+\end{bmatrix}^H
+\end{equation}
+
+While matrix products are not communitive, some of the eigenvalues of matrix products are communitive.
+
+Furthermore, for general matrices $\mA$ and $\mB$ the eigenvectors of $\mA\mB$ and $\mB\mA$ are related:
+
+\begin{equation}
+\mB\mA\vx = \lambda\vx  \implies  \mA\mB\mA\vx = \lambda\mA\vx
+\end{equation}
+
+where $\lambda$ is the eigenvalue and $\vx$ is a vector.\footnote{I appologize for the reuse of certain variables here. Please do not confuse this $\vx$ for the sparse coding coefficients, $\lambda$ for the L$1$ penalty factor applied to the coefficients, or $\mA$ and $\mB$ for the matrices in the ADMM constraints.}
+
+So, if $\vx$ is an eigenvector of $\mB\mA$, $\mA\vx$ is an eigenvector of $\mA\mB$.
+
+
+\begin{equation}
+\begin{bmatrix}
+\hat{\mD}^H\vu_{\ell} & \vv_{\ell}
+\end{bmatrix}^H
+\begin{bmatrix}
+\vv_{\ell} & \hat{\mD}^H\vu_{\ell} 
+\end{bmatrix}
+ = 
+\begin{bmatrix}
+\vu_{\ell}^H\hat{\mD}\vv_{\ell} & \vu_{\ell}^H\hat{\mD}\hat{\mD}^H\vu_{\ell} \\
+\vv_{\ell}^H\vv_{\ell}    & \vv_{\ell}^H\hat{\mD}^H\vu_{\ell}
+\end{bmatrix}
+\end{equation}
+
+The eigenvalues and corresponding eigenvectors of a $2 \times 2$ matrix can be computed using the quadradic formula. Assuming that the $2 \times 2$ matrix has $2$ distinct eigenvalues, the expressions for these are below.\footnote{It is not guarenteed the $2 \times 2$ matrix will have $2$ distinct eigenvalues. In the practical considerations section, I consider those cases.}
+
+\begin{equation}
+\operatorname{eigvals}(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}) = \operatorname{real}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}
+\end{equation}
+
+\begin{equation}
+\operatorname{eigvecs}(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}) = \begin{bmatrix} b \\ -j\operatorname{imag}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}\end{bmatrix}
+\end{equation}
+
+For the sake of brevity, I will drop the subscripts for $\vu$ and $\vv$.
+
+\begin{equation}
+\operatorname{eigvals}(\begin{bmatrix}
+\vu^H\hat{\mD}\vv & \vu^H\hat{\mD}\hat{\mD}^H\vu \\
+\vv^H\vv    & \vv^H\hat{\mD}^H\vu
+\end{bmatrix})
+= \operatorname{real}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2}
+\end{equation}
+
+\begin{equation}
+\operatorname{eigvecs}
+(\begin{bmatrix}
+\vu^H\hat{\mD}\vv & \vu^H\hat{\mD}\hat{\mD}^H\vu \\
+\vv^H\vv    & \vv^H\hat{\mD}^H\vu
+\end{bmatrix})
+= \begin{bmatrix}
+\vu^H\hat{\mD}\hat{\mD}^H\vu \\
+-j\operatorname{imag}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2}
+\end{bmatrix}
+\end{equation}
+
+Therefore,
+
+\begin{equation}
+\operatorname{eigvecs}
+(
+\vv\vu^H\hat{\mD} + \hat{\mD}^H\vu\vv^H
+) = 
+\vu^H\hat{\mD}\hat{\mD}^H\vu\vv +
+(-j\operatorname{imag}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2})\hat{\mD}^H\vu
+\end{equation}
+
+\begin{equation}
+\operatorname{eigvals}(
+\vv\vu^H\hat{\mD} + \hat{\mD}^H\vu\vv^H
+)
+= \operatorname{real}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2}
+\end{equation}
+
+This decomposition splits the Hermitian rank-two update into two Hermitian rank-one updates that can be used to update the inverse representation for $\rho\mId + \hat{\mD}^H[\hat{k}]\hat{\mD}[\hat{k}]$.
+
+Recall once again, the update under consideration:
+\begin{equation}
+\hat{\mD}^{(n + 1)}[\hat{k}] = \hat{\mD}^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}]
+\end{equation}
+
+This update must be of rank $L$ at every frequency. Furthermore, the dictionary filter is spatially limited to its filter size. This second constraint is met if $\mV^H[\hat{k}]$ is similarly spatially limited.
+
+\subsection{Handling Dictionary Normalization}
+Consider the optimization problem:
+
+\begin{equation}
+\begin{aligned}
+\min_{\vx,\vy,\vz} & \frac{1}{2}\|\vs -\mD\vx\|_2^2 + \lambda\|\vy\|_1 \\
+\text{subject to } & \mR^{-1}\vy - \mR^{-1}\vx = 0 
+\end{aligned}
+\end{equation}
+
+This optimization problem has the augmented Lagrangian function:
+
+\begin{equation}
+\operatorname{L}_{\rho}(\vx,\vy,\vu) = \frac{1}{2}\|\vs - \mD\vx\|_2^2 + \lambda\|\vy\|_1 + \vu^H\mR^{-1}(\vy - \vx)  + \frac{\rho}{2}\|\mR^{-1}(\vy - \vx)\|_2^2
+\end{equation} 
+
+\begin{equation}
+\nabla_{\vx}\operatorname{L}_{\rho}(\vx,\vy,\vu) = -\mR^{-1}\vu - \mD^H\vs + \mD^T\mD\vx + \rho\mR^{-2}\vx - \rho\mR^{-2}\vy
+\end{equation}
+
+For $\vx,\vy,\vu$ such that $\nabla_{\vx}\operatorname{L}_{\rho}(\vx,\vy,\vu) = 0$:
+
+\begin{equation}
+(\rho\mR^{-2} + \mD^T\mD)\vx = \rho\mR^{-2}\vy + \mR^{-1} \vu + \mD^T\vs
+\end{equation}
+
+\begin{equation}
+\mR^{-1}\left(\rho\mId + (\mD\mR)^T(\mD\mR)\right)\mR^{-1}\vx = \rho\mR^{-2}\vy + \mR^{-1}\vu + \mD^T\vs
+\end{equation}
+
+\begin{equation}
+\left(\rho\mId + (\mD\mR)^T(\mD\mR)\right)\mR^{-1}\vx = \rho\mR^{-1}\vz + \vu + (\mD\mR)^T\vs
+\end{equation}
+
+\begin{equation}
+\mR^{-1}\vx = \left(\rho\mId + (\mD\mR)^H(\mD\mR)\right)^{-1}\left(\rho\mR^{-1}\vy + \vu + (\mD\mR)^T\vs\right)
+\end{equation}
+
+So,
+
+\begin{equation}
+\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy,\vu) = \mR\left(\rho\mId + (\mD\mR)^T(\mD\mR)\right)^{-1}\left(\rho\mR^{-1}\vy + \vu + (\mD\mR)^T\vs\right)
+\end{equation}
+
+However, in similar fashion to scaled ADMM, it will be simpler to track $\mR^{-1}\vx$ instead of $\vx$ directly.
+
+\begin{equation}
+\mR^{-1}\vx^{(t + 1)} = \left(\rho\mId + (\mD\mR)^T(\mD\mR)\right)^{-1}\left((\mD\mR)^T\vs + \rho\left(\mR^{-1}\vy^{(t)} + \frac{\vu^{(t)}}{\rho}\right)\right)
+\end{equation}
+
+Moving on to the $\vy$ update,
+
+\begin{equation}
+\min_{\vy} \operatorname{L}_{\rho}(\vx,\vy,\vu) = \operatorname{S}_{\frac{\lambda\mR^2}{\rho}}\left(\vx - \frac{\mR\vu}{\rho}\right)
+\end{equation}
+
+\begin{equation}
+\mR^{-1}\vy^{(t + 1)}= \operatorname{S}_{\frac{\lambda\mR}{\rho}}\left(\mR^{-1}\vx^{(t + 1)} - \frac{\vu^{(t)}}{\rho}\right)
+\end{equation}
+
+Finally, the dual update is 
+\begin{equation}
+\frac{\vu{(t + 1)}}{\rho} = \frac{\vu^{(t)}}{\rho} + \mR^{-1}\vy^{(t + 1)} - \mR^{-1}\vx^{(t + 1)}
+\end{equation}
+
+Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$.
+
+\subsection{Dictionary Updates}
+
+A desired dictionary update can be computed through stochastic gradient descent or other dictionary-update scheme. However, the actual update will only approximate the desired one, obtained through singular-value decomposition.
+
+\section{Conclusion}
+In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently.
 % This is a figure in landscape orientation
 \begin{sidewaysfigure}
 \includegraphics[width=\textwidth]{figures/exampleFigure.png}
