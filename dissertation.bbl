@@ -221,6 +221,32 @@
   \field{year}{2015}
 \endentry
 
+\entry{henderson1981deriving}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Henderson}{H.}%
+     {Harold~V}{H.~V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Searle}{S.}%
+     {Shayle~R}{S.~R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {SIAM}%
+  }
+  \strng{namehash}{HHVSSR1}
+  \strng{fullhash}{HHVSSR1}
+  \field{number}{1}
+  \field{pages}{53\bibrangedash 60}
+  \field{title}{On deriving the inverse of a sum of matrices}
+  \field{volume}{23}
+  \field{journaltitle}{Siam Review}
+  \field{year}{1981}
+\endentry
+
 \entry{chodosh2018deep}{inproceedings}{}
   \name{author}{3}{}{%
     {{}%
@@ -571,18 +597,43 @@
 \endentry
 
 \entry{chen2013deep}{article}{}
-  \name{author}{1}{}{%
+  \name{author}{6}{}{%
     {{}%
-     {ar}{a.}%
+     {Chen}{C.}%
+     {Bo}{B.}%
      {}{}%
+     {}{}}%
+    {{}%
+     {Polatkan}{P.}%
+     {Gungor}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sapiro}{S.}%
+     {Guillermo}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Blei}{B.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dunson}{D.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carin}{C.}%
+     {Lawrence}{L.}%
      {}{}%
      {}{}}%
   }
   \list{publisher}{1}{%
     {IEEE}%
   }
-  \strng{namehash}{a1}
-  \strng{fullhash}{a1}
+  \strng{namehash}{CBPGSGBDDDCL1}
+  \strng{fullhash}{CBPGSGBDDDCL1}
   \field{number}{8}
   \field{pages}{1887\bibrangedash 1901}
   \field{title}{Deep learning with hierarchical convolutional factor analysis}

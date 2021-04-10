@@ -8,6 +8,116 @@ The JPEG compression process begins with an RGB image input, and consists of fiv
 The standard reconstruction process reverses the lossless encoding, computes the IDCT of the blocks, upsamples the color channels, and reverses the color transform.
 \section{Literature Review}
 \section{Modelling Compressed JPEG Images}
+Some researchers have observed convolutional dictionary models struggle with large smooth components of signals, likely due to the fact that shifted versions of smooth filters have high coherence.
+
+For this reason, it is often a good idea to subtract a smoothed version $\vs_{\text{smth}}$ of the signal, and only apply apply the dictionary model to the residual $\vs_{\text{rough}}$.
+
+\begin{equation}
+\vs_{\text{clean}} = \vs_{\text{smth}} + \vs_{\text{rough}}
+\end{equation}
+
+\begin{equation}
+\vs_{\text{rough}} \approx \mD_1\vx_1
+\end{equation}
+
+When restoring an image after JPEG compression, the original image $\vs_{\text{clean}}$ is not known. Instead, the compressed image $\vs$ is observed.
+
+\begin{equation}
+\vs = \mQ\mW\vs_{\text{clean}}
+\end{equation}
+
+\begin{equation}
+\vs \approx \mQ\mW(\vs_{\text{smth}} + \mD_1\vx_1)
+\end{equation}
+
+where $\mW$ maps the signal to $8 \times 8$ block frequency coefficients (from the cosine transform), and $\mQ$ quantizes them.
+
+A means of estimating $\vs_{\text{smth}}$ from JPEG-compressed image $\vs$ is discussed in the Practical Considerations chapter.
+
+From this idea, I construct the pursuit problem:
+\begin{equation}
+\begin{aligned}
+\minimize_{\vx} & \frac{\mu_1}{2}\|\vs - \mQ\mW(\mD_1\vx_1 + \vs_{\text{smth}})\|_2^2 + \sum_{\ell = 2}^L \frac{\mu_{\ell}}{2}\|\vx_{\ell - 1} - \mD_{\ell}\vx_{\ell}\|_2^2 + \sum_{\ell = 1}^L \|\vb_{\ell} \cdot \vx_{\ell}\|_1 \\
+\text{subject to } & \vx_{\ell} > \vzero
+\end{aligned}
+\end{equation}
+
+with $\vb_{\ell} \geq \vzero$.
+
+My approach to solve this problem uses the ADMM algorthm, where $\vx_1,\ldots,\vx_L$ are the first set of primal variables, $\vv,\vz_1,\ldots,\vz_L$ are the second set of primal variables, and $\veta$ is the dual variable corresponding to the $\vv$ constraint and $\vgamma_1,\ldots,\vgamma_L$ are the dual variables corresponding to contraints on $\vz_1,\ldots,\vz_L$.  Here is the corresponding optimization problem:
+
+\begin{equation}
+\begin{aligned}
+\minimize_{\vx,\vv,\vz} & \frac{\mu_1}{2}\|\vv - \mD_1\vx_1  - \vs_{\text{smth}}\|_2^2 + \sum_{\ell = 2}^L \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} - \mD_{\ell}\vx_{\ell}\|_2^2 + \sum_{\ell = 1}^L \|\vb_{\ell} \cdot \vz_{\ell}\|_1 \\
+\text{subject to } & \vz_{\ell} \geq \vzero \\
+                   & \sqrt{\mu}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) = \vzero \\
+                   & \mQ\mW(\vv) - \vs = \vzero
+\end{aligned}
+\end{equation}
+
+The constraint $\mQ\mW(\vv) - \vs = \vzero$ is not convex because of the quantization. A linear approximation of the quantization operation 9as seen in \cite{chodosh2020use}) would produce an affine constraint. However, I have a different novel means of handling the quantization operator in the constraint, described in the next section. For now, I will focus on the other variable updates.
+
+Setting $\vz_0 = \vv - \vs_{\text{smth}}$, the $\vx$ update is identical to the $\vx$ update in the last chapter.
+
+\begin{equation}
+\mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} = \left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1}^{(t)} + \rho \left(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} + \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
+\end{equation}
+
+For the $\vz$ update, it is helpful to introduce a common convex-optimization trick. Consider the following function:
+\begin{equation}
+\indicator_{\vz \geq \vzero} = \begin{cases} 0 & \vz \geq \vzero \\ + \infty & \text{otherwise} \end{cases}
+\end{equation}
+
+The function is convex, and if it is added to the objective function, it implicitly enforces the constraint $\vz \geq \vzero$.
+
+So, 
+
+\begin{equation}
+\begin{split}
+\L_{\rho}(\vx,\vv,\vz,\veta,\vgamma) = f(\vx,\vv,\vz) + \frac{\rho}{2}\|\mQ\mW(\vv) - \vs + \frac{\veta}{\rho}\|_2^2 - \frac{1}{2\rho}\|\veta\|_2^2 +  \\ \sum_{\ell = 1}^L \frac{\rho}{2}\|\sqrt{\mu}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\gamma_{\ell}}{\rho}\|_2^2 - \frac{1}{2\rho}\|\gamma_{\ell}\|_2^2
+\end{split}
+\end{equation}
+
+
+where
+
+\begin{equation}
+f(\vx,\vv,\vz) = \frac{\mu_1}{2}\|\vv - \mD_1\vx_1  - \vs_{\text{smth}}\|_2^2 + \sum_{\ell = 2}^L \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} - \mD_{\ell}\vx_{\ell}\|_2^2 + \sum_{\ell = 1}^L \|\vb_{\ell} \cdot \vz_{\ell}\|_1 + \indicator_{\vz \geq \vzero}
+\end{equation}
+
+This means the $\vz$ update satisfies this equation:
+
+\begin{equation}
+\vz_{\ell} = \arg\min_{\vz} \frac{\mu}{2}\|\vz - \mD_{\ell + 1}\vx_{\ell + 1}\|_2^2 + \|\vb_{\ell} \cdot \vz\|_1 + \frac{\rho}{2}\|\sqrt{\mu}\mR_{\ell}^{-1}(\vz - \vx_{\ell}) + \frac{\gamma_{\ell}}{\rho}\|_2^2 + \indicator_{\vz \geq \vzero}
+\end{equation}
+
+Like before, each element of $\vz$ can be treated independently for the $\vz$ update.
+
+\begin{equation}
+\vz_{\ell}[i] = \arg\min_{z} \frac{\mu}{2}\left(z - (\mD_{\ell + 1}\vx_{\ell + 1})[i]\right)^2 + \vb_{\ell}[i]|z| + \frac{\rho}{2}\|\sqrt{\mu}\mR_{\ell}^{-1}[i](z - \vx_{\ell}[i]) + \frac{\gamma_{\ell}[i]}{\rho}\|_2^2 + \indicator_{z \geq \vzero}
+\end{equation}
+
+
+
+\begin{equation}
+\vz_{\text{est}} = \arg\min_{\vz} \frac{\mu}{2}\|\vz - \mD_{\ell + 1}\vx_{\ell + 1}\|_2^2 + \|\vb_{\ell} \cdot \vz\|_1 + \frac{\rho}{2}\|\sqrt{\mu}\mR_{\ell}^{-1}(\vz - \vx_{\ell}) + \frac{\gamma_{\ell}}{\rho}\|_2^2
+\end{equation}
+
+\begin{equation}
+\vz_{\ell}[i] = \begin{cases} \vz_{\text{est}}[i] & \vz_{\text{est}}[i] \geq 0 \\ 0 & \text{otherwise}\end{cases} 
+\end{equation}
+
+A non-negativity constraint converts the shrinkage operator to a biased rectified linear unit.
+
+\begin{equation}
+\vz_{\ell}^{(t + 1)} = (\mu_{\ell + 1}\mR_{\ell}^2 + \rho\mu_{\ell}\mId)^{-1}\mR_{\ell}^2\operatorname{ReLU}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}^{(t + 1)} + \rho\mu_{\ell}\mR_{\ell}^{-1}\left(\mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} - \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}}\right) - \vb_{\ell}\right)
+\end{equation}
+
+\begin{equation}
+\vz_L^{(t + 1)} = \mR_{\ell}\operatorname{RELU}\left(\mR_L^{-1}\vx_L^{(t + 1)} - \frac{\vgamma_L^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_L}} - \frac{\mR_L\vb_L}{\rho\mu_L}\right)
+\end{equation}
+
+
 \section{Handling Quantization}
 \section{Experiments}
 \subsection{Experiment Setup}

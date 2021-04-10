@@ -516,4 +516,15 @@ and show that they provide only a partial solution at best. Taken together, our 
   pages     = {8226--8235},
 }
 
+@Article{henderson1981deriving,
+  author    = {Henderson, Harold V and Searle, Shayle R},
+  journal   = {Siam Review},
+  title     = {On deriving the inverse of a sum of matrices},
+  year      = {1981},
+  number    = {1},
+  pages     = {53--60},
+  volume    = {23},
+  publisher = {SIAM},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

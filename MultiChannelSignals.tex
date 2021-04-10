@@ -76,7 +76,7 @@ The term $-\frac{1}{2\rho}\|\vu\|_2^2$ can be ignored for the primal updates bec
 
 This form is known as scaled ADMM.
 
-The other common variation of ADMM updates the dual variable more frequently.
+Another common variation of ADMM updates the dual variable more frequently.
 \begin{equation}
 \vx^{(t + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
 \end{equation}
@@ -93,7 +93,7 @@ The other common variation of ADMM updates the dual variable more frequently.
 \vu^{(t + 1)} = \vu^{(t + \frac{1}{2})} + \rho(\mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc)
 \end{equation}
 
-When $\alpha > 1$, this is known as overrelaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have chozen to notate over/under relaxation differently than what is standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation instead adds the term $-(1 - \alpha)(\mA\vx^{(t + 1)} + \mB\vy^{(t)} + \vc)$ to $\mA\vx^{(t + 1)}$ and substitutes that expression for $\mA\vx^{(t + 1)}$ in subsequent equations.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without overrelaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
+When $\alpha > 1$, this is known as over-relaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have elected to notate over/under relaxation differently than standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation does not use the first dual update, and instead includes another variable $\vh^{(t + 1)} = \mA\vx^{(t + 1)} - (1 - \alpha)(\mA\vx^{(t + 1)} + \mB\vy^{(t)} + \vc)$ and substitutes $\vh^{(t + 1)}$ for $\mA\vx^{(t + 1)}$ in the dual-update equation and the second primal-update equation. While more familiar to readers who have dealt with ADMM before, this standard notation complicates ADMM with an extra variable and obscures how the dual update and second primal update relate to the augmented Lagrangian.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without over-relaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
 
 
 \section{Applying ADMM to the Sparse Coding Problem}
@@ -220,7 +220,7 @@ where
 \end{bmatrix}
 \end{equation}
 
-and in a slight abuse of notation, $\F$ computes the FFT separately on the coefficients for each filter.  In \cite{Bristow2013fast}, Bristow et al. observe the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ is sparsely banded, so the inverse can be broken down into much smaller inverse problems, and one only needs to compute the inverse of an $M \times M$ matrix for every pixel in the image. ($\rho\mId + \hat{\mD}^H\hat{\mD}$ is an $M \times M$ block matrix, whose blocks are diagonal.  Each submatrix collects one element from the diagonal of each of the blocks.)
+and in a slight abuse of notation, $\F$ computes the FFT separately on the coefficients for each filter.  In \cite{Bristow2013fast}, Bristow et al. observe the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ is sparsely banded, so the inverse can be broken down into much smaller inverse problems, and one only needs to compute the inverse of an $M \times M$ matrix for every element in the signal. ($\rho\mId + \hat{\mD}^H\hat{\mD}$ is an $M \times M$ block matrix, whose blocks are diagonal.  Each submatrix collects one element from the diagonal of each of the blocks.)
 
 Furthermore, the maximum rank of these submatrices is $C$, so if $C$ is small, these inverses can be computed even more efficiently using the Woodbury matrix identity \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient}.
 
@@ -245,13 +245,13 @@ In \cite{chodosh2018deep}\cite{murdock2018deep}, the authors use the ADMM algori
 (\rho\mId + \mD^T\mD)^{-1} = \frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD
 \end{equation}
 
-This produces an update equation for $\vx$ that avoids computing inverses altogether.
+This produces the $\vx$ update equationL
 
 \begin{equation}
 \vx^{(t + 1)} = \frac{1}{\rho + 1}\mD^T\vs + \left(\mId - \frac{1}{\rho + 1}\mD^T\mD\right)\left(\vz^{(t)} - \frac{\vgamma^{(t)}}{\rho}\right)
 \end{equation}
 
-In their work, they use the equations built on the assumption that the dictionary is a tight frame, but develop no mechanism to ensure that their assumption is accurate. Thus, ultimately $\frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD$ merely serves as an approximation to $(\rho\mId + \mD^T\mD)^{-1}$. Empirically, they observe the algorithm converges, but the dictionaries they learn are not tight frames.
+In their work, they use the equations built on the assumption that the dictionary is a tight frame, but develop no mechanism to ensure that their assumption is accurate. Thus, ultimately $\frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD$ merely serves as an approximation to $(\rho\mId + \mD^T\mD)^{-1}$. Empirically, they observe the algorithm converges, but the dictionaries they learn are not tight frames, so the solution they converge to is not optimal\footnote{The solution does not minimize the sparse coding objective function.}.
 
 Other works avoid the ADMM algorithm entirely.
 
@@ -428,51 +428,56 @@ So, if $\vx$ is an eigenvector of $\mB\mA$, $\mA\vx$ is an eigenvector of $\mA\m
 The eigenvalues and corresponding eigenvectors of a $2 \times 2$ matrix can be computed using the quadradic formula. Assuming that the $2 \times 2$ matrix has $2$ distinct eigenvalues, the expressions for these are below.\footnote{It is not guarenteed the $2 \times 2$ matrix will have $2$ distinct eigenvalues. In the practical considerations section, I consider those cases.}
 
 \begin{equation}
-\operatorname{eigvals}(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}) = \operatorname{real}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}
+\operatorname{eigval}\left(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}\right) = \operatorname{real}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}
 \end{equation}
 
 \begin{equation}
-\operatorname{eigvecs}(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}) = \begin{bmatrix} b \\ -j\operatorname{imag}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}\end{bmatrix}
+\operatorname{eigvec}\left(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}\right) = \begin{bmatrix} b \\ -j\operatorname{imag}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}\end{bmatrix}
 \end{equation}
 
 For the sake of brevity, I will drop the subscripts for $\vu$ and $\vv$.
 
+Letting $\eta_{\vu} = \|\hat{\mD}^H\vu\|_2^2$, $\eta_{\vv} = \|\vv\|_2^2$, and $\eta_{\vu,\vv} = \vu^H\hat{\mD}\vv$:
+
 \begin{equation}
-\operatorname{eigvals}(\begin{bmatrix}
-\vu^H\hat{\mD}\vv & \vu^H\hat{\mD}\hat{\mD}^H\vu \\
-\vv^H\vv    & \vv^H\hat{\mD}^H\vu
-\end{bmatrix})
-= \operatorname{real}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2}
+\operatorname{eigval}\left(\begin{bmatrix}
+\eta_{\vu,\vv} & \eta_{\vu} \\
+\eta_{\vv}    & \eta_{\vu,\vv}^*
+\end{bmatrix}\right)
+= \operatorname{real}(\eta_{\vu,\vv}) \pm \sqrt{\eta_{\vv}\eta_{\vu} - (\operatorname{imag}(\eta_{\vu,\vv}))^2}
 \end{equation}
 
 \begin{equation}
-\operatorname{eigvecs}
-(\begin{bmatrix}
-\vu^H\hat{\mD}\vv & \vu^H\hat{\mD}\hat{\mD}^H\vu \\
-\vv^H\vv    & \vv^H\hat{\mD}^H\vu
-\end{bmatrix})
+\operatorname{eigvec}
+\left(\begin{bmatrix}
+\eta_{\vu,\vv} & \eta_{\vu} \\
+\eta_{\vv}    & \eta_{\vu,\vv}^*
+\end{bmatrix}\right)
 = \begin{bmatrix}
-\vu^H\hat{\mD}\hat{\mD}^H\vu \\
--j\operatorname{imag}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2}
+\eta_{\vu} \\
+-j\operatorname{imag}(\eta_{\vu,\vv}) \pm \sqrt{\eta_{\vv}\eta_{\vu} - (\operatorname{imag}(\eta_{\vu,\vv}))^2}
 \end{bmatrix}
 \end{equation}
 
-Therefore,
+
+
+Therefore, 
 
 \begin{equation}
-\operatorname{eigvecs}
+\operatorname{eigvec}
 (
 \vv\vu^H\hat{\mD} + \hat{\mD}^H\vu\vv^H
 ) = 
-\vu^H\hat{\mD}\hat{\mD}^H\vu\vv +
-(-j\operatorname{imag}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2})\hat{\mD}^H\vu
+\eta_{\vu}\vv +
+\left(-j\operatorname{imag}(\eta_{\vu,\vv}) \pm \sqrt{\eta_{\vv} \eta_{\vu} - (\operatorname{imag}(\eta_{\vu,\vv}))^2}\right)\hat{\mD}^H\vu
 \end{equation}
 
+
 \begin{equation}
-\operatorname{eigvals}(
+\operatorname{eigval}(
 \vv\vu^H\hat{\mD} + \hat{\mD}^H\vu\vv^H
 )
-= \operatorname{real}(\vu^H\hat{\mD}\vv) \pm \sqrt{\vv^H\vv\vu^H\hat{\mD}\hat{\mD}^H\vu - (\operatorname{imag}(\vu^H\hat{\mD}\vv))^2}
+= \operatorname{real}(\eta_{\vu,\vv}) \pm \sqrt{\eta_{\vv}\eta_{\vu} - (\operatorname{imag}(\eta_{\vu,\vv}))^2}
 \end{equation}
 
 This decomposition splits the Hermitian rank-two update into two Hermitian rank-one updates that can be used to update the inverse representation for $\rho\mId + \hat{\mD}^H[\hat{k}]\hat{\mD}[\hat{k}]$.
@@ -492,6 +497,12 @@ Consider the optimization problem:
 \min_{\vx,\vy,\vz} & \frac{1}{2}\|\vs -\mD\vx\|_2^2 + \lambda\|\vy\|_1 \\
 \text{subject to } & \mR^{-1}\vy - \mR^{-1}\vx = 0 
 \end{aligned}
+\end{equation}
+
+where $\mR$ is a diagonal matrix with scaled identity blocks:
+
+\begin{equation}
+\mR = \begin{bmatrix} r_1\mId & \vzero & \hdots & \vzero \\ \vzero & r_2\mId &  & \vdots \\ \vdots &  & \ddots &   \\ \vzero & \hdots &  & r_M\mId \end{bmatrix}
 \end{equation}
 
 This optimization problem has the augmented Lagrangian function:
@@ -528,7 +539,7 @@ So,
 \min_{\vx} \operatorname{L}_{\rho}(\vx,\vy,\vu) = \mR\left(\rho\mId + (\mD\mR)^T(\mD\mR)\right)^{-1}\left(\rho\mR^{-1}\vy + \vu + (\mD\mR)^T\vs\right)
 \end{equation}
 
-However, in similar fashion to scaled ADMM, it will be simpler to track $\mR^{-1}\vx$ instead of $\vx$ directly.
+However, taking a similar approach to that of scaled ADMM, it will be simpler to track $\mR^{-1}\vx$ instead of $\vx$ directly.
 
 \begin{equation}
 \mR^{-1}\vx^{(t + 1)} = \left(\rho\mId + (\mD\mR)^T(\mD\mR)\right)^{-1}\left((\mD\mR)^T\vs + \rho\left(\mR^{-1}\vy^{(t)} + \frac{\vu^{(t)}}{\rho}\right)\right)
@@ -541,12 +552,16 @@ Moving on to the $\vy$ update,
 \end{equation}
 
 \begin{equation}
-\mR^{-1}\vy^{(t + 1)}= \operatorname{S}_{\frac{\lambda\mR}{\rho}}\left(\mR^{-1}\vx^{(t + 1)} - \frac{\vu^{(t)}}{\rho}\right)
+\mR^{-1}\vy^{(t + 1)}= \operatorname{S}_{\frac{\lambda\mR}{\rho}}\left(\mR^{-1}\vx^{(t + 1)} - \frac{\vu^{\left(t + \frac{1}{2}\right)}}{\rho}\right)
 \end{equation}
 
-Finally, the dual update is 
+Finally, the dual updates are 
 \begin{equation}
-\frac{\vu{(t + 1)}}{\rho} = \frac{\vu^{(t)}}{\rho} + \mR^{-1}\vy^{(t + 1)} - \mR^{-1}\vx^{(t + 1)}
+\frac{\vu^{\left(t + \frac{1}{2}\right)}}{\rho} = \frac{\vu^{(t)}}{\rho} + (\alpha - 1)(\mR^{-1}\vy^{(t)} - \mR^{-1}\vx^{(t + 1)})
+\end{equation}
+
+\begin{equation}
+\frac{\vu^{(t + 1)}}{\rho} = \frac{\vu^{\left(t + \frac{1}{2}\right)}}{\rho} + \mR^{-1}\vy^{(t + 1)} - \mR^{-1}\vx^{(t + 1)}
 \end{equation}
 
 Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$.
