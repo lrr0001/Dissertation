@@ -6,10 +6,57 @@
 
 %Begin individual appendices, separated as chapters
 
-\chapter{Experimental Equipment}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\chapter{Cholesky Hermitian Rank-1 Updates}
+I am using the methods described in \cite{krause2015more}, modified to handle complex numbers. I have not written this up yet.
 
-\chapter{Data Processing}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\chapter{Rank-2 Eigendecomposition Edge Cases}
+
+\section{Less than 2 Independent Eigenvectors}
+
+\begin{equation}
+\mB = \begin{bmatrix} \mD^H\vu & \vv\end{bmatrix}^H
+\end{equation}
+
+
+The matrix $\mA\mB$ is a Hermitian $M \times M$ matrix, so it has $M$ real eigenvalues and $M$ independent eigenvectors which can be chosen to be orthogonal. Therefore, $\mB\mA$ has $2$ independent eigenvectors if $\mB$ is rank $2$.  There are three cases that can cause $\mB$ to have a rank less than $2$.
+
+
+\begin{enumerate}
+\item
+\begin{equation}
+\mD^H\vu = \vzero
+\end{equation}
+\item
+
+\begin{equation}
+\vv = \vzero
+\end{equation}
+\item
+\begin{equation}
+\mD^H\vu = \alpha \vv
+\end{equation}
+\end{enumerate}
+
+In the first $2$ cases, the matrix $\mB\mA$ has one independent eigenvector. The first case implies that only the Hermitian update is nonzero.  The second case implies that the entire update is zero. (The eigenvalues are zero, so as long as the normalization of eigenvectors is handled with care, it is not necessary to check for these cases in code.)
+
+In the third case, the diagonalization of $\mA\mB$ can be determined directly without using the $2 \times 2$ matrix $\mB\mA$.
+
+\begin{equation}
+\mA\mB = 2\operatorname{real}(\alpha)\vv\vv^H
+\end{equation}
+
+\begin{equation}
+\lambda = 2\operatorname{real}(\alpha) \|\vv\|_2^2
+\end{equation}
+
+\begin{equation}
+\vx = \frac{\vv}{\|\vv\|_2}
+\end{equation}
+
+The rest of the eigenvalues are zero.  (The corresponding $2 \times 2$ matrix $\mB\mA$ shares the same nonzero eigenvalue. The eigenvector that is lost has an eigenvalue of zero, so like in the other $2$ cases, it is not necessary to check for this case in code.)
+
+\section{Eigenvalues are Not Distinct}
+
+If the pair of eigenvalues are the same, then all nonzero vectors are eigenvectors of $\mB\mA$. However, it is necessary for a diagonalization expansion with only Hermitian terms that the eigenvectors of $\mA\mB$ are chosen to be orthogonal, which can be found using a Gram-Schmidt process. This case is not just a theoretical concern; it is necessary to check for this in code.
 
 \end{appendices}

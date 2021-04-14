@@ -108,13 +108,13 @@
 % Epigraph
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{epigraph.tex}
+%\input{epigraph.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Dedication
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{dedication.tex}
+%\input{dedication.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Acknowledgments
@@ -125,10 +125,10 @@
 \setcounter{page}{5} % set the page number appropriately based on the number of intro pages
 \input{acknowledgements.tex}
 
-%\addtocontents{toc}{\cftpagenumbersoff{chapter}} 
+\addtocontents{toc}{\cftpagenumbersoff{chapter}} 
 
-%\currentpdfbookmark{Acknowledgments}{acknowledgments}
-%\addtocontents{toc}{\cftpagenumberson{chapter}} 
+\currentpdfbookmark{Acknowledgments}{acknowledgments}
+\addtocontents{toc}{\cftpagenumberson{chapter}} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table of Contents
@@ -279,7 +279,7 @@
 % Only for PhD students
 % Masters students remove this line
 %%%%%%%%%%%%%%%%
-\input{vita.tex}
+%\input{vita.tex}
 
 
 \end{document}

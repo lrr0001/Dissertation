@@ -204,7 +204,7 @@ and show that they provide only a partial solution at best. Taken together, our 
 }
 
 @Article{chen2013deep,
-  author    = {ar},
+  author    = {Chen, Bo and Polatkan, Gungor and Sapiro, Guillermo and Blei, David and Dunson, David and Carin, Lawrence},
   journal   = {IEEE transactions on pattern analysis and machine intelligence},
   title     = {Deep learning with hierarchical convolutional factor analysis},
   year      = {2013},
@@ -525,6 +525,14 @@ and show that they provide only a partial solution at best. Taken together, our 
   pages     = {53--60},
   volume    = {23},
   publisher = {SIAM},
+}
+
+@InProceedings{krause2015more,
+  author    = {Krause, Oswin and Igel, Christian},
+  booktitle = {Proceedings of the 2015 ACM Conference on Foundations of Genetic Algorithms XIII},
+  title     = {A more efficient rank-one covariance matrix update for evolution strategies},
+  year      = {2015},
+  pages     = {129--136},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

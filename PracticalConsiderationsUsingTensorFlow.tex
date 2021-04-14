@@ -1,12 +1,33 @@
-\chapter{Practical Considerations Concerning Tensorflow}
+\chapter{Practical Considerations}
 \section{Boundary Handling}
-
+Convolution and circular convolution can produce boundary effects that can impact performance. In the JPEG compression artifact removal chapter, $\mW$ is defined as the function producing $8 \times 8$ block DCT coefficients from an RGB image. However, to mitigate boundary effects this should in practice also include cropping the image. This allows $\mD_1\vx_1$ to reconstruct the signal outside of the measured space (similar to the "boundary masking" in \cite{wohlberg2016boundary}, but with the constraint and objective term swapped). Initialization is important however \cite{DBLP:journals/corr/WohlbergR17}. Reflecting across the boundary is a much better initialization approach than zeros, but if using patches, actual (compressed image) measurements would provide an even better initialization. 
 \section{Removing Low-Frequency Signal Content}
-
+Convolutional dictionary models tend to struggle with low-frequency signal content, so ideally steps should be taken to avoid representing it with the dictionary model. Tikonov regularization is a straightforward means to remove low-frequency content:
+\begin{equation}
+\vs_{\text{smth}} = \arg\min_{\vx} \frac{1}{2}\|\vs - \vx\|_2^2 + \lambda\|\sum_i \mG_i\vx\|_2^2
+\end{equation}
+where $\mG_i$ computes a discrete gradient in the $i$th direction. This has a closed form solution and can be easily solved in frequency domain.
 \subsection{JPEG Artifact Removal}
+Tikonov regularation can struggle with block artifacts from JPEG compression. Rather than smooth the compressed JPEG image itself, it is better to solve for a smoothed version of a signal that compresses to the compressed JPEG image. This problem can be solved using ADMM.
+\begin{equation}
+\minimize_{\vx,\vv} \frac{1}{2}\|\vv - \vx\|_2^2 + \lambda\|\sum_i \mG_i\vx\|_2^2 + \indicator_{\{\mQ(\mW\vv) - \vs = \vzero\}}
+\end{equation}
+
+There are no constraints, so no dual variables are needed. Jut alternate between a Tikonov update for $\vx$ and an update for $\vv$ that closely resembles the $\vv$ update from the last chapert.
+Handling the cases in pointwise fashion, define function $h$ as the following clipping operation:
+
+\begin{equation}
+\operatorname{h}(\vx) = \mW(\vv - \vx) = \begin{cases} \vs + \frac{\vq}{2} - \mW(\vx) & \mW(\vx) > \vs + \frac{\vq}{2} \\ \vs - \frac{\vq}{2} - \mW(\vx) & \mW(\vx) < \vs - \frac{\vq}{2} \\ \vzero & \text{otherwise}
+\end{cases}
+\end{equation}
+
+Then,
+\begin{equation}
+\vv = \vx + \mW^{\dagger}\operatorname{h}(\vx)
+\end{equation}
 
 \section{Tensorflow and Keras}
-Most of the computations for my research rely on TensorFlow version 2.3.1 \cite{tensorflow}, a Python library for machine learning specializing in building models with differentiable, parameterizable composite functions and learning model parameters using gradient descent or other gradient-based optimization methods. TensorFlow is a common platform for researchers and developers working on artificial neural networks, and there are many tutorials and exampes freely available online, so I will not replicate that work here. This chapter section the reader already has some familiarity with TensorFlow and Keras \cite{keras} (a high-level library inside TensorFlow). The goal of this section is to provide the reader with the tools and workarounds to be able to replicate my work without resorting to hacking things together with gradient tape and/or TensorFlow-1-style code.
+Most of the computations for my research rely on TensorFlow version 2.3.1 and version 2.4.1 \cite{tensorflow}, a Python library for machine learning specializing in building models with differentiable, parameterizable composite functions and learning model parameters using gradient descent or other gradient-based optimization methods. TensorFlow is a common platform for researchers and developers working on artificial neural networks, and there are many tutorials and exampes freely available online, so I will not replicate that work here. This chapter section the reader already has some familiarity with TensorFlow and Keras \cite{keras} (a high-level library inside TensorFlow). The goal of this section is to provide the reader with the tools and workarounds to be able to replicate my work without resorting to hacking things together with gradient tape and/or TensorFlow-1-style code.
 
 \subsection{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}
 Keras offers a high-level environment. Code written in Keras's framework is easier to integrate with other work. Gradient tape is great for hacking something together or debugging, but promotes styles of coding that are less readable, less maintainable, and less portable. Keras also has a lower learning curve than the broader TensorFlow library.
@@ -14,7 +35,7 @@ Keras offers a high-level environment. Code written in Keras's framework is easi
 
 
 \subsection{Shared Weights Between Layers}
-Trainable TensorFlow variables declared outside of any Keras layer will not be automatically added to a Keras model's list of trainable variables. In most cases, this limitation is not a problem; it is intuitive to declare a layer's weights inside that layer. However, sometimes the same variable is needed in multiple distinct layers. To be include a variable in the model's trainable variables, it is sufficient to declare the variable in one layer and pass the variable (or the layer it was initialized in) as an input argument to the \_\_init\_\_ function of the other layers that share that variable. This will work even if the Keras model does not use the layer that declared the variable. \footnote{One could instead declare the variable outside any layers, pass it into the \_\_init\_\_ functions of all the variables that depend on it, and then manually add the variable to the model's list of trainable variables, but I do not recommend this approach. The resulting code will be less readable and much less maintainable.}
+Trainable TensorFlow variables declared outside of any Keras layer will not be automatically added to a Keras model's list of trainable variables. In most cases, this limitation is not a problem; it is intuitive to declare a layer's weights inside that layer. However, sometimes the same variable is needed in multiple distinct layers. To be include a variable in the model's trainable variables, it is sufficient to declare the variable in one layer and pass the variable (or the layer it was initialized in) as an input argument to the \_\_init\_\_ function of the other layers that share that variable. This will work even if the Keras model does not use the layer that declared the variable. Keras users should be careful when combining Keras classes with non-Keras classes, as certain class structures can prevent Keras from detecting some trainable variables.\footnote{If a Keras layer instantiates a non-Keras class that instantiates a Keras class that creates a trainable variable, Keras will fail to detect the trainable variable, and the variable will not be updated during training or saved when the model weights are saved.}
 
 \subsection{Custom Partial Gradients}
 TensorFlow offers a well-documented means of replacing TensorFlow's gradient computations of an operation with specified custom gradient computations. However, if the operation involves multiple tensors that are inputs or trainable variables, the standard approach replaces all the gradients with custom gradients. If TensorFlow's gradient computations are sufficient for some tensors but not others, a workaround is necessary. This workaround is best explained by example.
@@ -52,7 +73,7 @@ class PostProcess:
 \end{code}
 
 
-In the standard Keras training paradigm, models are trained using the fit function, a method in the Keras model object. The fit function calls the function train\_step, where gradients are applied.  To update TensorFlow Variables after gradients are applied, train\_step is the function to modify. The only change that needs to be made is adding a function call to all update functions that correspond to the model's list of trainable variables.
+In the standard Keras training paradigm, models are trained using the fit function, a method in the Keras model object. The fit function calls the function train\_step, where gradients are applied.  To update TensorFlow Variables after gradients are applied in Tensorflow 2.3.1 on a CPU, train\_step is the function to modify. The only change that needs to be made is adding a function call to all update functions that correspond to the model's list of trainable variables.
 
 \begin{code}
 class Model_subclass(tf.keras.Model):
@@ -67,7 +88,28 @@ class Model_subclass(tf.keras.Model):
 
 Changes to Tensorflow variables in the update function must use the assign command (or its variants: assign\_add, assign\_sub, ect). Otherwise, TensorFlow will detect that computations lie outside of its computational graph and throw an error. Note that using the assign command on Python variables that are not TensorFlow variables will produce some very cryptic error messages, so be sure to use the assign command correctly. If the value change of one TensorFlow variable depends on the value of another TenorFlow variable value pre-update, it may be necessary to use the Tensorflow control\_dependencies command to get TensorFlow to track that dependency. TensorFlow has a useful tool called TensorBoard that helps visualize TensorFlow's dependencies, but a workaround is required to use TensorBoard on update functions that are called after applying gradients. To use TensorBoard to visualize dependencies in an update function, temporarily call the update function in the layer's call method, use TensorBoard to verify all necessary dependancies are being tracked, then remove the update function call from the layer's call method.
 
+However, in Tensorflow 2.4.1 on a GPU, the above method fails. The PostProcess class is still fine, but the update functions must be instead be called using Keras callbacks.
+\begin{code}
+class PostProcessCallback(tf.keras.callbacks.Callback,PostProcess):
+    def on_train_begin(self,logs):
+        logs = logs or {}
+        self.updates = []
+        for tv in self.model.trainable_variables:
+            if tv.name in PostProcess.update:
+                self.updates.append(PostProcess.update[tv.name])
+
+    def on_batch_end(self, epoch, logs=None):
+        logs = logs or {}
+
+        for an_update in self.updates:
+            an_update()
+
+        for k, v in logs.items():
+            self.history.setdefault(k, []).append(v)
+\end{code}
+
 \subsection{The Perils of Using Built-In Functions for Complex Tensors and Arrays}
+Complex numbers are not as frequently used by researchers and practitioners, and many tools and platforms fail on complex cases.  Tensorflow's assign\_add command can fail on the GPU, so users should use the assign command instead. It is necessary in some cases to split complex variables into their real and imaginary components GPU errors. 
 The TensorFlow Probability version 0.11.1 \cite{tensorflowprobability} is an extension of TensorFlow mosly used for probabilistic models. The library contains a Cholesky update function, but the function does not properly handle complex inputs. To compute Cholesky updates for complex inputs, users should either write their own implementation or use my code (included in supplementary material). Similarly, the Randomized SVD algorithm in the Python scikit-learn library does not properly handle complex inputs.
 
-Errors like these are fairly common, so when dealing with complex data, researchers and practitioners should carefully verify that the function libraries they rely on are properly handling complex numbers.
+Errors like these are fairly common, so when dealing with complex data, researchers and practitioners should carefully verify that the function libraries they rely on are properly handling complex numbers. It is also important for code to be highly modularized, because if an error does not occur until computations on the computational graph or saving weights, platforms may not be able to identify where in the code the error is coming from, and error messages can be cryptic or even wrong.

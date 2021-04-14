@@ -1,7 +1,7 @@
 \chapter{Learning Dictionaries for Multi-Channel Signals}
 
 \section{Introduction}
-When using a multi-layer dictionary model, the coefficients corresponding to a dictionary from one layer become the "signal" for the subsequent layer.  The number of channels for this "signal" is the number of dictionary filters from the previous layer.  Much of the literature on learning convolutional dictionaries is tailored to applications with signals that only have a small number of channels.  This chapter presents a novel method for learning convolutional dictionaries from and for multi-channel signals. 
+In a multi-layer dictionary model, the coefficients corresponding to a dictionary from one layer become the "signal" for the subsequent layer.  The number of channels for this "signal" is the number of dictionary filters from the previous layer.  Much of the literature on using convolutional dictionaries is tailored to applications with signals that only have a small number of channels.  This chapter presents a novel method to use learning convolutional dictionaries for multi-channel signals. 
 \section{Dictionary Types}
 There are many ways to construct a convolutional sparse representation of a multi-channel signal, but broadly the distinctions reduce down to if and how signal channels share dictionaries and coefficients, and if and how those non-shared entities interact across channels.
 
@@ -16,13 +16,13 @@ The dictionary model decomposes the signal $\vs_i$ into a dictionary $\mD$ (whic
 \vs_i \approx \mD\vx_i
 \end{equation}
 
-(Here the subscript $i$ specifies a particular signal and its corresponding coefficients.) A pursuit algorithm finds the coefficients $\vx_i$ corresponding to a particular signal $\vs_i$ for known dictionary $\mD$. If the number of dictionary atoms (columns) is larger than the dimension of the signal, then the number of unknowns is larger than the number of equations, and many solutions for $\vx_i$ represent $\vs_i$ equally well (at least in an L$2$ sense). Researchers and practitioners commonly either impose a sparsity constraint on the coefficients or add a coefficient L$1$ penalty to the objective function, which removes the ambiguity from the problem construction. When such a penalty or constraint is added, pursuit is sometimes called sparse coding. With the added coefficient L$1$ penalty, the pursuit optimization problem looks like this:
+(Here the subscript $i$ specifies a particular signal and its corresponding coefficients.) A pursuit algorithm finds the coefficients $\vx_i$ corresponding to a particular signal $\vs_i$ for known dictionary $\mD$. If the number of dictionary atoms (columns) is larger than the dimension of the signal, then the number of unknowns is larger than the number of equations, and many solutions for $\vx_i$ represent $\vs_i$ equally well (at least in an L$2$ sense). Researchers and practitioners commonly either impose a sparsity constraint on the coefficients or add a coefficient L$1$ penalty to the objective function, which removes this ambiguity from the problem construction. When such a penalty or constraint is used, pursuit is sometimes called sparse coding. With the added coefficient L$1$ penalty, the pursuit optimization problem looks like this:
 
 \begin{equation}\label{equation:sparse coding}
 \vx_i = \arg\min_{\vx} \frac{1}{2}\|\vs_i - \mD\vx\|_2^2 + \lambda \|\vx\|_1
 \end{equation}
 
-where $\lambda$ is a hyperparameter greater than zero controlling how much the L$1$ norm of the coefficients is penalized. Researchers have proposed many ways to solve this problem. If the dictionary is convolutional and the number of channels is low, a standard approach is to use the Alternating direction Method of Multipliers (ADMM) algorithm.
+where $\lambda$ is a nonnegative hyperparameter controlling how much the L$1$ norm of the coefficients is penalized. Researchers have proposed many ways to solve this problem. If the dictionary is convolutional and the number of channels is low, a standard approach is to use the Alternating direction Method of Multipliers (ADMM) algorithm.
 
 \section{ADMM}
 \label{section:ADMM}
@@ -56,19 +56,19 @@ The ADMM algorithm is an iterative search for the saddle point of the augmented 
 \vy^{(t + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(t + 1)},\vy,\vu^{(t)})
 \end{equation}
 
-\begin{equation}
+\begin{equation} \label{equation:general dual update}
 \vu^{(t + 1)} = \vu^{(t)} + \rho(\mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc)
 \end{equation}
 
-The primal updates serve to move towards the minimum of the augmented Lagrangian in respect to $\vx$ and $\vy$ with $\vu$ fixed, and the dual update fixes $\vx$ and $\vy$, and performs gradient ascent on $\vu$ with stepsize $\rho$. Under very mild assumptions, this process converges to the saddle point of the augmented Lagrangian, which matches the solution to the constrained optimization problem.
+The primal updates serve to move towards the minimum of the augmented Lagrangian in respect to $\vx$ and $\vy$ with $\vu$ fixed, and the dual update fixes $\vx$ and $\vy$, and performs gradient ascent on $\vu$ with stepsize $\rho$. Under very mild assumptions, this process converges to a saddle point of the augmented Lagrangian, which matches a solution to the constrained optimization problem.\footnote{Neither the saddle point nor the corresponding solution to the constrained optimization problem are guarenteed to be unique, however.}
 
-There are two common variations of the ADMM algorithm that this work will make use of.  The first is the scaled form, which comes from completing the square for the augmented lagrangian function:
+There are two common variations of the ADMM algorithm that this dissertation will make use of.  The first is the scaled form, which comes from completing the square for the augmented lagrangian function:
 
 \begin{equation}
-\operatorname{L}_{\rho}(\vx,\vy,\vu) = f(\vx) + g(\vy) + \frac{\rho}{2}\|\mA\vx + \mB\vy + \vc + \frac{\vu}{\rho}\|_2^2 - \frac{1}{2\rho}\|\vu\|_2^2
+\operatorname{L}_{\rho}(\vx,\vy,\vu) = f(\vx) + g(\vy) + \frac{\rho}{2}\|\mA\vx + \mB\vy + \vc + \frac{\vu}{\rho}\|_2^2 - \frac{\rho}{2}\|\frac{\vu}{\rho}\|_2^2
 \end{equation}
 
-The term $-\frac{1}{2\rho}\|\vu\|_2^2$ can be ignored for the primal updates because it has no dependence on the primal variables. For this reason, it is sometimes more convenient to keep track of $\frac{\vu}{\rho}$ instead of $\vu$, since that is the form that appears in the augmented Lagrangian after completing the square.
+The term $-\frac{\rho}{2}\|\frac{\vu}{\rho}\|_2^2$ can be ignored for the primal updates because it has no dependence on the primal variables. It is sometimes more convenient to keep track of $\frac{\vu}{\rho}$ instead of $\vu$, since that is the form that appears in the augmented Lagrangian after completing the square. The dual update for the scaled form is easily derived from equation \ref{equation:general dual update}.
 
 \begin{equation}
 \frac{\vu^{(t + 1)}}{\rho} = \frac{\vu^{(t)}}{\rho} + \mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc
@@ -125,22 +125,22 @@ Starting with the $\vx$-update:
 \vx^{(t + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
 \end{equation}
 
-Since the minimim is desired, setting the gradient to zero will produce the solution.
+Since the desired result is the minimizer, setting the gradient to zero and solving for $\vx$ will produce the solution.
 
 \begin{equation}
 \nabla_{\vx^{(t + 1)}} \operatorname{L}_{\rho}(\vx^{(t + 1)},\vy{(t)},\vu{(t)}) = \vzero
 \end{equation}
 
 \begin{equation}
-\vzero = \mD^T\mD\vx^{(t + 1)} - \mD^T\vs_i + \rho\vx^{(t + 1)} - \rho(\vy^{(t)} + \frac{\vu^{(t)}}{\rho})
+\vzero = \mD^T\mD\vx^{(t + 1)} - \mD^T\vs_i + \rho\vx^{(t + 1)} - \rho\left(\vy^{(t)} + \frac{\vu^{(t)}}{\rho}\right)
 \end{equation}
 
 \begin{equation}
-(\rho\mId + \mD^T\mD)\vx^{(t + 1)} = \mD^T\vs_i + \rho(\vy^{(t)} + \frac{\vu^{(t)}}{\rho})
+(\rho\mId + \mD^T\mD)\vx^{(t + 1)} = \mD^T\vs_i + \rho\left(\vy^{(t)} + \frac{\vu^{(t)}}{\rho}\right)
 \end{equation}
 
 \begin{equation}
-\vx^{(t + 1)} = (\rho\mId + \mD^T\mD)^{-1}(\mD^T\vs_i + \rho(\vy^{(t)} + \frac{\vu^{(t)}}{\rho}))
+\vx^{(t + 1)} = (\rho\mId + \mD^T\mD)^{-1}\left(\mD^T\vs_i + \rho\left(\vy^{(t)} + \frac{\vu^{(t)}}{\rho}\right)\right)
 \end{equation}
 
 In subsection \ref{subsection:SC xupdate}, there is a discussion of the implications of this update equation, how to compute it for cases in which the signal has a low number of channels, and the challenges it poses for signals with many channels.
@@ -222,7 +222,7 @@ where
 
 and in a slight abuse of notation, $\F$ computes the FFT separately on the coefficients for each filter.  In \cite{Bristow2013fast}, Bristow et al. observe the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ is sparsely banded, so the inverse can be broken down into much smaller inverse problems, and one only needs to compute the inverse of an $M \times M$ matrix for every element in the signal. ($\rho\mId + \hat{\mD}^H\hat{\mD}$ is an $M \times M$ block matrix, whose blocks are diagonal.  Each submatrix collects one element from the diagonal of each of the blocks.)
 
-Furthermore, the maximum rank of these submatrices is $C$, so if $C$ is small, these inverses can be computed even more efficiently using the Woodbury matrix identity \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient}.
+Furthermore, the maximum rank of these submatrices is $C$, so if $C$ is small, these inverses can be computed even more efficiently using the Woodbury matrix identity or Sherman-Morrison equations \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient}.
 
 According to the Woodbury matrix identity \cite{henderson1981deriving}, for any invertible matrix $\mU$ and any matrix $\mV$:
 \begin{equation}
@@ -245,7 +245,7 @@ In \cite{chodosh2018deep}\cite{murdock2018deep}, the authors use the ADMM algori
 (\rho\mId + \mD^T\mD)^{-1} = \frac{1}{\rho}\mId - \frac{1}{\rho(\rho + 1)}\mD^T\mD
 \end{equation}
 
-This produces the $\vx$ update equationL
+This produces the $\vx$ update equation:
 
 \begin{equation}
 \vx^{(t + 1)} = \frac{1}{\rho + 1}\mD^T\vs + \left(\mId - \frac{1}{\rho + 1}\mD^T\mD\right)\left(\vz^{(t)} - \frac{\vgamma^{(t)}}{\rho}\right)
@@ -323,10 +323,21 @@ While neither Chodosh and Lucey nor the work they cite mentions FISTA, the resem
 
 Given these similarities, it is likely the performance between the two methods is similar.
 
-\section{A Novel Approach to Sparse Coding: ADMM with Low-Rank Updates}
+\section{Dictionary Learning}
+The last few sections have focused on sparse coding. For sparse coding, the dictionary is fixed. Generally, dictionary learning algorithms alternate between pursuing coefficients and updating dictionary filters. There are many methods to updating dictionaries: FISTA, ADMM, projected stochastic gradient descent, et cetera. Dictionary updates generally adhere to the following three properties:
+\begin{enumerate}
+\item The updated dictionary filters better represents the data for the given coefficients.\label{item:improvement property}
+\item The updated dictionary filters are normalized.\label{item:normalized}
+\item The updated dictionary filters are spatially constrained. \label{item:spatially constrained}
+\end{enumerate}
+Property \ref{item:spatially constrained} relates to the idea that convolutional filters are usually small $5 \times 5$ or $9 \times 9$, et cetera. Dictionary updates do not increase the size of the filters.
+
+If using ADMM for pursuit, every time the dictionary is updated, the inverse representation must be updated as well. The inverse representation can be updated more efficiently if the dictionary update is low rank, but approximating the dictionary update using a truncated singular value decomposition would forfeit property \ref{item:normalized}. The next section describes a novel means to work handle these challenges, with an explanation of how to efficiently update the inverse representation and a sparse coding method designed to handle dictionary updates that produce unnormalized dictionaries.
+
+\section{A Novel Approach to Sparse Coding: ADMM with Low-Rank Dictionary Updates}
 In this section, I present a novel approach to sparse coding for signals with a large number of channels. The approach uses the ADMM algorithm described in section \ref{section:ADMM} and will share many similarities to the standard ADMM sparse coding approach described in section \ref{section:Applying ADMM} for signals with few channels.
 
-\subsection{Low-Rank Updates}
+\subsection{Updating the Inverse Representation}
 
 Under many circumstances, inverse representations can be updated efficiently, provided the update adheres to a low-rank structure. Recall the freqeuncy representation of the convolutional dictionary:
 
@@ -363,13 +374,13 @@ where $\mU$ is an orthogonal matrix of size $C \times L$ and $\mV[\hat{k}]$ is a
 Then,
 
 \begin{equation}
-(\rho\mId + (\hat{\mD}^{(n + 1)})^H[\hat{k}]\hat{\mD}^{(n + 1)}[\hat{k}])^{-1} = \rho\mId + (\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])^H(\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])
+\rho\mId + (\hat{\mD}^{(n + 1)})^H[\hat{k}]\hat{\mD}^{(n + 1)}[\hat{k}] = \rho\mId + (\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])^H(\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])
 \end{equation}
 
 For brevity and simplicity, I will drop the notation indexing the frequency $\hat{k}$ and selecting the iteration $n$ for matrix $\hat{\mD}^{(n)}[\hat{k}]$ and simply use $\hat{\mD}$ instead. However, the reader should keep in mind the $\hat{\mD}$ here is a dense $C \times M$ matrix capturing the component of the dictionary $\mD$ for implicit frequency $\hat{k}$, not the sparsely banded $\hat{\mD}$ of size $KC \times M$ from earlier in this section.
 
 \begin{equation}
-(\rho\mId + \hat{\mD}^H\hat{\mD})^{-1} = \rho\mId + \mD^H\mD + \mV\mU^H \mU\mV^H + \mV\mU^H\mD + \mD^H\mU\mV^H
+\rho\mId + (\hat{\mD}^{(n + 1)})^H\hat{\mD}^{(n + 1)} = \rho\mId + (\hat{\mD}^{(n)})^H\hat{\mD}^{(n)} + \mV\mU^H \mU\mV^H + \mV\mU^H\hat{\mD}^{(n)} + (\hat{\mD}^{(n)})^H\mU\mV^H
 \end{equation}
 
 Given that $\mV$ and $\mU$ are orthogonal matrices, $\mV\mU^H\mU\mV^H$ can easily be broken into $L$ rank-one Hermitian updates.
@@ -378,10 +389,10 @@ Given that $\mV$ and $\mU$ are orthogonal matrices, $\mV\mU^H\mU\mV^H$ can easil
 \mV\mU^H\mU\mV^H = \sum_{\ell = 1}^L \vu_{\ell}^H\vu_{\ell}\vv_{\ell}\vv_{\ell}^H
 \end{equation}
 
-Similarly, $\mV\mU^H\mD + \mD^H\mU\mV^H$ can be broken into $L$ Hermitian, rank-two updates:
+Similarly, $\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H$ can be broken into $L$ Hermitian, rank-two updates:
 
 \begin{equation}
-\mV\mU^H\mD + \mD^H\mU\mV^H = \sum_{\ell = 1}^{L} \vv_{\ell}\vu_{\ell}^H\mD + \mD^H\vu_{\ell}\vv_{\ell}^H
+\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H = \sum_{\ell = 1}^{L} \vv_{\ell}\vu_{\ell}^H\hat{\mD} + \hat{\mD}^H\vu_{\ell}\vv_{\ell}^H
 \end{equation}
 
 
@@ -505,6 +516,8 @@ where $\mR$ is a diagonal matrix with scaled identity blocks:
 \mR = \begin{bmatrix} r_1\mId & \vzero & \hdots & \vzero \\ \vzero & r_2\mId &  & \vdots \\ \vdots &  & \ddots &   \\ \vzero & \hdots &  & r_M\mId \end{bmatrix}
 \end{equation}
 
+and $\mD$ has normalized dictionary filters.
+
 This optimization problem has the augmented Lagrangian function:
 
 \begin{equation}
@@ -566,15 +579,11 @@ Finally, the dual updates are
 
 Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$.
 
-\subsection{Dictionary Updates}
-
-A desired dictionary update can be computed through stochastic gradient descent or other dictionary-update scheme. However, the actual update will only approximate the desired one, obtained through singular-value decomposition.
-
 \section{Conclusion}
-In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently.
+In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently when used within a dictionary-learning algorithm.
 % This is a figure in landscape orientation
-\begin{sidewaysfigure}
-\includegraphics[width=\textwidth]{figures/exampleFigure.png}
-\caption{This is another example Figure, rotated to landscape orientation.}
-\label{LandscapeFigure}
-\end{sidewaysfigure}
+%\begin{sidewaysfigure}
+%\includegraphics[width=\textwidth]{figures/exampleFigure.png}
+%\caption{This is another example Figure, rotated to landscape orientation.}
+%\label{LandscapeFigure}
+%\end{sidewaysfigure}

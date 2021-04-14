@@ -46,7 +46,7 @@ where $\vz_0 = \vs$ is not a primal variable, but instead the signal itself.
 This optimization problem has the augmented Lagrangian function:
 
 \begin{equation}
-\L_{\rho}(\vx,\vz,\vgamma) = f(\vx,\vz)  +  \sum_{\ell = 1}^L \frac{\rho}{2}\|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2  - \frac{1}{2\rho}\|\vgamma_{\ell}\|_2^2
+\L_{\rho}(\vx,\vz,\vgamma) = f(\vx,\vz)  +  \sum_{\ell = 1}^L \frac{\rho}{2}\|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2  - \frac{\rho}{2}\|\frac{\vgamma_{\ell}}{\rho}\|_2^2
 \end{equation}
 
 where 
