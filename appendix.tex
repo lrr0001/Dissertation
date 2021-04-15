@@ -7,7 +7,181 @@
 %Begin individual appendices, separated as chapters
 
 \chapter{Cholesky Hermitian Rank-1 Updates}
-I am using the methods described in \cite{krause2015more}, modified to handle complex numbers. I have not written this up yet.
+These derivations are based on the work of \cite{krause2015more}, but modified to handle complex numbers.
+
+
+Let $\mA^{(n)} = \mL\mL^H$ be a Hermitian, positive definite matrix of dimension $C \times C$ and $\mL$ be a lower trangular matrix. Then, the diagonal of $\mL$ is positive and real.
+
+\begin{equation}
+\mA^{(n)} = \begin{bmatrix} a_{1,1} & \hdots & a_{C,1}^{*} \\
+                      \vdots & \ddots & \vdots \\
+                      a_{C,1} & \hdots & a_{C,C}
+      \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mL = \begin{bmatrix} \ell_{1,1} & 0      & \hdots & 0 \\
+                      \ell_{2,1} & \ddots &        & \vdots \\
+                      \vdots     &        &  \ddots &  0     \\
+                      \ell_{C,1}     & \hdots &   & \ell_{C,C}
+      \end{bmatrix}
+\end{equation}
+
+Dividing $\mA^{(n)}$ into blocks:
+\begin{equation}
+\mA^{(n)} = \begin{bmatrix}\ell_{1,1} & \vzero^T \\ \vl_{2,1} & \mL_{2,2} \end{bmatrix} \begin{bmatrix} \ell_{1,1}^{*} & \vl_{2,1}^H \\ \vzero & \mL_{2,2}^H \end{bmatrix} 
+\end{equation}
+
+\begin{equation}
+\mA^{(n)} = \begin{bmatrix} \ell_{1,1}^2 & \ell_{1,1}\vl_{2,1}^H \\ \ell_{1,1}\vl_{2,1} & \mL_{2,2}\mL_{2,2}^H + \vl_{2,1}\vl_{2,1}^H \end{bmatrix}
+\end{equation}
+
+Consider the rank-$1$ update:\footnote{If $\lambda$ is negative, the result is not guarenteed to be positive definite. In general, updates to inverse representations with a negative $\lambda$ (sometimes refered to as "downdates") are less numerically stable, even if the resulting matrix is still positive definite.}
+\begin{equation}
+\mA^{(n + 1)} = \mA^{(n)} + \lambda\vv\vv^H
+\end{equation}
+
+where
+\begin{equation}
+\vv = \begin{bmatrix} v_1 \\ \vv_2 \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mA^{(n + 1)} = \begin{bmatrix} \ell_{1,1}^2 + \lambda v_1 v_1^{*} & \ell_{1,1}\vl_{2,1}^H + \lambda v_1\vv_2^H \\ \ell_{1,1}\vl_{2,1} + \lambda v_1^{*}\vv_2 & \mL_{2,2}\mL_{2,2}^H + \vl_{2,1}\vl_{2,1}^H + \lambda\vv_2\vv_2^H \end{bmatrix}
+\end{equation}
+
+Let $\mA^{(n + 1)} = \mM\mM^H$, where $\mM$ is a lower triangular matrix. Then, the diagonal of $\mM$ is positive and real.
+
+\begin{equation}
+\mA^{(n + 1)} = \begin{bmatrix} m_{1,1}^2 & m_{1,1}\vm_{2,1}^H \\ m_{1,1}\vm_{2,1} & \mM_{2,2}\mM_{2,2}^H + \vm_{2,1}\vm_{2,1}^H \end{bmatrix}
+\end{equation}
+
+Therefore,
+\begin{equation}
+m_{1,1}^2 = \ell_{1,1}^2 + \lambda v_1 v_1^{*}
+\end{equation}
+\begin{equation}
+m_{1,1}\vm_{2,1} = \ell_{1,1}\vl_{2,1} + \lambda v_1^{*}\vv_2
+\end{equation}
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H + \vm_{2,1}\vm_{2,1}^H = \mL_{2,2}\mL_{2,2}^H + \vl_{2,1}\vl_{2,1}^H + \lambda\vv_2\vv_2^H
+\end{equation}
+
+Solving for the first column of $\mM$:
+\begin{equation} \label{equation:m11}
+m_{1,1} = \sqrt{\ell_{1,1}^2 + \lambda v_1 v_1^{*}}
+\end{equation}
+\begin{equation}
+\vm_{2,1} = \frac{\ell_{1,1}\vl_{2,1} + \lambda v_1^{*}\vv_2}{m_{1,1}}
+\end{equation}
+Finally,
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \vl_{2,1}\vl_{2,1}^H + \lambda\vv_2\vv_2^H - \vm_{2,1}\vm_{2,1}^H
+\end{equation}
+
+\begin{equation}
+\vm_{2,1}\vm_{2,1}^H = \frac{1}{m_{1,1}^2}\left(\ell_{1,1}^2\vl_{2,1}\vl_{2,1}^H + \lambda\ell_{1,1}v_1\vl_{2,1}\vv_2^H + \lambda\ell_{1,1}v_1^{*}\vv_2\vl_{2,1}^H + \lambda^2 v_1 v_1^{*} \vv_2\vv_2^H\right)
+\end{equation}
+
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{m_{1,1}^2 - \ell_{1,1}^2}{m_{1,1}^2}\vl_{2,1}\vl_{2,1}^H + \frac{\lambda(m_{1,1}^2 - \lambda v_1 v_1^{*})}{m_{1,1}^2}\vv_2\vv_2^H - \frac{\lambda\ell_{1,1}v_1}{m_{1,1}^2}\vl_{2,1}\vv_2^H - \frac{\lambda\ell_{1,1}v_1^{*}}{m_{1,1}}\vv_2\vl_{2,1}^H
+\end{equation}
+
+The expressions $m_{1,1}^2 - \lambda v_1 v_1^{*}$ and $m_{1,1}^2 - \ell_{1,1}^2$ can be simplified using equation \ref{equation:m11}.
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda v_1 v_1^{*} }{m_{1,1}^2}\vl_{2,1}\vl_{2,1}^H + \frac{\lambda \ell_{1,1}^2}{m_{1,1}^2}\vv_2\vv_2^H - \frac{\lambda\ell_{1,1}v_1}{m_{1,1}}\vl_{2,1}\vv_2^H - \frac{\lambda\ell_{1,1}v_1^{*}}{m_{1,1}^2}\vv_2\vl_{2,1}^H
+\end{equation}
+
+Factoring out $\frac{\lambda}{m_{1,1}^2}$:
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda}{m_{1,1}^2}\left( v_1 v_1^{*} \vl_{2,1}\vl_{2,1}^H + \ell_{1,1}^2\vv_2\vv_2^H - \ell_{1,1}v_1\vl_{2,1}\vv_2^H - \ell_{1,1}v_1^{*}\vv_2\vl_{2,1}^H\right)
+\end{equation}
+
+Note the factorization:
+\begin{equation}
+(\ell_{1,1}\vv_2 - v_1\vl_{2,1})(\ell_{1,1}\vv_2 - v_1\vl_{2,1})^H = \ell_{1,1}^2\vv_2\vv_2^H - \ell_{1,1}v_1^{*}\vl_{2,1}^H - \ell_{1,1}v_1\vl_{2,1}\vv_2 + v_1 v_1^{*}\vl_{2,1}\vl_{2,1}^H
+\end{equation}
+Therefore,
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda}{m_{1,1}^2}\left(\ell_{1,1}\vv_2 - v_1\vl_{2,1}\right)\left(\ell_{1,1}\vv_2 - v_1\vl_{2,1}\right)^H
+\end{equation}
+$\mL_{2,2}\mL_{2,2}^H$ is a $ (C - 1) \times (C - 1)$ Hermitian, positive definite matrix and $\frac{\lambda}{m_{1,1}^2}(\ell_{1,1}\vv_2 - v_1\vl_{2,1})(\ell_{1,1}\vv_2 - v_1\vl_{2,1})^H$ is a rank-$1$ Hermitian update, so the process can be repeated on subsequent columns of $\mL$ until the entire Cholesky decomposition has been updated. Each column update is computed in linear time, so the entire update can be computed in quadratic time.
+
+While the order of complexity cannot be further reduced, there are changes that can be made to decrease precision error. Factoring out $\ell_{1,1}$:
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda\ell_{1,1}^2}{m_{1,1}^2}\left(\vv_2 - \frac{v_1}{\ell_{1,1}}\vl_{2,1}\right)\left(\vv_2 - \frac{v_1}{\ell_{1,1}}\vl_{2,1}\right)^H
+\end{equation}
+
+Rather than directly updating $\lambda$ before moving on to the next column, better precision can be achieved by updating a divisor instead.  Looking at the fraction $\frac{\ell_{1,1}^2}{m_{1,1}^2}$:
+\begin{equation}
+\frac{\ell_{1,1}^2}{m_{1,1}^2} = \frac{\ell_{1,1}^2}{\ell_{1,1}^2 + \lambda v_1 v_1^{*}}
+\end{equation}
+
+\begin{equation}
+\frac{\ell_{1,1}^2}{m_{1,1}^2} = \frac{1}{1 + \frac{\lambda v_1 v_1^{*}}{\ell_{1,1}^2}}
+\end{equation}
+
+Therefore,
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda}{1 + \frac{\lambda v_1 v_1^{*}}{\ell_{1,1}^2}}(\vv_2 - \frac{v_1}{\ell_{1,1}}\vl_{2,1})(\vv_2 - \frac{v_1}{\ell_{1,1}}\vl_{2,1})^H
+\end{equation}
+
+Let
+\begin{equation}
+\vomega = \vv_2 - \frac{v_1}{\ell_{1,1}}\vl_{2,1}
+\end{equation}
+
+So,
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda}{1 + \frac{\lambda v_1 v_1^{*}}{\ell_{1,1}^2}}\vomega\vomega^H
+\end{equation}
+
+I will now write $\vm_{2,1}$ in terms of $\vomega$. Recall that
+\begin{equation}
+\vm_{2,1} = \frac{\ell_{1,1}\vl_{2,1} + \lambda v_1^{*}\vv_2}{m_{1,1}}
+\end{equation}
+
+Substituting for $\vv_2$:
+\begin{equation}
+\vm_{2,1} = \frac{\ell_{1,1}\vl_{2,1} + \lambda v_1^{*}(\vomega + \frac{v_1}{\ell_{1,1}}\vl_{2,1})}{m_{1,1}}
+\end{equation}
+
+Combining the $\vl_{2,1}$ terms:
+\begin{equation}
+\vm_{2,1} = \frac{(\ell_{1,1} +  \frac{\lambda v_1 v_1^{*}}{\ell_{1,1}}) \vl_{2,1} + \lambda v_1^{*}\vomega}{m_{1,1}}
+\end{equation}
+
+Factoring out $\frac{1}{\ell_{1,1}}$ produces the expression for $m_{1,1}^2$.
+\begin{equation}
+\vm_{2,1} = \frac{\frac{1}{\ell_{1,1}}(\ell_{1,1}^2 +  \lambda v_1 v_1^{*}) \vl_{2,1} + \lambda v_1^{*}\vomega}{m_{1,1}}
+\end{equation}
+\begin{equation}
+\vm_{2,1} = \frac{\frac{m_{1,1}^2}{\ell_{1,1}} \vl_{2,1} + \lambda v_1^{*}\vomega}{m_{1,1}}
+\end{equation}
+
+\begin{equation}
+\vm_{2,1} = \frac{m_{1,1}}{\ell_{1,1}} \vl_{2,1} + \frac{\lambda v_1^{*}}{m_{1,1}}\vomega
+\end{equation}
+
+So, to summarize:
+\begin{equation} \label{equation:m11}
+m_{1,1} = \sqrt{\ell_{1,1}^2 + \lambda |v_1|^2}
+\end{equation}
+
+\begin{equation}
+\vomega = \vv_2 - \frac{v_1}{\ell_{1,1}}\vl_{2,1}
+\end{equation}
+
+\begin{equation}
+\vm_{2,1} = \frac{m_{1,1}}{\ell_{1,1}} \vl_{2,1} + \frac{\lambda v_1^{*}}{m_{1,1}}\vomega
+\end{equation}
+
+\begin{equation}
+\mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda}{1 + \frac{\lambda |v_1|^2}{\ell_{1,1}^2}}\vomega\vomega^H
+\end{equation}
+
+The rank-$1$ Hermitian update to a Cholesky decomposition can be computed in quadratic time. 
+
 
 \chapter{Rank-2 Eigendecomposition Edge Cases}
 
