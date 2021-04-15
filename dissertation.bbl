@@ -16,6 +16,205 @@
   {}
 \endgroup
 
+\entry{wohlberg2016convolutional}{inproceedings}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wohlberg}{W.}%
+     {Brendt}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{WB2}
+  \strng{fullhash}{WB2}
+  \field{booktitle}{2016 IEEE 12th Image, Video, and Multidimensional Signal
+  Processing Workshop (IVMSP)}
+  \field{pages}{1\bibrangedash 5}
+  \field{title}{Convolutional sparse representations as an image model for
+  impulse noise restoration}
+  \field{year}{2016}
+\endentry
+
+\entry{kong2012dictionary}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Kong}{K.}%
+     {Shu}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wang}{W.}%
+     {Donghui}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{KSWD1}
+  \strng{fullhash}{KSWD1}
+  \field{booktitle}{European conference on computer vision}
+  \field{pages}{186\bibrangedash 199}
+  \field{title}{A dictionary learning approach for classification: separating
+  the particularity and the commonality}
+  \field{year}{2012}
+\endentry
+
+\entry{carroll2017outlier}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Carroll}{C.}%
+     {Brandon~T}{B.~T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Whitaker}{W.}%
+     {Bradley~M}{B.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dayley}{D.}%
+     {Wayne}{W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Anderson}{A.}%
+     {David~V}{D.~V.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{CBTWBMDWADV1}
+  \strng{fullhash}{CBTWBMDWADV1}
+  \field{number}{6}
+  \field{pages}{1207\bibrangedash 1215}
+  \field{title}{Outlier learning via augmented frozen dictionaries}
+  \field{volume}{25}
+  \field{journaltitle}{IEEE/ACM Transactions on Audio, Speech, and Language
+  Processing}
+  \field{year}{2017}
+\endentry
+
+\entry{polatkan2014bayesian}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Polatkan}{P.}%
+     {G{\"u}ng{\"o}r}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zhou}{Z.}%
+     {Mingyuan}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carin}{C.}%
+     {Lawrence}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Blei}{B.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Daubechies}{D.}%
+     {Ingrid}{I.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{PGZMCLBDDI1}
+  \strng{fullhash}{PGZMCLBDDI1}
+  \field{number}{2}
+  \field{pages}{346\bibrangedash 358}
+  \field{title}{A Bayesian nonparametric approach to image super-resolution}
+  \field{volume}{37}
+  \field{journaltitle}{IEEE transactions on pattern analysis and machine
+  intelligence}
+  \field{year}{2014}
+\endentry
+
+\entry{gu2015convolutional}{inproceedings}{}
+  \name{author}{6}{}{%
+    {{}%
+     {Gu}{G.}%
+     {Shuhang}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zuo}{Z.}%
+     {Wangmeng}{W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Xie}{X.}%
+     {Qi}{Q.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Meng}{M.}%
+     {Deyu}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Feng}{F.}%
+     {Xiangchu}{X.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zhang}{Z.}%
+     {Lei}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{GSZWXQMDFXZL1}
+  \strng{fullhash}{GSZWXQMDFXZL1}
+  \field{booktitle}{Proceedings of the IEEE International Conference on
+  Computer Vision}
+  \field{pages}{1823\bibrangedash 1831}
+  \field{title}{Convolutional sparse coding for image super-resolution}
+  \field{year}{2015}
+\endentry
+
+\entry{papyan2017convolutional}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Papyan}{P.}%
+     {Vardan}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Romano}{R.}%
+     {Yaniv}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Elad}{E.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {JMLR. org}%
+  }
+  \strng{namehash}{PVRYEM1}
+  \strng{fullhash}{PVRYEM1}
+  \field{number}{1}
+  \field{pages}{2887\bibrangedash 2938}
+  \field{title}{Convolutional neural networks analyzed via convolutional sparse
+  coding}
+  \field{volume}{18}
+  \field{journaltitle}{The Journal of Machine Learning Research}
+  \field{year}{2017}
+\endentry
+
 \entry{boyd2011distributed}{article}{}
   \true{moreauthor}
   \name{author}{5}{}{%
@@ -493,38 +692,6 @@
   \field{pages}{36\bibrangedash 40}
   \field{title}{Sparse coding and autoencoders}
   \field{year}{2018}
-\endentry
-
-\entry{papyan2017convolutional}{article}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Papyan}{P.}%
-     {Vardan}{V.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Romano}{R.}%
-     {Yaniv}{Y.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Elad}{E.}%
-     {Michael}{M.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {JMLR. org}%
-  }
-  \strng{namehash}{PVRYEM1}
-  \strng{fullhash}{PVRYEM1}
-  \field{number}{1}
-  \field{pages}{2887\bibrangedash 2938}
-  \field{title}{Convolutional neural networks analyzed via convolutional sparse
-  coding}
-  \field{volume}{18}
-  \field{journaltitle}{The Journal of Machine Learning Research}
-  \field{year}{2017}
 \endentry
 
 \entry{fei2004-Caltech101}{inproceedings}{}
