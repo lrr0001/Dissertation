@@ -49,16 +49,30 @@ At the saddle-point solution, the augmented Lagrangian is at a minimum in respec
 The ADMM algorithm is an iterative search for the saddle point of the augmented Lagrangian. Each iteration consists of a primal update for $\vx$, a primal update for $\vy$, and a dual update for $\vu$:
 
 \begin{equation}
-\vx^{(t + 1)} = \arg\min_{\vx} \operatorname{L}_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
+\vx^{(t + 1)} = \arg\min_{\vx} \L_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
 \end{equation}
 
 \begin{equation}
-\vy^{(t + 1)} = \arg\min_{\vy} \operatorname{L}_{\rho}(\vx^{(t + 1)},\vy,\vu^{(t)})
+\vy^{(t + 1)} = \arg\min_{\vy} \L_{\rho}(\vx^{(t + 1)},\vy,\vu^{(t)})
 \end{equation}
 
 \begin{equation} \label{equation:general dual update}
 \vu^{(t + 1)} = \vu^{(t)} + \rho(\mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc)
 \end{equation}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+%\KwResult{Write here the result }
+ %initialization:\\
+   $\vy = $ inital guess \\
+   $\vu = \vzero$ \\
+ \While{Not Converged}{
+  $\vx = \arg \min_{\vx}  \L_{\rho}(\vx,\vy,\vu)$ \\
+  $\vy = \arg \min_{\vy} \L_{\rho}(\vx,\vy,\vu)$ \\
+  $\vu = \vu + \rho(\mA\vx + \mB\vy + \vc)$
+ }
+ \caption{ADMM}
+\end{algorithm}
 
 The primal updates serve to move towards the minimum of the augmented Lagrangian in respect to $\vx$ and $\vy$ with $\vu$ fixed, and the dual update fixes $\vx$ and $\vy$, and performs gradient ascent on $\vu$ with stepsize $\rho$. Under very mild assumptions, this process converges to a saddle point of the augmented Lagrangian, which matches a solution to the constrained optimization problem.\footnote{Neither the saddle point nor the corresponding solution to the constrained optimization problem are guarenteed to be unique, however.}
 
@@ -94,6 +108,22 @@ Another common variation of ADMM updates the dual variable more frequently.
 \end{equation}
 
 When $\alpha > 1$, this is known as over-relaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have elected to notate over/under relaxation differently than standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation does not use the first dual update, and instead includes another variable $\vh^{(t + 1)} = \mA\vx^{(t + 1)} - (1 - \alpha)(\mA\vx^{(t + 1)} + \mB\vy^{(t)} + \vc)$ and substitutes $\vh^{(t + 1)}$ for $\mA\vx^{(t + 1)}$ in the dual-update equation and the second primal-update equation. While more familiar to readers who have dealt with ADMM before, this standard notation complicates ADMM with an extra variable and obscures how the dual update and second primal update relate to the augmented Lagrangian.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without over-relaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+%\KwResult{Write here the result }
+ %initialization:\\
+   $\alpha \in (0,2]$ \\
+   $\vy = $ inital guess \\
+   $\vu_s = \vzero$ \\
+ \While{Not Converged}{
+  $\vx = \arg \min_{\vx}  \L_{\rho}(\vx,\vy,\rho\vu_s)$ \\
+  $\vu_s = \vu_s + (\alpha - 1)(\mA\vx + \mB\vy + \vc)$ \\
+  $\vy = \arg \min_{\vy} \L_{\rho}(\vx,\vy,\rho\vu_s)$ \\
+  $\vu_s = \vu_s + \mA\vx + \mB\vy + \vc$
+ }
+ \caption{Scaled ADMM With Over or Under-Relaxation}
+\end{algorithm}
 
 
 \section{Applying ADMM to the Sparse Coding Problem}
@@ -174,6 +204,22 @@ Finally, the last update equation for the dual variable:
 \begin{equation}
 \frac{\vu^{(t + 1)}}{\rho} = \frac{\vu^{(t + \frac{1}{2})}}{\rho} + \vy^{(t + 1)} - \vx^{(t + 1)}
 \end{equation}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+%\KwResult{Write here the result }
+ %initialization:\\
+   $\alpha \in (0,2]$ \\
+   $\vy = \mD^T\vs$ \\
+   $\vu_s = \vzero$ \\
+ \While{Not Converged}{
+  $\vx = \left(\rho\mId + \mD^T\mD\right)^{-1}\left(\mD^T\vs + \rho(\vy + \vu_s)\right)$ \\
+  $\vu_s = \vu_s + (\alpha - 1)(\vy - \vx)$ \\
+  $\vy = \operatorname{S}_{\frac{\lambda}{\rho}}(\vx - \vu_s)$ \\
+  $\vu_s = \vu_s + \vy - \vx$
+ }
+ \caption{ADMM for Sparse Coding}
+\end{algorithm}
 
 \subsection{Exploiting Dictionary Structure for the Inverse Problem}
 \label{subsection:SC xupdate}
@@ -578,6 +624,24 @@ Finally, the dual updates are
 \end{equation}
 
 Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+ %initialization:\\
+   $\alpha \in (0,2]$ \\
+   $\mD_s = \mD\mR$  \\
+   $\vy_s = \mR^{-2}\mD_s^T\vs$ \\
+   $\vu_s = \vzero$ \\
+ \While{Not Converged}{
+  $\vx_s = \left(\rho\mId + \mD_s^T\mD_s\right)^{-1}\left(\mD_s^T\vs + \rho\left(\vy_s + \vu_s\right)\right)$ \\
+  $\vu_s = \vu_s + (\alpha - 1)(\vy_s - \vx_s)$ \\
+  $\vy_s = \operatorname{S}_{\frac{\lambda\mR}{\rho}}(\vx_s - \vu_s)$ \\
+  $\vu_s = \vu_s + \vy_s - \vx_s$
+ }
+  $\vx = \mR\vx_s$ \\
+  $\vy = \mR\vy_s$
+ \caption{ADMM for Sparse Coding, Large Number of Channels}
+\end{algorithm}
 
 \section{Conclusion}
 In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently when used within a dictionary-learning algorithm.

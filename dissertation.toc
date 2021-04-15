@@ -32,90 +32,90 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.4}ADMM}{5}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Applying ADMM to the Sparse Coding Problem}{7}{section.2.5}
+\contentsline {section}{\numberline {2.5}Applying ADMM to the Sparse Coding Problem}{8}{section.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}Exploiting Dictionary Structure for the Inverse Problem}{9}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.1}Exploiting Dictionary Structure for the Inverse Problem}{11}{subsection.2.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.6}Sparse Coding for Multi-Channel Signals: Alternatives to My Novel Approach}{11}{section.2.6}
+\contentsline {section}{\numberline {2.6}Sparse Coding for Multi-Channel Signals: Alternatives to My Novel Approach}{13}{section.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.7}Dictionary Learning}{14}{section.2.7}
+\contentsline {section}{\numberline {2.7}Dictionary Learning}{16}{section.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.8}A Novel Approach to Sparse Coding: ADMM with Low-Rank Dictionary Updates}{15}{section.2.8}
+\contentsline {section}{\numberline {2.8}A Novel Approach to Sparse Coding: ADMM with Low-Rank Dictionary Updates}{17}{section.2.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.8.1}Updating the Inverse Representation}{15}{subsection.2.8.1}
+\contentsline {subsection}{\numberline {2.8.1}Updating the Inverse Representation}{17}{subsection.2.8.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.8.2}Handling Dictionary Normalization}{19}{subsection.2.8.2}
+\contentsline {subsection}{\numberline {2.8.2}Handling Dictionary Normalization}{21}{subsection.2.8.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.9}Conclusion}{22}{section.2.9}
+\contentsline {section}{\numberline {2.9}Conclusion}{23}{section.2.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Learning Multi-Layer Dictionaries}{23}{chapter.3}
+\contentsline {chapter}{\numberline {3}Learning Multi-Layer Dictionaries}{24}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Introduction}{23}{section.3.1}
+\contentsline {section}{\numberline {3.1}Introduction}{24}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Literature Review}{23}{section.3.2}
+\contentsline {section}{\numberline {3.2}Literature Review}{24}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Multi-Layer ADMM with Low-Rank Updates}{24}{section.3.3}
+\contentsline {section}{\numberline {3.3}Multi-Layer ADMM with Low-Rank Updates}{25}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Coefficients Update Equation}{26}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.1}Coefficients Update Equation}{27}{subsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Proximal Updates}{27}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Proximal Updates}{28}{subsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.3}Dual Updates}{30}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.3}Dual Updates}{31}{subsection.3.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Summary}{30}{section.3.4}
+\contentsline {section}{\numberline {3.4}Summary}{31}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}JPEG Artifact Removal}{31}{chapter.4}
+\contentsline {chapter}{\numberline {4}JPEG Artifact Removal}{32}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Introduction}{31}{section.4.1}
+\contentsline {section}{\numberline {4.1}Introduction}{32}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}JPEG Algorithm}{31}{section.4.2}
+\contentsline {section}{\numberline {4.2}JPEG Algorithm}{32}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Literature Review}{32}{section.4.3}
+\contentsline {section}{\numberline {4.3}Literature Review}{33}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Modelling Compressed JPEG Images}{32}{section.4.4}
+\contentsline {section}{\numberline {4.4}Modelling Compressed JPEG Images}{33}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.5}Handling Quantization}{34}{section.4.5}
+\contentsline {section}{\numberline {4.5}Handling Quantization}{35}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.6}Experiment}{36}{section.4.6}
+\contentsline {section}{\numberline {4.6}Experiment}{37}{section.4.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.6.1}Experiment Setup}{36}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.1}Experiment Setup}{37}{subsection.4.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.6.2}Results}{36}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.2}Results}{37}{subsection.4.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.7}Conclusion}{36}{section.4.7}
+\contentsline {section}{\numberline {4.7}Conclusion}{37}{section.4.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Practical Considerations}{37}{chapter.5}
+\contentsline {chapter}{\numberline {5}Practical Considerations}{38}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Boundary Handling}{37}{section.5.1}
+\contentsline {section}{\numberline {5.1}Boundary Handling}{38}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Removing Low-Frequency Signal Content}{37}{section.5.2}
+\contentsline {section}{\numberline {5.2}Removing Low-Frequency Signal Content}{38}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.1}JPEG Artifact Removal}{38}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.1}JPEG Artifact Removal}{39}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Inverse Representation Drift}{38}{section.5.3}
+\contentsline {section}{\numberline {5.3}Inverse Representation Drift}{39}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Tensorflow and Keras}{39}{section.5.4}
+\contentsline {section}{\numberline {5.4}Tensorflow and Keras}{40}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.1}Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{39}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.1}Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{40}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Shared Weights Between Layers}{39}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Shared Weights Between Layers}{40}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.3}Custom Partial Gradients}{40}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.3}Custom Partial Gradients}{41}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.4}Updating TensorFlow Variables After Applying Gradients}{41}{subsection.5.4.4}
+\contentsline {subsection}{\numberline {5.4.4}Updating TensorFlow Variables After Applying Gradients}{42}{subsection.5.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.5}The Perils of Using Built-In Functions for Complex Tensors and Arrays}{43}{subsection.5.4.5}
+\contentsline {subsection}{\numberline {5.4.5}The Perils of Using Built-In Functions for Complex Tensors and Arrays}{44}{subsection.5.4.5}
 \defcounter {refsection}{0}\relax 
 \renewcommand {\cftchappresnum }{Appendix }
 \defcounter {refsection}{0}\relax 
 \renewcommand {\cftchapnumwidth }{6em}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Hermitian Rank-1 Updates for the Cholesky Decomposition}{46}{Appendix.1.A}
+\contentsline {chapter}{\numberline {A}Hermitian Rank-1 Updates for the Cholesky Decomposition}{47}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Rank-2 Eigendecomposition Edge Cases}{51}{Appendix.1.B}
+\contentsline {chapter}{\numberline {B}Rank-2 Eigendecomposition Edge Cases}{52}{Appendix.1.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Less than 2 Independent Eigenvectors}{51}{section.1.B.1}
+\contentsline {section}{\numberline {B.1}Less than 2 Independent Eigenvectors}{52}{section.1.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.2}Eigenvalues are Not Distinct}{52}{section.1.B.2}
+\contentsline {section}{\numberline {B.2}Eigenvalues are Not Distinct}{53}{section.1.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{55}{chapter*.4}
+\contentsline {chapter}{References}{56}{chapter*.4}
