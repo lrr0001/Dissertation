@@ -396,7 +396,7 @@ Similarly, $\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H$ can be broken into $L$ Herm
 \end{equation}
 
 
-Inverse representations can be efficiently updated if the update is Hermitian and rank one. The details of such updates are discussed in the appendix.
+Inverse representations can be efficiently updated if the update is Hermitian and rank one. The details of such updates are discussed in Appendix \ref{chapter:Cholesky}.
 
 The Hermitian rank-two update consists of two rank-one terms, but the terms are not Hermitian, complicating the update process. However, this can be resolved through eigendecomposition.  
 
@@ -436,7 +436,7 @@ So, if $\vx$ is an eigenvector of $\mB\mA$, $\mA\vx$ is an eigenvector of $\mA\m
 \end{bmatrix}
 \end{equation}
 
-The eigenvalues and corresponding eigenvectors of a $2 \times 2$ matrix can be computed using the quadradic formula. Assuming that the $2 \times 2$ matrix has $2$ distinct eigenvalues, the expressions for these are below.\footnote{It is not guarenteed the $2 \times 2$ matrix will have $2$ distinct eigenvalues. In the practical considerations section, I consider those cases.}
+The eigenvalues and corresponding eigenvectors of a $2 \times 2$ matrix can be computed using the quadradic formula. Assuming that the $2 \times 2$ matrix has $2$ distinct eigenvalues, the expressions for these are below.\footnote{It is not guarenteed the $2 \times 2$ matrix will have $2$ distinct eigenvalues. In Appendix \ref{chapter:eigenedge}, I consider those cases.}
 
 \begin{equation}
 \operatorname{eigval}\left(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}\right) = \operatorname{real}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}

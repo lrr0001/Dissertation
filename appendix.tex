@@ -6,7 +6,7 @@
 
 %Begin individual appendices, separated as chapters
 
-\chapter{Cholesky Hermitian Rank-1 Updates}
+\chapter{Hermitian Rank-1 Updates for the Cholesky Decomposition} \label{chapter:Cholesky}
 These derivations are based on the work of \cite{krause2015more}, but modified to handle complex numbers.
 
 
@@ -136,7 +136,7 @@ So,
 \mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda}{1 + \frac{\lambda v_1 v_1^{*}}{\ell_{1,1}^2}}\vomega\vomega^H
 \end{equation}
 
-I will now write $\vm_{2,1}$ in terms of $\vomega$. Recall that
+Previously, $\vm_{2,1}$ was written in terms of $\vl_{2,1}$ and $\vv$. It can instead be written in terms of $\vl_{2,1}$ and $\vomega$. Recall that
 \begin{equation}
 \vm_{2,1} = \frac{\ell_{1,1}\vl_{2,1} + \lambda v_1^{*}\vv_2}{m_{1,1}}
 \end{equation}
@@ -183,7 +183,7 @@ m_{1,1} = \sqrt{\ell_{1,1}^2 + \lambda |v_1|^2}
 The rank-$1$ Hermitian update to a Cholesky decomposition can be computed in quadratic time. 
 
 
-\chapter{Rank-2 Eigendecomposition Edge Cases}
+\chapter{Rank-2 Eigendecomposition Edge Cases} \label{chapter:eigenedge}
 
 \section{Less than 2 Independent Eigenvectors}
 
