@@ -180,7 +180,45 @@ m_{1,1} = \sqrt{\ell_{1,1}^2 + \lambda |v_1|^2}
 \mM_{2,2}\mM_{2,2}^H = \mL_{2,2}\mL_{2,2}^H + \frac{\lambda}{1 + \frac{\lambda |v_1|^2}{\ell_{1,1}^2}}\vomega\vomega^H
 \end{equation}
 
-The rank-$1$ Hermitian update to a Cholesky decomposition can be computed in quadratic time. 
+The rank-$1$ Hermitian update to a Cholesky decomposition can be computed in quadratic time. The algorithm can be rewritten to be computed in place.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+ %initialization:\\
+   $\vomega \leftarrow \vv$ \\
+   $\alpha \leftarrow 1$ \\
+  \For{$i \in \{1,\hdots,C\}$}{
+     $\eta \leftarrow \alpha\ell_{i,i}^2 + \lambda |\omega_i|^2$ \\
+     $m_{i,i} \leftarrow \sqrt{\ell_{i,i}^2 + \frac{\lambda|\omega_i|^2}{\alpha}}$ \\
+     \For{$j \in \{i + 1,\hdots, C\}$}{
+        $\omega_j \leftarrow \omega_j - \frac{\ell_{j,i}\omega_i}{\ell_{i,i}} $ \\
+        $m_{j,i} \leftarrow \frac{m_{i,i}\ell_{j,i}}{\ell_{i,i}} + \frac{\lambda m_{i,i}\omega_j\omega_i^{*}}{\eta}$
+}
+     $\alpha \leftarrow \alpha + \frac{\lambda|\omega_i|^2}{\tau^2}$
+}
+ \caption{Cholesky Decomposition Hermitian Rank-One Update}
+\end{algorithm} 
+
+
+
+
+\begin{algorithm}[H]
+\SetAlgoLined
+ %initialization:\\
+   $\vomega \leftarrow \vv$ \\
+   $\alpha \leftarrow 1$ \\
+  \For{$i \in \{1,\hdots,C\}$}{
+     $\eta \leftarrow \alpha\ell_{i,i}^2 + \lambda |\omega_i|^2$ \\
+     $\tau \leftarrow \ell_{i,i}$ \\
+     $\ell_{i,i} \leftarrow \sqrt{\ell_{i,i}^2 + \frac{\lambda|\omega_i|^2}{\alpha}}$ \\
+     \For{$j \in \{i + 1,\hdots, C\}$}{
+        $\omega_j \leftarrow \omega_j - \frac{\ell_{j,i}\omega_i}{\tau} $ \\
+        $\ell_{j,i} \leftarrow \frac{\ell_{i,i}\ell_{j,i}}{\tau} + \frac{\lambda\ell_{i,i}\omega_j\omega_i^{*}}{\eta}$
+}
+     $\alpha \leftarrow \alpha + \frac{\lambda|\omega_i|^2}{\tau^2}$
+}
+ \caption{Cholesky Decomposition Hermitian Rank-One Update (In Place)}
+\end{algorithm} 
 
 
 \chapter{Rank-2 Eigendecomposition Edge Cases} \label{chapter:eigenedge}

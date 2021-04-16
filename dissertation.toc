@@ -112,10 +112,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {A}Hermitian Rank-1 Updates for the Cholesky Decomposition}{47}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Rank-2 Eigendecomposition Edge Cases}{52}{Appendix.1.B}
+\contentsline {chapter}{\numberline {B}Rank-2 Eigendecomposition Edge Cases}{53}{Appendix.1.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Less than 2 Independent Eigenvectors}{52}{section.1.B.1}
+\contentsline {section}{\numberline {B.1}Less than 2 Independent Eigenvectors}{53}{section.1.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.2}Eigenvalues are Not Distinct}{53}{section.1.B.2}
+\contentsline {section}{\numberline {B.2}Eigenvalues are Not Distinct}{54}{section.1.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{56}{chapter*.4}
+\contentsline {chapter}{References}{57}{chapter*.4}
