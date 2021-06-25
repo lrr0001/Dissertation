@@ -375,7 +375,7 @@ Given these similarities, it is likely the performance between the two methods i
 
 \section{Dictionary Learning}
 The last few sections have focused on sparse coding. For sparse coding, the dictionary is fixed or known. Most dictionary learning algorithms alternate between pursuing coefficients and updating dictionary filters, as shown in algorithms \ref{Algorithm: Online Dictionary Learning} and \ref{Algorithm: Batch Dictionary Learning}. The CoeficientUpdate in algorithm \ref{Algorithm: Batch Dictionary Learning} may consist of one or more sparse coding update steps. Not all dictionary learning algorithms perfectly adhere to this stucture, but the template covers most approaches.
-\begin{algorithm}[h] \label{Algorithm: Online Dictionary Learning}
+\begin{algorithm}[h] 
 \SetAlgoLined
 %\KwResult{Write here the result }
  %initialization:\\
@@ -387,9 +387,9 @@ The last few sections have focused on sparse coding. For sparse coding, the dict
   $\mD = \operatorname{DictionaryUpdate}(\mD,\vs,\vx)$ \\
   $i = i + 1$
  }
- \caption{Online Dictionary Learning Algorithm}
+ \caption{Online Dictionary Learning Algorithm}\label{Algorithm: Online Dictionary Learning}
 \end{algorithm}
-\begin{algorithm}[h] \label{Algorithm: Batch Dictionary Learning}
+\begin{algorithm}[h] 
 \SetAlgoLined
 %\KwResult{Write here the result }
  %initialization:\\
@@ -399,7 +399,7 @@ The last few sections have focused on sparse coding. For sparse coding, the dict
   $\mX = \operatorname{CoeficientUpdate}(\mD,\mX,\mS)$ \\
   $\mD = \operatorname{DictionaryUpdate}(\mD,\mS,\mX)$
  }
- \caption{Batch Dictionary Learning Algorithm}
+ \caption{Batch Dictionary Learning Algorithm}\label{Algorithm: Batch Dictionary Learning}
 \end{algorithm}
 
 There are many methods to updating dictionaries: FISTA, ADMM, projected stochastic gradient descent, et cetera. Dictionary updates generally adhere to the following three properties:
