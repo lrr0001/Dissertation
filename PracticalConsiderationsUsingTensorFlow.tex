@@ -15,12 +15,12 @@ Tikonov regularation can struggle with block artifacts from JPEG compression. Ra
 
 There are no constraints, so no dual variables are needed. Jut alternate between a Tikonov update for $\vx$ and an update for $\vv$ that closely resembles the $\vv$ update from the last chapert.
 Handling the cases in pointwise fashion, define function $h$ as the following clipping operation:
-
+%
 \begin{equation}
 \operatorname{h}(\vx) = \mW(\vv - \vx) = \begin{cases} \vs + \frac{\vq}{2} - \mW(\vx) & \mW(\vx) > \vs + \frac{\vq}{2} \\ \vs - \frac{\vq}{2} - \mW(\vx) & \mW(\vx) < \vs - \frac{\vq}{2} \\ \vzero & \text{otherwise}
 \end{cases}
 \end{equation}
-
+%
 Then,
 \begin{equation}
 \vv = \vx + \mW^{\dagger}\operatorname{h}(\vx)
@@ -28,7 +28,7 @@ Then,
 
 \section{Inverse Representation Drift}
 Rank-$1$ Hermtian updates to a Cholesky factorization or other inverse representation can be computed in quadratic time. However, these algorithms compute the new inverse representation from the old one, compounding precision error. Over the course of many iterations, the inverse representation will become less and less accurate. It is necessary to occasionally recompute the inverse representation in cubic time, to mitigate the impact of precision errors.  One method to determine when to recompute the inverse representation is to measure the error of the inverse function in reconstructing a random set of vectors $\hat{\vu}$, and recompute the inverse representation in cubic time when the error $\epsilon$ exceeds a threshold.
-
+%
 \begin{equation}
 \epsilon = \max_i \|(\rho\mId + (\hat{\mD}\mR)^T\hat{\mD}\mR)^{-1}(\rho\hat{\vu}_i + (\hat{\mD}\mR)^T\hat{\mD}\mR\hat{\vu}_i\|_{\infty}
 \end{equation} 
@@ -72,11 +72,11 @@ The function $h$ does nothing on the forward pass, but in the backward pass comp
 To update TensorFlow Variables after applying gradients, it is necessary to track which variables are affected and what their corresponding update functions are. To accomplish this, I store the update functions in a Python dictionary using variable names as the dictionary keys. This Python dictionary needs to be widely accessible so that layers can add update functions when they are initialized; a simple way to do this is to make the update function Python dictionary a class attribute. The keys need to be unique, but TensorFlow variable names can conflict. It is easy to avoid this problem by checking for conflicts before adding a new update function.
 
 \begin{code}
-class PostProcess:
+class PostPrc:
     update = {}
     def add_update(varName,update_fun):
-        assert varName not in PostProcess.update
-        PostProcess.update[varName] = update_fun
+        assert varName not in PostPrc.update
+        PostPrc.update[varName] = update_fun
 \end{code}
 
 
@@ -88,27 +88,27 @@ class Model_subclass(tf.keras.Model):
         trainStepOutputs = tf.keras.Model.train_step(self,data)
         update_ops = []
         for tv in self.trainable_variables:
-            if tv.name in PostProcess.update:
-                PostProcess.update[tv.name]()
+            if tv.name in PostPrc.update:
+                PostPrc.update[tv.name]()
         return trainStepOutputs
 \end{code}
 
 Changes to Tensorflow variables in the update function must use the assign command (or its variants: assign\_add, assign\_sub, ect). Otherwise, TensorFlow will detect that computations lie outside of its computational graph and throw an error. Note that using the assign command on Python variables that are not TensorFlow variables will produce some very cryptic error messages, so be sure to use the assign command correctly. If the value change of one TensorFlow variable depends on the value of another TenorFlow variable value pre-update, it may be necessary to use the Tensorflow control\_dependencies command to get TensorFlow to track that dependency. TensorFlow has a useful tool called TensorBoard that helps visualize TensorFlow's dependencies, but a workaround is required to use TensorBoard on update functions that are called after applying gradients. To use TensorBoard to visualize dependencies in an update function, temporarily call the update function in the layer's call method, use TensorBoard to verify all necessary dependancies are being tracked, then remove the update function call from the layer's call method.
 
-However, in Tensorflow 2.4.1 on a GPU, the above method fails. The PostProcess class is still fine, but the update functions must be instead be called using Keras callbacks.
+However, in Tensorflow 2.4.1 on a GPU, the above method fails. The PostPrc class is still fine, but the update functions must be instead be called using Keras callbacks.
 \begin{code}
-class PostProcessCallback(tf.keras.callbacks.Callback,PostProcess):
+class PostPrcCallback(keras.callbacks.Callback,PostPrc):
     def on_train_begin(self,logs):
         logs = logs or {}
-        self.updates = []
+        self.update = []
         for tv in self.model.trainable_variables:
-            if tv.name in PostProcess.update:
-                self.updates.append(PostProcess.update[tv.name])
+            if tv.name in PostPrc.update:
+                self.update.append(PostPrc.update[tv.name])
 
     def on_batch_end(self, epoch, logs=None):
         logs = logs or {}
 
-        for an_update in self.updates:
+        for an_update in self.update:
             an_update()
 
         for k, v in logs.items():

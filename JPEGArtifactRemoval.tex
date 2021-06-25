@@ -6,30 +6,29 @@ Despite the existance of better compression algorithms, use of the JPEG compress
 The JPEG compression process begins with an RGB image input, and consists of five steps. The first is a color transformation, transitioning from RGB to YUV. Then, the U and V color channels are downsampled.  The DCT for each $8 \times 8$ block is computed (separately for each channel).  The DCT coefficients are then quantized using a quantization matrix determined by a user-chosen JPEG quality factor. Finally, these quantized coefficients are reodered and encoded using a lossless variable length coding process.
 
 The standard reconstruction process reverses the lossless encoding, computes the IDCT of the blocks, upsamples the color channels, and reverses the color transform.
-\section{Literature Review}
 \section{Modelling Compressed JPEG Images}
 Some researchers have observed convolutional dictionary models struggle with large smooth components of signals, likely due to the fact that shifted versions of smooth filters have high coherence.
 
 For this reason, it is often a good idea to subtract a smoothed version $\vs_{\text{smth}}$ of the signal, and only apply apply the dictionary model to the residual $\vs_{\text{rough}}$.
-
+%
 \begin{equation}
 \vs_{\text{clean}} = \vs_{\text{smth}} + \vs_{\text{rough}}
 \end{equation}
-
+%
 \begin{equation}
 \vs_{\text{rough}} \approx \mD_1\vx_1
 \end{equation}
-
+%
 When restoring an image after JPEG compression, the original image $\vs_{\text{clean}}$ is not known. Instead, the compressed image $\vs$ is observed.
-
+%
 \begin{equation}
 \vs = \mQ\mW\vs_{\text{clean}}
 \end{equation}
-
+%
 \begin{equation}
 \vs \approx \mQ\mW(\vs_{\text{smth}} + \mD_1\vx_1)
 \end{equation}
-
+%
 where $\mW$ maps the signal to $8 \times 8$ block frequency coefficients (from the cosine transform), and $\mQ$ quantizes them.
 
 A means of estimating $\vs_{\text{smth}}$ from JPEG-compressed image $\vs$ is discussed in the Practical Considerations chapter.
@@ -41,11 +40,11 @@ From this idea, I construct the pursuit problem:
 \text{subject to } & \vx_{\ell} > \vzero
 \end{aligned}
 \end{equation}
-
+%
 with $\lambda_{\ell} \geq \vzero$.
 
 My approach to solve this problem uses the ADMM algorthm, where $\vx_1,\ldots,\vx_L$ are the first set of primal variables, $\vv,\vz_1,\ldots,\vz_L$ are the second set of primal variables,  and $\vgamma_1,\ldots,\vgamma_L$ are the dual variables corresponding to contraints on $\vz_1,\ldots,\vz_L$.  Here is the corresponding optimization problem:
-
+%
 \begin{equation}
 \begin{aligned}
 \minimize_{\vx,\vv,\vz} & \frac{\mu_1}{2}\|\vv - \mD_1\vx_1  - \vs_{\text{smth}}\|_2^2 + \sum_{\ell = 2}^L \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} - \mD_{\ell}\vx_{\ell}\|_2^2 + \sum_{\ell = 1}^L \lambda_{\ell}\|\vz_{\ell}\|_1 \\
@@ -53,33 +52,33 @@ My approach to solve this problem uses the ADMM algorthm, where $\vx_1,\ldots,\v
                    & \mQ\mW(\vv) - \vs = \vzero
 \end{aligned}
 \end{equation}
-
+%
 The constraint $\mQ\mW(\vv) - \vs = \vzero$ is not an affine constraint because of the quantization. To resolve this, \cite{chodosh2020use}) approximate the quantization as a linear operator. However, the constraint is convex, so the constraint can be handled without approximation implicitly using and indicator function. For now, I will focus on the other variable updates.
 
 Setting $\vz_0 = \vv - \vs_{\text{smth}}$, the updates for $\vx$, $\vz$, and $\vgamma$ are identitical to those from the last chpater.
-
+%
 \begin{equation}
 \mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} = \left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1}^{(t)} + \rho \left(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} + \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
-
+%
 \begin{equation}
 \vz_{\ell}^{(t + 1)} = (\rho\mu_{\ell}\mId + \mu_{\ell + 1}\mR_{\ell}^2)^{-1}\mR_{\ell}^2\operatorname{S}_{\lambda_{\ell}}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}^{(t + 1)} + \rho\mu_{\ell}\mR_{\ell}^{-1}\left(\mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} - \frac{\vgamma_{\ell}^{(t + \frac{1}{2})}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
-
+%
 \begin{equation}
 \vz_L^{(t + 1)} = \mR_{\ell}\operatorname{S}_{\frac{\lambda_L\mR_L}{\rho\mu_L}}\left(\mR_L^{-1}\vx_L^{(t + 1)} - \frac{\vgamma_L^{(t + \frac{1}{2})}}{\rho\sqrt{\mu_L}}\right)
 \end{equation}
-
+%
 \begin{equation}
 \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}} + (\alpha - 1)(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} - \mR^{-1}\vz_{\ell}^{(t + 1)})
 \end{equation}
-
+%
 \begin{equation}
 \frac{\vgamma_{\ell}^{(t + 1)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} + \mR_{\ell}^{-1}\vz_{\ell}^{(t + 1)} - \mR^{-1}\vz_{\ell}^{(t + 1)} 
 \end{equation}
+%
 
-
-The only remaining update equation is for $\vv$. This deals with the non-affine constraint, which complicates the problem. I will present a method for handling the quantization operator in the constraint in the next section.
+The only remaining update equation is for $\vv$. I will present a method for handling the quantization operator in the constraint in the next section.
 
 \section{Handling Quantization}
 
@@ -99,31 +98,31 @@ For the $\vv$ update, it is helpful to introduce a common convex-optimization tr
 \begin{equation}
 \indicator_{\{\mQ\mW(\vv) - \vs = \vzero\}} = \begin{cases} 0 & \mQ(\mW\vv) - \vs = \vzero \\ + \infty & \text{otherwise} \end{cases}
 \end{equation}
-
+%
 The function is convex, and when included in an objective function, it implicitly enforces the constraint $\mQ(\mW\vv) - \vs = \vzero$ This can be rewritten as the following:\footnote{The set $\{\vv: \mQ(\mW\vv) - \vs = \vzero\}$ does not include all boundary points. Equation \ref{equation:Indicator} uses the closure of the set instead. This ensures that there is a minimizer of the augmented Lagrangian in respect to $\vv$.} 
-
+%
 \begin{equation} \label{equation:Indicator}
 \indicator_{\{\mQ(\mW\vv) - \vs = \vzero\}} = \begin{cases} 0 & \vs - \frac{\vq}{2} \leq \mW\vv \leq \vs + \frac{\vq}{2} \\ + \infty & \text{otherwise} \end{cases}
 \end{equation}
-
+%
 Adding the indicator function to the objective produces the following Lagrangian function: 
-
+%
 \begin{equation}
 \begin{split}
 \L_{\rho}(\vx,\vv,\vz,\veta,\vgamma) =  \frac{\mu_1}{2}\|\vv - \mD_1\vx_1  - \vs_{\text{smth}}\|_2^2 + \psi(\vx,\vz,\vgamma) + \indicator_{\{\mQ(\mW\vv) - \vs = \vzero\}}
 \end{split}
 \end{equation}
-
+%
 where $h\psi(\vx,\vz,\vgamma)$ is a collection of terms irrelevant to the updates for $\vv$.
 
 Handling the cases in pointwise fashion, define function $h$ as the following clipping operation:
 
-
+%
 \begin{equation}
 \operatorname{h}(\vx_1) = \mW(\vv - \mD_1\vx_1 - \vs_{\textrm{smth}}) = \begin{cases} \vs + \frac{\vq}{2} - \mW(\mD_1\vx_1 + \vs_{\textrm{smth}}) & \mW(\mD_1\vx_1 + \vs_{\textrm{smth}}) > \vs + \frac{\vq}{2} \\ \vs - \frac{\vq}{2} - \mW(\mD_1\vx_1 + \vs_{\textrm{smth}}) & \mW(\mD_1\vx_1) + \vs_{\textrm{smth}}) < \vs - \frac{\vq}{2} \\ \vzero & \text{otherwise}
 \end{cases}
 \end{equation}
-
+%
 Then,
 \begin{equation}
 \vv^{(t + 1)} = \mD_1\vx_1^{(t + 1)} + \vs_{\text{smth}} + \mW^{\dagger}\operatorname{h}(\vx_1^{(t + 1)})

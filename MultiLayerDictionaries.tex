@@ -27,28 +27,28 @@ This chapter demostrates how to apply the novel sparse coding method for multi-c
 To start off, it is helpful to write a multi-layer dictionary optimization problem. To keep things compact, let $\vx_0 = \vs$.
 
 I use the same multi-layer dictionary model as \cite{murdock2018deep} and \cite{chodosh2018deep}, but I use different ADMM constraints:
-
+%
 \begin{equation}
 \minimize_{\vx} = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vx_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vx_{\ell}\|_1
 \end{equation}
 
 Applying the ADMM algorithm, I add a secondary primal variable $\vz_{\ell}$ for each layer $\ell$ and constrain it to be equal to $\vx_{\ell}$. As in the previous chapter, I scale this constraint so that the inverse representation can be updated efficiently without losing the normalized quality of the dictionary. This replaces the tight-frame assumption used in \cite{murdock2018deep} and \cite{chodosh2018deep}. Again, keeping things compact, let $\vz_0 = \vs$.
-
+%
 \begin{equation}
 \begin{aligned}
 \min_{\vx,\vz} & \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1 \\
 \text{subject to } & \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vz_{\ell} - \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vx_{\ell} = 0
 \end{aligned}
 \end{equation}
-
+%
 where $\vz_0 = \vs$ is not a primal variable, but instead the signal itself.
 
 This optimization problem has the augmented Lagrangian function:
-
+%
 \begin{equation}
 \L_{\rho}(\vx,\vz,\vgamma) = f(\vx,\vz)  +  \sum_{\ell = 1}^L \frac{\rho}{2}\|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2  - \frac{\rho}{2}\|\frac{\vgamma_{\ell}}{\rho}\|_2^2
 \end{equation}
-
+%
 where 
 \begin{equation}
 f(\vx,\vz) = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1
@@ -58,19 +58,19 @@ Recall that the ADMM algoritm (with relaxation) iteratively alternates between p
 \begin{equation} \label{equation:general x-update ADMM}
 \vx^{(t + 1)} = \arg\min_{\vx} \L(\vx,\vz^{(t)},\vgamma^{(t)})
 \end{equation}
-
+%
 \begin{equation}
 \frac{\vgamma^{\left(t + \frac{1}{2}\right)}}{\rho} = \frac{\vgamma^{(t)}}{\rho} + (\alpha - 1)(\mA\vx^{(t + 1)} + \mB\vz^{(t)} + \vc)
 \end{equation}
-
+%
 \begin{equation} \label{equation:general y-update ADMM}
 \vz^{(t + 1)} = \arg\min_{\vz} \L\left(\vx^{(t + 1)},\vz,\vgamma^{\left(t + \frac{1}{2}\right)}\right)
 \end{equation}
-
+%
 \begin{equation}
 \frac{\vgamma^{(t + 1)}}{\rho} = \frac{\vgamma^{\left(t + \frac{1}{2}\right)}}{\rho} + \mA\vx^{(t + 1)} + \mB\vz^{(t + 1)} + \vc
 \end{equation}
-
+%
 where $\mA\vx + \mB\vz + \vc = \vzero$ are the affine constraints.
 
 The first of these updates is the $\vx$ update, which updates the coefficients.
@@ -78,51 +78,51 @@ The first of these updates is the $\vx$ update, which updates the coefficients.
 
 \subsection{Coefficients Update Equation}
 The coefficients update comes from equation \ref{equation:general x-update ADMM}, which can be derived through setting the gradient of the Lagrangian equal to zero and solving for $\vx$.
-
+%
 \begin{equation}
 \nabla_{\vx_{\ell}} f(\vx,\vz) = \mu_{\ell}\mD_{\ell}^T\mD_{\ell}\vx_{\ell} - \mu_{\ell}\mD_{\ell}^T\vz_{\ell - 1}
 \end{equation}
-
+%
 \begin{equation}
 \nabla_{\vx_{\ell}} \frac{1}{2}\|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2 = \mu_{\ell}\mR_{\ell}^{-2}\vx - \mu_{\ell}\mR_{\ell}^{-2}\vz_{\ell} - \frac{\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}}{\rho}
 \end{equation}
-
+%
 Therefore,
-
+%
 \begin{equation}
 \nabla_{\vx_{\ell}} \L_{\rho}(\vx,\vz,\vgamma) = \mu_{\ell}\mD_{\ell}^T\mD_{\ell}\vx_{\ell} - \mu_{\ell}\mD_{\ell}^T\vz_{\ell - 1} + \rho\left(\mu_{\ell}\mR_{\ell}^{-2}\vx - \mu_{\ell}\mR_{\ell}^{-2}\vz_{\ell} - \frac{\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}}{\rho}\right)
 \end{equation}
 
 For $\vx$, $\vz$, $\vgamma$, such that $\nabla_{\vx_{\ell}} \L_{\rho}(\vx_1,\hdots,\vx_L,\vz_1,\hdots,\vz_L,\vgamma_1,\hdots,\vgamma_L) = 0$:
-
+%
 \begin{equation}
 \mu_{\ell}(\rho \mR_{\ell}^{-2} + \mD_{\ell}^T\mD_{\ell})\vx_{\ell} = \mu_{\ell}\mD_{\ell}^T\vz_{\ell - 1} + \rho \mu_{\ell}\mR_{\ell}^{-2}\vz_{\ell} + \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}
 \end{equation}
-
+%
 \begin{equation}
 (\rho \mR_{\ell}^{-2} + \mD_{\ell}^T\mD_{\ell})\vx_{\ell} = \mD_{\ell}^T\vz_{\ell - 1} + \rho \mR_{\ell}^{-2}\vz_{\ell} + \frac{\mR_{\ell}^{-1}\vgamma_{\ell}}{\sqrt{\mu_{\ell}}}
 \end{equation}
-
+%
 \begin{equation}
 \vx_{\ell} = (\rho \mR_{\ell}^{-2} + \mD_{\ell}^T\mD_{\ell})^{-1}\left(\mD_{\ell}^T\vz_{\ell - 1} + \rho \mR_{\ell}^{-2}\vz_{\ell} + \frac{\mR_{\ell}^{-1}\vgamma_{\ell}}{\sqrt{\mu_{\ell}}}\right)
 \end{equation}
-
+%
 This solution is the $\vx$ update for the ADMM algorithm, but a couple extra steps can put it into a form that is easier to use.
-
+%
 \begin{equation}
 \vx_{\ell} = \mR_{\ell}\left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\mR_{\ell}\left(\mD_{\ell}^T\vz_{\ell - 1} + \rho \mR_{\ell}^{-2}\vz_{\ell} + \frac{\mR_{\ell}^{-1}\vgamma_{\ell}}{\sqrt{\mu_{\ell}}}\right)
 \end{equation}
-
+%
 \begin{equation}
 \mR_{\ell}^{-1}\vx_{\ell} = \left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1} + \rho \mR_{\ell}^{-1}\vz_{\ell} + \frac{\vgamma_{\ell}}{\sqrt{\mu_{\ell}}}\right)
 \end{equation}
-
+%
 So, therefore the update equation for $\mR_{\ell}^{-1}\vx_{\ell}$ is the following:
-
+%
 \begin{equation}
 \mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} = \left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1}^{(t)} + \rho \left(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} + \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
-
+%
 Before moving onto another update equation, there are a few useful things to note here. The form of the inverse matrix identically matches the form from the last chapter, so the inverse representation can be updated efficiently if the updates have a low-rank structure. Furthermore, $\mD_{\ell}\mR_{\ell}$ is the unnormalized dictionary that is updated through low-rank updates. The normalized dictionary does not need to be explicitly calculated at all. It would be easy to isolate $\vx_{\ell}$, but it will be simpler to keep track of $\mR_{\ell}^{-1}\vx_{\ell}$ instead, similar to how $\frac{\vu}{\rho}$ is tracked instead of $\vu$ in the scaled ADMM algorithm.
 
 \subsection{Proximal Updates}
@@ -134,73 +134,73 @@ where, as before,
 \begin{equation}
 \L_{\rho}(\vx,\vz,\vgamma) = f(\vx,\vz)  +  \sum_{\ell = 1}^L \frac{\rho}{2}\|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2  - \frac{1}{2\rho}\|\vgamma_{\ell}\|_2^2
 \end{equation}
-
+%
 and
 \begin{equation}
 f(\vx,\vz) = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1
 \end{equation}
 
 For $\vx$, $\vz$, $\vgamma$, such that $\nabla_{\vz_{\ell}} \L_{\rho}(\vx_1,\hdots,\vx_L,\vz_0,\hdots,\vz_L,\vgamma_0,\hdots,\vgamma_L) = 0$:
-
+%
 \begin{equation}
 \nabla_{\vz} \frac{\mu_{\ell + 1}}{2}\|\vz_{\ell} - \mD_{\ell + 1}\vx_{\ell + 1}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1 + \frac{\rho}{2} \|\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}(\vz_{\ell} - \vx_{\ell}) + \frac{\vgamma_{\ell}}{\rho}\|_2^2 = 0
 \end{equation}
-
+%
 Something important to note here is that each element of $\vz_{\ell}$ can be treated independently, that is:
-
+%
 \begin{equation}
 \nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \lambda_{\ell}|\vz_{\ell}[i]| + \frac{\rho}{2} (\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}[i](\vz_{\ell}[i] - \vx_{\ell}[i]) + \frac{\vgamma_{\ell}[i]}{\rho})^2 = 0
 \end{equation}
-
-
+%
+%
 \begin{equation}
 \nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \lambda_{\ell}|\vz_{\ell}[i]| + \frac{\rho\mu_{\ell}}{2\mR_{\ell}^2[i]} (\vz_{\ell}[i] - \vx_{\ell}[i] + \frac{\mR_{\ell}[i]\vgamma_{\ell}[i]}{\rho\sqrt{\mu_{\ell}}})^2 = 0
 \end{equation}
-
+%
 For the sake of brevity, I will now drop the indexing:
-
+%
 \begin{equation}
 \nabla_{\vz_{\ell}} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}^2 - 2(\mD_{\ell + 1}\vx_{\ell + 1})z_{\ell}) + \lambda_{\ell}|\vz_{\ell}| + \frac{\rho\mu_{\ell}}{2\mR_{\ell}^2} (\vz_{\ell}^2 - 2\vx_{\ell}\vz_{\ell} + \frac{2\mR_{\ell}\vgamma_{\ell}\vz_{\ell}}{\rho\sqrt{\mu_{\ell}}}) = 0
 \end{equation}
-
+%
 \begin{equation}
 \nabla_{\vz_{\ell}} \frac{1}{2}(\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2})\vz_{\ell}^2 - \mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}\vz_{\ell} - \rho\mu_{\ell}\mR_{\ell}^{-2}\vx_{\ell}\vz_{\ell} + \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}\vz_{\ell} + \lambda_{\ell}|\vz_{\ell}| = 0
 \end{equation}
-
+%
 \begin{equation}
 \nabla_{\vz_{\ell}} \frac{1}{2}\vz_{\ell}^2 - \frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}\vx_{\ell} - \sqrt{\mu_{\ell}}\mR_{\ell}^{-1}\vgamma_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\vz_{\ell} + \frac{\lambda_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}|\vz_{\ell}| = 0
 \end{equation}
-
+%
 \begin{equation}
 \vz_{\ell} = \operatorname{S}_{\frac{\lambda_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}}\left(\frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}(\vx_{\ell} - \frac{\mR_{\ell}\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}})}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\right)
 \end{equation}
-
+%
 \begin{equation}
 \vz_{\ell} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{S}_{\lambda_{\ell}}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-1}\left(\mR_{\ell}^{-1}\vx_{\ell} - \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
-
+%
 \begin{equation}
 \vz_{\ell}^{(t + 1)} = (\rho\mu_{\ell}\mId + \mu_{\ell + 1}\mR_{\ell}^2)^{-1}\mR_{\ell}^2\operatorname{S}_{\lambda_{\ell}}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}^{(t + 1)} + \rho\mu_{\ell}\mR_{\ell}^{-1}\left(\mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} - \frac{\vgamma_{\ell}^{(t + \frac{1}{2})}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
-
+%
 Note there is a dependence on $\mR_{\ell + 1}^{-1}\vx_{\ell + 1}$. The last layer will have to be considered separately. Using the same procedure, the update for $\vz_L$ can be derived. Given how similar the derivations are to those used for the other $\vz$ layers, I will skip to the result.
-
-
+%
+%
 \begin{equation}
 \vz_L = \mR_{\ell}\operatorname{S}_{\frac{\lambda_L\mR_L}{\rho\mu_L}}\left(\mR_L^{-1}\vx_L - \frac{\vgamma_L}{\rho\sqrt{\mu_L}}\right)
 \end{equation}
-
+%
 \begin{equation}
 \vz_L^{(t + 1)} = \mR_{\ell}\operatorname{S}_{\frac{\lambda_L\mR_L}{\rho\mu_L}}\left(\mR_L^{-1}\vx_L^{(t + 1)} - \frac{\vgamma_L^{(t + \frac{1}{2})}}{\rho\sqrt{\mu_L}}\right)
 \end{equation}
 
 \subsection{Dual Updates}
 Rather than tracking $\vgamma_{\ell}$ or $\frac{\vgamma_{\ell}}{\rho}$ explicitly, it will be easier to track $\frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}$. The update equations are very straightforward.
-
+%
 \begin{equation}
 \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}} + (\alpha - 1)(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} - \mR^{-1}\vz_{\ell}^{(t + 1)})
 \end{equation}
-
+%
 \begin{equation}
 \frac{\vgamma_{\ell}^{(t + 1)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} + \mR_{\ell}^{-1}\vz_{\ell}^{(t + 1)} - \mR^{-1}\vz_{\ell}^{(t + 1)} 
 \end{equation}
