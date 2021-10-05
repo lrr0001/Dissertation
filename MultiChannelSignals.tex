@@ -786,7 +786,7 @@ Thus, with this modification to the sparse coding optimization problem, the inve
 
 
 \section{Conclusion}
-In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently ($\mathcal{O}(K\mathbb{R}M^2)$, $\mathbb{R} << M$) when used within a dictionary-learning algorithm. This is an improvement to existing methods, whose inverse updates require cubic complexity $\mathcal{O}(KM^3)$.
+In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently ($\mathcal{O}(N\mathbb{R}M^2)$, $\mathbb{R} << M$) when used within a dictionary-learning algorithm. This is an improvement to existing methods, whose inverse updates require cubic complexity $\mathcal{O}(NM^3)$.
 % This is a figure in landscape orientation
 %\begin{sidewaysfigure}
 %\includegraphics[width=\textwidth]{figures/exampleFigure.png}
