@@ -1,13 +1,78 @@
 \chapter{Learning Dictionaries for Multi-Channel Signals}
 
 \section{Introduction}
-In a multi-layer dictionary model, the coefficients corresponding to a dictionary from one layer become the signal for the subsequent layer.  The number of channels for this signal is the number of dictionary filters from the previous layer.  Much of the literature on using convolutional dictionaries is tailored to applications with signals that only have a small number of channels.  This chapter presents a novel method to use learning convolutional dictionaries for multi-channel signals. 
+Much of the literature on using convolutional dictionaries is tailored to applications with signals that only have a small number of channels (like RGB or grayscale imagery). Many of the methods designed with a small number of channels in mind do not transfer well to applications like hyperspectral imagery \cite{PURR1947} with signal measurements containing a large number of channels.
+
+Signal measurements are not the only way to end up with a large number of channels. In a multi-layer dictionary model, the coefficients corresponding to a dictionary from one layer become the signal for the subsequent layer.  The number of channels for this signal is the number of dictionary filters from the previous layer, so if the number of filters in a layer is large, the number of channels for the subsequent layer will also be large.
+
+This chapter presents a novel method to learn convolutional dictionaries for multi-channel signals. 
 \section{Dictionary Types}
-There are many ways to construct a convolutional sparse representation of a multi-channel signal, but broadly the distinctions reduce down to if and how signal channels share dictionaries and coefficients, and if and how non-shared entities interact across channels.
+There are many ways to construct a convolutional sparse representation of a multi-channel signal. One way models can differ is if and how signal channels share dictionaries and coefficients.
 
-It is common in many applications for dictionary models to share dictionaries across channels, which requires the use of multi-channel coefficients. If such models were used in a multi-layer dictionary model, the tensor rank would increase with each subsequent layer.
+For example, models with single-channel dictionaries represent the channels in the coefficients:\footnote{In this case, both $\mX$ and $\mS$ still refer to a single sample. They are capitalized because they are matrices.}
+%
+\begin{equation}
+\mS \approx \mD\mX
+\end{equation}
+\begin{equation}
+\mS = \begin{bmatrix} \vs_1 & \hdots & \vs_C \end{bmatrix}
+\end{equation}
+\begin{equation}
+\mD = \begin{bmatrix} \mD_1 & \hdots & \mD_M \end{bmatrix}
+\end{equation}
+\begin{equation}
+\mX = \begin{bmatrix} \vx_{1,1} & \hdots & \vx_{1,C} \\ \vdots & \ddots & \vdots \\ \vx_{M,1} & \hdots & \vx_{M,C} \end{bmatrix}
+\end{equation}
+%
+where $\vs_c \in \R^N$, $\mD_m \in \R^{N \times N}$, and $\vx_{m,c} \in \R^N$.
 
-For this work, I focus instead on the multi-channel dictionary with shared coefficients. This structure matches that of convolutional neural networks, and the number of channels for a subsequent dictionary is the number of filters for the dictionary from the previous layer.
+Alternatively, each signal channel could be given its own dictionary model.
+%
+\begin{equation}
+\vs_c \approx \mD_c\vx_c
+\end{equation}
+%
+where $\vs_c \in \R^N$, $\mD_c \in \R^{N \times M}$, and $\vx_{c} \in \R^M$.
+
+In both the above-mentioned cases, the models use multi-channel coefficients. For multi-layer models, this poses a problem: with each subsequent layer, the number of coefficients grows by a factor of the number of filters. Thus, the number of coefficients increases exponentially in respect to the number of layers.
+
+This exponential growth could be dampened (though not eliminated) through the use of product dictionaries \cite{garcia2018multichannel}. In product dictionary models, correlations between channels are captured in a separate matrix $\mSS$.
+%
+\begin{equation}
+\mS \approx \mD\mX\mSS
+\end{equation}
+\begin{equation}
+\mS = \begin{bmatrix} \vs_1 & \hdots & \vs_C \end{bmatrix}
+\end{equation}
+\begin{equation}
+\mD = \begin{bmatrix} \mD_1 & \hdots & \mD_M \end{bmatrix}
+\end{equation}
+\begin{equation}
+\mX = \begin{bmatrix} \vx_{1,1} & \hdots & \vx_{1,B} \\ \vdots & \ddots & \vdots \\ \vx_{M,1} & \hdots & \vx_{M,B} \end{bmatrix}
+\end{equation}
+%
+where $\vs_c \in \R^N$, $\mD_m \in \R^{N \times N}$, $\vx_{m,b} \in \R^N$, and $\mSS \in \R^{B \times C}$. Pursuit algorithms for product dictionaries still seek to estimate $\mX$ for fixed $\mS$, $\mD$, and $\mSS$. For dictionary learning, $\mSS$ is updated with $\mD$.
+
+For this work, I will instead focus on multi-channel dictionaries with shared coefficients.
+%
+\begin{equation}
+\vs \approx \mD\vx
+\end{equation}
+\begin{equation}
+\vs = \begin{bmatrix} \vs_1 \\ \hdots \\ \vs_C \end{bmatrix}
+\end{equation}
+\begin{equation}
+\mD = \begin{bmatrix} \mD_{1,1} & \hdots & \mD_{1,M}  \\ \vdots & \ddots & \vdots \\ \mD_{C,1} & \hdots & \mD_{C,M} \end{bmatrix}
+\end{equation}
+\begin{equation}
+\vx = \begin{bmatrix} \vx_1 \\ \vdots \\ \vx_M \end{bmatrix}
+\end{equation}
+where $\vs_c \in \R^N$, $\mD_{c,m} \in \R^{N \times N}$, and $\vx_{m} \in \R^N$.
+%
+When extended to multi-layer dictionaries, this structure closely aligns with that of convolutional neural networks,  and the number of channels for a subsequent dictionary is the number of filters for the dictionary from the previous layer. The number of coefficients does not grow exponentially with the number of layers, but the number of channels can be large.
+
+
+
 \section{Pursuit and Sparse Coding}
 \label{section:sparse coding}
 The dictionary model decomposes the signal $\vs_i$ into a dictionary $\mD$ (which generalizes to other signals) and the coefficients $\vx_i$ (which are specific to the signal $\vs_i$:
@@ -16,13 +81,13 @@ The dictionary model decomposes the signal $\vs_i$ into a dictionary $\mD$ (whic
 \vs_i \approx \mD\vx_i
 \end{equation}
 %
-(Here the subscript $i$ specifies a particular signal and its corresponding coefficients.) A pursuit algorithm finds the coefficients $\vx_i$ corresponding to a particular signal $\vs_i$ for known dictionary $\mD$. If the number of dictionary atoms (columns) is larger than the dimension of the signal, then the number of unknowns is larger than the number of equations, and many solutions for $\vx_i$ represent $\vs_i$ equally well (at least in an L$2$ sense). Researchers and practitioners commonly either impose a sparsity constraint on the coefficients or add a coefficient L$1$ penalty to the objective function, which removes this ambiguity from the problem construction. When such a penalty or constraint is used, pursuit is sometimes called sparse coding. With the added coefficient L$1$ penalty, the pursuit optimization problem looks like this:
+(Here the subscript $i$ specifies a particular signal and its corresponding coefficients.) A pursuit algorithm finds the coefficients $\vx_i$ corresponding to a particular signal $\vs_i$ for known dictionary $\mD$. If the number of dictionary atoms (columns) is larger than the dimension of the signal, then the number of unknowns is larger than the number of equations, and many solutions for $\vx_i$ represent $\vs_i$ equally well (at least in an $\operatorname{L}_2$ sense). Researchers and practitioners commonly either impose a sparsity constraint on the coefficients or add a coefficient $\operatorname{L}_1$ penalty to the objective function, which removes this ambiguity from the problem construction. When such a penalty or constraint is used, pursuit is sometimes called sparse coding. With the added coefficient $\operatorname{L}_1$ penalty, the pursuit optimization problem looks like this:
 %
 \begin{equation}\label{equation:sparse coding}
 \vx_i = \arg\min_{\vx} \frac{1}{2}\|\vs_i - \mD\vx\|_2^2 + \lambda \|\vx\|_1
 \end{equation}
 %
-where $\lambda$ is a nonnegative hyperparameter controlling how much the L$1$ norm of the coefficients is penalized. Researchers have proposed many ways to solve this problem. If the dictionary is convolutional and the number of channels is low, a standard approach is to use the Alternating direction Method of Multipliers (ADMM) algorithm.
+where $\lambda$ is a nonnegative hyperparameter controlling how much the $\operatorname{L}_1$ norm of the coefficients is penalized. Researchers have proposed many ways to solve this problem. If the dictionary is convolutional and the number of channels is low, a standard approach is to use the Alternating direction Method of Multipliers (ADMM) algorithm.
 
 \section{ADMM}
 \label{section:ADMM}
@@ -90,7 +155,7 @@ The term $-\frac{\rho}{2}\|\frac{\vu}{\rho}\|_2^2$ can be ignored for the primal
 %
 This form is known as scaled ADMM.
 
-Another common variation of ADMM updates the dual variable more frequently.
+Another common variation of ADMM updates the dual variable more frequently \cite{eckstein1994parallel}.
 \begin{equation}
 \vx^{(t + 1)} = \arg\min_{\vx} \L_{\rho}(\vx,\vy^{(t)},\vu^{(t)})
 \end{equation}
@@ -107,7 +172,7 @@ Another common variation of ADMM updates the dual variable more frequently.
 \vu^{(t + 1)} = \vu^{(t + \frac{1}{2})} + \rho(\mA\vx^{(t + 1)} + \mB\vy^{(t + 1)} + \vc)
 \end{equation}
 %
-When $\alpha > 1$, this is known as over-relaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have elected to notate over/under relaxation differently than standard, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation does not use the first dual update, and instead includes another variable $\vh^{(t + 1)} = \mA\vx^{(t + 1)} - (1 - \alpha)(\mA\vx^{(t + 1)} + \mB\vy^{(t)} + \vc)$ and substitutes $\vh^{(t + 1)}$ for $\mA\vx^{(t + 1)}$ in the dual-update equation and the second primal-update equation. While more familiar to readers who have dealt with ADMM before, this standard notation complicates ADMM with an extra variable and obscures how the dual update and second primal update relate to the augmented Lagrangian.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without over-relaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
+When $\alpha > 1$, this is known as over-relaxation, and if $\alpha < 1$, this is known as under-relaxation.\footnote{I have elected to notate over/under relaxation differently than standard notation, but the $\alpha$ is the same, and the notations are mathematically equivalent. The standard notation does not use the first dual update, and instead includes another variable $\vh^{(t + 1)} = \mA\vx^{(t + 1)} - (1 - \alpha)(\mA\vx^{(t + 1)} + \mB\vy^{(t)} + \vc)$ and substitutes $\vh^{(t + 1)}$ for $\mA\vx^{(t + 1)}$ in the dual-update equation and the second primal-update equation. While more familiar to readers who have dealt with ADMM before, this standard notation complicates ADMM with an extra variable and obscures how the dual update and second primal update relate to the augmented Lagrangian.} $\alpha$ is always chozen to be greater than zero. In some applications, researchers have found using over-relaxation converges faster than without over-relaxation \cite{eckstein1994parallel}, but optimal choice of $\alpha$ is problem-dependent \cite{nishihara2015general}.
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -234,9 +299,9 @@ Writing $\mD$ in a block structure, I have
 %
 \begin{equation}
 \mD = \begin{bmatrix}
-\mD_{1,1}, & \hdots, & \mD_{1,M}\\
+\mD_{1,1} & \hdots & \mD_{1,M}\\
 \vdots & \ddots & \vdots\\
-\mD_{C,1}, & \hdots, & \mD_{C,M}
+\mD_{C,1} & \hdots & \mD_{C,M}
 \end{bmatrix}
 \end{equation}
 %
@@ -244,9 +309,9 @@ where $\mD_{c,m}$ is a toplitz matrix capturing channel $c$ of the $m$th filter 
 %
 \begin{equation}
 \mD = \begin{bmatrix}
-\F^{-1}\hat{\mD}_{1,1}\F, & \hdots, & \F^{-1}\hat{\mD}_{1,M}\F\\
+\F^{-1}\hat{\mD}_{1,1}\F & \hdots & \F^{-1}\hat{\mD}_{1,M}\F\\
 \vdots & \ddots & \vdots\\
-\F^{-1}\hat{\mD}_{C,1}\F, & \hdots, & \F^{-1}\hat{\mD}_{C,M}\F
+\F^{-1}\hat{\mD}_{C,1}\F & \hdots & \F^{-1}\hat{\mD}_{C,M}\F
 \end{bmatrix}
 \end{equation}
 %
@@ -266,7 +331,7 @@ where
 \end{bmatrix}
 \end{equation}
 %
-and in a slight abuse of notation, $\F$ computes the FFT separately on the coefficients for each filter.  In \cite{Bristow2013fast}, Bristow et al. observe the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ is sparsely banded, so the inverse can be broken down into much smaller inverse problems, and one only needs to compute the inverse of an $M \times M$ matrix for every element in the signal. ($\rho\mId + \hat{\mD}^H\hat{\mD}$ is an $M \times M$ block matrix, whose blocks are diagonal.  Each submatrix collects one element from the diagonal of each of the blocks.)
+and in a slight abuse of notation, $\F$ computes the FFT separately on the coefficients for each filter.  In \cite{Bristow2013fast}, Bristow et al. observe the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ is sparsely banded, so the inverse can be broken down into much smaller inverse problems, and one only needs to compute the inverse of an $M \times M$ matrix for every element in the signal. ($\rho\mId + \hat{\mD}^H\hat{\mD}$ is an $M \times M$ block matrix, whose blocks are diagonal.  Each submatrix collects one element from the diagonal of each of the blocks.) This inverse can be calculated in $\mathcal{O}(NM^3)$ time.
 
 Furthermore, the maximum rank of these submatrices is $C$, so if $C$ is small, these inverses can be computed even more efficiently using the Woodbury matrix identity or Sherman-Morrison equations \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient}.
 
@@ -280,10 +345,10 @@ So,
 (\rho\mId + \hat{\mD}^H\hat{\mD})^{-1} = \frac{1}{\rho}\mId - \frac{1}{\rho}\hat{\mD}^H(\rho\mId + \hat{\mD}\hat{\mD}^H)^{-1}\hat{\mD}
 \end{equation}
 %
-This means that instead of computing the inverse of an $M \times M$ matrix for every pixel in the image, one could instead choose to compute the inverse of a $C \times C$ matrix for each pixel in the image.\footnote{Generally, Cholesky or LDLT decomposition would be preferable to explicitly computing the inverse, and the efficiency gains due to the Woodbury matrix identity are relevant regardless of the chosen representation.}
+This means that instead of computing the inverse of an $M \times M$ matrix for every pixel in the image, one could instead choose to compute the inverse of a $C \times C$ matrix for each pixel in the image.\footnote{Generally, Cholesky or LDLT decomposition would be preferable to explicitly computing the inverse, and the efficiency gains due to the Woodbury matrix identity are relevant regardless of the chosen representation.} This inverse can be computed in $\mathcal{O}(NC^3)$ time.
 
 \section{Sparse Coding for Multi-Channel Signals: Alternatives to My Novel Approach}
-In applying ADMM to the convolutional sparse coding problem, \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient} exploit the low-rank structure of the inverse problem in the $\vx$ update for efficient computation. Unfortunately, this relies on the number of channels being small. Broadly, there are two main approaches to avoid or simplify this challenging inverse problem: either construct a variant of the ADMM algorithm that simplifies the inverse problem, or use a proximal gradient approach that avoids it altogether.
+In applying ADMM to the convolutional sparse coding problem, \cite{vsorel2016fast} \cite{heide2015fast} \cite{wohlberg2015efficient} exploit the low-rank structure of the inverse problem in the $\vx$ update for efficient computation. Unfortunately, this relies on the number of channels being small, as the rank corresponds to the minimum of the number of channels $C$ and the number of filters $M$. Broadly, there are two main approaches to avoid or simplify this challenging inverse problem: either construct a variant of the ADMM algorithm that simplifies the inverse problem, or use a proximal gradient approach that avoids it altogether.
 
 In \cite{chodosh2018deep}\cite{murdock2018deep}, the authors use the ADMM algorithm for sparse coding. They observe that if the dictionary is a tight frame, that is, $\mD\mD^T = \mId$, then the inverse can be simplied without using the frequency representation.
 %
@@ -356,7 +421,7 @@ The updates come from the formula:
 %
 where $\vx^{(t)} = \vz^{(t)} + \omega_t(\vz^{(t)} - \vz^{(t - 1)})$ and $\omega_t$ is a momentum factor.
 
-This yields the update equation\footnote{In their paper, they add a non-negativity constraint and allow different $\lambda$ for the coefficients of each filter (and possibly spatially varied as well). They also are constucting the equations specifically for a multi-layer network. I simplified their equations to illistrate how their approach relates to the FISTA algorithm.}:
+This yields the update equation\footnote{In their paper, they add a non-negativity constraint and allow different $\lambda$ for the coefficients of each filter (and possibly spatially varied as well). They also are constucting the equations specifically for a multi-layer network. Those modifications relate to their objective function and constraints, not their minimization algorithm, so I rewrote their equations without those modifications to illustrate how their approach relates to the FISTA algorithm.}:
 \begin{equation}
 \vz^{(t + 1)} = \operatorname{S}_{\frac{\lambda}{\mathbb{L}}}\left(\vx^{(t)} - \frac{1}{\mathbb{L}}\mD^T(\mD\vx^{(t)} - \vs)\right)
 \end{equation}
@@ -365,16 +430,10 @@ This yields the update equation\footnote{In their paper, they add a non-negativi
 \vx^{(t + 1)} = \vz^{(t + 1)} + \omega_t(\vz^{(t + 1)} - \vz^{(t)})
 \end{equation}
 %
-While neither Chodosh and Lucey, nor the work they cite, mention FISTA, the resemblance is very close. There are two distinctions:
-\begin{enumerate}
-\item Momentum is computed slightly differently: to match FISTA, the prox-linear updates would need to use $\vx^{(t)} - \bar{\vx}^{(t - 1)}$ for momentum. Instead, they use $\vx^{(t)} - \vx^{(t - 1)}$.
-\item The prox-linear approach scales the momentum steps differently.
-\end{enumerate}
-
-Given these similarities, it is likely the performance between the two methods is similar.
+While neither Chodosh and Lucey, nor the work they cite, mention FISTA, the resemblance is very close. The only distinction is in the momentum step.  Given these similarities, it is likely the performance between the two methods is similar.
 
 \section{Dictionary Learning}
-The last few sections have focused on sparse coding. For sparse coding, the dictionary is fixed or known. Most dictionary learning algorithms alternate between pursuing coefficients and updating dictionary filters, as shown in algorithms \ref{Algorithm: Online Dictionary Learning} and \ref{Algorithm: Batch Dictionary Learning}. The CoeficientUpdate in algorithm \ref{Algorithm: Batch Dictionary Learning} may consist of one or more sparse coding update steps. Not all dictionary learning algorithms perfectly adhere to this stucture, but the template covers most approaches.
+The last few sections have focused on sparse coding. For sparse coding, the dictionary is fixed or known. Most dictionary learning algorithms alternate between pursuing coefficients and updating dictionary filters, as shown in algorithms \ref{Algorithm: Online Dictionary Learning} and \ref{Algorithm: Batch Dictionary Learning}. The CoeficientUpdate in algorithm \ref{Algorithm: Batch Dictionary Learning} may consist of one or more sparse coding update steps. Not all dictionary learning algorithms perfectly adhere to this stucture \cite{aharon2006k}, but the template covers most approaches.
 \begin{algorithm}[h] 
 \SetAlgoLined
 %\KwResult{Write here the result }
@@ -402,25 +461,26 @@ The last few sections have focused on sparse coding. For sparse coding, the dict
  \caption{Batch Dictionary Learning Algorithm}\label{Algorithm: Batch Dictionary Learning}
 \end{algorithm}
 
-There are many methods to updating dictionaries: FISTA, ADMM, projected stochastic gradient descent, et cetera. Dictionary updates generally adhere to the following three properties:
+There are many methods to updating dictionaries: FISTA, ADMM, projected stochastic gradient descent, et cetera. Good dictionaries tend to have the following characteristics:
 \begin{enumerate}
-\item The updated dictionary filters better represents the data for the given coefficients.\label{item:improvement property}
+\item Good dictionaries are able to represent the data well. That is \label{item:improvement property}
 \begin{equation}
-\|\mS - \mD^{(n + 1)}\mX\|_F^2 \leq \|\mS - \mD^{(n)}\mX\|_F^2
+\vs \approx \mD\vx
 \end{equation}
-\item The updated dictionary filters are normalized.\label{item:normalized}
+for some sparse coefficients $\vx$.
+\item Furthermore, it is desirable for the dictionary to be normalized.\label{item:normalized}
 \begin{equation}
 \sum_{c = 1}^C \|\vd_{c,m}\|_2^2 = 1
 \end{equation}
-\item The updated dictionary filters are spatially constrained. \label{item:spatially constrained}
+where $\vd_{c,m}$ is the first column of $\mD_{c,m}$, that is, the $c$th channel of zero-padded dictionary filter $\vf_m$.
+\item Specifically, convolutional dictionary filters are typically spatially or temporally constrained. \label{item:spatially constrained}
 \begin{equation}
 (\mId - \mT)\vd_{c,m} = \vzero
 \end{equation}
-(Here, $\mId - \mT$ selects the elements of $\vd_{c,m}$ that must be zero.)
+(Here, $\mId - \mT$ selects the elements of $\vd_{c,m}$ that must be zero.) Generally, dictionary updates do not increase the size of the filters.
 \end{enumerate}
-Property \ref{item:spatially constrained} relates to the idea that convolutional filters are usually small $5 \times 5$ or $9 \times 9$, et cetera. Dictionary updates do not increase the size of the filters.
 
-If using ADMM for pursuit, every time the dictionary is updated, the inverse representation must be updated as well. The inverse representation can be updated more efficiently if the dictionary update is low rank, but approximating the dictionary update using a truncated singular value decomposition would forfeit property \ref{item:normalized}. The next section describes a novel means to work handle these challenges, with an explanation of how to efficiently update the inverse representation and a sparse coding method designed to handle dictionary updates that produce unnormalized dictionaries.
+Dictionary updates tend to improve data representation while maintaining normalization and spatial or temporal contraints.  If using ADMM for pursuit, every time the dictionary is updated, the inverse representation must be updated as well. The inverse representation can be updated more efficiently if the dictionary update is low rank, but approximating a dictionary update using a truncated singular value decomposition would forfeit characteristic \ref{item:normalized}. The next section describes a novel means to work handle these challenges, with an explanation of how to efficiently update the inverse representation and a novel sparse coding method designed to handle dictionary updates that produce unnormalized dictionaries.
 
 \section{A Novel Approach to Sparse Coding: ADMM with Low-Rank Dictionary Updates}
 In this section, I present a novel approach to sparse coding for signals with a large number of channels. The approach uses the ADMM algorithm described in section \ref{section:ADMM} and will share many similarities to the standard ADMM sparse coding approach described in section \ref{section:Applying ADMM} for signals with few channels.
@@ -502,12 +562,10 @@ While matrix products are not communitive, some of the eigenvalues of matrix pro
 Furthermore, for general matrices $\mA$ and $\mB$ the eigenvectors of $\mA\mB$ and $\mB\mA$ are related:
 %
 \begin{equation}
-\mB\mA\vx = \lambda\vx  \implies  \mA\mB\mA\vx = \lambda\mA\vx
+\mB\mA\vx = \lambda\vx  \implies  \mA\mB\mA\vx = \lambda\mA\vx \label{equation:eigenvector relation}
 \end{equation}
 %
-where $\lambda$ is the eigenvalue and $\vx$ is a vector.\footnote{I appologize for the reuse of certain variables here. Please do not confuse this $\vx$ for the sparse coding coefficients, $\lambda$ for the L$1$ penalty factor applied to the coefficients, or $\mA$ and $\mB$ for the matrices in the ADMM constraints.}
-
-So, if $\vx$ is an eigenvector of $\mB\mA$, $\mA\vx$ is an eigenvector of $\mA\mB$.
+where $\lambda$ is the eigenvalue and $\vx$ is a vector.\footnote{In equation \ref{equation:eigenvector relation}, some variables are repurposed to explain some general eigenvector relationships for matrix products. The reaader should be careful not confuse this $\vx$ for the sparse coding coefficients, $\lambda$ for the $\operatorname{L}_1$ penalty factor applied to the coefficients, or $\mA$ and $\mB$ for the matrices in the ADMM constraints.}  So, if $\vx$ is an eigenvector of $\mB\mA$, $\mA\vx$ is an eigenvector of $\mA\mB$.
 %
 %
 \begin{equation}
@@ -665,11 +723,11 @@ Finally, the dual updates are
 \frac{\vu^{(t + 1)}}{\rho} = \frac{\vu^{\left(t + \frac{1}{2}\right)}}{\rho} + \mR^{-1}\vy^{(t + 1)} - \mR^{-1}\vx^{(t + 1)}
 \end{equation}
 %
-Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$.
+Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$. The resulting pursuit algorithm is shown in algorithm \ref{algorithm:ADMM for Sparse Coding, Large C}. The same pursuit algorithm in the larger dictionary learning context is shown in algorithm \ref{Algorithm:Dictionary Learning, Using ADMM with large C}.
 
 
 \begin{algorithm}[h]
-\SetAlgoLined
+\SetAlgoLined 
  %initialization:\\
    $\alpha \in (0,2]$ \\
    $\mD_s = \mD\mR$  \\
@@ -683,7 +741,7 @@ Thus, with this modification to the sparse coding optimization problem, the inve
  }
   $\vx = \mR\vx_s$ \\
   $\vy = \mR\vy_s$
- \caption{ADMM for Sparse Coding, Large Number of Channels}
+ \caption{ADMM for Sparse Coding, Large Number of Channels}\label{algorithm:ADMM for Sparse Coding, Large C}
 \end{algorithm}
 
 \begin{algorithm}[h]
@@ -695,9 +753,11 @@ Thus, with this modification to the sparse coding optimization problem, the inve
    \For{$m \in \{1,\hdots M\}$}{
       $\mR_{m,m} = \|(\mD\mR)_m\|_F$
    }
-   $i = 0$
+   $\left(\rho\mId + \left(\mD\mR\right)^T\mD\mR\right) = \operatorname{ComputeDecomp}\left(\rho,\mD\mR \right)$ \\
+   $i = 0$ \\
    \While{Stopping Criteria Not Met}{
    $\vs = \operatorname{GetData}(i)$ \\
+   $i = i + 1$ \\
    \tcp{Pursuit:}
    $\mD_s = \mD\mR$  \\
    $\vy_s = \mR^{-2}\mD_s^T\vs$ \\
@@ -710,15 +770,18 @@ Thus, with this modification to the sparse coding optimization problem, the inve
  }
   $\vx = \mR\vx_s$ \\
   $\vy = \mR\vy_s$  \\
-   \tcp{Dictionary Update:} 
-   $\tilde{\mD} = \mT(\mD\mR - \alpha\nabla_{\mD}f(\vx))$ \\
+   \tcp{Updating the Dictionary:} 
+   $\tilde{\mD} = \operatorname{StandardDictionaryUpdate}(\mD,\mS,\mX)$ \\
    $\tilde{\mD} = \operatorname{Normalize}(\tilde{\mD})$ \\
-   $\mD\mR = \mD\mR + \operatorname{RandomizedSVD}(\tilde{\mD} - \mD\mR)$ \\
-   \For{$m \in \{1,\hdots M\}$}{
+   $\mDelta\mD = \operatorname{RandomizedSVD}(\tilde{\mD} - \mD\mR)$ \\
+   $\mD\mR = \mD\mR + \mDelta\mD$ \\
+   \For{$m \in \{1,\hdots M\}$}
+   {
       $\mR_{m,m} = \|(\mD\mR)_m\|_F$ 
-} 
+   }
+   $\left(\rho\mId + \left(\mD\mR\right)^T\mD\mR\right) = \operatorname{UpdateDecomp}\left(\left(\rho\mId + \left(\mD\mR\right)^T\mD\mR\right),\rho,\mD_s,\mDelta\mD \right)$
 }
- \caption{Dictionary Learning, Using ADMM with Large Number of Channels}
+ \caption{Dictionary Learning, Using ADMM with Large Number of Channels}\label{Algorithm:Dictionary Learning, Using ADMM with large C}
 \end{algorithm}
 
 

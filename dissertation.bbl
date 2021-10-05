@@ -215,6 +215,297 @@
   \field{year}{2017}
 \endentry
 
+\entry{zhu2013convolutional}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Zhu}{Z.}%
+     {Yingying}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{ZYLS1}
+  \strng{fullhash}{ZYLS1}
+  \field{number}{3}
+  \field{pages}{529\bibrangedash 540}
+  \field{title}{Convolutional sparse coding for trajectory reconstruction}
+  \field{volume}{37}
+  \field{journaltitle}{IEEE transactions on pattern analysis and machine
+  intelligence}
+  \field{year}{2013}
+\endentry
+
+\entry{chodosh2020use}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Chodosh}{C.}%
+     {Nathaniel}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CNLS1}
+  \strng{fullhash}{CNLS1}
+  \field{booktitle}{Proceedings of the IEEE/CVF Conference on Computer Vision
+  and Pattern Recognition}
+  \field{pages}{8226\bibrangedash 8235}
+  \field{title}{When to use Convolutional Neural Networks for Inverse Problems}
+  \field{year}{2020}
+\endentry
+
+\entry{chen2013deep}{article}{}
+  \name{author}{6}{}{%
+    {{}%
+     {Chen}{C.}%
+     {Bo}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Polatkan}{P.}%
+     {Gungor}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sapiro}{S.}%
+     {Guillermo}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Blei}{B.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dunson}{D.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carin}{C.}%
+     {Lawrence}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{CBPGSGBDDDCL1}
+  \strng{fullhash}{CBPGSGBDDDCL1}
+  \field{number}{8}
+  \field{pages}{1887\bibrangedash 1901}
+  \field{title}{Deep learning with hierarchical convolutional factor analysis}
+  \field{volume}{35}
+  \field{journaltitle}{IEEE transactions on pattern analysis and machine
+  intelligence}
+  \field{year}{2013}
+\endentry
+
+\entry{zeiler2010deconvolutional}{inproceedings}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Zeiler}{Z.}%
+     {Matthew~D}{M.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Krishnan}{K.}%
+     {Dilip}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Taylor}{T.}%
+     {Graham~W}{G.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fergus}{F.}%
+     {Rob}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{ZMDKDTGWFR1}
+  \strng{fullhash}{ZMDKDTGWFR1}
+  \field{booktitle}{2010 IEEE Computer Society Conference on computer vision
+  and pattern recognition}
+  \field{pages}{2528\bibrangedash 2535}
+  \field{title}{Deconvolutional networks}
+  \field{year}{2010}
+\endentry
+
+\entry{pu2014bayesian}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Pu}{P.}%
+     {Yunchen}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yuan}{Y.}%
+     {Xin}{X.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carin}{C.}%
+     {Lawrence}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{PYYXCL1}
+  \strng{fullhash}{PYYXCL1}
+  \field{pages}{18}
+  \field{title}{Bayesian deep deconvolutional learning}
+  \field{volume}{1050}
+  \field{journaltitle}{stat}
+  \field{year}{2014}
+\endentry
+
+\entry{murdock2018deep}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Murdock}{M.}%
+     {Calvin}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chang}{C.}%
+     {MingFang}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{MCCMLS1}
+  \strng{fullhash}{MCCMLS1}
+  \field{booktitle}{Proceedings of the European Conference on Computer Vision
+  (ECCV)}
+  \field{pages}{820\bibrangedash 836}
+  \field{title}{Deep component analysis via alternating direction neural
+  networks}
+  \field{year}{2018}
+\endentry
+
+\entry{chodosh2018deep}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Chodosh}{C.}%
+     {Nathaniel}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wang}{W.}%
+     {Chaoyang}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lucey}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{CNWCLS1}
+  \strng{fullhash}{CNWCLS1}
+  \field{booktitle}{Asian Conference on Computer Vision}
+  \field{pages}{499\bibrangedash 513}
+  \field{title}{Deep convolutional compressed sensing for lidar depth
+  completion}
+  \field{year}{2018}
+\endentry
+
+\entry{PURR1947}{misc}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Baumgardner}{B.}%
+     {M.~F.}{M.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Biehl}{B.}%
+     {L.~L.}{L.~L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Landgrebe}{L.}%
+     {D.~A.}{D.~A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BMFBLLLDA1}
+  \strng{fullhash}{BMFBLLLDA1}
+  \verb{doi}
+  \verb doi:/10.4231/R7RX991C
+  \endverb
+  \field{title}{220 Band AVIRIS Hyperspectral Image Data Set: June 12, 1992
+  Indian Pine Test Site 3}
+  \verb{url}
+  \verb https://purr.purdue.edu/publications/1947/1
+  \endverb
+  \field{year}{2015}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{garcia2018multichannel}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {{Garcia-Cardona}}{G.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Wohlberg}}{W.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{convolutional neural nets;inverse problems;learning (artificial
+  intelligence);signal processing;signal representation;hyperspectral
+  imagery;convolutional dictionary learning;multichannel signals;image
+  processing inverse problems;convolutional sparse
+  coding;Dictionaries;Convolutional codes;Convolution;Training;Machine
+  learning;Image coding;Encoding}
+  \strng{namehash}{GCWB1}
+  \strng{fullhash}{GCWB1}
+  \field{abstract}{%
+  There has recently been a rapid growth in interest in the design of efficient
+  algorithms for convolutional sparse coding, and in the application of these
+  methods to signal and image processing inverse problems. Thus far, however,
+  the design of algorithms and methods for multi-channel signals has received
+  very little attention. In this work we extend our initial results in
+  convolutional sparse coding and dictionary learning for this type of data,
+  proposing new algorithms that scale well to signals with large numbers of
+  channels, and demonstrate their performance in an application involving
+  hyperspectral imagery.%
+  }
+  \field{booktitle}{2018 52nd Asilomar Conference on Signals, Systems, and
+  Computers}
+  \verb{doi}
+  \verb 10.1109/ACSSC.2018.8645108
+  \endverb
+  \field{pages}{335\bibrangedash 342}
+  \field{title}{Convolutional Dictionary Learning for Multi-Channel Signals}
+  \field{year}{2018}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
 \entry{boyd2011distributed}{article}{}
   \true{moreauthor}
   \name{author}{5}{}{%
@@ -446,64 +737,6 @@
   \field{year}{1981}
 \endentry
 
-\entry{chodosh2018deep}{inproceedings}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Chodosh}{C.}%
-     {Nathaniel}{N.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Wang}{W.}%
-     {Chaoyang}{C.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Lucey}{L.}%
-     {Simon}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{organization}{1}{%
-    {Springer}%
-  }
-  \strng{namehash}{CNWCLS1}
-  \strng{fullhash}{CNWCLS1}
-  \field{booktitle}{Asian Conference on Computer Vision}
-  \field{pages}{499\bibrangedash 513}
-  \field{title}{Deep convolutional compressed sensing for lidar depth
-  completion}
-  \field{year}{2018}
-\endentry
-
-\entry{murdock2018deep}{inproceedings}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Murdock}{M.}%
-     {Calvin}{C.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Chang}{C.}%
-     {MingFang}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Lucey}{L.}%
-     {Simon}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{MCCMLS1}
-  \strng{fullhash}{MCCMLS1}
-  \field{booktitle}{Proceedings of the European Conference on Computer Vision
-  (ECCV)}
-  \field{pages}{820\bibrangedash 836}
-  \field{title}{Deep component analysis via alternating direction neural
-  networks}
-  \field{year}{2018}
-\endentry
-
 \entry{beck2009fast}{article}{}
   \name{author}{2}{}{%
     {{}%
@@ -529,28 +762,6 @@
   \field{volume}{2}
   \field{journaltitle}{SIAM journal on imaging sciences}
   \field{year}{2009}
-\endentry
-
-\entry{chodosh2020use}{inproceedings}{}
-  \name{author}{2}{}{%
-    {{}%
-     {Chodosh}{C.}%
-     {Nathaniel}{N.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Lucey}{L.}%
-     {Simon}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{CNLS1}
-  \strng{fullhash}{CNLS1}
-  \field{booktitle}{Proceedings of the IEEE/CVF Conference on Computer Vision
-  and Pattern Recognition}
-  \field{pages}{8226\bibrangedash 8235}
-  \field{title}{When to use Convolutional Neural Networks for Inverse Problems}
-  \field{year}{2020}
 \endentry
 
 \entry{xu2013block}{article}{}
@@ -581,39 +792,36 @@
   \field{year}{2013}
 \endentry
 
-\entry{zeiler2010deconvolutional}{inproceedings}{}
-  \name{author}{4}{}{%
+\entry{aharon2006k}{article}{}
+  \name{author}{3}{}{%
     {{}%
-     {Zeiler}{Z.}%
-     {Matthew~D}{M.~D.}%
+     {Aharon}{A.}%
+     {Michal}{M.}%
      {}{}%
      {}{}}%
     {{}%
-     {Krishnan}{K.}%
-     {Dilip}{D.}%
+     {Elad}{E.}%
+     {Michael}{M.}%
      {}{}%
      {}{}}%
     {{}%
-     {Taylor}{T.}%
-     {Graham~W}{G.~W.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Fergus}{F.}%
-     {Rob}{R.}%
+     {Bruckstein}{B.}%
+     {Alfred}{A.}%
      {}{}%
      {}{}}%
   }
-  \list{organization}{1}{%
+  \list{publisher}{1}{%
     {IEEE}%
   }
-  \strng{namehash}{ZMDKDTGWFR1}
-  \strng{fullhash}{ZMDKDTGWFR1}
-  \field{booktitle}{2010 IEEE Computer Society Conference on computer vision
-  and pattern recognition}
-  \field{pages}{2528\bibrangedash 2535}
-  \field{title}{Deconvolutional networks}
-  \field{year}{2010}
+  \strng{namehash}{AMEMBA1}
+  \strng{fullhash}{AMEMBA1}
+  \field{number}{11}
+  \field{pages}{4311\bibrangedash 4322}
+  \field{title}{K-SVD: An algorithm for designing overcomplete dictionaries for
+  sparse representation}
+  \field{volume}{54}
+  \field{journaltitle}{IEEE Transactions on signal processing}
+  \field{year}{2006}
 \endentry
 
 \entry{Goodfellow2016-DeepLearningBook}{book}{}
@@ -761,53 +969,6 @@
   \field{title}{The hierarchical beta process for convolutional factor analysis
   and deep learning}
   \field{year}{2011}
-\endentry
-
-\entry{chen2013deep}{article}{}
-  \name{author}{6}{}{%
-    {{}%
-     {Chen}{C.}%
-     {Bo}{B.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Polatkan}{P.}%
-     {Gungor}{G.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Sapiro}{S.}%
-     {Guillermo}{G.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Blei}{B.}%
-     {David}{D.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Dunson}{D.}%
-     {David}{D.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Carin}{C.}%
-     {Lawrence}{L.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {IEEE}%
-  }
-  \strng{namehash}{CBPGSGBDDDCL1}
-  \strng{fullhash}{CBPGSGBDDDCL1}
-  \field{number}{8}
-  \field{pages}{1887\bibrangedash 1901}
-  \field{title}{Deep learning with hierarchical convolutional factor analysis}
-  \field{volume}{35}
-  \field{journaltitle}{IEEE transactions on pattern analysis and machine
-  intelligence}
-  \field{year}{2013}
 \endentry
 
 \entry{pu2014generative}{article}{}

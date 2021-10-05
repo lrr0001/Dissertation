@@ -43,6 +43,8 @@ From this idea, I construct the pursuit problem:
 %
 with $\lambda_{\ell} \geq \vzero$.
 
+With this multi-layer archetecture, the first layer will construct small, simple filters, and subsequent layers superimpose those filters to build more complicated structures.
+
 My approach to solve this problem uses the ADMM algorthm, where $\vx_1,\ldots,\vx_L$ are the first set of primal variables, $\vv,\vz_1,\ldots,\vz_L$ are the second set of primal variables,  and $\vgamma_1,\ldots,\vgamma_L$ are the dual variables corresponding to contraints on $\vz_1,\ldots,\vz_L$.  Here is the corresponding optimization problem:
 %
 \begin{equation}
@@ -93,7 +95,6 @@ Recall the optimization problem:
 \end{aligned}
 \end{equation}
 
-
 For the $\vv$ update, it is helpful to introduce a common convex-optimization trick. Consider the following function:
 \begin{equation}
 \indicator_{\{\mQ\mW(\vv) - \vs = \vzero\}} = \begin{cases} 0 & \mQ(\mW\vv) - \vs = \vzero \\ + \infty & \text{otherwise} \end{cases}
@@ -113,10 +114,9 @@ Adding the indicator function to the objective produces the following Lagrangian
 \end{split}
 \end{equation}
 %
-where $h\psi(\vx,\vz,\vgamma)$ is a collection of terms irrelevant to the updates for $\vv$.
+where $\psi(\vx,\vz,\vgamma)$ is a collection of terms irrelevant to the updates for $\vv$.
 
 Handling the cases in pointwise fashion, define function $h$ as the following clipping operation:
-
 %
 \begin{equation}
 \operatorname{h}(\vx_1) = \mW(\vv - \mD_1\vx_1 - \vs_{\textrm{smth}}) = \begin{cases} \vs + \frac{\vq}{2} - \mW(\mD_1\vx_1 + \vs_{\textrm{smth}}) & \mW(\mD_1\vx_1 + \vs_{\textrm{smth}}) > \vs + \frac{\vq}{2} \\ \vs - \frac{\vq}{2} - \mW(\mD_1\vx_1 + \vs_{\textrm{smth}}) & \mW(\mD_1\vx_1) + \vs_{\textrm{smth}}) < \vs - \frac{\vq}{2} \\ \vzero & \text{otherwise}

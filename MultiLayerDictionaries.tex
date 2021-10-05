@@ -26,12 +26,12 @@ This chapter demostrates how to apply the novel sparse coding method for multi-c
 
 To start off, it is helpful to write a multi-layer dictionary optimization problem. To keep things compact, let $\vx_0 = \vs$.
 
-I use the same multi-layer dictionary model as \cite{murdock2018deep} and \cite{chodosh2018deep}, but I use different ADMM constraints:
+I use a similar multi-layer dictionary model to the one used in \cite{murdock2018deep} and \cite{chodosh2018deep}:
 %
 \begin{equation}
-\minimize_{\vx} = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vx_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vx_{\ell}\|_1
+\minimize_{\vx} \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vx_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vx_{\ell}\|_1
 \end{equation}
-
+%
 Applying the ADMM algorithm, I add a secondary primal variable $\vz_{\ell}$ for each layer $\ell$ and constrain it to be equal to $\vx_{\ell}$. As in the previous chapter, I scale this constraint so that the inverse representation can be updated efficiently without losing the normalized quality of the dictionary. This replaces the tight-frame assumption used in \cite{murdock2018deep} and \cite{chodosh2018deep}. Again, keeping things compact, let $\vz_0 = \vs$.
 %
 \begin{equation}
@@ -54,7 +54,7 @@ where
 f(\vx,\vz) = \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1
 \end{equation}
 
-Recall that the ADMM algoritm (with relaxation) iteratively alternates between primal and dual updates, using four update equations:
+Recall that the ADMM algorithm (with relaxation) iteratively alternates between primal and dual updates, using four update equations:
 \begin{equation} \label{equation:general x-update ADMM}
 \vx^{(t + 1)} = \arg\min_{\vx} \L(\vx,\vz^{(t)},\vgamma^{(t)})
 \end{equation}
@@ -149,9 +149,10 @@ For $\vx$, $\vz$, $\vgamma$, such that $\nabla_{\vz_{\ell}} \L_{\rho}(\vx_1,\hdo
 Something important to note here is that each element of $\vz_{\ell}$ can be treated independently, that is:
 %
 \begin{equation}
-\nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \lambda_{\ell}|\vz_{\ell}[i]| + \frac{\rho}{2} (\sqrt{\mu_{\ell}}\mR_{\ell}^{-1}[i](\vz_{\ell}[i] - \vx_{\ell}[i]) + \frac{\vgamma_{\ell}[i]}{\rho})^2 = 0
+\nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \lambda_{\ell}|\vz_{\ell}[i]| + \frac{\rho}{2} (\frac{\sqrt{\mu_{\ell}}}{\mR_{\ell}[i]}(\vz_{\ell}[i] - \vx_{\ell}[i]) + \frac{\vgamma_{\ell}[i]}{\rho})^2 = 0
 \end{equation}
 %
+where $\mR{\ell}[i]$ is the scalar $i$th diagonal entry of diagonal matrix $\mR_{\ell}$.
 %
 \begin{equation}
 \nabla_{\vz_{\ell}[i]} \frac{\mu_{\ell + 1}}{2}(\vz_{\ell}[i] - (\mD_{\ell + 1}\vx_{\ell + 1})[i])^2 + \lambda_{\ell}|\vz_{\ell}[i]| + \frac{\rho\mu_{\ell}}{2\mR_{\ell}^2[i]} (\vz_{\ell}[i] - \vx_{\ell}[i] + \frac{\mR_{\ell}[i]\vgamma_{\ell}[i]}{\rho\sqrt{\mu_{\ell}}})^2 = 0
