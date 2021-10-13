@@ -6,9 +6,9 @@
 \defcounter {refsection}{0}\relax 
 \cftpagenumberson {chapter}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Tables}{ix}{chapter*.1}
+\contentsline {chapter}{List of Tables}{x}{chapter*.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Figures}{x}{chapter*.2}
+\contentsline {chapter}{List of Figures}{xi}{chapter*.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
@@ -60,7 +60,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.3}Dual Updates}{35}{subsection.3.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Summary}{36}{section.3.4}
+\contentsline {section}{\numberline {3.4}Pursuit Algorithm Summary}{36}{section.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Dictionary Learning}{36}{section.3.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}Summary}{36}{section.3.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}JPEG Artifact Removal}{37}{chapter.4}
 \defcounter {refsection}{0}\relax 
@@ -114,4 +118,24 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {B.2}Eigenvalues are Not Distinct}{59}{section.1.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{63}{chapter*.9}
+\contentsline {chapter}{\numberline {C}Differentiating the Inverse Function}{60}{Appendix.1.C}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.1}Chain Rule}{60}{section.1.C.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.1.1}Matrix Calculus}{61}{subsection.1.C.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.1.2}Complex Numbers}{61}{subsection.1.C.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.2}Partial Derivatives in Respect to Inputs}{64}{section.1.C.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.3}Partial Derivatives in Respect to Dictionary}{64}{section.1.C.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.4}Partial Derivatives in Respect to Dictionary for Woodbury Form}{67}{section.1.C.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.5}Backpropagation of Loss Function}{69}{section.1.C.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.5.1}Standard Form}{69}{subsection.1.C.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.5.2}Woodbury Form}{72}{subsection.1.C.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{References}{76}{chapter*.9}

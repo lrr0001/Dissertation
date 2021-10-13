@@ -89,7 +89,7 @@ and show that they provide only a partial solution at best. Taken together, our 
   booktitle = {2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
   title     = {Separable Dictionary Learning for Convolutional Sparse Coding via Split Updates},
   year      = {2018},
-  month     = {April},
+  month     = apr,
   pages     = {4094-4098},
   abstract  = {Existing methods for constructing separable 2D dictionary filter banks approximate a set of K non-separable filters via a linear combination of R ≪ K separable filters. This approach involves the inefficiency of learning an initial set of non-separable filters, and places an upper bound on the quality of the separable filter banks. In this paper, we propose a method to directly learn a set of K separable dictionary filters from a given image training set by drawing ideas from convolutional dictionary learning (CDL) methods. We show that the separable filters obtained by our method match the performance of an equivalent number of non-separable filters. Furthermore, the computational performance of our learning method is shown to be substantially faster than a state-of-the-art non-separable CDL method for large numbers of filters or large training sets.},
   doi       = {10.1109/ICASSP.2018.8461884},
@@ -101,7 +101,7 @@ and show that they provide only a partial solution at best. Taken together, our 
   booktitle = {2018 52nd Asilomar Conference on Signals, Systems, and Computers},
   title     = {Convolutional Dictionary Learning for Multi-Channel Signals},
   year      = {2018},
-  month     = {Oct},
+  month     = {October},
   pages     = {335-342},
   abstract  = {There has recently been a rapid growth in interest in the design of efficient algorithms for convolutional sparse coding, and in the application of these methods to signal and image processing inverse problems. Thus far, however, the design of algorithms and methods for multi-channel signals has received very little attention. In this work we extend our initial results in convolutional sparse coding and dictionary learning for this type of data, proposing new algorithms that scale well to signals with large numbers of channels, and demonstrate their performance in an application involving hyperspectral imagery.},
   doi       = {10.1109/ACSSC.2018.8645108},
@@ -113,7 +113,7 @@ and show that they provide only a partial solution at best. Taken together, our 
   booktitle = {2019 XXII Symposium on Image, Signal Processing and Artificial Vision (STSIVA)},
   title     = {Combinatorial Separable Convolutional Dictionaries},
   year      = {2019},
-  month     = {April},
+  month     = apr,
   pages     = {1-5},
   abstract  = {Recent works have considered the use of a linear combination of separable filters to approximate a non-separable filter bank (FB) to obtain computational advantages in CNNs and convolutional sparse representations/coding (CSR/CSC). However, it has been recently shown that there are advantages to directly solving the convolutional dictionary learning (CDL) problem considering a separable FB. A separable filter bank of M 2-d filters is typically constructed from a paired set of M horizontal filters and M vertical filters. In contrast, here we propose an outer product construction involving all possible combinations of vertical and horizontal filters, so that M vertical and M horizontal filters generate M2 2-d filters. Our computational experiments show that this alternative form results in a reduction in computation time of 10% and 80% for the CDL and CSC problems respectively, while matching the reconstruction performance of the typical separable FB approach for the same cardinality.},
   doi       = {10.1109/STSIVA.2019.8730236},
@@ -125,7 +125,7 @@ and show that they provide only a partial solution at best. Taken together, our 
   booktitle = {2016 IEEE International Conference on Image Processing (ICIP)},
   title     = {Boundary handling for convolutional sparse representations},
   year      = {2016},
-  month     = {Sep.},
+  month     = {September},
   pages     = {1833-1837},
   abstract  = {Convolutional sparse representations differ from the standard form in representing the signal to be decomposed as the sum of a set of convolutions with dictionary filters instead of a linear combination of dictionary vectors. The advantage of the convolutional form is that it provides a single-valued representation optimised over an entire signal. The substantial computational cost of the convolutional sparse coding and dictionary learning problems has recently been shown to be greatly reduced by solving in the frequency domain, but the periodic boundary conditions imposed by this approach have the potential to create boundary artifacts. The present paper compares different approaches to avoiding these effects in both sparse coding and dictionary learning.},
   doi       = {10.1109/ICIP.2016.7532675},
@@ -183,7 +183,7 @@ and show that they provide only a partial solution at best. Taken together, our 
   booktitle = {The IEEE International Conference on Computer Vision (ICCV)},
   title     = {Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification},
   year      = {2015},
-  month     = {December},
+  month     = dec,
 }
 
 @InCollection{lecun2012efficient,
@@ -397,10 +397,9 @@ and show that they provide only a partial solution at best. Taken together, our 
   publisher = {IEEE},
 }
 
-
 @Misc{PURR1947,
   author = {Baumgardner, M. F. and Biehl, L. L. and Landgrebe, D. A.},
-  month  = {Sep},
+  month  = {September},
   title  = {220 Band AVIRIS Hyperspectral Image Data Set: June 12, 1992 Indian Pine Test Site 3},
   year   = {2015},
   doi    = {doi:/10.4231/R7RX991C},

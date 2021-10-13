@@ -29,29 +29,41 @@
 \BOOKMARK [2][-]{subsection.3.3.1}{Coefficients Update Equation}{section.3.3}% 29
 \BOOKMARK [2][-]{subsection.3.3.2}{Proximal Updates}{section.3.3}% 30
 \BOOKMARK [2][-]{subsection.3.3.3}{Dual Updates}{section.3.3}% 31
-\BOOKMARK [1][-]{section.3.4}{Summary}{chapter.3}% 32
-\BOOKMARK [0][-]{chapter.4}{JPEG Artifact Removal}{}% 33
-\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 34
-\BOOKMARK [1][-]{section.4.2}{JPEG Algorithm}{chapter.4}% 35
-\BOOKMARK [1][-]{section.4.3}{Modelling Compressed JPEG Images}{chapter.4}% 36
-\BOOKMARK [1][-]{section.4.4}{Handling Quantization}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.5}{Experiment}{chapter.4}% 38
-\BOOKMARK [2][-]{subsection.4.5.1}{Experiment Setup}{section.4.5}% 39
-\BOOKMARK [2][-]{subsection.4.5.2}{Results}{section.4.5}% 40
-\BOOKMARK [1][-]{section.4.6}{Conclusion}{chapter.4}% 41
-\BOOKMARK [0][-]{chapter.5}{Practical Considerations}{}% 42
-\BOOKMARK [1][-]{section.5.1}{Boundary Handling}{chapter.5}% 43
-\BOOKMARK [1][-]{section.5.2}{Removing Low-Frequency Signal Content}{chapter.5}% 44
-\BOOKMARK [2][-]{subsection.5.2.1}{JPEG Artifact Removal}{section.5.2}% 45
-\BOOKMARK [1][-]{section.5.3}{Inverse Representation Drift}{chapter.5}% 46
-\BOOKMARK [1][-]{section.5.4}{Tensorflow and Keras}{chapter.5}% 47
-\BOOKMARK [2][-]{subsection.5.4.1}{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{section.5.4}% 48
-\BOOKMARK [2][-]{subsection.5.4.2}{Shared Weights Between Layers}{section.5.4}% 49
-\BOOKMARK [2][-]{subsection.5.4.3}{Custom Partial Gradients}{section.5.4}% 50
-\BOOKMARK [2][-]{subsection.5.4.4}{Updating TensorFlow Variables After Applying Gradients}{section.5.4}% 51
-\BOOKMARK [2][-]{subsection.5.4.5}{The Perils of Using Built-In Functions for Complex Tensors and Arrays}{section.5.4}% 52
-\BOOKMARK [0][-]{Appendix.1.A}{Hermitian Rank-1 Updates for the Cholesky Decomposition}{}% 53
-\BOOKMARK [0][-]{Appendix.1.B}{Rank-2 Eigendecomposition Edge Cases}{}% 54
-\BOOKMARK [1][-]{section.1.B.1}{Less than 2 Independent Eigenvectors}{Appendix.1.B}% 55
-\BOOKMARK [1][-]{section.1.B.2}{Eigenvalues are Not Distinct}{Appendix.1.B}% 56
-\BOOKMARK [0][-]{chapter*.9}{References}{}% 57
+\BOOKMARK [1][-]{section.3.4}{Pursuit Algorithm Summary}{chapter.3}% 32
+\BOOKMARK [1][-]{section.3.5}{Dictionary Learning}{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.6}{Summary}{chapter.3}% 34
+\BOOKMARK [0][-]{chapter.4}{JPEG Artifact Removal}{}% 35
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 36
+\BOOKMARK [1][-]{section.4.2}{JPEG Algorithm}{chapter.4}% 37
+\BOOKMARK [1][-]{section.4.3}{Modelling Compressed JPEG Images}{chapter.4}% 38
+\BOOKMARK [1][-]{section.4.4}{Handling Quantization}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.5}{Experiment}{chapter.4}% 40
+\BOOKMARK [2][-]{subsection.4.5.1}{Experiment Setup}{section.4.5}% 41
+\BOOKMARK [2][-]{subsection.4.5.2}{Results}{section.4.5}% 42
+\BOOKMARK [1][-]{section.4.6}{Conclusion}{chapter.4}% 43
+\BOOKMARK [0][-]{chapter.5}{Practical Considerations}{}% 44
+\BOOKMARK [1][-]{section.5.1}{Boundary Handling}{chapter.5}% 45
+\BOOKMARK [1][-]{section.5.2}{Removing Low-Frequency Signal Content}{chapter.5}% 46
+\BOOKMARK [2][-]{subsection.5.2.1}{JPEG Artifact Removal}{section.5.2}% 47
+\BOOKMARK [1][-]{section.5.3}{Inverse Representation Drift}{chapter.5}% 48
+\BOOKMARK [1][-]{section.5.4}{Tensorflow and Keras}{chapter.5}% 49
+\BOOKMARK [2][-]{subsection.5.4.1}{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{section.5.4}% 50
+\BOOKMARK [2][-]{subsection.5.4.2}{Shared Weights Between Layers}{section.5.4}% 51
+\BOOKMARK [2][-]{subsection.5.4.3}{Custom Partial Gradients}{section.5.4}% 52
+\BOOKMARK [2][-]{subsection.5.4.4}{Updating TensorFlow Variables After Applying Gradients}{section.5.4}% 53
+\BOOKMARK [2][-]{subsection.5.4.5}{The Perils of Using Built-In Functions for Complex Tensors and Arrays}{section.5.4}% 54
+\BOOKMARK [0][-]{Appendix.1.A}{Hermitian Rank-1 Updates for the Cholesky Decomposition}{}% 55
+\BOOKMARK [0][-]{Appendix.1.B}{Rank-2 Eigendecomposition Edge Cases}{}% 56
+\BOOKMARK [1][-]{section.1.B.1}{Less than 2 Independent Eigenvectors}{Appendix.1.B}% 57
+\BOOKMARK [1][-]{section.1.B.2}{Eigenvalues are Not Distinct}{Appendix.1.B}% 58
+\BOOKMARK [0][-]{Appendix.1.C}{Differentiating the Inverse Function}{}% 59
+\BOOKMARK [1][-]{section.1.C.1}{Chain Rule}{Appendix.1.C}% 60
+\BOOKMARK [2][-]{subsection.1.C.1.1}{Matrix Calculus}{section.1.C.1}% 61
+\BOOKMARK [2][-]{subsection.1.C.1.2}{Complex Numbers}{section.1.C.1}% 62
+\BOOKMARK [1][-]{section.1.C.2}{Partial Derivatives in Respect to Inputs}{Appendix.1.C}% 63
+\BOOKMARK [1][-]{section.1.C.3}{Partial Derivatives in Respect to Dictionary}{Appendix.1.C}% 64
+\BOOKMARK [1][-]{section.1.C.4}{Partial Derivatives in Respect to Dictionary for Woodbury Form}{Appendix.1.C}% 65
+\BOOKMARK [1][-]{section.1.C.5}{Backpropagation of Loss Function}{Appendix.1.C}% 66
+\BOOKMARK [2][-]{subsection.1.C.5.1}{Standard Form}{section.1.C.5}% 67
+\BOOKMARK [2][-]{subsection.1.C.5.2}{Woodbury Form}{section.1.C.5}% 68
+\BOOKMARK [0][-]{chapter*.9}{References}{}% 69

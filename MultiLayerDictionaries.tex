@@ -15,7 +15,7 @@ where $\vx_0 = \vs$ is the signal. They convert this to a constrained optimizati
 \begin{aligned}
 \min_{\vx,\vz} & \sum_{\ell = 1}^{L} \frac{\mu_{\ell}}{2}\|\vz_{\ell - 1} -\mD_{\ell}\vx_{\ell}\|_2^2 + \lambda_{\ell}\|\vz_{\ell}\|_1 \\
 \text{subject to } & \vz_{\ell} - \vx_{\ell} = 0
-\end{aligned}
+\end{aligned} \label{equation:ADMM Multi-Layer Pursuit Objective}
 \end{equation}
 where $\vz_0 = \vs$ is the signal. The $\vx$ updates involve solving an inverse problem. They use a tight-frame assumption to approximate the inverse.
 
@@ -205,6 +205,17 @@ Rather than tracking $\vgamma_{\ell}$ or $\frac{\vgamma_{\ell}}{\rho}$ explicitl
 \begin{equation}
 \frac{\vgamma_{\ell}^{(t + 1)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} + \mR_{\ell}^{-1}\vz_{\ell}^{(t + 1)} - \mR^{-1}\vz_{\ell}^{(t + 1)} 
 \end{equation}
+
+\section{Pursuit Algorithm Summary}
+Together, the equations from the sections above produce a pursuit algorthm for a multi-layer dictionary model, as shown in algorithm \ref{algorithm:ADMM multi-layer pursuit}. It is important to note that unlike in \cite{zeiler2010deconvolutional}, there is feedback between layers during pursuit.  Figure \ref{figure:ADMM multi-layer pursuit diagram} shows the interactions between layers across iterations. This allows for asymptotic convergence to an optimal solution of the objective in equation \ref{equation:ADMM Multi-Layer Pursuit Objective}.
+
+\section{Dictionary Learning}
+Backpropagation of representation error or some other loss function can be used to compute dictionary gradients and update the dictionaries of a multi-layer dictionary model. For efficient ADMM pursuit in the case of a large number of channels, the updates need to be replaced with low-rank substitutes, so that the inverse decomposition can be updated efficiently.
+
+
+
+
+but backpropagation across the entire network is expensive. Instead of backpropagating through the entire network, I merely backpropagate through the only the last few computations of the network: the highlighted edges in figure \ref{figure:Multi-Layer Dictionary Learning Backprop Edges}. Putting it all together, the algorithm is shown in figure \ref{algorithm:Multi-Layer Dictionary Learning}.
 
 \section{Summary}
 In this chapter, I have applied the novel sparse coding algorithm from the previous chapter to a multi-layer dictionary model. If the dictionaries are updated with low-rank updates, the inverse representation necessary for the $\vx$ updates in the algorithm can be updated efficiently. This approach offers an alternative to direct proximal methods such as FISTA or mathematically suspect inverse approximations like the tight-frame assumption.

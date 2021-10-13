@@ -125,7 +125,7 @@ and show that they provide only a partial solution at best. Taken together, our 
   booktitle = {2016 IEEE International Conference on Image Processing (ICIP)},
   title     = {Boundary handling for convolutional sparse representations},
   year      = {2016},
-  month     = {\#},
+  month     = {September},
   pages     = {1833-1837},
   abstract  = {Convolutional sparse representations differ from the standard form in representing the signal to be decomposed as the sum of a set of convolutions with dictionary filters instead of a linear combination of dictionary vectors. The advantage of the convolutional form is that it provides a single-valued representation optimised over an entire signal. The substantial computational cost of the convolutional sparse coding and dictionary learning problems has recently been shown to be greatly reduced by solving in the frequency domain, but the periodic boundary conditions imposed by this approach have the potential to create boundary artifacts. The present paper compares different approaches to avoiding these effects in both sparse coding and dictionary learning.},
   doi       = {10.1109/ICIP.2016.7532675},
@@ -552,6 +552,16 @@ and show that they provide only a partial solution at best. Taken together, our 
   year    = {2014},
   pages   = {18},
   volume  = {1050},
+}
+
+@Article{petersen2008matrix,
+  author  = {Petersen, Kaare Brandt and Pedersen, Michael Syskind and others},
+  journal = {Technical University of Denmark},
+  title   = {The matrix cookbook},
+  year    = {2008},
+  number  = {15},
+  pages   = {510},
+  volume  = {7},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
