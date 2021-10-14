@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  13 OCT 2021 22:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  14 OCT 2021 03:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1152,16 +1152,12 @@ ned on input line 210.
 LaTeX Warning: Reference `figure:ADMM multi-layer pursuit diagram' on page 35 u
 ndefined on input line 210.
 
-[35]
+[35] [36]
 
-LaTeX Warning: Reference `figure:Multi-Layer Dictionary Learning Backprop Edges
-' on page 36 undefined on input line 218.
+LaTeX Warning: Reference `algorithm:Multi-Layer Dictionary Learning' on page 37
+ undefined on input line 229.
 
-
-LaTeX Warning: Reference `algorithm:Multi-Layer Dictionary Learning' on page 36
- undefined on input line 218.
-
-) (./JPEGArtifactRemoval.tex [36]
+) (./JPEGArtifactRemoval.tex [37] [38]
 Chapter 4.
 
 Overfull \hbox (3.57222pt too wide) in paragraph at lines 10--11
@@ -1169,43 +1165,43 @@ Overfull \hbox (3.57222pt too wide) in paragraph at lines 10--11
 mod-els strug-gle with large smooth
  []
 
-[37
+[39
 
-] [38]
+] [40]
 Overfull \hbox (3.20084pt too wide) detected at line 68
 \OML/cmm/b/it/12 z[] \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 ^^Z^^V[]\OT1/cmr/bx/n/
 12 I \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 ^^V[]\OML/cmm/b/it/12 R[]\OT1/cmr/m/n/1
 2 )[]\OML/cmm/b/it/12 R[] [][] []
  []
 
-[39]
+[41]
 LaTeX Font Info:    Try loading font information for U+bbm on input line 100.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [40]
+) [42]
 Overfull \hbox (22.55806pt too wide) detected at line 124
 []\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 x[]\OT1/cmr/m/n/12 ) = \OML/cmm/b/it/12 W\O
 T1/cmr/m/n/12 (\OML/cmm/b/it/12 v \OMS/cmsy/m/n/12 ^^@ \OML/cmm/b/it/12 D[]x[] 
 \OMS/cmsy/m/n/12 ^^@ \OML/cmm/b/it/12 s[]\OT1/cmr/m/n/12 ) = []
  []
 
-[41]) (./PracticalConsiderationsUsingTensorFlow.tex [42]
+[43]) (./PracticalConsiderationsUsingTensorFlow.tex [44]
 Chapter 5.
-[43
+[45
 
-] [44] [45] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+] [46] [47] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-[46] [47] [48] [49]) (./appendix.tex [50]
+[48] [49] [50] [51]) (./appendix.tex [52]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
- [51
+ [53
 
 ]
 Appendix A.
-[52
+[54
 
-] [53]
+] [55]
 Overfull \hbox (36.28339pt too wide) detected at line 88
 \OML/cmm/b/it/12 M[]M[] \OT1/cmr/m/n/12 = \OML/cmm/b/it/12 L[]L[] \OT1/cmr/m/n/
 12 + []\OML/cmm/b/it/12 l[]l[] \OT1/cmr/m/n/12 + []\OML/cmm/b/it/12 v[]v[] \OMS
@@ -1213,21 +1209,21 @@ Overfull \hbox (36.28339pt too wide) detected at line 88
 /12 v[]l[]
  []
 
-[54] [55]
+[56] [57]
 Overfull \hbox (1.65634pt too wide) in paragraph at lines 183--184
 []\OT1/ptm/m/n/12 The rank-$\OT1/cmr/m/n/12 1$ \OT1/ptm/m/n/12 Her-mi-tian up-d
 ate to a Cholesky de-com-po-si-tion can be com-puted in quadratic
  []
 
-[56] [57]
+[58] [59]
 Appendix B.
-[58
-
-] [59]
-Appendix C.
 [60
 
-] [61] [62] [63] [64] [65] [66] [67]
+] [61]
+Appendix C.
+[62
+
+] [63] [64] [65] [66] [67] [68] [69]
 Overfull \hbox (23.87059pt too wide) in paragraph at lines 549--550
 []\OT1/ptm/m/n/12 If the dic-tio-nary $[]$ is used in mul-ti-ple com-po-nent fu
 nc-tions, the ex-pres-sions $[][]$
@@ -1237,7 +1233,7 @@ nc-tions, the ex-pres-sions $[][]$
 Overfull \vbox (0.11153pt too high) has occurred while \output is active []
 
 
-[68]
+[70]
 Overfull \hbox (25.4169pt too wide) detected at line 561
 [][] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/1
 2 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/
@@ -1271,7 +1267,7 @@ Overfull \hbox (46.98918pt too wide) detected at line 584
 [][] \OT1/cmr/m/n/12 = [][]
  []
 
-[69]
+[71]
 Overfull \hbox (35.194pt too wide) detected at line 596
 [][] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/12 
 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 j [] \OT1/cmr/
@@ -1300,25 +1296,25 @@ Overfull \hbox (47.71118pt too wide) detected at line 615
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
-[70]
+[72]
 Overfull \hbox (33.3714pt too wide) detected at line 618
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
-) [71] [72
+) [73] [74
 
 ]
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 278.
- [73]
+ [75]
 Overfull \hbox (2.5002pt too wide) in paragraph at lines 278--278
 []\OT1/ptm/m/n/12 I. Good-fel-low, Y. Ben-gio, and A. Courville, \OT1/ptm/m/it/
 12 Deep Learn-ing\OT1/ptm/m/n/12 . MIT Press, 2016, []$\OT1/pcr/m/n/12 http :
  []
 
-[74]
+[76]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 291.
- [75]
+ [77]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 291.
  (./dissertation.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 291.
@@ -1335,13 +1331,13 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
  )
 (\end occurred when \iftrue on line 97 was incomplete) 
 Here is how much of TeX's memory you used:
- 16346 strings out of 493029
- 255970 string characters out of 6136233
- 462361 words of memory out of 5000000
- 19054 multiletter control sequences out of 15000+600000
+ 16360 strings out of 493029
+ 256204 string characters out of 6136233
+ 463819 words of memory out of 5000000
+ 19058 multiletter control sequences out of 15000+600000
  31222 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,20n,48p,1227b,1206s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,20n,48p,1444b,1206s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/lrr/.texmf-var/fo
 nts/pk/ljfour/public/bbm/bbm12.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/d
 vips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
@@ -1350,30 +1346,33 @@ cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cmextra/cmmib6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb
-8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on dissertation.pdf (85 pages, 483109 bytes).
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cmextra/cmmib6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsf
+s/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on dissertation.pdf (87 pages, 512569 bytes).
 PDF statistics:
- 1460 PDF objects out of 1728 (max. 8388607)
- 1328 compressed objects within 14 object streams
- 545 named destinations out of 1000 (max. 500000)
+ 1499 PDF objects out of 1728 (max. 8388607)
+ 1362 compressed objects within 14 object streams
+ 555 named destinations out of 1000 (max. 500000)
  542 words of extra memory for PDF output out of 10000 (max. 10000000)
 

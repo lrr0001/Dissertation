@@ -996,72 +996,121 @@
   \field{year}{2014}
 \endentry
 
-\entry{wohlberg2016boundary}{inproceedings}{}
-  \name{author}{1}{}{%
+\entry{sutskever2013importance}{inproceedings}{}
+  \name{author}{4}{}{%
     {{}%
-     {{Wohlberg}}{W.}%
-     {B.}{B.}%
+     {Sutskever}{S.}%
+     {Ilya}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Martens}{M.}%
+     {James}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dahl}{D.}%
+     {George}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hinton}{H.}%
+     {Geoffrey}{G.}%
      {}{}%
      {}{}}%
   }
-  \keyw{convolution;encoding;filtering theory;frequency-domain analysis;signal
-  representation;boundary handling;convolutional sparse representations;signal
-  decomposition;dictionary filters;single-valued representation;convolutional
-  sparse coding;dictionary learning problems;frequency domain;periodic boundary
-  conditions;Dictionaries;Convolution;Encoding;Convolutional codes;Discrete
-  Fourier transforms;Standards;Boundary conditions;Convolutional Sparse
-  Coding;Convolutional Dictionary Learning;Boundary Effects}
-  \strng{namehash}{WB1}
-  \strng{fullhash}{WB1}
-  \field{abstract}{%
-  Convolutional sparse representations differ from the standard form in
-  representing the signal to be decomposed as the sum of a set of convolutions
-  with dictionary filters instead of a linear combination of dictionary
-  vectors. The advantage of the convolutional form is that it provides a
-  single-valued representation optimised over an entire signal. The substantial
-  computational cost of the convolutional sparse coding and dictionary learning
-  problems has recently been shown to be greatly reduced by solving in the
-  frequency domain, but the periodic boundary conditions imposed by this
-  approach have the potential to create boundary artifacts. The present paper
-  compares different approaches to avoiding these effects in both sparse coding
-  and dictionary learning.%
+  \list{organization}{1}{%
+    {PMLR}%
   }
-  \field{booktitle}{2016 IEEE International Conference on Image Processing
-  (ICIP)}
-  \verb{doi}
-  \verb 10.1109/ICIP.2016.7532675
-  \endverb
-  \field{pages}{1833\bibrangedash 1837}
-  \field{title}{Boundary handling for convolutional sparse representations}
-  \field{year}{2016}
-  \warn{\item Invalid format of field 'month'}
+  \strng{namehash}{SIMJDGHG1}
+  \strng{fullhash}{SIMJDGHG1}
+  \field{booktitle}{International conference on machine learning}
+  \field{pages}{1139\bibrangedash 1147}
+  \field{title}{On the importance of initialization and momentum in deep
+  learning}
+  \field{year}{2013}
 \endentry
 
-\entry{DBLP:journals/corr/WohlbergR17}{article}{}
+\entry{kingma2017adam}{misc}{}
   \name{author}{2}{}{%
     {{}%
-     {Wohlberg}{W.}%
-     {Brendt}{B.}%
+     {Kingma}{K.}%
+     {Diederik~P.}{D.~P.}%
      {}{}%
      {}{}}%
     {{}%
-     {Rodr{\'{\i}}guez}{R.}%
-     {Paul}{P.}%
+     {Ba}{B.}%
+     {Jimmy}{J.}%
      {}{}%
      {}{}}%
   }
-  \strng{namehash}{WBRP1}
-  \strng{fullhash}{WBRP1}
+  \strng{namehash}{KDPBJ1}
+  \strng{fullhash}{KDPBJ1}
   \verb{eprint}
-  \verb 1707.06718
+  \verb 1412.6980
   \endverb
-  \field{title}{Convolutional Sparse Coding: Boundary Handling Revisited}
-  \verb{url}
-  \verb http://arxiv.org/abs/1707.06718
-  \endverb
-  \field{volume}{abs/1707.06718}
-  \field{journaltitle}{CoRR}
+  \field{title}{Adam: A Method for Stochastic Optimization}
   \field{eprinttype}{arXiv}
+  \field{eprintclass}{cs.LG}
+  \field{year}{2017}
+\endentry
+
+\entry{paszke2017automatic}{article}{}
+  \name{author}{10}{}{%
+    {{}%
+     {Paszke}{P.}%
+     {Adam}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gross}{G.}%
+     {Sam}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chintala}{C.}%
+     {Soumith}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chanan}{C.}%
+     {Gregory}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yang}{Y.}%
+     {Edward}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {DeVito}{D.}%
+     {Zachary}{Z.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lin}{L.}%
+     {Zeming}{Z.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Desmaison}{D.}%
+     {Alban}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Antiga}{A.}%
+     {Luca}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lerer}{L.}%
+     {Adam}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{PAGSCSCGYEDZLZDAALLA1}
+  \strng{fullhash}{PAGSCSCGYEDZLZDAALLA1}
+  \field{title}{Automatic differentiation in pytorch}
   \field{year}{2017}
 \endentry
 
@@ -1277,6 +1326,75 @@
   \verb https://www.tensorflow.org/
   \endverb
   \field{year}{2015}
+\endentry
+
+\entry{wohlberg2016boundary}{inproceedings}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Wohlberg}}{W.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{convolution;encoding;filtering theory;frequency-domain analysis;signal
+  representation;boundary handling;convolutional sparse representations;signal
+  decomposition;dictionary filters;single-valued representation;convolutional
+  sparse coding;dictionary learning problems;frequency domain;periodic boundary
+  conditions;Dictionaries;Convolution;Encoding;Convolutional codes;Discrete
+  Fourier transforms;Standards;Boundary conditions;Convolutional Sparse
+  Coding;Convolutional Dictionary Learning;Boundary Effects}
+  \strng{namehash}{WB1}
+  \strng{fullhash}{WB1}
+  \field{abstract}{%
+  Convolutional sparse representations differ from the standard form in
+  representing the signal to be decomposed as the sum of a set of convolutions
+  with dictionary filters instead of a linear combination of dictionary
+  vectors. The advantage of the convolutional form is that it provides a
+  single-valued representation optimised over an entire signal. The substantial
+  computational cost of the convolutional sparse coding and dictionary learning
+  problems has recently been shown to be greatly reduced by solving in the
+  frequency domain, but the periodic boundary conditions imposed by this
+  approach have the potential to create boundary artifacts. The present paper
+  compares different approaches to avoiding these effects in both sparse coding
+  and dictionary learning.%
+  }
+  \field{booktitle}{2016 IEEE International Conference on Image Processing
+  (ICIP)}
+  \verb{doi}
+  \verb 10.1109/ICIP.2016.7532675
+  \endverb
+  \field{pages}{1833\bibrangedash 1837}
+  \field{title}{Boundary handling for convolutional sparse representations}
+  \field{year}{2016}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{DBLP:journals/corr/WohlbergR17}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Wohlberg}{W.}%
+     {Brendt}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rodr{\'{\i}}guez}{R.}%
+     {Paul}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{WBRP1}
+  \strng{fullhash}{WBRP1}
+  \verb{eprint}
+  \verb 1707.06718
+  \endverb
+  \field{title}{Convolutional Sparse Coding: Boundary Handling Revisited}
+  \verb{url}
+  \verb http://arxiv.org/abs/1707.06718
+  \endverb
+  \field{volume}{abs/1707.06718}
+  \field{journaltitle}{CoRR}
+  \field{eprinttype}{arXiv}
+  \field{year}{2017}
 \endentry
 
 \entry{keras}{misc}{}

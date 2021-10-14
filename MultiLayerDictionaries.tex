@@ -119,7 +119,7 @@ This solution is the $\vx$ update for the ADMM algorithm, but a couple extra ste
 %
 So, therefore the update equation for $\mR_{\ell}^{-1}\vx_{\ell}$ is the following:
 %
-\begin{equation}
+\begin{equation} \label{equation:Multi-Layer x-Update Equation}
 \mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} = \left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1}^{(t)} + \rho \left(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} + \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
 %
@@ -210,12 +210,23 @@ Rather than tracking $\vgamma_{\ell}$ or $\frac{\vgamma_{\ell}}{\rho}$ explicitl
 Together, the equations from the sections above produce a pursuit algorthm for a multi-layer dictionary model, as shown in algorithm \ref{algorithm:ADMM multi-layer pursuit}. It is important to note that unlike in \cite{zeiler2010deconvolutional}, there is feedback between layers during pursuit.  Figure \ref{figure:ADMM multi-layer pursuit diagram} shows the interactions between layers across iterations. This allows for asymptotic convergence to an optimal solution of the objective in equation \ref{equation:ADMM Multi-Layer Pursuit Objective}.
 
 \section{Dictionary Learning}
-Backpropagation of representation error or some other loss function can be used to compute dictionary gradients and update the dictionaries of a multi-layer dictionary model. For efficient ADMM pursuit in the case of a large number of channels, the updates need to be replaced with low-rank substitutes, so that the inverse decomposition can be updated efficiently.
+There are many possible approaches to compute dictionary updates, but the focus here will be on gradient descent. The pursuit algorithm generates several layers of coefficients from an input signal, and these coeffients can subsequently be used to generate some output, for classification, reconstruction, or some other task. With the appropriate choice of loss function $\loss$, backpropagation can be used to update the dictionaries. All of the computations in pursuit are almost\footnote{Like rectified linear activation functions, there is a discontinuity in the derivative for shrinkage operators. While such functions are technically not differentiable, this does not pose any issue for backpropagation. Operations that rely on a conjugate conjugate of a complex input also are not differentiable, but since the output is a scalar loss function, gradients can still be computed, which is sufficient for gradient descent. See Appendix C for details.} differentiable, so backpropagation is possible all the way back to the signal. Regardless of whether stochastic gradient descent or momentum methods such as Nesterov \cite{sutskever2013importance} or ADAM \cite{kingma2017adam} is used, the dictionary updates must be replaced with low-rank substitutes if the number of channels is large, so that the inverse decomposition can be updated efficiently.
 
+Backpropagating gradients through most of the operations in the pursuit algorithm is very straightforward. Some platforms such as PyTorch \cite{paszke2017automatic} or TensorFlow \cite{tensorflow} will even do so automatically. However, the $\vx$-updates rely on the decomposition of the inverse, and this prevents automatic differentiation in respect to the dictionaries for those operations. The equations necessary to compute gradients for those operations are derived in appendix C.
+Let $\hat{\mD}_{\ell}$ be the frequency domain representation of the unnormalized dictionary corresponding to the $\ell$th layer, and let $\mQ_{\ell} = \rho\mId + \hat{\mD}_{\ell}^H\hat{\mD}_{\ell}$.
+\begin{equation}
+\nabla_{\hat{\mD}_{\ell}}^{(\vb \rightarrow \mQ_{\ell}^{-1}\vb)} \loss = -(\hat{\mD}_{\ell}\mQ_{\ell}^{-1}\vb)(\mQ_{\ell}^{-1}\nabla_{\mQ_{\ell}^{-1}\vb} \loss)^H - (\hat{\mD}_{\ell}\mQ_{\ell}^{-1}\nabla_{\mQ_{\ell}^{-1}\vb} \loss) (\mQ_{\ell}^{-1}\vb)^H
+\end{equation}
+where $\vb$ is the input vector to the computational step $\mQ_{\ell}^{-1}\vb$.\footnote{$\vb$ would take on a value like $\vb = \F\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1}^{(t)} + \rho \left(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} + \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}}\right)\right) $, as seen in the $\vx$-update equation \ref{equation:Multi-Layer x-Update Equation}.} The superscript of the gradient specifices which gradient term is being computed. This is necessary because same dictionary gets reused across multiple computations, and so these gradient terms must be computed separately and then aggregated to get the actual gradient.
 
+For the Woodbury form\footnote{Useful if the number of filters is larger than the number of channels}, the decomposition represents a different matrix for efficiently solving the inverse problem, and so the equation for the corresponding gradient term is different.
+Let $\mXi_{\ell} = \rho\mId + \hat{\mD}_{\ell}\hat{\mD}_{\ell}^H$.
+\begin{equation}
+\nabla_{\hat{\mD}_{\ell}}^{(\vb \rightarrow \mXi_{\ell}^{-1}\vb)} \loss = -(\mXi_{\ell}^{-1}\nabla_{\mQ_{\ell}^{-1}\vb} \loss)(\hat{\mD}_{\ell}^H\mXi_{\ell}^{-1}\vb)^H -  (\mXi_{\ell}^{-1}\vb)(\hat{\mD}_{\ell}^H\mXi_{\ell}^{-1}\nabla_{\mQ_{\ell}^{-1}\vb} \loss)^H
+\end{equation}
+where $\vb$ is the input vector to the computational step $\mXi_{\ell}^{-1}\vb$.
 
-
-but backpropagation across the entire network is expensive. Instead of backpropagating through the entire network, I merely backpropagate through the only the last few computations of the network: the highlighted edges in figure \ref{figure:Multi-Layer Dictionary Learning Backprop Edges}. Putting it all together, the algorithm is shown in figure \ref{algorithm:Multi-Layer Dictionary Learning}.
+With these equations it is possible to compute dictionary updates through backpropagation.  Putting it all together, a dictionary learning algorithm for multi-layer dictionary models is shown in algorithm \ref{algorithm:Multi-Layer Dictionary Learning}.
 
 \section{Summary}
 In this chapter, I have applied the novel sparse coding algorithm from the previous chapter to a multi-layer dictionary model. If the dictionaries are updated with low-rank updates, the inverse representation necessary for the $\vx$ updates in the algorithm can be updated efficiently. This approach offers an alternative to direct proximal methods such as FISTA or mathematically suspect inverse approximations like the tight-frame assumption.
