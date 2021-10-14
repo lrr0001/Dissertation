@@ -1378,6 +1378,30 @@
   \field{year}{2015}
 \endentry
 
+\entry{petersen2008matrix}{article}{}
+  \true{moreauthor}
+  \name{author}{2}{}{%
+    {{}%
+     {Petersen}{P.}%
+     {Kaare~Brandt}{K.~B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pedersen}{P.}%
+     {Michael~Syskind}{M.~S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{PKBPMS+1}
+  \strng{fullhash}{PKBPMS+1}
+  \field{number}{15}
+  \field{pages}{510}
+  \field{title}{The matrix cookbook}
+  \field{volume}{7}
+  \field{journaltitle}{Technical University of Denmark}
+  \field{year}{2008}
+\endentry
+
 \lossort
 \endlossort
 

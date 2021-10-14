@@ -60,10 +60,8 @@
 \BOOKMARK [1][-]{section.1.C.1}{Chain Rule}{Appendix.1.C}% 60
 \BOOKMARK [2][-]{subsection.1.C.1.1}{Matrix Calculus}{section.1.C.1}% 61
 \BOOKMARK [2][-]{subsection.1.C.1.2}{Complex Numbers}{section.1.C.1}% 62
-\BOOKMARK [1][-]{section.1.C.2}{Partial Derivatives in Respect to Inputs}{Appendix.1.C}% 63
-\BOOKMARK [1][-]{section.1.C.3}{Partial Derivatives in Respect to Dictionary}{Appendix.1.C}% 64
-\BOOKMARK [1][-]{section.1.C.4}{Partial Derivatives in Respect to Dictionary for Woodbury Form}{Appendix.1.C}% 65
-\BOOKMARK [1][-]{section.1.C.5}{Backpropagation of Loss Function}{Appendix.1.C}% 66
-\BOOKMARK [2][-]{subsection.1.C.5.1}{Standard Form}{section.1.C.5}% 67
-\BOOKMARK [2][-]{subsection.1.C.5.2}{Woodbury Form}{section.1.C.5}% 68
-\BOOKMARK [0][-]{chapter*.9}{References}{}% 69
+\BOOKMARK [1][-]{section.1.C.2}{Partial Derivatives}{Appendix.1.C}% 63
+\BOOKMARK [2][-]{subsection.1.C.2.1}{Partial Derivatives in Respect to Inputs}{section.1.C.2}% 64
+\BOOKMARK [2][-]{subsection.1.C.2.2}{Partial Derivatives in Respect to Dictionary}{section.1.C.2}% 65
+\BOOKMARK [1][-]{section.1.C.3}{Backpropagation of Loss Function}{Appendix.1.C}% 66
+\BOOKMARK [0][-]{chapter*.9}{References}{}% 67
