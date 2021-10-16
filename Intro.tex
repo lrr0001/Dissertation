@@ -2,7 +2,7 @@
 
 
 \section{Dictionaries and Dictionary Learning}
-Dictionary models are powerful and versitile tools, useful in denoising \cite{wohlberg2016convolutional}, classification \cite{kong2012dictionary}, anomaly detection \cite{carroll2017outlier}, super-resolution \cite{polatkan2014bayesian}\cite{gu2015convolutional}, inpainting \cite{papyan2017convolutional}, trajectory-basis non-rigid structure from motion \cite{zhu2013convolutional}\cite{chodosh2020use}, and more. Dictionaries are interpretable, and their models are well-suited for incorporating model assumptions using apriori knowledge of the data. In some applications, well-performing dictionaries can be learned from very limited data.
+Dictionary models are powerful and versatile tools, useful in denoising \cite{wohlberg2016convolutional}, classification \cite{kong2012dictionary}, anomaly detection \cite{carroll2017outlier}, super-resolution \cite{polatkan2014bayesian}\cite{gu2015convolutional}, inpainting \cite{papyan2017convolutional}, trajectory-basis non-rigid structure from motion \cite{zhu2013convolutional}\cite{chodosh2020use}, and more. Dictionaries are interpretable, and their models are well-suited for incorporating model assumptions using prior knowledge of the data. In some applications, well-performing dictionaries can be learned from very limited data.
 
 The dictionary model decomposes the signal $\vs$ into the dictionary $\mD$ and coefficients $\vx$.
 %
@@ -24,7 +24,7 @@ The convolutional dictionary model is a dictionary model which imposes a convolu
 \vs \approx \sum_i \vf_i * \vx_i
 \end{equation}
 %
-where $\vf_i$ is the $i$th filter of the dictionary, $\vx_i$ is the coefficients for the $i$th filter, and $*$ indicates convolution. This structure is useful for signals where shift-invariance is a desirable characteristic and/or when dealing with variable-length data. Convolutional approaches often outperform patch-based methods. For the rest of this dissertation, I will notate $\sum_i \vf_i * \vx_i$ as $\mD\vx$. The matrix $\mD$ consists of $M$ Toeplitz blocks $\mD_{m}$, each block corresponding to a particular filter $m$ of the $M$ dictionary filters.
+where $\vf_i$ is the $i^{\text{th}}$ filter of the dictionary, $\vx_i$ is the coefficients for the $i^{\text{th}}$ filter, and $*$ indicates convolution. This structure is useful for signals where shift-invariance is a desirable characteristic and/or when dealing with variable-length data. Convolutional approaches often outperform patch-based methods. For the rest of this dissertation, I will notate $\sum_i \vf_i * \vx_i$ as $\mD\vx$. The matrix $\mD$ consists of $M$ circulant blocks $\mD_{m}$, each block corresponding to a particular filter $m$ of the $M$ dictionary filters.
 
 \section{Multi-Layer Dictionaries}
 A multi-layer dictionary treats the coefficients as the signal of a subsequent dictionary model. That is,
@@ -55,7 +55,7 @@ Some researchers have noted that convolutional neural networks resemble multi-la
 
 
 \section{Organization of Dissertation}
-In chaper $2$, I derive a novel dictionary learning method for multi-channel signals. In chapter $3$, I show how that approach can be adapted to multi-layer dictionary models.  Finally, in chapter $4$, I apply the multi-layer dictionary approach to JPEG compression artifact removal. Chapter $5$ features some practical considerations when implementing these algorithms.
+In chapter $2$, I derive a novel dictionary learning method for multi-channel signals. In chapter $3$, I show how that approach can be adapted to multi-layer dictionary models.  Finally, in chapter $4$, I apply the multi-layer dictionary approach to JPEG compression artifact removal. Chapter $5$ features some practical considerations when implementing these algorithms.
 
 % This is a figure
 %\begin{figure}
