@@ -305,7 +305,7 @@ Writing $\mD$ in a block structure, I have
 \end{bmatrix}
 \end{equation}
 %
-where $\mD_{c,m}$ is a circulant matrix capturing channel $c$ of the $m$th filter of the dictionary. Circulant matrices are diagonalizable with Fourier eigenvectors:
+where $\mD_{c,m}$ is a circulant matrix capturing channel $c$ of the $m^{\text{th}}$ filter of the dictionary. Circulant matrices are diagonalizable with Fourier eigenvectors:
 %
 \begin{equation}
 \mD = \begin{bmatrix}
@@ -315,7 +315,7 @@ where $\mD_{c,m}$ is a circulant matrix capturing channel $c$ of the $m$th filte
 \end{bmatrix}
 \end{equation}
 %
-where $\hat{\mD}_{c,m}$ is a diagonal matrix whose elements are the discrete Fourier transform (FFT) of channel $c$ of the $m$th dictionary filter.
+where $\hat{\mD}_{c,m}$ is a diagonal matrix whose elements are the discrete Fourier transform (FFT) of channel $c$ of the $m^{\text{th}}$ dictionary filter.
 
 This sparsely banded structure is a useful form in analyzing the structure of the inverse problem:
 \begin{equation}
@@ -493,7 +493,7 @@ Under many circumstances, inverse representations can be updated efficiently, pr
 \end{bmatrix}
 \end{equation}
 %
-where $\hat{\mD}_{c,m}$ is diagonal for all $c$ and $m$. Let $\hat{\mD}_{c,m}[\hat{k}]$ be the $\hat{k}$th element of the diagonal and let
+where $\hat{\mD}_{c,m}$ is diagonal for all $c$ and $m$. Let $\hat{\mD}_{c,m}[\hat{k}]$ be the $\hat{k}^{\text{th}}$ element of the diagonal and let
 %
 \begin{equation}
 \hat{\mD}[\hat{k}] = \begin{bmatrix}
@@ -503,7 +503,7 @@ where $\hat{\mD}_{c,m}$ is diagonal for all $c$ and $m$. Let $\hat{\mD}_{c,m}[\h
 \end{bmatrix}
 \end{equation}
 %
-Then $\hat{\mD}[\hat{k}]$ is a $C \times M$ matrix collecting the $\hat{k}$th frequency of all channels and filters of $\mD$.
+Then $\hat{\mD}[\hat{k}]$ is a $C \times M$ matrix collecting the $\hat{k}^{\text{th}}$ frequency of all channels and filters of $\mD$.
 
 Thus, $(\rho\mId + \hat{\mD}^H\hat{\mD})^{-1}$ really consists of $\hat{K}$ separate inverse problems: $(\rho\mId + \hat{\mD}^H[\hat{k}]\hat{\mD}[\hat{k}])^{-1}$.
 
@@ -559,7 +559,7 @@ The Hermitian rank-two update consists of two rank-one terms, but the terms are 
 \end{bmatrix}^H
 \end{equation}
 %
-While matrix products are not communitive, some of the eigenvalues of matrix products are communitive.
+While matrix products are not commutative, some of the eigenvalues of matrix products are commutative.
 
 Furthermore, for general matrices $\mA$ and $\mB$ the eigenvectors of $\mA\mB$ and $\mB\mA$ are related:
 %
@@ -567,7 +567,7 @@ Furthermore, for general matrices $\mA$ and $\mB$ the eigenvectors of $\mA\mB$ a
 \mB\mA\vx = \lambda\vx  \implies  \mA\mB\mA\vx = \lambda\mA\vx \label{equation:eigenvector relation}
 \end{equation}
 %
-where $\lambda$ is the eigenvalue and $\vx$ is a vector.\footnote{In equation \ref{equation:eigenvector relation}, some variables are repurposed to explain some general eigenvector relationships for matrix products. The reaader should be careful not confuse this $\vx$ for the sparse coding coefficients, $\lambda$ for the $\operatorname{L}_1$ penalty factor applied to the coefficients, or $\mA$ and $\mB$ for the matrices in the ADMM constraints.}  So, if $\vx$ is an eigenvector of $\mB\mA$, $\mA\vx$ is an eigenvector of $\mA\mB$.
+where $\lambda$ is the eigenvalue and $\vx$ is a vector.\footnote{In equation \ref{equation:eigenvector relation}, some variables are repurposed to explain some general eigenvector relationships for matrix products. The reader should be careful not confuse this $\vx$ for the sparse coding coefficients, $\lambda$ for the $\operatorname{L}_1$ penalty factor applied to the coefficients, or $\mA$ and $\mB$ for the matrices in the ADMM constraints.}  So, if $\vx$ is an eigenvector of $\mB\mA$, $\mA\vx$ is an eigenvector of $\mA\mB$.
 %
 %
 \begin{equation}
@@ -584,7 +584,7 @@ where $\lambda$ is the eigenvalue and $\vx$ is a vector.\footnote{In equation \r
 \end{bmatrix}
 \end{equation}
 %
-The eigenvalues and corresponding eigenvectors of a $2 \times 2$ matrix can be computed using the quadradic formula. Assuming that the $2 \times 2$ matrix has $2$ distinct eigenvalues, the expressions for these are below.\footnote{It is not guaranteed the $2 \times 2$ matrix will have $2$ distinct eigenvalues. In Appendix \ref{chapter:eigenedge}, I consider those cases.}
+The eigenvalues and corresponding eigenvectors of a $2 \times 2$ matrix can be computed using the quadratic formula. Assuming that the $2 \times 2$ matrix has $2$ distinct eigenvalues, the expressions for these are below.\footnote{It is not guaranteed the $2 \times 2$ matrix will have $2$ distinct eigenvalues. In Appendix \ref{chapter:eigenedge}, I consider those cases.}
 %
 \begin{equation}
 \operatorname{eigval}\left(\begin{bmatrix} a & b \\ c & a^* \end{bmatrix}\right) = \operatorname{real}(a) \pm \sqrt{bc - (\operatorname{imag}(a))^2}
