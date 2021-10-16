@@ -47,7 +47,7 @@
 \BOOKMARK [2][-]{subsection.5.2.1}{JPEG Artifact Removal}{section.5.2}% 47
 \BOOKMARK [1][-]{section.5.3}{Inverse Representation Drift}{chapter.5}% 48
 \BOOKMARK [1][-]{section.5.4}{Tensorflow and Keras}{chapter.5}% 49
-\BOOKMARK [2][-]{subsection.5.4.1}{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}{section.5.4}% 50
+\BOOKMARK [2][-]{subsection.5.4.1}{Why Not Use Gradient Tape and TensorFlow-1-Style Code?}{section.5.4}% 50
 \BOOKMARK [2][-]{subsection.5.4.2}{Shared Weights Between Layers}{section.5.4}% 51
 \BOOKMARK [2][-]{subsection.5.4.3}{Custom Partial Gradients}{section.5.4}% 52
 \BOOKMARK [2][-]{subsection.5.4.4}{Updating TensorFlow Variables After Applying Gradients}{section.5.4}% 53

@@ -1,6 +1,6 @@
 \chapter{Practical Considerations}
 \section{Boundary Handling}
-Convolution and circular convolution can produce boundary effects that can impact performance. In the JPEG compression artifact removal chapter, $\mW$ is defined as the function producing $8 \times 8$ block DCT coefficients from an RGB image. However, to mitigate boundary effects this should in practice also include cropping the image. This allows $\mD_1\vx_1$ to reconstruct the signal outside of the measured space (similar to the "boundary masking" in \cite{wohlberg2016boundary}, but with the constraint and objective term swapped). Initialization is important however \cite{DBLP:journals/corr/WohlbergR17}. Reflecting across the boundary is a much better initialization approach than zeros, but if using patches, actual (compressed image) measurements would provide an even better initialization. 
+Convolution and circular convolution can produce boundary effects that can impact performance. In the JPEG compression artifact removal chapter, $\mW$ is defined as the function producing $8 \times 8$ block DCT coefficients from an RGB image. However, to mitigate boundary effects this should in practice also include cropping the image. This allows $\mD_1\vx_1$ to reconstruct the signal outside of the measured space (similar to the "boundary masking" in \cite{wohlberg2016boundary}, but with the constraint and objective term swapped). Initialization is important however \cite{DBLP:journals/corr/WohlbergR17}. Reflecting across the boundary is a much better initialization approach than zeros, but if using patches, actual (compressed image) measurements would provide an even better initialization. For the experiments in Chapter $4$, I use these compressed image measurements.
 \section{Removing Low-Frequency Signal Content}
 Convolutional dictionary models tend to struggle with low-frequency signal content, so ideally steps should be taken to avoid representing it with the dictionary model. Tikonov regularization is a straightforward means to remove low-frequency content:
 \begin{equation}
@@ -13,7 +13,7 @@ Tikonov regularation can struggle with block artifacts from JPEG compression. Ra
 \minimize_{\vx,\vv} \frac{1}{2}\|\vv - \vx\|_2^2 + \lambda\|\sum_i \mG_i\vx\|_2^2 + \indicator_{\{\mQ(\mW\vv) - \vs = \vzero\}}
 \end{equation}
 
-There are no constraints, so no dual variables are needed. Jut alternate between a Tikonov update for $\vx$ and an update for $\vv$ that closely resembles the $\vv$ update from the last chapert.
+There are no constraints, so no dual variables are needed. Just alternate between a Tikonov update for $\vx$ and an update for $\vv$ that closely resembles the $\vv$ update from the last chapter.
 Handling the cases in pointwise fashion, define function $h$ as the following clipping operation:
 %
 \begin{equation}
@@ -36,7 +36,7 @@ Rank-$1$ Hermtian updates to a Cholesky factorization or other inverse represent
 \section{Tensorflow and Keras}
 Most of the computations for my research rely on TensorFlow version 2.3.1 and version 2.4.1 \cite{tensorflow}, a Python library for machine learning specializing in building models with differentiable, parameterizable composite functions and learning model parameters using gradient descent or other gradient-based optimization methods. TensorFlow is a common platform for researchers and developers working on artificial neural networks, and there are many tutorials and exampes freely available online, so I will not replicate that work here. This chapter section the reader already has some familiarity with TensorFlow and Keras \cite{keras} (a high-level library inside TensorFlow). The goal of this section is to provide the reader with the tools and workarounds to be able to replicate my work without resorting to hacking things together with gradient tape and/or TensorFlow-1-style code.
 
-\subsection{Why Not Use Gradient Tape and TensorFlow-1-Stye Code?}
+\subsection{Why Not Use Gradient Tape and TensorFlow-1-Style Code?}
 Keras offers a high-level environment. Code written in Keras's framework is easier to integrate with other work. Gradient tape is great for hacking something together or debugging, but promotes styles of coding that are less readable, less maintainable, and less portable. Keras also has a lower learning curve than the broader TensorFlow library.
 \TODO{I should write more for this section or possibly remove it. Might help to read through Keras documentation and endorsements to see why they think it's necessary.}
 
@@ -116,7 +116,7 @@ class PostPrcCallback(keras.callbacks.Callback,PostPrc):
 \end{code}
 
 \subsection{The Perils of Using Built-In Functions for Complex Tensors and Arrays}
-Complex numbers are not as frequently used by researchers and practitioners, and many tools and platforms fail on complex cases.  Tensorflow's assign\_add command can fail on the GPU, so users should use the assign command instead. It is necessary in some cases to split complex variables into their real and imaginary components GPU errors. 
+Complex numbers are not as frequently used by researchers and practitioners, and many tools and platforms fail on complex cases.  Tensorflow's assign\_add command can fail on the GPU, so users should use the assign command instead. It is necessary in some cases to split complex variables into their real and imaginary components to avoid GPU errors. 
 The TensorFlow Probability version 0.11.1 \cite{tensorflowprobability} is an extension of TensorFlow mosly used for probabilistic models. The library contains a Cholesky update function, but the function does not properly handle complex inputs. To compute Cholesky updates for complex inputs, users should either write their own implementation or use my code (included in supplementary material). Similarly, the Randomized SVD algorithm in the Python scikit-learn library does not properly handle complex inputs.
 
 Errors like these are fairly common, so when dealing with complex data, researchers and practitioners should carefully verify that the function libraries they rely on are properly handling complex numbers. It is also important for code to be highly modularized, because if an error does not occur until computations on the computational graph or saving weights, platforms may not be able to identify where in the code the error is coming from, and error messages can be cryptic or even wrong.

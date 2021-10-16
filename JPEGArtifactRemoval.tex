@@ -7,9 +7,9 @@ The JPEG compression process begins with an RGB image input, and consists of fiv
 
 The standard reconstruction process reverses the lossless encoding, computes the IDCT of the blocks, upsamples the color channels, and reverses the color transform.
 \section{Modelling Compressed JPEG Images}
-Some researchers have observed convolutional dictionary models struggle with large smooth components of signals, likely due to the fact that shifted versions of smooth filters have high coherence.
+Some researchers have observed that convolutional dictionary models struggle with large smooth components of signals, likely due to the fact that shifted versions of smooth filters have high coherence.
 
-For this reason, it is often a good idea to subtract a smoothed version $\vs_{\text{smth}}$ of the signal, and only apply apply the dictionary model to the residual $\vs_{\text{rough}}$.
+For this reason, it is often a good idea to subtract a smoothed version $\vs_{\text{smth}}$ of the signal, and only apply the dictionary model to the residual $\vs_{\text{rough}}$.
 %
 \begin{equation}
 \vs_{\text{clean}} = \vs_{\text{smth}} + \vs_{\text{rough}}
@@ -55,9 +55,9 @@ My approach to solve this problem uses the ADMM algorthm, where $\vx_1,\ldots,\v
 \end{aligned}
 \end{equation}
 %
-The constraint $\mQ\mW(\vv) - \vs = \vzero$ is not an affine constraint because of the quantization. To resolve this, \cite{chodosh2020use}) approximate the quantization as a linear operator. However, the constraint is convex, so the constraint can be handled without approximation implicitly using and indicator function. For now, I will focus on the other variable updates.
+The constraint $\mQ\mW(\vv) - \vs = \vzero$ is not an affine constraint because of the quantization. To resolve this, \cite{chodosh2020use} approximate the quantization as a linear operator. However, the constraint is convex, so the constraint can be handled without approximation implicitly using an indicator function. For now, I will focus on the other variable updates.
 
-Setting $\vz_0 = \vv - \vs_{\text{smth}}$, the updates for $\vx$, $\vz$, and $\vgamma$ are identitical to those from the last chpater.
+Setting $\vz_0 = \vv - \vs_{\text{smth}}$, the updates for $\vx$, $\vz$, and $\vgamma$ are identitical to those from the last chapter.
 %
 \begin{equation}
 \mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} = \left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1}^{(t)} + \rho \left(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} + \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}}\right)\right)

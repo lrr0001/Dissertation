@@ -4,7 +4,7 @@
 \section{Dictionaries and Dictionary Learning}
 Dictionary models are powerful and versitile tools, useful in denoising \cite{wohlberg2016convolutional}, classification \cite{kong2012dictionary}, anomaly detection \cite{carroll2017outlier}, super-resolution \cite{polatkan2014bayesian}\cite{gu2015convolutional}, inpainting \cite{papyan2017convolutional}, trajectory-basis non-rigid structure from motion \cite{zhu2013convolutional}\cite{chodosh2020use}, and more. Dictionaries are interpretable, and their models are well-suited for incorporating model assumptions using apriori knowledge of the data. In some applications, well-performing dictionaries can be learned from very limited data.
 
-The dictionary model decomposes the signal into the dictionary and coefficients.
+The dictionary model decomposes the signal $\vs$ into the dictionary $\mD$ and coefficients $\vx$.
 %
 \begin{equation}
 \vs \approx \mD\vx
@@ -18,7 +18,7 @@ When the dictionary is known, solving for $\vx$ using $\mD$ and $\vs$ is a pursu
 	\caption{This is a $1$-dimensional dictionary with convolutional structure. The columns of the dictionary are shifted versions of the dictionary filters.}
 	\label{Figure: Convolutional Dictionary}
 \end{figure}
-The convolutional dictionary model is a dictionary model which imposes a convolutional structure on the dictionary. This structure is shown in figure \ref{Figure: Convolutional Dictionary}. Note that while the example uses $1$-dimensional convolution, it is straightforward to extend to multi-dimensional convolution through vectorization. The convolutional dictionary model equation can be notated as signals convolved with filters:
+The convolutional dictionary model is a dictionary model which imposes a convolutional structure on the dictionary. This structure is shown in Figure \ref{Figure: Convolutional Dictionary}. Note that while the example uses $1$-dimensional convolution, it is straightforward to extend to multi-dimensional convolution through vectorization. The convolutional dictionary model equation can be notated as signals convolved with filters:
 %
 \begin{equation}
 \vs \approx \sum_i \vf_i * \vx_i
@@ -39,7 +39,7 @@ A multi-layer dictionary treats the coefficients as the signal of a subsequent d
 \vx_{L - 1} \approx & \mD_L\vx_L
 \end{split}
 \end{equation}
-where $L$ is the number of layers. Pursuit for a multi-layer dictionary model seeks to find the coefficients for all layers $\vx_1,\vx_2,\hdots,\vx_L$. Multi-layer dictionary models have been used in applications such as feature extraction for classification \cite{chen2013deep}\cite{zeiler2010deconvolutional}\cite{pu2014bayesian} and trajectory-basis non-rigid structure from motion \cite{chodosh2020use}. Dictionary models can often be easily extended allow the researcher or practitioner to inject prior knowledge into the model architecture through the use of convex constraints or known projection operator $\mPhi$. For convolutional dictionaries, the projection operator $\mPhi$ need not have convolutional structure.
+where $L$ is the number of layers. Pursuit for a multi-layer dictionary model seeks to find the coefficients for all layers $\vx_1,\vx_2,\hdots,\vx_L$. Multi-layer dictionary models have been used in applications such as feature extraction for classification \cite{chen2013deep}\cite{zeiler2010deconvolutional}\cite{pu2014bayesian} and trajectory-basis non-rigid structure from motion \cite{chodosh2020use}. Dictionary models can often be easily extended to allow the researcher or practitioner to inject prior knowledge into the model architecture through the use of convex constraints or known projection operator $\mPhi$. For convolutional dictionaries, the projection operator $\mPhi$ need not have convolutional structure.
 %
 \begin{equation}
 \begin{split}
@@ -51,7 +51,7 @@ where $L$ is the number of layers. Pursuit for a multi-layer dictionary model se
 %
 In the context of multi-layer dictionary models, these types of dictionary model modifications have been shown to be useful for applications such as interpolation of LIDAR measurements using RGB imagery \cite{murdock2018deep}\cite{chodosh2018deep} and compression-artifact removal \cite{chodosh2020use}.
 
-Some researchers have noted that convolutional neural networks resemble multi-layer dictionaries \cite{papyan2017convolutional}: thresholding is a type of pursuit algorithm, and rectified linear unit activations perform the same operation. A convolutional neural network is a composite function of convolutionals, pooling functions, and activation functions. Over the last decade, convolutional neural networks have reached state-of-the-art performance on a wide variety of tasks. In a way, multi-layer dictionary models can be thought of as a blend of dictionary models and convolutional neural networks, since multi-layer dictionary models mimic the layered structure of convolutional neural networks, while mantaining the interpretability of dictionary models.
+Some researchers have noted that convolutional neural networks resemble multi-layer dictionaries \cite{papyan2017convolutional}: thresholding is a type of pursuit algorithm, and rectified linear unit activations perform the same operation. A convolutional neural network is a composite function of convolutionals, pooling functions, and activation functions. Over the last decade, convolutional neural networks have reached state-of-the-art performance on a wide variety of tasks. In a way, multi-layer dictionary models can be thought of as a blend of dictionary models and convolutional neural networks, since multi-layer dictionary models mimic the layered structure of convolutional neural networks, while maintaining the interpretability of dictionary models.
 
 
 \section{Organization of Dissertation}
