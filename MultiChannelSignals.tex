@@ -513,7 +513,9 @@ Consider the update equation.
 \hat{\mD}[\hat{k}]^{(n + 1)} = \hat{\mD}[\hat{k}]^{(n)} + \mU\mV[\hat{k}]^H
 \end{equation}
 %
-where $\mU$ is an orthogonal matrix of size $C \times \mathbb{R}$ and $\mV[\hat{k}]$ is an orthogonal matrix of size $M \times \mathbb{R}$.\footnote{$\mU$ and $\mV$ are also iteration specific, but to notate that would over-clutter the equations. For efficient, low-rank updates to the inverse representation, I could allow both $\mU$ and $\mV$ to vary in respect to frequency $\hat{k}$ (instead of just $\mV$). However, I also need to limit the spatial support of the dictionary (so that the filter size is small), and preventing $\mU$ from varying across frequency is part of a means to satisfy that constraint.}
+where $\mU$ is an orthogonal matrix of size $C \times 
+\reflectbox{R}$ and $\mV[\hat{k}]$ is an orthogonal matrix of size $M \times 
+\reflectbox{R}$.\footnote{$\mU$ and $\mV$ are also iteration specific, but to notate that would over-clutter the equations. For efficient, low-rank updates to the inverse representation, I could allow both $\mU$ and $\mV$ to vary in respect to frequency $\hat{k}$ (instead of just $\mV$). However, I also need to limit the spatial support of the dictionary (so that the filter size is small), and preventing $\mU$ from varying across frequency is part of a means to satisfy that constraint.}
 
 Then,
 %
@@ -527,16 +529,20 @@ For brevity and simplicity, I will drop the notation indexing the frequency $\ha
 \rho\mId + (\hat{\mD}^{(n + 1)})^H\hat{\mD}^{(n + 1)} = \rho\mId + (\hat{\mD}^{(n)})^H\hat{\mD}^{(n)} + \mV\mU^H \mU\mV^H + \mV\mU^H\hat{\mD}^{(n)} + (\hat{\mD}^{(n)})^H\mU\mV^H
 \end{equation}
 %
-Given that $\mV$ and $\mU$ are orthogonal matrices, $\mV\mU^H\mU\mV^H$ can easily be broken into $\mathbb{R}$ rank-one Hermitian updates.
+Given that $\mV$ and $\mU$ are orthogonal matrices, $\mV\mU^H\mU\mV^H$ can easily be broken into $
+\reflectbox{R}$ rank-one Hermitian updates.
 %
 \begin{equation}
-\mV\mU^H\mU\mV^H = \sum_{\ell = 1}^{\mathbb{R}} \vu_{\ell}^H\vu_{\ell}\vv_{\ell}\vv_{\ell}^H
+\mV\mU^H\mU\mV^H = \sum_{\ell = 1}^{
+\reflectbox{R}} \vu_{\ell}^H\vu_{\ell}\vv_{\ell}\vv_{\ell}^H
 \end{equation}
 %
-Similarly, $\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H$ can be broken into $\mathbb{R}$ Hermitian, rank-two updates:
+Similarly, $\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H$ can be broken into $
+\reflectbox{R}$ Hermitian, rank-two updates:
 %
 \begin{equation}
-\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H = \sum_{\ell = 1}^{\mathbb{R}} \left( \vv_{\ell}\vu_{\ell}^H\hat{\mD} + \hat{\mD}^H\vu_{\ell}\vv_{\ell}^H \right)
+\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H = \sum_{\ell = 1}^{
+\reflectbox{R}} \left( \vv_{\ell}\vu_{\ell}^H\hat{\mD} + \hat{\mD}^H\vu_{\ell}\vv_{\ell}^H \right)
 \end{equation}
 %
 %
@@ -640,7 +646,8 @@ Recall once again, the update under consideration:
 \hat{\mD}^{(n + 1)}[\hat{k}] = \hat{\mD}^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}]
 \end{equation}
 %
-This update must be of rank $\mathbb{R}$ at every frequency. Furthermore, the dictionary filter is spatially limited to its filter size. This second constraint is met if $\mV^H[\hat{k}]$ is similarly spatially limited.
+This update must be of rank $
+\reflectbox{R}$ at every frequency. Furthermore, the dictionary filter is spatially limited to its filter size. This second constraint is met if $\mV^H[\hat{k}]$ is similarly spatially limited.
 
 \subsection{Handling Dictionary Normalization}
 Consider the optimization problem:
@@ -782,7 +789,9 @@ Thus, with this modification to the sparse coding optimization problem, the inve
 
 
 \section{Conclusion}
-In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently ($\mathcal{O}(N\mathbb{R}M^2)$, $\mathbb{R} << M$) when used within a dictionary-learning algorithm. This is an improvement to existing methods, whose inverse updates require cubic complexity $\mathcal{O}(NM^3)$.
+In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently ($\mathcal{O}(N
+\reflectbox{R}M^2)$, $
+\reflectbox{R} << M$) when used within a dictionary-learning algorithm. This is an improvement to existing methods, whose inverse updates require cubic complexity $\mathcal{O}(NM^3)$.
 % This is a figure in landscape orientation
 %\begin{sidewaysfigure}
 %\includegraphics[width=\textwidth]{figures/exampleFigure.png}
