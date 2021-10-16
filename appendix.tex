@@ -10,7 +10,7 @@
 These derivations are based on the work of \cite{krause2015more}, but modified to handle complex numbers.
 
 
-Let $\mA^{(n)} = \mL\mL^H$ be a Hermitian, positive definite matrix of dimension $C \times C$ and $\mL$ be a lower trangular matrix. Then, the diagonal of $\mL$ is positive and real.
+Let $\mA^{(n)} = \mL\mL^H$ be a Hermitian, positive definite matrix of dimension $C \times C$ and $\mL$ be a lower triangular matrix. Then, the diagonal of $\mL$ is positive and real.
 
 \begin{equation}
 \mA^{(n)} = \begin{bmatrix} a_{1,1} & \hdots & a_{C,1}^{*} \\
@@ -36,7 +36,7 @@ Dividing $\mA^{(n)}$ into blocks:
 \mA^{(n)} = \begin{bmatrix} \ell_{1,1}^2 & \ell_{1,1}\vl_{2,1}^H \\ \ell_{1,1}\vl_{2,1} & \mL_{2,2}\mL_{2,2}^H + \vl_{2,1}\vl_{2,1}^H \end{bmatrix}
 \end{equation}
 
-Consider the rank-$1$ update:\footnote{If $\lambda$ is negative, the result is not guaranteed to be positive definite. In general, updates to inverse representations with a negative $\lambda$ (sometimes refered to as "downdates") are less numerically stable, even if the resulting matrix is still positive definite.}
+Consider the rank-$1$ update:\footnote{If $\lambda$ is negative, the result is not guaranteed to be positive definite. In general, updates to inverse representations with a negative $\lambda$ (sometimes called "downdates") are less numerically stable, even if the resulting matrix is still positive definite.}
 \begin{equation}
 \mA^{(n + 1)} = \mA^{(n)} + \lambda\vv\vv^H
 \end{equation}
@@ -330,7 +330,7 @@ If $\vb$ affects $\loss$ through multiple branches, the gradient is the sum of m
 \end{equation}
 
 \subsection{Complex Numbers}
-The chain rule can be applied for complex-valued functions if the complex-valued functions are analytic. However, for a non-analytic function $f$, the limit $\lim_{\Delta z \rightarrow 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}$ does not exist. For non-analytic function $f: \Z^M \rightarrow \R$, define\footnote{The partial derivatives in this definition are not guarenteed to exist. For those cases, this derivative cannot be calculated. For the rest of this part of the Appendix, assume that the non-analytic functions are chosen such that the partial derivatives exist.}
+The chain rule can be applied for complex-valued functions if the complex-valued functions are analytic. However, for a non-analytic function $f$, the limit $\lim_{\Delta z \rightarrow 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}$ does not exist. For non-analytic function $f: \Z^M \rightarrow \R$, define\footnote{The partial derivatives in this definition are not guaranteed to exist. For those cases, this derivative cannot be calculated. For the rest of this part of the Appendix, assume that the non-analytic functions are chosen such that the partial derivatives exist.}
 \begin{equation} \label{equation:Derivative Definition}
 \frac{\partial f(\vz)}{ \partial \vz} = \frac{\partial f(\vz)}{\partial \real(\vz)} - j\frac{\partial f(\vz)}{\partial \imag(\vz)}
 \end{equation}
@@ -417,7 +417,7 @@ The partial derivative of $g_{\hat{\mD}}(\vy)$ in respect to $\vy$ is also strai
 \frac{\partial g_{\hat{\mD}}(\vy)}{\partial \vy} = \left(\rho\mId + \hat{\mD}\hat{\mD}^H\right)^{-1}
 \end{equation}
 
-The function $g_{\hat{\mD}}$ from the Woodbury form uses a different inverse: $\left(\rho\mId + \hat{\mD}\hat{\mD}^H\right)^{-1}$. However, the derivations for its derivatives are very similar to that of the previous inverse $\left(\rho\mId + \hat{\mD}^H\hat{\mD}\right)^{-1}$, so the focus here will remain on the orginal formulation without the Woodbury transformation.
+The function $g_{\hat{\mD}}$ from the Woodbury form uses a different inverse: $\left(\rho\mId + \hat{\mD}\hat{\mD}^H\right)^{-1}$. However, the derivations for its derivatives are very similar to that of the previous inverse $\left(\rho\mId + \hat{\mD}^H\hat{\mD}\right)^{-1}$, so the focus here will remain on the original formulation without the Woodbury transformation.
 
 \subsection{Partial Derivatives in Respect to Dictionary} \label{section:Differentiating Standard Form}
 Let
@@ -630,7 +630,7 @@ If $\hat{\mD}$ affects $\loss$ through other functions (rather than just through
 \end{equation}
 
 
-Using simlar derivations for the function $g_{\hat{\mD}}(\vy)$ yields the following equation for the gradient term:
+Using similar derivations for the function $g_{\hat{\mD}}(\vy)$ yields the following equation for the gradient term:
 \begin{equation}
 \nabla^{(\vy \rightarrow g_{\mD}(\vy))}_{\hat{\mD}} \loss = -\left(\mQ_g^{-1}\left(\frac{\partial \loss}{\partial g_{\hat{\mD}}(\vb)}\right)^H\right)(\vb^H\mQ_g^{-1}\hat{\mD}) - (\mQ_g^{-1}\vb)\left(\frac{\partial \loss}{\partial g_{\hat{\mD}}(\vb)}\mQ_g^{-1}\hat{\mD}\right)
 \end{equation}
