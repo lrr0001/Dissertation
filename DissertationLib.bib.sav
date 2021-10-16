@@ -588,4 +588,13 @@ and show that they provide only a partial solution at best. Taken together, our 
   year   = {2017},
 }
 
+@Article{krizhevsky2012imagenet,
+  author  = {Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E},
+  journal = {Advances in neural information processing systems},
+  title   = {Imagenet classification with deep convolutional neural networks},
+  year    = {2012},
+  pages   = {1097--1105},
+  volume  = {25},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

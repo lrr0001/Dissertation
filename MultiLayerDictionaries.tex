@@ -1,8 +1,8 @@
 \chapter{Learning Multi-Layer Dictionaries}
 \section{Introduction}
-A multi-layer dictionary model is composed of multiple dictionaries; the model treats the dictionary coefficients of a previous layer as the signal for the subsequent layer. This model dates back to Zeiler's Deconvolutional Neural Networks \cite{zeiler2010deconvolutional} and can be thought of as a deep autoencoder \cite[Chapter~14]{Goodfellow2016-DeepLearningBook}\cite{Rangamani2018DictLandAE}. Some researchers have interpreted convolutional neural networks as multi-layer dictionary models, the convolution and its corresponding rectified linear units serving as a crude pursuit algorithm \cite{papyan2017convolutional}. In this chapter, I explain how to apply the novel dictionary learning algorithm from the prior chapter to the multi-layer dictionary learning problem.
+A multi-layer dictionary model is composed of multiple dictionaries; the model treats the dictionary coefficients of a previous layer as the signal for the subsequent layer. This model dates back to Zeiler's Deconvolutional Neural Networks \cite{zeiler2010deconvolutional} and can be thought of as a deep autoencoder \cite[Chapter~14]{Goodfellow2016-DeepLearningBook}\cite{Rangamani2018DictLandAE}. Some researchers have interpreted convolutional neural networks as multi-layer dictionary models, the convolution and its corresponding rectified linear units serving as a crude pursuit algorithm \cite{papyan2017convolutional}. This chaper presents how to apply the novel dictionary learning algorithm from the prior chapter to the multi-layer dictionary learning problem.
 \section{Literature Review}
-In 2010, Zeiler et al. proposed a multi-layer dictionary model termed a deconvolutional network. The learning process for dictionary filters is entirely unsupervised, and they learn their filters layer-by-layer. Their algorithm is greedy in the sense that there is no feedback from subsequent layers to influence the learning process on the previous layer. This approach was tested both on the task of removing added gaussian noise to images, and also as a feature extraction method for object recognition on the Caltech-101 dataset \cite{fei2004-Caltech101}. While this research drew a lot of attention at the time, as the success of alternative models like convolutional neural networks grew, the popularity of deconolutional networks decreased.
+In 2010, Zeiler et al. proposed a multi-layer dictionary model termed a deconvolutional network \cite{zeiler2010deconvolutional}. The learning process for dictionary filters is entirely unsupervised, and they learn their filters layer-by-layer. Their algorithm is greedy in the sense that there is no feedback from subsequent layers to influence the learning process on the previous layer. This approach was tested both on the task of removing added gaussian noise to images, and also as a feature extraction method for object recognition on the Caltech-101 dataset \cite{fei2004-Caltech101}. While this research drew a lot of attention at the time, as the success of alternative models like convolutional neural networks grew \cite{krizhevsky2012imagenet}, the popularity of deconolutional networks decreased.
 
 Multi-layer dictionaries also appear in Bayesian models, going by names such as hierarchical convolutional factor analysis \cite{chen2011hierarchical}\cite{chen2013deep} and deep deconvolutional learning \cite{pu2014generative}. These networks use probabilistic models to prune network architecture and provide interpretable dictionaries. Inference can be slow.
 
@@ -199,20 +199,71 @@ Note there is a dependence on $\mR_{\ell + 1}^{-1}\vx_{\ell + 1}$. The last laye
 Rather than tracking $\vgamma_{\ell}$ or $\frac{\vgamma_{\ell}}{\rho}$ explicitly, it will be easier to track $\frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}$. The update equations are very straightforward.
 %
 \begin{equation}
-\frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}} + (\alpha - 1)(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} - \mR^{-1}\vz_{\ell}^{(t + 1)})
+\frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}} + (\alpha - 1)(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} - \mR^{-1}\vx_{\ell}^{(t + 1)})
 \end{equation}
 %
 \begin{equation}
-\frac{\vgamma_{\ell}^{(t + 1)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} + \mR_{\ell}^{-1}\vz_{\ell}^{(t + 1)} - \mR^{-1}\vz_{\ell}^{(t + 1)} 
+\frac{\vgamma_{\ell}^{(t + 1)}}{\rho\sqrt{\mu_{\ell}}} = \frac{\vgamma_{\ell}^{\left(t + \frac{1}{2}\right)}}{\rho\sqrt{\mu_{\ell}}} + \mR_{\ell}^{-1}\vz_{\ell}^{(t + 1)} - \mR^{-1}\vx_{\ell}^{(t + 1)} 
 \end{equation}
 
 \section{Pursuit Algorithm Summary}
-Together, the equations from the sections above produce a pursuit algorthm for a multi-layer dictionary model, as shown in algorithm \ref{algorithm:ADMM multi-layer pursuit}. It is important to note that unlike in \cite{zeiler2010deconvolutional}, there is feedback between layers during pursuit.  Figure \ref{figure:ADMM multi-layer pursuit diagram} shows the interactions between layers across iterations. This allows for asymptotic convergence to an optimal solution of the objective in equation \ref{equation:ADMM Multi-Layer Pursuit Objective}.
+Together, the equations from the sections above produce a pursuit algorthm for a multi-layer dictionary model, as shown in algorithm \ref{algorithm:ADMM Multi-Layer Pursuit}. It is important to note that unlike in \cite{zeiler2010deconvolutional}, there is feedback between layers during pursuit.  Figure \ref{figure:ADMM Multi-Layer Pursuit Diagram} shows the interactions between layers across iterations. This allows for asymptotic convergence to an optimal solution of the objective in equation \ref{equation:ADMM Multi-Layer Pursuit Objective}.
+\begin{figure}
+	\includegraphics[width=\textwidth]{figures/multi-layer_ADMM-node-dependencies.PNG}
+	\caption{This diagram shows interactions between layers across iterations. The double-sided arrows at the top of the diagram go both directions because $\vx_{\ell + 1}$ influences $\vz_{\ell}$ during initialization.}
+	\label{figure:ADMM Multi-Layer Pursuit Diagram}
+\end{figure}
+\begin{algorithm}[h]
+\SetAlgoLined 
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\Input{Overrelaxation parameter: $\alpha \in (0,2]$, Number of layers: $L$, Number of filters: $M$, Signal size: $N$, Signal: $\vs$, Unnormalized dictionary for each layer: $\mD_{\ell}$, Objective function term coefficients: $\mu_{\ell}$ and $\lambda_{\ell}$, Efficient means to compute $(\rho\mId + \mD_{\ell}^T\mD_{\ell})^{-1}\vb$}
+\Output{Sparse coding coeficients: either $\vx_{\ell}$ or $\vz_{\ell}$}
+ %initialization:\\
+   \For{$\ell \in \{1,\hdots, L\}$}
+   {
+      $\vgamma_{\ell} = \vzero$
+      \For{$m \in \{1,\hdots, M\}$}
+      {
+         $r_{\ell}[m] = \|\mD_{\ell}[:,mN]\|_2$
+      }
+   }
+   $\vx_1 = \mR_1^{-2} \mD_1^T$  \\
+   \For{$\ell \in \{2,\hdots,L\}$}
+   {
+      $\vx_{\ell} = \mR_{\ell}^{-2}\mD_{\ell}^T\mR_{\ell - 1}\vx_{\ell - 1}$
+   }
+ \While{Not Converged}{
+   \For{$\ell \in \{1,\hdots,L - 1\}$}
+   {
+      $\vz_{\ell} = (\rho\mu_{\ell}\mId + \mu_{\ell + 1}\mR_{\ell}^2)^{-1}\mR_{\ell}^2\operatorname{S}_{\lambda_{\ell}}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-1}(\vx_{\ell} - \vgamma_{\ell})\right)$
+   }
+   $\vz_L = \mR_L \operatorname{S}_{\frac{\lambda_L\mR_L}{\rho\mu_L}}(\vx_L - \vgamma_L)$ \\
+   \For{$\ell \in \{1,\hdots,L\}$}
+   {
+      $\vgamma_{\ell} = \vgamma_{\ell} + \mR_{\ell}^{-1}\vz_{\ell} - \vx_{\ell}$
+   }
+   $\vx_1 = (\rho\mId + \mD_1^T\mD_1)^{-1}(\mD_1^T\vs + \rho(\mR_1^{-1}\vz_1 + \vgamma_1))$ \\
+   \For{$\ell \in \{2,\hdots,L\}$}
+   {
+      $\vx_{\ell} = (\rho\mId + \mD_{\ell}^T\mD_{\ell})^{-1}(\mD_{\ell}^T\vz_{\ell - 1} + \rho(\mR_{\ell}^{-1}\vz_{\ell} + \vgamma_{\ell}))$
+   }
+   \For{$\ell \in \{1,\hdots,L\}$}
+   {
+      $\vgamma_{\ell} = \vgamma_{\ell} + (\alpha - 1)(\mR_{\ell}^{-1}\vz_{\ell} - \vx_{\ell})$
+   }
+ }
+   \For{$\ell \in \{1,\hdots,L\}$}
+   {
+      $\vx_{\ell} = \mR_{\ell}\vx_{\ell}$
+   }
+ \caption{ADMM for Multi-Layer Pursuit with Unnormalized Dictionary}\label{algorithm:ADMM Multi-Layer Pursuit}
+\end{algorithm}
 
 \section{Dictionary Learning}
-There are many possible approaches to compute dictionary updates, but the focus here will be on gradient descent. The pursuit algorithm generates several layers of coefficients from an input signal, and these coeffients can subsequently be used to generate some output, for classification, reconstruction, or some other task. With the appropriate choice of loss function $\loss$, backpropagation can be used to update the dictionaries. All of the computations in pursuit are almost\footnote{Like rectified linear activation functions, there is a discontinuity in the derivative for shrinkage operators. While such functions are technically not differentiable, this does not pose any issue for backpropagation. Operations that rely on a conjugate conjugate of a complex input also are not differentiable, but since the output is a scalar loss function, gradients can still be computed, which is sufficient for gradient descent. See Appendix C for details.} differentiable, so backpropagation is possible all the way back to the signal. Regardless of whether stochastic gradient descent or momentum methods such as Nesterov \cite{sutskever2013importance} or ADAM \cite{kingma2017adam} is used, the dictionary updates must be replaced with low-rank substitutes if the number of channels is large, so that the inverse decomposition can be updated efficiently.
+There are many possible approaches to compute dictionary updates, but the focus here will be on gradient descent. The pursuit algorithm generates several layers of coefficients from an input signal, and these coeffients can subsequently be used to generate some output, for classification, reconstruction, or some other task. With the appropriate choice of loss function $\loss$, backpropagation can be used to update the dictionaries. All of the computations in pursuit are almost\footnote{Like rectified linear activation functions, there is a discontinuity in the derivative for shrinkage operators. While such functions are technically not differentiable, this does not pose any issue for backpropagation. Operations that rely on a conjugate conjugate of a complex input also are not differentiable, but since the output is a scalar loss function, gradients can still be computed, which is sufficient for gradient descent. See Appendix C for details.} differentiable, so backpropagation is possible all the way back to the signal. Regardless of whether stochastic gradient descent or momentum methods such as Nesterov \cite{sutskever2013importance} or ADAM \cite{kingma2017adam} is used, the dictionary updates must be replaced with low-rank substitutes if the number of channels is large, so that the inverse decomposition can be updated efficiently. At least some of the gradients are computed in frequency domain. The convolutional filters are either spatially or temporally bound, and the frequency domain gradients will not respect that constraint, so they will need to be transformed and truncated.
 
-Backpropagating gradients through most of the operations in the pursuit algorithm is very straightforward. Some platforms such as PyTorch \cite{paszke2017automatic} or TensorFlow \cite{tensorflow} will even do so automatically. However, the $\vx$-updates rely on the decomposition of the inverse, and this prevents automatic differentiation in respect to the dictionaries for those operations. The equations necessary to compute gradients for those operations are derived in appendix C.
+Backpropagating gradients through most of the operations in the pursuit algorithm is very straightforward. Some platforms such as PyTorch \cite{paszke2017automatic} or TensorFlow \cite{tensorflow} will even do so automatically. However, the $\vx$-updates rely on a matrix decomposition to solve an inverse problem, and this prevents automatic differentiation in respect to the dictionaries. The equations necessary to compute gradients for the inverse problem in the $\vx$-update are derived in appendix C.
 Let $\hat{\mD}_{\ell}$ be the frequency domain representation of the unnormalized dictionary corresponding to the $\ell$th layer, and let $\mQ_{\ell} = \rho\mId + \hat{\mD}_{\ell}^H\hat{\mD}_{\ell}$.
 \begin{equation}
 \nabla_{\hat{\mD}_{\ell}}^{(\vb \rightarrow \mQ_{\ell}^{-1}\vb)} \loss = -(\hat{\mD}_{\ell}\mQ_{\ell}^{-1}\vb)(\mQ_{\ell}^{-1}\nabla_{\mQ_{\ell}^{-1}\vb} \loss)^H - (\hat{\mD}_{\ell}\mQ_{\ell}^{-1}\nabla_{\mQ_{\ell}^{-1}\vb} \loss) (\mQ_{\ell}^{-1}\vb)^H
@@ -227,6 +278,37 @@ Let $\mXi_{\ell} = \rho\mId + \hat{\mD}_{\ell}\hat{\mD}_{\ell}^H$.
 where $\vb$ is the input vector to the computational step $\mXi_{\ell}^{-1}\vb$.
 
 With these equations it is possible to compute dictionary updates through backpropagation.  Putting it all together, a dictionary learning algorithm for multi-layer dictionary models is shown in algorithm \ref{algorithm:Multi-Layer Dictionary Learning}.
+
+\begin{algorithm}[h]
+\SetAlgoLined
+   \SetKwInOut{Input}{input}
+   \SetKwInOut{Output}{output}
+   \Input{Overrelaxation Parameter: $\alpha \in (0,2]$, Signal: $\vs$, Unnormalized initial dictionary for each layer: $\mD_{\ell}$, Objective function term coefficients for each layer: $\mu_{\ell}$ and $\lambda_{\ell}$}
+   \Output{Unnormalized dictionaries for each layer: $\mD_{\ell}$}
+ %initialization:\\
+   \For{$\ell \in \{1,\hdots,L\}$}
+   {
+      $\left(\rho\mId + \mD_{\ell}^T\mD_{\ell}\right) = \operatorname{ComputeDecomp}\left(\rho,\mD_{\ell} \right)$
+   }
+   $i = 0$ \\
+   \While{Stopping Criteria Not Met}{
+   $\vs = \operatorname{GetData}(i)$ \\
+   $i = i + 1$ \\
+   $\vx_1,\hdots,\vx_L = \operatorname{MultiLayerPursuit}(\vs,\alpha,\vmu,\vlambda,\mD,(\rho\mId + \mD_1^T\mD_1),\hdots,(\rho\mId + \mD_L^T\mD_L))$ \\
+   $\loss = \operatorname{ComputeLoss}(\vx_1,\hdots,\vx_L)$ \\
+   $\nabla_{\hat{\mD}_1} \loss,\hdots,\nabla_{\hat{\mD}_L} \loss = \operatorname{Backpropagation}(\loss,\mD_1,\hdots,\mD_L)$ \\
+   $\mDelta \hat{\mD}_1,\hdots,\mDelta \hat{\mD}_L = \operatorname{CalculateGradientStep}(\nabla_{\hat{\mD}_1} \loss,\hdots,\nabla_{\hat{\mD}_L} \loss)$ \\
+   \For{$\ell \in \{1,\hdots,L\}$}
+   {
+      $\tilde{\mD} = \operatorname{Normalize}(\hat{\mD}_{\ell} + \mDelta \hat{\mD}_{\ell})$ \\
+      $\mDelta \mD_{\ell} = \operatorname{Truncate}(\F^{-1}\operatorname{RandomizedSVD}(\tilde{\mD} - \hat{\mD}_{\ell}))$ \\
+      $\left(\rho\mId + \mD_{\ell}^T\mD_{\ell}\right) = \operatorname{UpdateDecomp}\left(\left(\rho\mId + \mD_{\ell}^T\mD_{\ell}\right),\rho,\mD_s,\mDelta\mD \right)$ \\
+      $\mD_{\ell} = \mD + \mDelta\mD$ \\
+      $\hat{\mD}_{\ell} = \F(\mD_{\ell})$
+   }
+   }
+ \caption{Multi-Layer Dictionary Learning}\label{algorithm:Multi-Layer Dictionary Learning}
+\end{algorithm}
 
 \section{Summary}
 In this chapter, I have applied the novel sparse coding algorithm from the previous chapter to a multi-layer dictionary model. If the dictionaries are updated with low-rank updates, the inverse representation necessary for the $\vx$ updates in the algorithm can be updated efficiently. This approach offers an alternative to direct proximal methods such as FISTA or mathematically suspect inverse approximations like the tight-frame assumption.

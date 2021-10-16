@@ -564,4 +564,28 @@ and show that they provide only a partial solution at best. Taken together, our 
   volume  = {7},
 }
 
+@Misc{kingma2017adam,
+  author        = {Diederik P. Kingma and Jimmy Ba},
+  title         = {Adam: A Method for Stochastic Optimization},
+  year          = {2017},
+  archiveprefix = {arXiv},
+  eprint        = {1412.6980},
+  primaryclass  = {cs.LG},
+}
+
+@InProceedings{sutskever2013importance,
+  author       = {Sutskever, Ilya and Martens, James and Dahl, George and Hinton, Geoffrey},
+  booktitle    = {International conference on machine learning},
+  title        = {On the importance of initialization and momentum in deep learning},
+  year         = {2013},
+  organization = {PMLR},
+  pages        = {1139--1147},
+}
+
+@Article{paszke2017automatic,
+  author = {Paszke, Adam and Gross, Sam and Chintala, Soumith and Chanan, Gregory and Yang, Edward and DeVito, Zachary and Lin, Zeming and Desmaison, Alban and Antiga, Luca and Lerer, Adam},
+  title  = {Automatic differentiation in pytorch},
+  year   = {2017},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

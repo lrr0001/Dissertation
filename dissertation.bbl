@@ -933,6 +933,34 @@
   \field{year}{2004}
 \endentry
 
+\entry{krizhevsky2012imagenet}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Krizhevsky}{K.}%
+     {Alex}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sutskever}{S.}%
+     {Ilya}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hinton}{H.}%
+     {Geoffrey~E}{G.~E.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{KASIHGE1}
+  \strng{fullhash}{KASIHGE1}
+  \field{pages}{1097\bibrangedash 1105}
+  \field{title}{Imagenet classification with deep convolutional neural
+  networks}
+  \field{volume}{25}
+  \field{journaltitle}{Advances in neural information processing systems}
+  \field{year}{2012}
+\endentry
+
 \entry{chen2011hierarchical}{inproceedings}{}
   \name{author}{5}{}{%
     {{}%
