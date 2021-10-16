@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  16 OCT 2021 14:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  16 OCT 2021 14:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1116,7 +1116,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [18] [19] [20]
-Overfull \hbox (9.18976pt too wide) in paragraph at lines 508--509
+Overfull \hbox (13.53416pt too wide) in paragraph at lines 508--509
 []\OT1/ptm/m/n/12 Thus, $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^Z\OT1/cmr/bx/n/12 
 I \OT1/cmr/m/n/12 + [][])[]$ \OT1/ptm/m/n/12 re-ally con-sists of $[]$ sep-a-ra
 te in-verse prob-lems: $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^Z\OT1/cmr/bx/n/12 I
@@ -1365,7 +1365,7 @@ s/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on dissertation.pdf (89 pages, 551414 bytes).
+Output written on dissertation.pdf (89 pages, 551439 bytes).
 PDF statistics:
  1527 PDF objects out of 1728 (max. 8388607)
  1386 compressed objects within 14 object streams
