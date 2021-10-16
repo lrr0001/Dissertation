@@ -129,7 +129,7 @@ The ADMM algorithm is an iterative search for the saddle point of the augmented 
 \SetAlgoLined
 %\KwResult{Write here the result }
  %initialization:\\
-   $\vy = $ inital guess \\
+   $\vy = $ initial guess \\
    $\vu = \vzero$ \\
  \While{Not Converged}{
   $\vx = \arg \min_{\vx}  \L_{\rho}(\vx,\vy,\vu)$ \\
@@ -179,7 +179,7 @@ When $\alpha > 1$, this is known as over-relaxation, and if $\alpha < 1$, this i
 %\KwResult{Write here the result }
  %initialization:\\
    $\alpha \in (0,2]$ \\
-   $\vy = $ inital guess \\
+   $\vy = $ initial guess \\
    $\vu_s = \vzero$ \\
  \While{Not Converged}{
   $\vx = \arg \min_{\vx}  \L_{\rho}(\vx,\vy,\rho\vu_s)$ \\
@@ -305,7 +305,7 @@ Writing $\mD$ in a block structure, I have
 \end{bmatrix}
 \end{equation}
 %
-where $\mD_{c,m}$ is a toplitz matrix capturing channel $c$ of the $m$th filter of the dictionary. Toplitz matrices are diagonalizable with Fourier eigenvectors:
+where $\mD_{c,m}$ is a circulant matrix capturing channel $c$ of the $m$th filter of the dictionary. Circulant matrices are diagonalizable with Fourier eigenvectors:
 %
 \begin{equation}
 \mD = \begin{bmatrix}
