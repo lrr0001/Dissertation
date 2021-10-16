@@ -1,12 +1,12 @@
 \chapter{JPEG Artifact Removal}
 \section{Introduction}
-Despite the existance of better compression algorithms, use of the JPEG compression algorithm is ubiquitous: it is the most commonly used image compression algorithm.  Overzealous JPEG compression can produce visible distortions, and image restoration from these distortions is a challenging problem. There are two aspects of JPEG compression which make the restoration process more challenging than simpler restoration problems like deblurring or removing salt-and-pepper noise: JPEG's block-based approach is not spatially invariant, and the quantization is nonlinear. This chapter describes a novel approach to address the challenges of JPEG image restoration using the ADMM-based convolutional sparse coding for a multi-layer dictionary model.
+Despite the existence of better compression algorithms, use of the JPEG compression algorithm is ubiquitous: it is the most commonly used image compression algorithm.  Overzealous JPEG compression can produce visible distortions, and image restoration from these distortions is a challenging problem. There are two aspects of JPEG compression which make the restoration process more challenging than simpler restoration problems like deblurring or removing salt-and-pepper noise: JPEG's block-based approach is not spatially invariant, and the quantization is nonlinear. This chapter describes a novel approach to address the challenges of JPEG image restoration using the ADMM-based convolutional sparse coding for a multi-layer dictionary model.
 \section{JPEG Algorithm}
 
-The JPEG compression process begins with an RGB image input, and consists of five steps. The first is a color transformation, transitioning from RGB to YUV. Then, the U and V color channels are downsampled.  The DCT for each $8 \times 8$ block is computed (separately for each channel).  The DCT coefficients are then quantized using a quantization matrix determined by a user-chosen JPEG quality factor. Finally, these quantized coefficients are reodered and encoded using a lossless variable length coding process.
+The JPEG compression process begins with an RGB image input, and consists of five steps. The first is a color transformation, transitioning from RGB to YUV. Then, the U and V color channels are downsampled.  The DCT for each $8 \times 8$ block is computed (separately for each channel).  The DCT coefficients are then quantized using a quantization matrix determined by a user-chosen JPEG quality factor. Finally, these quantized coefficients are reordered and encoded using a lossless variable length coding process.
 
 The standard reconstruction process reverses the lossless encoding, computes the IDCT of the blocks, upsamples the color channels, and reverses the color transform.
-\section{Modelling Compressed JPEG Images}
+\section{Modeling Compressed JPEG Images}
 Some researchers have observed that convolutional dictionary models struggle with large smooth components of signals, likely due to the fact that shifted versions of smooth filters have high coherence.
 
 For this reason, it is often a good idea to subtract a smoothed version $\vs_{\text{smth}}$ of the signal, and only apply the dictionary model to the residual $\vs_{\text{rough}}$.
@@ -43,9 +43,9 @@ From this idea, I construct the pursuit problem:
 %
 with $\lambda_{\ell} \geq \vzero$.
 
-With this multi-layer archetecture, the first layer will construct small, simple filters, and subsequent layers superimpose those filters to build more complicated structures.
+With this multi-layer architecture, the first layer will construct small, simple filters, and subsequent layers superimpose those filters to build more complicated structures.
 
-My approach to solve this problem uses the ADMM algorthm, where $\vx_1,\ldots,\vx_L$ are the first set of primal variables, $\vv,\vz_1,\ldots,\vz_L$ are the second set of primal variables,  and $\vgamma_1,\ldots,\vgamma_L$ are the dual variables corresponding to contraints on $\vz_1,\ldots,\vz_L$.  Here is the corresponding optimization problem:
+My approach to solve this problem uses the ADMM algorithm, where $\vx_1,\ldots,\vx_L$ are the first set of primal variables, $\vv,\vz_1,\ldots,\vz_L$ are the second set of primal variables,  and $\vgamma_1,\ldots,\vgamma_L$ are the dual variables corresponding to constraints on $\vz_1,\ldots,\vz_L$.  Here is the corresponding optimization problem:
 %
 \begin{equation}
 \begin{aligned}
@@ -57,7 +57,7 @@ My approach to solve this problem uses the ADMM algorthm, where $\vx_1,\ldots,\v
 %
 The constraint $\mQ\mW(\vv) - \vs = \vzero$ is not an affine constraint because of the quantization. To resolve this, \cite{chodosh2020use} approximate the quantization as a linear operator. However, the constraint is convex, so the constraint can be handled without approximation implicitly using an indicator function. For now, I will focus on the other variable updates.
 
-Setting $\vz_0 = \vv - \vs_{\text{smth}}$, the updates for $\vx$, $\vz$, and $\vgamma$ are identitical to those from the last chapter.
+Setting $\vz_0 = \vv - \vs_{\text{smth}}$, the updates for $\vx$, $\vz$, and $\vgamma$ are identical to those from the last chapter.
 %
 \begin{equation}
 \mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} = \left(\rho \mId + (\mD_{\ell}\mR_{\ell})^T\mD_{\ell}\mR_{\ell}\right)^{-1}\left((\mD_{\ell}\mR_{\ell})^T\vz_{\ell - 1}^{(t)} + \rho \left(\mR_{\ell}^{-1}\vz_{\ell}^{(t)} + \frac{\vgamma_{\ell}^{(t)}}{\rho\sqrt{\mu_{\ell}}}\right)\right)

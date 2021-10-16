@@ -72,7 +72,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}JPEG Algorithm}{41}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Modelling Compressed JPEG Images}{42}{section.4.3}
+\contentsline {section}{\numberline {4.3}Modeling Compressed JPEG Images}{42}{section.4.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.4}Handling Quantization}{44}{section.4.4}
 \defcounter {refsection}{0}\relax 

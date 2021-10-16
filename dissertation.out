@@ -35,7 +35,7 @@
 \BOOKMARK [0][-]{chapter.4}{JPEG Artifact Removal}{}% 35
 \BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 36
 \BOOKMARK [1][-]{section.4.2}{JPEG Algorithm}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.3}{Modelling Compressed JPEG Images}{chapter.4}% 38
+\BOOKMARK [1][-]{section.4.3}{Modeling Compressed JPEG Images}{chapter.4}% 38
 \BOOKMARK [1][-]{section.4.4}{Handling Quantization}{chapter.4}% 39
 \BOOKMARK [1][-]{section.4.5}{Experiment}{chapter.4}% 40
 \BOOKMARK [2][-]{subsection.4.5.1}{Experiment Setup}{section.4.5}% 41
