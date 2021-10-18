@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  16 OCT 2021 17:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  18 OCT 2021 09:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1104,43 +1104,36 @@ LaTeX Warning: Command \ss invalid in math mode on input line 54.
 
 LaTeX Warning: Command \ss invalid in math mode on input line 54.
 
-[6] [7] [8] [9]
-Overfull \vbox (1.96033pt too high) has occurred while \output is active []
-
-
-[10] [11] [12] [13] [14] [15] [16] [17]
+[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[18] [19] [20]
+[19] [20]
 Overfull \hbox (13.53416pt too wide) in paragraph at lines 508--509
 []\OT1/ptm/m/n/12 Thus, $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^Z\OT1/cmr/bx/n/12 
-I \OT1/cmr/m/n/12 + [][])[]$ \OT1/ptm/m/n/12 re-ally con-sists of $[]$ sep-a-ra
-te in-verse prob-lems: $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^Z\OT1/cmr/bx/n/12 I
- \OT1/cmr/m/n/12 + [][[]][][[]])[]$\OT1/ptm/m/n/12 . 
+I \OT1/cmr/m/n/12 + [][])[]$ \OT1/ptm/m/n/12 re-ally con-sists of $\OML/cmm/m/i
+t/12 K$ \OT1/ptm/m/n/12 sep-a-rate in-verse prob-lems: $\OT1/cmr/m/n/12 (\OML/c
+mm/m/it/12 ^^Z\OT1/cmr/bx/n/12 I \OT1/cmr/m/n/12 + [][[]][][[]])[]$\OT1/ptm/m/n
+/12 . 
  []
 
-[21]
-Overfull \vbox (1.89938pt too high) has occurred while \output is active []
+[21] [22] [23] [24] [25] [26]
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[22] [23] [24] [25]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 753.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 761.
 
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./MultiLayerDictionaries.tex [26] [27] [28]
+) [27] (./MultiLayerDictionaries.tex [28] [29]
 Chapter 3.
-[29
+[30
 
-] [30] [31] [32] [33] [34]
+] [31] [32] [33] [34] [35]
 Overfull \hbox (3.20084pt too wide) detected at line 183
 \OML/cmm/b/it/12 z[] \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 ^^Z^^V[]\OT1/cmr/bx/n/
 12 I \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 ^^V[]\OML/cmm/b/it/12 R[]\OT1/cmr/m/n/1
@@ -1148,60 +1141,60 @@ Overfull \hbox (3.20084pt too wide) detected at line 183
  []
 
 
-<figures/multi-layer_ADMM-node-dependencies.PNG, id=843, 641.39626pt x 418.5637
+<figures/multi-layer_ADMM-node-dependencies.PNG, id=856, 641.39626pt x 418.5637
 5pt>
 File: figures/multi-layer_ADMM-node-dependencies.PNG Graphic file (type png)
  <use figures/multi-layer_ADMM-node-dependencies.PNG>
 Package pdftex.def Info: figures/multi-layer_ADMM-node-dependencies.PNG used on
  input line 210.
 (pdftex.def)             Requested size: 433.62001pt x 282.97818pt.
- [35]
+ [36]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[36 <./figures/multi-layer_ADMM-node-dependencies.PNG>] [37]
+[37 <./figures/multi-layer_ADMM-node-dependencies.PNG>] [38]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./JPEGArtifactRemoval.tex [38] [39] [40]
+) (./JPEGArtifactRemoval.tex [39] [40] [41]
 Chapter 4.
-[41
+[42
 
-] [42]
+] [43]
 Overfull \hbox (3.20084pt too wide) detected at line 68
 \OML/cmm/b/it/12 z[] \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 ^^Z^^V[]\OT1/cmr/bx/n/
 12 I \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 ^^V[]\OML/cmm/b/it/12 R[]\OT1/cmr/m/n/1
 2 )[]\OML/cmm/b/it/12 R[] [][] []
  []
 
-[43]
+[44]
 LaTeX Font Info:    Try loading font information for U+bbm on input line 100.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [44]
+) [45]
 Overfull \hbox (22.55806pt too wide) detected at line 124
 []\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 x[]\OT1/cmr/m/n/12 ) = \OML/cmm/b/it/12 W\O
 T1/cmr/m/n/12 (\OML/cmm/b/it/12 v \OMS/cmsy/m/n/12 ^^@ \OML/cmm/b/it/12 D[]x[] 
 \OMS/cmsy/m/n/12 ^^@ \OML/cmm/b/it/12 s[]\OT1/cmr/m/n/12 ) = []
  []
 
-[45]) (./PracticalConsiderationsUsingTensorFlow.tex [46]
+[46]) (./PracticalConsiderationsUsingTensorFlow.tex [47]
 Chapter 5.
-[47
+[48
 
-] [48] [49] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+] [49] [50] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-[50] [51] [52] [53]) (./appendix.tex [54]
+[51] [52] [53] [54]) (./appendix.tex [55]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
- [55
+ [56
 
 ]
 Appendix A.
-[56
+[57
 
-] [57]
+] [58]
 Overfull \hbox (36.28339pt too wide) detected at line 88
 \OML/cmm/b/it/12 M[]M[] \OT1/cmr/m/n/12 = \OML/cmm/b/it/12 L[]L[] \OT1/cmr/m/n/
 12 + []\OML/cmm/b/it/12 l[]l[] \OT1/cmr/m/n/12 + []\OML/cmm/b/it/12 v[]v[] \OMS
@@ -1209,21 +1202,21 @@ Overfull \hbox (36.28339pt too wide) detected at line 88
 /12 v[]l[]
  []
 
-[58] [59]
+[59] [60]
 Overfull \hbox (1.65634pt too wide) in paragraph at lines 183--184
 []\OT1/ptm/m/n/12 The rank-$\OT1/cmr/m/n/12 1$ \OT1/ptm/m/n/12 Her-mi-tian up-d
 ate to a Cholesky de-com-po-si-tion can be com-puted in quadratic
  []
 
-[60] [61]
+[61] [62]
 Appendix B.
-[62
+[63
 
-] [63]
+] [64]
 Appendix C.
-[64
+[65
 
-] [65] [66] [67] [68] [69] [70] [71]
+] [66] [67] [68] [69] [70] [71] [72]
 Overfull \hbox (23.87059pt too wide) in paragraph at lines 549--550
 []\OT1/ptm/m/n/12 If the dic-tio-nary $[]$ is used in mul-ti-ple com-po-nent fu
 nc-tions, the ex-pres-sions $[][]$
@@ -1233,7 +1226,7 @@ nc-tions, the ex-pres-sions $[][]$
 Overfull \vbox (0.11153pt too high) has occurred while \output is active []
 
 
-[72]
+[73]
 Overfull \hbox (25.4169pt too wide) detected at line 561
 [][] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/1
 2 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/
@@ -1267,7 +1260,7 @@ Overfull \hbox (46.98918pt too wide) detected at line 584
 [][] \OT1/cmr/m/n/12 = [][]
  []
 
-[73]
+[74]
 Overfull \hbox (35.194pt too wide) detected at line 596
 [][] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/12 
 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 j [] \OT1/cmr/
@@ -1296,25 +1289,25 @@ Overfull \hbox (47.71118pt too wide) detected at line 615
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
-[74]
+[75]
 Overfull \hbox (33.3714pt too wide) detected at line 618
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
-) [75] [76
+) [76] [77
 
 ]
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 278.
- [77]
+ [78]
 Overfull \hbox (2.5002pt too wide) in paragraph at lines 278--278
 []\OT1/ptm/m/n/12 I. Good-fel-low, Y. Ben-gio, and A. Courville, \OT1/ptm/m/it/
 12 Deep Learn-ing\OT1/ptm/m/n/12 . MIT Press, 2016, []$\OT1/pcr/m/n/12 http :
  []
 
-[78]
+[79]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 291.
- [79]
+ [80]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 291.
  (./dissertation.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 291.
@@ -1327,10 +1320,10 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
  )
 (\end occurred when \iftrue on line 97 was incomplete) 
 Here is how much of TeX's memory you used:
- 16379 strings out of 493029
- 256632 string characters out of 6136233
- 465762 words of memory out of 5000000
- 19065 multiletter control sequences out of 15000+600000
+ 16387 strings out of 493029
+ 256810 string characters out of 6136233
+ 465960 words of memory out of 5000000
+ 19069 multiletter control sequences out of 15000+600000
  31222 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,20n,48p,1696b,1206s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1365,10 +1358,10 @@ s/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on dissertation.pdf (89 pages, 551528 bytes).
+Output written on dissertation.pdf (90 pages, 554510 bytes).
 PDF statistics:
- 1527 PDF objects out of 1728 (max. 8388607)
- 1386 compressed objects within 14 object streams
- 565 named destinations out of 1000 (max. 500000)
+ 1540 PDF objects out of 1728 (max. 8388607)
+ 1398 compressed objects within 14 object streams
+ 569 named destinations out of 1000 (max. 500000)
  547 words of extra memory for PDF output out of 10000 (max. 10000000)
 
