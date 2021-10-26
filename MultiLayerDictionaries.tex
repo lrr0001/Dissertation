@@ -207,7 +207,7 @@ Rather than tracking $\vgamma_{\ell}$ or $\frac{\vgamma_{\ell}}{\rho}$ explicitl
 \section{Pursuit Algorithm Summary}
 Together, the equations from the sections above produce a pursuit algorithm for a multi-layer dictionary model, as shown in algorithm \ref{algorithm:ADMM Multi-Layer Pursuit}. It is important to note that unlike in \cite{zeiler2010deconvolutional}, there is feedback between layers during pursuit.  Figure \ref{figure:ADMM Multi-Layer Pursuit Diagram} shows the interactions between layers across iterations. This allows for asymptotic convergence to an optimal solution of the objective in equation \ref{equation:ADMM Multi-Layer Pursuit Objective}.
 \begin{figure}
-	\includegraphics[width=\textwidth]{figures/multi-layer_ADMM-node-dependencies.PNG}
+	\includegraphics[width=\textwidth]{figures/multi-layer_ADMM-node-dependencies-Sparse-Coding.png}
 	\caption{This diagram shows interactions between layers across iterations. The double-sided arrows at the top of the diagram go both directions because $\vx_{\ell + 1}$ influences $\vz_{\ell}$ during initialization.}
 	\label{figure:ADMM Multi-Layer Pursuit Diagram}
 \end{figure}

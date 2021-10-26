@@ -2,7 +2,7 @@
 \section{Boundary Handling}
 Convolution and circular convolution can produce boundary effects that can impact performance. In the JPEG compression artifact removal chapter, $\mW$ is defined as the function producing $8 \times 8$ block DCT coefficients from an RGB image. However, to mitigate boundary effects this should in practice also include cropping the image. This allows $\mD_1\vx_1$ to reconstruct the signal outside of the measured space (similar to the "boundary masking" in \cite{wohlberg2016boundary}, but with the constraint and objective term swapped). Initialization is important however \cite{DBLP:journals/corr/WohlbergR17}. Reflecting across the boundary is a much better initialization approach than zeros, but if using patches, actual (compressed image) measurements would provide an even better initialization. For the experiments in Chapter $4$, I use these compressed image measurements.
 \section{Removing Low-Frequency Signal Content}
-Convolutional dictionary models tend to struggle with low-frequency signal content, so ideally steps should be taken to avoid representing it with the dictionary model. Tikhonov regularization is a straightforward means to remove low-frequency content:
+Convolutional dictionary models tend to struggle with low-frequency signal content, so ideally steps should be taken to avoid representing it with the dictionary model. Tikhonov regularization is a straight-forward means to remove low-frequency content \cite{garcia2018convolutional}:
 \begin{equation}
 \vs_{\text{smth}} = \arg\min_{\vx} \frac{1}{2}\|\vs - \vx\|_2^2 + \lambda\|\sum_i \mG_i\vx\|_2^2
 \end{equation}
@@ -25,6 +25,8 @@ Then,
 \begin{equation}
 \vv = \vx + \mW^{\dagger}\operatorname{h}(\vx)
 \end{equation}
+
+In the final update for $\vx$, it may help to increase $\lambda$. This will make the resulting smoothed image slightly more smooth, which allows the rough signal component to keep more information content from the image to compute better coefficients.
 
 \section{Inverse Representation Drift}
 Rank-$1$ Hermitian updates to a Cholesky factorization or other inverse representation can be computed in quadratic time. However, these algorithms compute the new inverse representation from the old one, compounding precision error. Over the course of many iterations, the inverse representation will become less and less accurate. It is necessary to occasionally recompute the inverse representation in cubic time, to mitigate the impact of precision errors.  One method to determine when to recompute the inverse representation is to measure the error of the inverse function in reconstructing a random set of vectors $\hat{\vu}$, and recompute the inverse representation in cubic time when the error $\epsilon$ exceeds a threshold.

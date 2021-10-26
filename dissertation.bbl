@@ -1356,6 +1356,59 @@
   \field{year}{2015}
 \endentry
 
+\entry{garcia2018convolutional}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Garcia-Cardona}{G.-C.}%
+     {Cristina}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wohlberg}{W.}%
+     {Brendt}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{GCCWB1}
+  \strng{fullhash}{GCCWB1}
+  \field{number}{3}
+  \field{pages}{366\bibrangedash 381}
+  \field{title}{Convolutional dictionary learning: A comparative review and new
+  algorithms}
+  \field{volume}{4}
+  \field{journaltitle}{IEEE Transactions on Computational Imaging}
+  \field{year}{2018}
+\endentry
+
+\entry{sorel2016efficient}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {{\v{S}}orel}{{\v{S}}.}%
+     {Michal}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Barto{\v{s}}}{B.}%
+     {Michal}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{SMBM1}
+  \strng{fullhash}{SMBM1}
+  \field{booktitle}{2016 23rd International Conference on Pattern Recognition
+  (ICPR)}
+  \field{pages}{271\bibrangedash 276}
+  \field{title}{Efficient JPEG decompression by the alternating direction
+  method of multipliers}
+  \field{year}{2016}
+\endentry
+
 \entry{wohlberg2016boundary}{inproceedings}{}
   \name{author}{1}{}{%
     {{}%
@@ -1522,6 +1575,214 @@
   \field{title}{A more efficient rank-one covariance matrix update for
   evolution strategies}
   \field{year}{2015}
+\endentry
+
+\entry{he2000alternating}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {He}{H.}%
+     {BS}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yang}{Y.}%
+     {Hai}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wang}{W.}%
+     {SL}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{HBYHWS1}
+  \strng{fullhash}{HBYHWS1}
+  \field{number}{2}
+  \field{pages}{337\bibrangedash 356}
+  \field{title}{Alternating direction method with self-adaptive penalty
+  parameters for monotone variational inequalities}
+  \field{volume}{106}
+  \field{journaltitle}{Journal of Optimization Theory and applications}
+  \field{year}{2000}
+\endentry
+
+\entry{xu2017adaptive}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Xu}{X.}%
+     {Zheng}{Z.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Figueiredo}{F.}%
+     {Mario}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Goldstein}{G.}%
+     {Tom}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {PMLR}%
+  }
+  \strng{namehash}{XZFMGT1}
+  \strng{fullhash}{XZFMGT1}
+  \field{booktitle}{Artificial Intelligence and Statistics}
+  \field{pages}{718\bibrangedash 727}
+  \field{title}{Adaptive ADMM with spectral penalty parameter selection}
+  \field{year}{2017}
+\endentry
+
+\entry{elad2006image}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Elad}{E.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Aharon}{A.}%
+     {Michal}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{EMAM1}
+  \strng{fullhash}{EMAM1}
+  \field{number}{12}
+  \field{pages}{3736\bibrangedash 3745}
+  \field{title}{Image denoising via sparse and redundant representations over
+  learned dictionaries}
+  \field{volume}{15}
+  \field{journaltitle}{IEEE Transactions on Image processing}
+  \field{year}{2006}
+\endentry
+
+\entry{yang2010image}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Yang}{Y.}%
+     {Jianchao}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wright}{W.}%
+     {John}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Huang}{H.}%
+     {Thomas~S}{T.~S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ma}{M.}%
+     {Yi}{Y.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{YJWJHTSMY1}
+  \strng{fullhash}{YJWJHTSMY1}
+  \field{number}{11}
+  \field{pages}{2861\bibrangedash 2873}
+  \field{title}{Image super-resolution via sparse representation}
+  \field{volume}{19}
+  \field{journaltitle}{IEEE transactions on image processing}
+  \field{year}{2010}
+\endentry
+
+\entry{turquais2017method}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Turquais}{T.}%
+     {Pierre}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Asgedom}{A.}%
+     {Endrias~G}{E.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {S{\"o}llner}{S.}%
+     {Walter}{W.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Society of Exploration Geophysicists}%
+  }
+  \strng{namehash}{TPAEGSW1}
+  \strng{fullhash}{TPAEGSW1}
+  \field{number}{3}
+  \field{pages}{V137\bibrangedash V148}
+  \field{title}{A method of combining coherence-constrained sparse coding and
+  dictionary learning for denoising}
+  \field{volume}{82}
+  \field{journaltitle}{Geophysics}
+  \field{year}{2017}
+\endentry
+
+\entry{jiang2021combining}{article}{}
+  \name{author}{7}{}{%
+    {{}%
+     {Jiang}{J.}%
+     {Feng}{F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chen}{C.}%
+     {ZhiYuan}{Z.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Nazir}{N.}%
+     {Amril}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Shi}{S.}%
+     {WuZhen}{W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lim}{L.}%
+     {WeiXiang}{W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Liu}{L.}%
+     {ShaoHui}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rho}{R.}%
+     {SeungMin}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Elsevier}%
+  }
+  \strng{namehash}{JFCZNASWLWLSRS1}
+  \strng{fullhash}{JFCZNASWLWLSRS1}
+  \field{pages}{103142}
+  \field{title}{Combining Fields of Experts (FoE) and K-SVD methods in pursuing
+  natural image priors}
+  \field{volume}{78}
+  \field{journaltitle}{Journal of Visual Communication and Image
+  Representation}
+  \field{year}{2021}
 \endentry
 
 \entry{petersen2008matrix}{article}{}

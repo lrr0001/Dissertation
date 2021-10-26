@@ -597,4 +597,58 @@ and show that they provide only a partial solution at best. Taken together, our 
   volume  = {25},
 }
 
+@InProceedings{sorel2016efficient,
+  author       = {{\v{S}}orel, Michal and Barto{\v{s}}, Michal},
+  booktitle    = {2016 23rd International Conference on Pattern Recognition (ICPR)},
+  title        = {Efficient JPEG decompression by the alternating direction method of multipliers},
+  year         = {2016},
+  organization = {IEEE},
+  pages        = {271--276},
+}
+
+@InProceedings{xu2017adaptive,
+  author       = {Xu, Zheng and Figueiredo, Mario and Goldstein, Tom},
+  booktitle    = {Artificial Intelligence and Statistics},
+  title        = {Adaptive ADMM with spectral penalty parameter selection},
+  year         = {2017},
+  organization = {PMLR},
+  pages        = {718--727},
+}
+
+@Article{he2000alternating,
+  author    = {He, BS and Yang, Hai and Wang, SL},
+  journal   = {Journal of Optimization Theory and applications},
+  title     = {Alternating direction method with self-adaptive penalty parameters for monotone variational inequalities},
+  year      = {2000},
+  number    = {2},
+  pages     = {337--356},
+  volume    = {106},
+  publisher = {Springer},
+}
+
+@Article{elad2006image,
+  author    = {Elad, Michael and Aharon, Michal},
+  journal   = {IEEE Transactions on Image processing},
+  title     = {Image denoising via sparse and redundant representations over learned dictionaries},
+  year      = {2006},
+  number    = {12},
+  pages     = {3736--3745},
+  volume    = {15},
+  publisher = {IEEE},
+}
+
+@Article{yang2010image,
+  author    = {Yang, Jianchao and Wright, John and Huang, Thomas S and Ma, Yi},
+  journal   = {IEEE transactions on image processing},
+  title     = {Image super-resolution via sparse representation},
+  year      = {2010},
+  number    = {11},
+  pages     = {2861--2873},
+  volume    = {19},
+  publisher = {IEEE},
+}
+
+@Article{,
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
