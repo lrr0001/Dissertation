@@ -1,0 +1,190 @@
+\documentclass{article}
+%\usepackage{amsmath}
+%\usepackage{bm}
+%\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+\input{../defs-dissertation}
+
+\begin{document}
+\section{Acronyms}
+ADMM: Alternating Directions Method of Multipliers
+
+ISTA: Iterative Shrinkage Thresholding Algorithm
+
+FISTA: Fast Iterative Shrinkage Tresholding Algorithm
+
+RGB image: an image with red, blue, and green channels
+
+JPEG: the compression process developed by the Joint Photographic Experts Group
+
+\section{Matrices}
+Matrices are noted as bold capital letters: $\mD$, $\mA$, $\mB$, $\mPhi$, $\mS$, $\mSS$, $\mX$, $\mU$, $\mV$.
+
+$\mD$ is the a dictionary. For most of the dissertation, $\mD$ has circulant matrix blocks.
+
+$\mS$ is a collection of signal vectors, either gathering multiple channels or multiple samples.
+
+$\mX$ is a collection of dictionary coefficient vectors, corresponding to multple signal vectors.
+
+$\mA$, $\mB$, $\mU$, and $\mV$ are arbitrary matrices. $\mA$ and $\mB$ are also used as the linear operators in the ADMM contraints.
+
+$\mPhi$ is an arbitrary linear operator (this matrix is also listed under operators, since matrices are linear operators).
+
+$\mT$ a diagonal matrix that has diagonal elements of $1$ for dictionary elements that are not constrained to be zero, and zeros for the other diagonal elements (this matrix is also listed under operators since matrices are linear operators).
+
+$\mW$ converts from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. Naturally, this matrix also appears under operators.
+
+$\mSS$ is part of the dictionary for the product dictionary model.
+
+$\mQ$ is used to represent the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$
+
+$\mXi$ is used to represent the matrix $\rho\mId + \hat{\mD}\hat{\mD}^H$
+
+\section{Vectors}
+Vectors are bold and lower-case.
+
+$\vx$, $\vy$ are the primal variables for ADMM.
+
+$\vu$ is the dual variable for ADMM.
+
+$\vc$ is the constraint vector in ADMM.
+
+$\vx$, $\vz$ are the coefficients for dictionary model in ADMM algorithm.
+
+$\vv$ is another primal variable (grouped with $\vz$) used in chapter $4$.
+
+$\vgamma$ is the corresponding dual variable.
+
+$\vx$ and $\vz$ are also used as vectors in the FISTA algorithm.
+
+$\vx$ is also used as an arbitrary vector throughout document.  Context will make clear.
+
+$\vs$ is the signal.
+
+$\vb$ is another arbitrary vector.
+
+$\vu$ and $\vv$ are more arbitrary vectors, usually used in pairs. The may collectively specify a rank-$1$ update to a matrix: $\vu\vv^H$.
+
+$\vf$ is a dictionary filter.
+
+$\vd$ is a column of $\mD$.
+
+$\vq$ is the quality-factor dependent vector used in quantization in JPEG compression.
+
+$\vomega$ is an eigenvector.
+
+$\mR$ is a rescaling matrix, used to scale a normalized dictionary back to its unnormalized form.
+
+
+
+\section{Non-Integer Scalars}
+Non-integer scalars are usually lower-case script letters that are not bolded. (The exception is the estimate of the Lipshitz constant used to determine stepsize in ISTA and FISTA.) I say "non-integer" not imply that they cannot take on integer values, but merely to differentiate them from the scalars that are required to be nonnegative integers.
+
+$a$ and $b$ are arbitrary scalars.
+
+$\rho$ is a scalar for the ADMM alrogithm that specifies both the weighting of the constraints in the augmented Lagrangian and the stepsize in the dual variable update.
+
+$\alpha$ is the over-relaxation or under-relaxation factor for ADMM
+
+$\lambda$ is the factor for $\operatorname{L}_1$ penalty.  $\lambda$ is also used as the factor for the $\operatorname{L}_2$ penalty on the image gradients for Tikhonov regularization. Context will make clear.
+
+$\mathbb{L}$ is an estimate of the Lipshitz constant, used to determine stepsize in the ISTA and FISTA algorithms.
+
+$\tau$ is the eigenvalue
+
+$r$ and $\omega$ are used to specify momentum stepsize in FISTA and a FISTA-like algorithm. Always appear with superscripts specifying iteration.
+
+$\loss$ the loss (as in the loss function)
+
+\section{Indexing Integers}
+$n$ selects the sample
+
+$t$ selects the iteration
+
+$m$ selects the filter
+
+$c$ selects the channel
+
+$\hat{k}$ specifies the frequency
+
+\section{Integer Constants}
+$M$ is the number of filters
+
+$C$ is the number of channels
+
+$\hat{K}$ is the number of elements in a single channel of the signal
+
+$\reflectbox{R}$ is a small integer that specifies the rank of the dictionary updates
+
+$L$ is the number of layers
+
+\section{Functions and Operations}
+$*$ is used to mean circular convolution, except when discussing boundary handling, which works to make circular convolution and convolution equivalent.
+
+$\cdot^{*}$ is the complex conjugate.
+
+$\cdot^H$ is the Hermitian transpose of a vector or matrix
+
+$\L_{\rho}$ is the augmented Lagrangian function
+
+$\operatorname{S}$ is the shrinkage operator
+
+$\F$ applies the Fourier tranform to each channel and/or filter
+
+$f$ and $g$ are arbitrary convex functions. $f$ may also be used to specify the objective function of a minimization problem. $f$ and $g$ are also used for arbitrary functions that are part of a composite function. Context should make clear.
+
+$\operatorname{q}(\cdot)$ quantizes a vector.
+
+$\indicator_{\text{condition}}$ takes on a value of $0$ when the condition is true and $\infty$ when the condition is false.
+
+$\arg \min$ is the argument minimum of a function 
+
+$\nabla_{a} b$ is the gradient of $b$ in respect to $a$.
+
+$L_1$ is the $L_1$ norm
+
+$L_2$ is the $L_2$ norm
+
+$\mPhi$ is an arbitrary linear operator (this operator is also listed under matrices, since matrices are linear operators).
+
+$\mT$ zeros out all dictionary elements that are constrained to be zero. (This operator is also listed under matrices since matrices are linear operators.)
+
+$\mW$ converts from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. (This operator also appears under matrices.)
+
+\section{Superscripts}
+Conventionally, superscripts are used to indicate exponents.
+
+However, I also use superscripts for other purposes.  To distinguish these superscripts from exponents, I put them in parenthesis $\vx^{(\cdot)}$.
+
+Superscripts are used to indicate which signal sample (or the corresponding dictionary update).
+
+Superscripts are also used to specify the iteration number.
+
+Finally, superscripts are used on gradients to specify a particular gradient term.
+
+\section{Subscripts}
+subscript $m$ specifies the filter. If there are multiple layers, $[m]$ will be used instead of subscript $m$.
+
+subscript $n$ specifies the sample.
+
+Subscript $c$ specifies the channel. If there are multiple layers $[c]$ will be used instead of subscript $c$.
+
+subscript $\ell$ specifies the layer.
+
+subscripts $+$ and $-$ are used to specify the eigenvalues or eigenvectors of a $2 \times 2$ matrix corresponding to the plus or minus in the quadratic formula.
+
+The $\rho$ in $\L_{\rho}$ specifies the scalar weight of the $L_2$ norm related to the affine constraints, used in the augmented Lagrangian function.
+
+Subscript $\cdot_{\text{init}}$ is short for initial value.
+
+Subscript $\cdot_{\text{sc}}$ is short for "scaled", and indicates that the variable in the algorithm is a scaled form of the variable.
+
+Subscript $i$ is used for essentially all other indexing.
+
+
+\end{document}

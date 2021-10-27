@@ -21,10 +21,10 @@ When the dictionary is known, solving for $\vx$ using $\mD$ and $\vs$ is a pursu
 The convolutional dictionary model is a dictionary model which imposes a convolutional structure on the dictionary. This structure is shown in Figure \ref{Figure: Convolutional Dictionary}. Note that while the example uses $1$-dimensional convolution, it is straightforward to extend to multi-dimensional convolution through vectorization. The convolutional dictionary model equation can be notated as signals convolved with filters:
 %
 \begin{equation}
-\vs \approx \sum_i \vf_i * \vx_i
+\vs \approx \sum_m \vf_m * \vx_m
 \end{equation}
 %
-where $\vf_i$ is the $i^{\text{th}}$ filter of the dictionary, $\vx_i$ is the coefficients for the $i^{\text{th}}$ filter, and $*$ indicates convolution. This structure is useful for signals where shift-invariance is a desirable characteristic and/or when dealing with variable-length data. Convolutional approaches often outperform patch-based methods. For the rest of this dissertation, I will notate $\sum_i \vf_i * \vx_i$ as $\mD\vx$. The matrix $\mD$ consists of $M$ circulant blocks $\mD_{m}$, each block corresponding to a particular filter $m$ of the $M$ dictionary filters.
+where $\vf_m$ is the $m^{\text{th}}$ filter of the dictionary, $\vx_m$ is the coefficients for the $m^{\text{th}}$ filter, and $*$ indicates convolution. This structure is useful for signals where shift-invariance is a desirable characteristic and/or when dealing with variable-length data. Convolutional approaches often outperform patch-based methods. For the rest of this dissertation, I will notate $\sum_m \vf_m * \vx_m$ as $\mD\vx$. The matrix $\mD$ consists of $M$ circulant blocks $\mD_{m}$, each block corresponding to a particular filter $\vf_m$ of the $M$ dictionary filters.
 
 \section{Multi-Layer Dictionaries}
 A multi-layer dictionary treats the coefficients as the signal of a subsequent dictionary model. That is,
@@ -39,7 +39,7 @@ A multi-layer dictionary treats the coefficients as the signal of a subsequent d
 \vx_{L - 1} \approx & \mD_L\vx_L
 \end{split}
 \end{equation}
-where $L$ is the number of layers. Pursuit for a multi-layer dictionary model seeks to find the coefficients for all layers $\vx_1,\vx_2,\hdots,\vx_L$. Multi-layer dictionary models have been used in applications such as feature extraction for classification \cite{chen2013deep}\cite{zeiler2010deconvolutional}\cite{pu2014bayesian} and trajectory-basis non-rigid structure from motion \cite{chodosh2020use}. Dictionary models can often be easily extended to allow the researcher or practitioner to inject prior knowledge into the model architecture through the use of convex constraints or known projection operator $\mPhi$. For convolutional dictionaries, the projection operator $\mPhi$ need not have convolutional structure.
+where $L$ is the number of layers. Pursuit for a multi-layer dictionary model seeks to find the coefficients for all layers $\vx_1,\vx_2,\hdots,\vx_L$. Multi-layer dictionary models have been used in applications such as feature extraction for classification \cite{chen2013deep}\cite{zeiler2010deconvolutional}\cite{pu2014bayesian} and trajectory-basis non-rigid structure from motion \cite{chodosh2020use}. Dictionary models can often be easily extended to allow the researcher or practitioner to inject prior knowledge into the model architecture through the use of convex constraints or known linear operator $\mPhi$. For convolutional dictionaries, the projection operator $\mPhi$ need not have convolutional structure.
 %
 \begin{equation}
 \begin{split}
