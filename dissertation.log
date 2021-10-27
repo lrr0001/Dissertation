@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  26 OCT 2021 21:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  26 OCT 2021 23:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1295,7 +1295,7 @@ Appendix C.
 [70
 
 ] [71] [72] [73] [74] [75] [76] [77]
-Overfull \hbox (23.87059pt too wide) in paragraph at lines 549--550
+Overfull \hbox (23.87059pt too wide) in paragraph at lines 553--554
 []\OT1/ptm/m/n/12 If the dic-tio-nary $[]$ is used in mul-ti-ple com-po-nent fu
 nc-tions, the ex-pres-sions $[][]$
  []
@@ -1305,28 +1305,28 @@ Overfull \vbox (0.11153pt too high) has occurred while \output is active []
 
 
 [78]
-Overfull \hbox (25.4169pt too wide) detected at line 561
+Overfull \hbox (25.4169pt too wide) detected at line 565
 [][] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/1
 2 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/
 b/it/12 e[]Q[]b\OT1/cmr/m/n/12 )
  []
 
 
-Overfull \hbox (66.46347pt too wide) detected at line 574
+Overfull \hbox (66.46347pt too wide) detected at line 578
 [][] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/1
 2 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ [][] \OT1/cmr/m/n/12 (\OML/cm
 m/b/it/12 b[]Q[]e[]\OT1/cmr/m/n/12 )[]
  []
 
 
-Overfull \hbox (64.4635pt too wide) detected at line 578
+Overfull \hbox (64.4635pt too wide) detected at line 582
 [][] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 e[
 ][]Q[]b\OT1/cmr/m/n/12 ) [] \OMS/cmsy/m/n/12 ^^@ [][] \OT1/cmr/m/n/12 (\OML/cmm
 /b/it/12 b[]Q[]e[]\OT1/cmr/m/n/12 )[]
  []
 
 
-Overfull \hbox (45.66783pt too wide) detected at line 581
+Overfull \hbox (45.66783pt too wide) detected at line 585
 [][] \OT1/cmr/m/n/12 = \OML/cmm/b/it/12 e[]\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 ^^
 @\OT1/cmr/m/n/12 ([]\OML/cmm/b/it/12 Q[]b\OT1/cmr/m/n/12 ) [] \OMS/cmsy/m/n/12 
 ^^@ [][] \OT1/cmr/m/n/12 (\OML/cmm/b/it/12 b[]Q[]\OT1/cmr/m/n/12 )[])\OML/cmm/b
@@ -1334,41 +1334,41 @@ Overfull \hbox (45.66783pt too wide) detected at line 581
  []
 
 
-Overfull \hbox (46.98918pt too wide) detected at line 584
+Overfull \hbox (46.98918pt too wide) detected at line 588
 [][] \OT1/cmr/m/n/12 = [][]
  []
 
 [79]
-Overfull \hbox (35.194pt too wide) detected at line 596
+Overfull \hbox (35.194pt too wide) detected at line 600
 [][] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/12 
 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 j [] \OT1/cmr/
 m/n/12 (\OML/cmm/b/it/12 e[]Q[]b\OT1/cmr/m/n/12 )
  []
 
 
-Overfull \hbox (74.2406pt too wide) detected at line 600
+Overfull \hbox (74.2406pt too wide) detected at line 604
 [][] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 e[][
 ]Q[]b\OT1/cmr/m/n/12 ) [] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 j [][] \OT1/cmr
 /m/n/12 (\OML/cmm/b/it/12 b[]Q[]e[]\OT1/cmr/m/n/12 )[]
  []
 
 
-Overfull \hbox (62.36887pt too wide) detected at line 605
+Overfull \hbox (62.36887pt too wide) detected at line 609
 [][] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [][]
  []
 
 
-Overfull \hbox (28.79529pt too wide) detected at line 612
+Overfull \hbox (28.79529pt too wide) detected at line 616
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
 
-Overfull \hbox (47.71118pt too wide) detected at line 615
+Overfull \hbox (47.71118pt too wide) detected at line 619
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
 [80]
-Overfull \hbox (33.3714pt too wide) detected at line 618
+Overfull \hbox (33.3714pt too wide) detected at line 622
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
@@ -1398,13 +1398,13 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
  )
 (\end occurred when \iftrue on line 100 was incomplete) 
 Here is how much of TeX's memory you used:
- 16570 strings out of 493029
- 260377 string characters out of 6136233
+ 16571 strings out of 493029
+ 260393 string characters out of 6136233
  473699 words of memory out of 5000000
  19213 multiletter control sequences out of 15000+600000
  32300 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,20n,48p,1696b,1205s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,20n,48p,1697b,1205s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/lrr/.texmf-var/f
 onts/pk/ljfour/public/bbm/bbm10.600pk> </home/lrr/.texmf-var/fonts/pk/ljfour/pu
 blic/bbm/bbm12.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
@@ -1439,10 +1439,10 @@ texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on dissertation.pdf (96 pages, 677110 bytes).
+Output written on dissertation.pdf (96 pages, 676911 bytes).
 PDF statistics:
- 1671 PDF objects out of 1728 (max. 8388607)
- 1509 compressed objects within 16 object streams
- 595 named destinations out of 1000 (max. 500000)
+ 1672 PDF objects out of 1728 (max. 8388607)
+ 1510 compressed objects within 16 object streams
+ 596 named destinations out of 1000 (max. 500000)
  591 words of extra memory for PDF output out of 10000 (max. 10000000)
 

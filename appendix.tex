@@ -222,12 +222,15 @@ The rank-$1$ Hermitian update to a Cholesky decomposition can be computed in qua
 
 
 \chapter{Rank-2 Eigendecomposition Edge Cases} \label{chapter:eigenedge}
-
-\section{Less than 2 Independent Eigenvectors}
-
+\begin{equation}
+\mA = \begin{bmatrix}  \vv   \mD^H\vu \end{bmatrix}
+\end{equation}
 \begin{equation}
 \mB = \begin{bmatrix} \mD^H\vu & \vv\end{bmatrix}^H
 \end{equation}
+\section{Less than 2 Independent Eigenvectors}
+
+
 
 
 The matrix $\mA\mB$ is a Hermitian $M \times M$ matrix, so it has $M$ real eigenvalues and $M$ independent eigenvectors which can be chosen to be orthogonal. Therefore, $\mB\mA$ has $2$ independent eigenvectors if $\mB$ is rank $2$.  There are three cases that can cause $\mB$ to have a rank less than $2$.
@@ -248,6 +251,7 @@ The matrix $\mA\mB$ is a Hermitian $M \times M$ matrix, so it has $M$ real eigen
 \mD^H\vu = \alpha \vv
 \end{equation}
 \end{enumerate}
+where $\alpha$ is a scalar.
 
 In the first $2$ cases, the matrix $\mB\mA$ has one independent eigenvector. The first case implies that only the Hermitian update is nonzero.  The second case implies that the entire update is zero. (The eigenvalues are zero, so as long as the normalization of eigenvectors is handled with care, it is not necessary to check for these cases in code.)
 
@@ -255,16 +259,16 @@ In the third case, the diagonalization of $\mA\mB$ can be determined directly wi
 
 \begin{equation}
 \mA\mB = 2
-eal(\alpha)\vv\vv^H
+\real(\alpha)\vv\vv^H
 \end{equation}
 
 \begin{equation}
-\lambda = 2
-eal(\alpha) \|\vv\|_2^2
+\tau = 2
+\real(\alpha) \|\vv\|_2^2
 \end{equation}
 
 \begin{equation}
-\vx = \frac{\vv}{\|\vv\|_2}
+\vomega = \frac{\vv}{\|\vv\|_2}
 \end{equation}
 
 The rest of the eigenvalues are zero.  (The corresponding $2 \times 2$ matrix $\mB\mA$ shares the same nonzero eigenvalue. The eigenvector that is lost has an eigenvalue of zero, so like in the other $2$ cases, it is not necessary to check for this case in code.)
