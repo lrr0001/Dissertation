@@ -1,0 +1,202 @@
+\clearpage
+\begin{centering}
+\textbf{NOMENCLATURE AND ABREVIATIONS}\\
+\vspace{\baselineskip}
+\end{centering}
+\begin{singlespace}
+\section{Acronyms}
+
+\begin{tabular}{cp{0.8\textwidth}}
+ADMM & The Alternating Directions Method of Multipliers algorithm\np
+ISTA & The Iterative Shrinkage Thresholding Algorithm \np
+FISTA & The Fast Iterative Shrinkage Tresholding Algorithm \np
+RGB & Describes an image with red, green, and blue channels \np
+JPEG & An image compression standard developed by the Joint Photographic Experts Group \np
+FFT & The discrete Fourier transform \np
+DCT & Type-II discrete cosine transform
+\end{tabular}
+
+\section{Integer Constants}
+Capital letters that are not bold are used to denote integer constants.\np
+\begin{tabular}{cp{0.8\textwidth}}
+$M$ & The number of filters\np
+$C$ & The number of channels\np
+$\hat{K}$ & the number of elements in a single channel of the signal\np
+$\reflectbox{R}$ & A small integer that specifies the rank of the dictionary updates \np
+$L$ & The number of layers
+\end{tabular}
+
+\section{Matrices}
+Bold capital letters are used to denote matrices.\np
+\begin{tabular}{cp{0.8\textwidth}}
+$\mD$ & The dictionary. For most of the dissertation, $\mD$ has circulant matrix blocks. \np
+%
+$\mS$ & A collection of signal vectors, either gathering multiple channels or multiple samples. \np
+%
+$\mX$ & A collection of dictionary coefficient vectors, corresponding to multple signal vectors. \np
+%
+$\mA$, $\mB$  & The linear operators appearing the the affine constraints for ADMM. $\mA$ and $\mB$ are also used as arbitary matrices when discussing general linear algebra principles. \np
+%
+$\mU$, $\mV$ & Arbitrary matrices used for discussing general linear algebra principles and low-rank updates. \np
+%
+$\mPhi$ & An arbitrary linear operator (This matrix is also listed under operators, since matrices are linear operators). \np
+%
+$\mT$ & A diagonal matrix that has diagonal elements of $1$ for dictionary elements that are not constrained to be zero, and zeros for the other diagonal elements (This matrix is also listed under operators since matrices are linear operators). \np
+%
+$\mW$ & A matrix which converts an image vector from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. This matrix also appears under operators. \np
+%
+$\mSS$ & Part of the dictionary for the product dictionary model \np
+%
+$\mQ$ & Used to denote the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ \np
+%
+$\mXi$ & Used to denote the matrix $\rho\mId + \hat{\mD}\hat{\mD}^H$ \np
+%
+$\mR$ & A rescaling matrix, used to scale a normalized dictionary back to its unnormalized form
+\end{tabular}
+
+\section{Vectors}
+Bold, lower-case letters are used to denote vectors.\np
+\begin{tabular}{cp{0.8\textwidth}}
+$\vx$, $\vy$ & the primal variables for ADMM. \np
+%
+$\vu$ & the dual variable for ADMM. \np
+%
+$\vc$ & the constraint vector in ADMM. \np
+%
+$\vx$, $\vz$ & the coefficients for dictionary model in ADMM algorithm. \np
+%
+$\vv$ & another primal variable (grouped with $\vz$) used in chapter $4$. \np
+%
+$\vgamma$ & the corresponding dual variable. \np
+%
+$\vx$, $\vz$ & also used as vectors in the FISTA algorithm. \np
+%
+$\vx$ & also used as an arbitrary vector throughout document.  Context will make clear. \np
+%
+$\vs$ & the signal. \np
+%
+$\vb$ & another arbitrary vector. \np
+%
+$\vu$, $\vv$ & more arbitrary vectors, usually used in pairs. The may collectively specify a rank-$1$ update to a matrix: $\vu\vv^H$. \np
+%
+$\vf$ & a dictionary filter. \np
+%
+$\vd$ & a column of $\mD$. \np
+%
+$\vq$ & the quality-factor dependent vector used in quantization in JPEG compression. \np
+%
+$\vomega$ & an eigenvector.
+\end{tabular}
+
+
+
+\section{Non-Integer Scalars}
+Lower-case letters that are not bold are generally used to denote scalars that are not integer constants. $\mathbb{L}$ and $\loss$ are the exceptions.\np
+\begin{tabular}{cp{0.8\textwidth}}
+$a$, $b$ & arbitrary scalars. \np
+%
+$\rho$ & a scalar for the ADMM alrogithm that specifies both the weighting of the constraints in the augmented Lagrangian and the stepsize in the dual variable update. \np
+%
+$\alpha$ & the over-relaxation or under-relaxation factor for ADMM \np
+%
+$\lambda$ & the factor for $\operatorname{L}_1$ penalty.  $\lambda$ is also used as the factor for the $\operatorname{L}_2$ penalty on the image gradients for Tikhonov regularization. Context will make clear. \np
+%
+$\mathbb{L}$ & an estimate of the Lipshitz constant, used to determine stepsize in the ISTA and FISTA algorithms. \np
+%
+$\tau$ & the eigenvalue \np
+%
+$r$, $\omega$ & used to specify momentum stepsize in FISTA and a FISTA-like algorithm. Both always appear with superscripts specifying iteration. \np
+%
+$\loss$ & loss (as in the loss function)
+\end{tabular}
+
+\section{Indexing Integers}
+Lower case letters that are not bold are also used to denote indexing integers.\np
+\begin{tabular}{cp{0.8\textwidth}}
+$n$ & selects the dictionary update or corresponding signal \np
+%
+$t$ & selects the iteration \np
+%
+$m$ & selects the filter \np
+%
+$c$ & selects the channel \np
+%
+$\hat{k}$ & specifies the frequency \np
+\end{tabular}
+
+
+\section{Functions and Operations}
+\begin{tabular}{cp{0.8\textwidth}}
+$*$ & Circular convolution \np
+%
+$a^{*}$ & The complex conjugate of $a$. \np
+%
+$\vu^H$, $\mU^H$ & The Hermitian transpose of a vector $\vu$ or matrix $\mU$ \np
+%
+$\L_{\rho}$ & The augmented Lagrangian function \np
+%
+$\operatorname{S}$ & The shrinkage operator \np
+%
+$\F$ & Applies the Fourier tranform to each channel and/or filter \np
+%
+$f$ and $g$ & Arbitrary convex functions. $f$ may also be used to specify the objective function of a minimization problem. $f$ and $g$ are also used for arbitrary functions that are part of a composite function. Context should make clear. \np
+%
+$\operatorname{q}(\cdot)$ & Quantizes a vector \np
+%
+$\indicator_{\text{condition}}$ & Takes on a value of $0$ when the condition is true and $\infty$ when the condition is false. \np
+%
+$\arg \min$ & The argument minimum of an expression \np
+%
+$\nabla_{a} b$ & The gradient of $b$ in respect to $a$ \np
+%
+$L_1$ & The $L_1$ norm \np
+%
+$L_2$ & The $L_2$ norm \np
+%
+$\mPhi$ & An arbitrary linear operator (this operator is also listed under matrices, since matrices are linear operators) \np
+%
+$\mT$ & Zeros out all dictionary elements that are constrained to be zero. (This operator is also listed under matrices since matrices are linear operators.) \np
+%
+$\mW$ & Converts from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. (This operator also appears under matrices.)
+\end{tabular}
+\section{Superscripts}
+\begin{tabular}{cp{0.8\textwidth}}
+$a^b$ & An exponent: the $b^{\text{th}}$ power of $a$ \np
+%
+$a^*$ & The complex conjugate of $a$ \np
+%
+$\vu^H$, $\mU^H$ & The Hermitian transpose of vector $\vu$ or matrix $\mU$ \np
+%
+$i^{\text{th}}$ & Occuring at position $i$ in a sequence \np
+%
+$\vgamma^{(t)}$ & The value of vector $\vgamma$ at the $t^{\text{th}}$ iteration \np
+%
+$\mD^{(n)}$ & The value of dictionary $\mD$ at the $n^{\text{th}}$ dictionary update\np
+%
+$\nabla_a^{(\vx \rightarrow \vy)} \loss$ & The gradient term of $\loss$ in respect to $a$ that corresponds to the computation of $\vy$ from $\vx$. The gradient of $\loss$ in respect to $a$ is the sum of all the gradient terms.
+\end{tabular}
+
+\section{Subscripts}
+\begin{tabular}{cp{0.8\textwidth}}
+subscript $m$ & specifies the filter. If there are multiple layers, $[m]$ will be used instead of subscript $m$. \np
+%
+subscript $n$ & specifies the sample. \np
+%
+Subscript $c$ & specifies the channel. If there are multiple layers $[c]$ will be used instead of subscript $c$. \np
+%
+subscript $\ell$ & specifies the layer. \np
+%
+subscripts $+$ and $-$ & used to specify the eigenvalues or eigenvectors of a $2 \times 2$ matrix corresponding to the plus or minus in the quadratic formula. \np
+%
+The $\rho$ in $\L_{\rho}$ & specifies the scalar weight of the $L_2$ norm related to the affine constraints, used in the augmented Lagrangian function. \np
+%
+Subscript $\mD_{\text{init}}$ & Short for initial value, appears in algorithms. \np
+%
+Subscript $\vgamma_{\text{sc}}$ & short for "scaled", and indicates that the variable in the algorithm is a scaled form of the variable. \np
+%
+Subscript $i$ & used for essentially all other indexing.
+\end{tabular}
+
+\end{singlespace}
+\clearpage
+
