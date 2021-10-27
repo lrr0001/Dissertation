@@ -330,7 +330,7 @@ If $\vb$ affects $\loss$ through multiple branches, the gradient is the sum of m
 \end{equation}
 
 \subsection{Complex Numbers}
-The chain rule can be applied for complex-valued functions if the complex-valued functions are analytic. However, for a non-analytic function $f$, the limit $\lim_{\Delta z \rightarrow 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}$ does not exist. For non-analytic function $f: \Z^M \rightarrow \R$, define\footnote{The partial derivatives in this definition are not guaranteed to exist. For those cases, this derivative cannot be calculated. For the rest of this part of the Appendix, assume that the non-analytic functions are chosen such that the partial derivatives exist.}
+The chain rule can be applied for complex-valued functions if the complex-valued functions are analytic. However, for a non-analytic function $f$, the limit $\lim_{\Delta z \rightarrow 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}$ does not exist. For non-analytic function $f: \Z^M \rightarrow \R$, define\footnote{The partial derivatives in this definition are not guaranteed to exist. For those cases, this derivative cannot be calculated. For the rest of this part of the appendix, assume that the non-analytic functions are chosen such that the partial derivatives exist.}
 \begin{equation} \label{equation:Derivative Definition}
 \frac{\partial f(\vz)}{ \partial \vz} = \frac{\partial f(\vz)}{\partial \real(\vz)} - j\frac{\partial f(\vz)}{\partial \imag(\vz)}
 \end{equation}

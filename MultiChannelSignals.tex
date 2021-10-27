@@ -429,7 +429,7 @@ where $\vx^{(t)} = \vz^{(t)} + \omega^{(t)}(\vz^{(t)} - \vz^{(t - 1)})$ and $\om
 While neither Chodosh and Lucey, nor the work they cite, mention FISTA, the resemblance is very close. The only distinction is in the momentum step.  Given these similarities, it is likely the performance between the two methods is similar.
 
 \section{Dictionary Learning}
-The last few sections have focused on sparse coding. For sparse coding, the dictionary is fixed or known. Most dictionary learning algorithms alternate between pursuing coefficients and updating dictionary filters, as shown in algorithms \ref{Algorithm: Online Dictionary Learning} and \ref{Algorithm: Batch Dictionary Learning}.\footnote{The capital $\mS$ in Algorithm \ref{Algorithm: Batch Dictionary Learning} represents the entire collection of signal samples, as opposed to a single signal $\vs$.} The CoefficientUpdate in algorithm \ref{Algorithm: Batch Dictionary Learning} may consist of one or more sparse coding update steps. Not all dictionary learning algorithms perfectly adhere to this structure \cite{aharon2006k}, but the template covers most approaches.
+The last few sections have focused on sparse coding. For sparse coding, the dictionary is fixed or known. Most dictionary learning algorithms alternate between pursuing coefficients and updating dictionary filters, as shown in Algorithms \ref{Algorithm: Online Dictionary Learning} and \ref{Algorithm: Batch Dictionary Learning}.\footnote{The capital $\mS$ in Algorithm \ref{Algorithm: Batch Dictionary Learning} represents the entire collection of signal samples, as opposed to a single signal $\vs$.} The CoefficientUpdate in Algorithm \ref{Algorithm: Batch Dictionary Learning} may consist of one or more sparse coding update steps. Not all dictionary learning algorithms perfectly adhere to this structure \cite{aharon2006k}, but the template covers most approaches.
 \begin{algorithm}[h] 
 \SetAlgoLined
 %\KwResult{Write here the result }
@@ -637,7 +637,7 @@ Therefore,
 = \operatorname{real}(\eta_{\vu,\vv}) \pm \sqrt{\eta_{\vv}\eta_{\vu} - (\operatorname{imag}(\eta_{\vu,\vv}))^2}
 \end{equation}
 %
-Assuming that the matrix is diagonalizable and that the eigenvectors are orthonormal,\footnote{This is not guaranteed. See Appendix B for details.} if $\tau_+$ and $\tau_-$ are the eigenvalues of $\vv\vu^H\hat{\mD} + \hat{\mD}^H\vu\vv^H$ and $\vomega_+$ and $\vomega_-$ are the corresponding eigenvectors, then 
+Assuming that the matrix is diagonalizable and that the eigenvectors are orthonormal,\footnote{This is not guaranteed. See appendix B for details.} if $\tau_+$ and $\tau_-$ are the eigenvalues of $\vv\vu^H\hat{\mD} + \hat{\mD}^H\vu\vv^H$ and $\vomega_+$ and $\vomega_-$ are the corresponding eigenvectors, then 
 \begin{equation}
 \vv\vu^H\hat{\mD} + \hat{\mD}^H\vu\vv^H = \tau_+\vomega_+\vomega_+^H + \tau_-\vomega_-\vomega_-^H
 \end{equation}
@@ -734,7 +734,7 @@ Finally, tracking $\vu_{\text{sc}} = \frac{\vu}{\rho}$ instead of $\vu$, the dua
 \frac{\vu^{(t + 1)}}{\rho} = \frac{\vu^{\left(t + \frac{1}{2}\right)}}{\rho} + \mR^{-1}\vy^{(t + 1)} - \mR^{-1}\vx^{(t + 1)}
 \end{equation}
 %
-Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$. The resulting pursuit algorithm is shown in algorithm \ref{algorithm:ADMM for Sparse Coding, Large C}. The same pursuit algorithm in the larger dictionary learning context is shown in algorithm \ref{Algorithm:Dictionary Learning, Using ADMM with large C}.
+Thus, with this modification to the sparse coding optimization problem, the inverse representation used in the $\vx$ updates can be updated efficiently (given that the dictionary updates adhere to a particular low-rank structure), and normalization can be handed through a normalization factor $\mR^{-1}$. The resulting pursuit algorithm is shown in Algorithm \ref{algorithm:ADMM for Sparse Coding, Large C}. The same pursuit algorithm in the larger dictionary learning context is shown in Algorithm \ref{Algorithm:Dictionary Learning, Using ADMM with large C}.
 
 
 \begin{algorithm}[h]
