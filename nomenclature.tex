@@ -1,57 +1,57 @@
 \clearpage
 \begin{centering}
-\textbf{NOMENCLATURE AND ABREVIATIONS}\\
+\textbf{NOMENCLATURE}\\
 \vspace{\baselineskip}
 \end{centering}
 \begin{singlespace}
 \section*{Acronyms}
 
 \begin{tabular}{cp{0.8\textwidth}}
-ADMM & The Alternating Directions Method of Multipliers algorithm\np
-ISTA & The Iterative Shrinkage Thresholding Algorithm \np
-FISTA & The Fast Iterative Shrinkage Tresholding Algorithm \np
+ADMM & the Alternating Directions Method of Multipliers algorithm\np
+ISTA & the Iterative Shrinkage Thresholding Algorithm \np
+FISTA & the Fast Iterative Shrinkage Tresholding Algorithm \np
 RGB & Describes an image with red, green, and blue channels \np
-JPEG & An image compression standard developed by the Joint Photographic Experts Group \np
-FFT & The discrete Fourier transform \np
-DCT & Type-II discrete cosine transform
+JPEG & an image compression standard developed by the Joint Photographic Experts Group \np
+FFT & the discrete Fourier transform \np
+DCT & type-II discrete cosine transform
 \end{tabular}
 
 \section*{Integer Constants}
 Capital letters that are not bold are used to denote integer constants.\np
 \begin{tabular}{cp{0.8\textwidth}}
-$M$ & The number of filters\np
-$C$ & The number of channels\np
+$M$ & the number of filters\np
+$C$ & the number of channels\np
 $\hat{K}$ & the number of elements in a single channel of the signal\np
-$\reflectbox{R}$ & A small integer that specifies the rank of the dictionary updates \np
-$L$ & The number of layers
+$\reflectbox{R}$ & a small integer that specifies the rank of the dictionary updates \np
+$L$ & the number of layers
 \end{tabular}
 
 \section*{Matrices}
 Bold capital letters are used to denote matrices.\np
 \begin{tabular}{cp{0.8\textwidth}}
-$\mD$ & The dictionary. For most of the dissertation, $\mD$ has circulant matrix blocks. \np
+$\mD$ & the dictionary. For most of the dissertation, $\mD$ has circulant matrix blocks. \np
 %
-$\mS$ & A collection of signal vectors, either gathering multiple channels or multiple samples. \np
+$\mS$ & a collection of signal vectors, either gathering multiple channels or multiple samples. \np
 %
-$\mX$ & A collection of dictionary coefficient vectors, corresponding to multple signal vectors. \np
+$\mX$ & a collection of dictionary coefficient vectors, corresponding to multple signal vectors. \np
 %
-$\mA$, $\mB$  & The linear operators appearing the the affine constraints for ADMM. $\mA$ and $\mB$ are also used as arbitary matrices when discussing general linear algebra principles. \np
+$\mA$, $\mB$  & the linear operators appearing the the affine constraints for ADMM. $\mA$ and $\mB$ are also used as arbitary matrices when discussing general linear algebra principles. \np
 %
-$\mU$, $\mV$ & Arbitrary matrices used for discussing general linear algebra principles and low-rank updates. \np
+$\mU$, $\mV$ & arbitrary matrices used for discussing general linear algebra principles and low-rank updates. \np
 %
-$\mPhi$ & An arbitrary linear operator \np
+$\mPhi$ & an arbitrary linear operator \np
 %
-$\mT$ & A diagonal matrix that has diagonal elements of $1$ for dictionary elements that are not constrained to be zero, and zeros for the other diagonal elements \np
+$\mT$ & a diagonal matrix that has diagonal elements of $1$ for dictionary elements that are not constrained to be zero, and zeros for the other diagonal elements \np
 %
-$\mW$ & A matrix which converts an image vector from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. \np
+$\mW$ & a matrix which converts an image vector from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. \np
 %
-$\mSS$ & Part of the dictionary for the product dictionary model \np
+$\mSS$ & part of the dictionary for the product dictionary model \np
 %
-$\mQ$ & Used to denote the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ \np
+$\mQ$ & used to denote the matrix $\rho\mId + \hat{\mD}^H\hat{\mD}$ \np
 %
-$\mXi$ & Used to denote the matrix $\rho\mId + \hat{\mD}\hat{\mD}^H$ \np
+$\mXi$ & used to denote the matrix $\rho\mId + \hat{\mD}\hat{\mD}^H$ \np
 %
-$\mR$ & A rescaling matrix, used to scale a normalized dictionary back to its unnormalized form
+$\mR$ & a rescaling matrix, used to scale a normalized dictionary back to its unnormalized form
 \end{tabular}
 
 \section*{Vectors}
@@ -135,72 +135,72 @@ $\hat{k}$ & specifies the frequency \np
 \begin{tabular}{cp{0.8\textwidth}}
 $*$ & Circular convolution \np
 %
-$a^{*}$ & The complex conjugate of $a$. \np
+$a^{*}$ & the complex conjugate of $a$. \np
 %
-$\vu^H$, $\mU^H$ & The Hermitian transpose of a vector $\vu$ or matrix $\mU$ \np
+$\vu^H$, $\mU^H$ & the Hermitian transpose of a vector $\vu$ or matrix $\mU$ \np
 %
-$\L_{\rho}$ & The augmented Lagrangian function \np
+$\L_{\rho}$ & the augmented Lagrangian function \np
 %
-$\operatorname{S}$ & The shrinkage operator \np
+$\operatorname{S}$ & the shrinkage operator \np
 %
-$\F$ & Applies the Fourier tranform to each channel and/or filter \np
+$\F$ & applies the Fourier tranform to each channel and/or filter \np
 %
-$f$ and $g$ & Arbitrary convex functions. $f$ may also be used to specify the objective function of a minimization problem. $f$ and $g$ are also used for arbitrary functions that are part of a composite function. Context should make clear. \np
+$f$ and $g$ & arbitrary convex functions. $f$ may also be used to specify the objective function of a minimization problem. $f$ and $g$ are also used for arbitrary functions that are part of a composite function. Context should make clear. \np
 %
-$\operatorname{q}(\cdot)$ & Quantizes a vector \np
+$\operatorname{q}(\cdot)$ & quantizes a vector \np
 %
-$\indicator_{\text{condition}}$ & Takes on a value of $0$ when the condition is true and $\infty$ when the condition is false. \np
+$\indicator_{\text{condition}}$ & takes on a value of $0$ when the condition is true and $\infty$ when the condition is false. \np
 %
-$\arg \min$ & The argument minimum of an expression \np
+$\arg \min$ & the argument minimum of an expression \np
 %
-$\nabla_{a} b$ & The gradient of $b$ in respect to $a$ \np
+$\nabla_{a} b$ & the gradient of $b$ in respect to $a$ \np
 %
-$L_1$ & The $L_1$ norm \np
+$L_1$ & the $L_1$ norm \np
 %
-$L_2$ & The $L_2$ norm \np
+$L_2$ & the $L_2$ norm \np
 %
-$\mPhi$ & An arbitrary linear operator (this operator is also listed under matrices, since matrices are linear operators) \np
+$\mPhi$ & n arbitrary linear operator (this operator is also listed under matrices, since matrices are linear operators) \np
 %
-$\mT$ & Zeros out all dictionary elements that are constrained to be zero. (This operator is also listed under matrices since matrices are linear operators.) \np
+$\mT$ & zeros out all dictionary elements that are constrained to be zero. (This operator is also listed under matrices since matrices are linear operators.) \np
 %
-$\mW$ & Converts from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. (This operator also appears under matrices.)
+$\mW$ & converts from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. (This operator also appears under matrices.)
 \end{tabular}
 \section*{Superscripts}
 \begin{tabular}{cp{0.8\textwidth}}
 $a^b$ & An exponent: the $b^{\text{th}}$ power of $a$ \np
 %
-$a^*$ & The complex conjugate of $a$ \np
+$a^*$ & the complex conjugate of $a$ \np
 %
-$\vu^H$, $\mU^H$ & The Hermitian transpose of vector $\vu$ or matrix $\mU$ \np
+$\vu^H$, $\mU^H$ & the Hermitian transpose of vector $\vu$ or matrix $\mU$ \np
 %
-$i^{\text{th}}$ & Occuring at position $i$ in a sequence \np
+$i^{\text{th}}$ & occuring at position $i$ in a sequence \np
 %
-$\vgamma^{(t)}$ & The value of vector $\vgamma$ at the $t^{\text{th}}$ iteration \np
+$\vgamma^{(t)}$ & the value of vector $\vgamma$ at the $t^{\text{th}}$ iteration \np
 %
-$\mD^{(n)}$ & The value of dictionary $\mD$ at the $n^{\text{th}}$ dictionary update\np
+$\mD^{(n)}$ & the value of dictionary $\mD$ at the $n^{\text{th}}$ dictionary update\np
 %
-$\nabla_a^{(\vx \rightarrow \vy)} \loss$ & The gradient term of $\loss$ in respect to $a$ that corresponds to the computation of $\vy$ from $\vx$. The gradient of $\loss$ in respect to $a$ is the sum of all the gradient terms.
+$\nabla_a^{(\vx \rightarrow \vy)} \loss$ & the gradient term of $\loss$ in respect to $a$ that corresponds to the computation of $\vy$ from $\vx$. The gradient of $\loss$ in respect to $a$ is the sum of all the gradient terms.
 \end{tabular}
 
 \section*{Subscripts}
 \begin{tabular}{cp{0.8\textwidth}}
-subscript $m$ & specifies the filter. If there are multiple layers, $[m]$ will be used instead of subscript $m$. \np
+$m$ & specifies the filter. If there are multiple layers, $[m]$ will be used instead of subscript $m$. \np
 %
-subscript $n$ & specifies the sample. \np
+$n$ & specifies the sample. \np
 %
-Subscript $c$ & specifies the channel. If there are multiple layers $[c]$ will be used instead of subscript $c$. \np
+$c$ & specifies the channel. If there are multiple layers $[c]$ will be used instead of subscript $c$. \np
 %
-subscript $\ell$ & specifies the layer. \np
+$\ell$ & specifies the layer. \np
 %
-subscripts $+$ and $-$ & used to specify the eigenvalues or eigenvectors of a $2 \times 2$ matrix corresponding to the plus or minus in the quadratic formula. \np
+$+$ and $-$ & used to specify the eigenvalues or eigenvectors of a $2 \times 2$ matrix corresponding to the plus or minus in the quadratic formula. \np
 %
-The $\rho$ in $\L_{\rho}$ & specifies the scalar weight of the $L_2$ norm related to the affine constraints, used in the augmented Lagrangian function. \np
+$\rho$ in $\L_{\rho}$ & specifies the scalar weight of the $L_2$ norm related to the affine constraints, used in the augmented Lagrangian function. \np
 %
-Subscript $\mD_{\text{init}}$ & Short for initial value, appears in algorithms. \np
+init in $\mD_{\text{init}}$ & short for initial value, appears in algorithms. \np
 %
-Subscript $\vgamma_{\text{sc}}$ & short for "scaled", and indicates that the variable in the algorithm is a scaled form of the variable. \np
+sc in $\vgamma_{\text{sc}}$ & short for "scaled", and indicates that the variable in the algorithm is a scaled form of the variable. \np
 %
-Subscript $i$ & used for essentially all other indexing.
+$i$ & used for essentially all other subscript indexing.
 \end{tabular}
 
 \end{singlespace}
