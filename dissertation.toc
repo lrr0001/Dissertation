@@ -6,27 +6,17 @@
 \defcounter {refsection}{0}\relax 
 \cftpagenumberson {chapter}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.1}Acronyms}{x}{section.0.1}
+\contentsline {chapter}{List of Tables}{x}{chapter*.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.2}Integer Constants}{x}{section.0.2}
+\contentsline {chapter}{List of Figures}{xi}{chapter*.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.3}Matrices}{x}{section.0.3}
+\contentsline {chapter}{Nomenclature and Abreviations}{xii}{chapter*.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.4}Vectors}{xi}{section.0.4}
+\cftpagenumbersoff {chapter}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.5}Non-Integer Scalars}{xii}{section.0.5}
+\cftpagenumberson {chapter}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.6}Indexing Integers}{xiii}{section.0.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.7}Functions and Operations}{xiv}{section.0.7}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.8}Superscripts}{xv}{section.0.8}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.9}Subscripts}{xv}{section.0.9}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Tables}{xvi}{section.0.9}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Figures}{xvii}{chapter*.2}
+\contentsline {chapter}{Summary}{xviii}{chapter*.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 

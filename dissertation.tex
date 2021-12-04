@@ -170,11 +170,7 @@
 
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Nomenclature
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\input{nomenclature.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % List of figures and tables
@@ -196,10 +192,21 @@
 
 \clearpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Nomenclature
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{chapter}{Nomenclature and Abreviations}
+\input{nomenclature.tex}
+\addtocontents{toc}{\cftpagenumbersoff{chapter}} 
+
+\currentpdfbookmark{Nomenclature and Abreviations}{nomenclature}
+\addtocontents{toc}{\cftpagenumberson{chapter}} 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is the Summary (abstract should be separate document)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\addcontentsline{toc}{chapter}{Summary}
 \input{summary.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%

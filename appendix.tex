@@ -221,6 +221,9 @@ The rank-$1$ Hermitian update to a Cholesky decomposition can be computed in qua
 \end{algorithm} 
 
 
+
+
+% ************ APPENDIx B ***********
 \chapter{Rank-2 Eigendecomposition Edge Cases} \label{chapter:eigenedge}
 \begin{equation}
 \mA = \begin{bmatrix}  \vv  &  \mD^H\vu \end{bmatrix}
@@ -277,6 +280,9 @@ The rest of the eigenvalues are zero.  (The corresponding $2 \times 2$ matrix $\
 
 If the pair of eigenvalues are the same, then all nonzero vectors are eigenvectors of $\mB\mA$. However, it is necessary for a diagonalization expansion with only Hermitian terms that the eigenvectors of $\mA\mB$ are chosen to be orthogonal, which can be found using a Gram-Schmidt process. This case is not just a theoretical concern; it is necessary to check for this in code.
 
+
+
+% ************ APPENDIx C ***********
 \chapter{Differentiating the Inverse Function} \label{chapter:Differentiating the Inverse Function}
 Appendix \ref{chapter:Differentiating the Inverse Function} considers the equation
 \begin{equation}
@@ -334,19 +340,14 @@ If $\vb$ affects $\loss$ through multiple branches, the gradient is the sum of m
 \end{equation}
 
 \subsection{Complex Numbers}
-The chain rule can be applied for complex-valued functions if the complex-valued functions are analytic. However, for a non-analytic function $f$, the limit $\lim_{\Delta z \rightarrow 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}$ does not exist. For non-analytic function $f: \Z^M \rightarrow \R$, define\footnote{The partial derivatives in this definition are not guaranteed to exist. For those cases, this derivative cannot be calculated. For the rest of this part of the appendix, assume that the non-analytic functions are chosen such that the partial derivatives exist.}
-\begin{equation} \label{equation:Derivative Definition}
-\frac{\partial f(\vz)}{ \partial \vz} = \frac{\partial f(\vz)}{\partial \real(\vz)} - j\frac{\partial f(\vz)}{\partial \imag(\vz)}
+The chain rule can be applied for functions of complex variables if the functions are analytic. However, for a non-analytic function $f$, the limit $\lim_{\Delta z \rightarrow 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}$ does not exist. Since all non-constant functions onto reals are nonanalytic, the lack of derivative is a problem. Fortunately, for functions onto reals, a chain-rule like property exists for gradients. For non-analytic function $f: \Z^M \rightarrow \R$, the gradient is simply\footnote{The partial derivatives in this definition are not guaranteed to exist. For those cases, this derivative cannot be calculated. For the rest of this part of the appendix, assume that the non-analytic functions are chosen such that the partial derivatives exist.}
+\begin{equation} \label{equation:Gradient Definition}
+\nabla_{\vz} f(\vz) = \left(\frac{\partial f(\vz)}{\partial \real(\vz)} - j\frac{\partial f(\vz)}{\partial \imag(\vz)}\right)^H
 \end{equation}
 
-Relating this derivative definition to the gradient, if $\loss$ is a scalar function then
-\begin{equation}
-\nabla_{\vz} \loss = \left(\frac{\partial \loss}{\partial \vz}\right)^H
-\end{equation}
-
-Using this derivative definition, if non-analytic, real-valued function $g: \Z^N \rightarrow \R$ is paired with analytic function $f: \Z^M \rightarrow \Z^N$, then the chain rule can safely be applied for composite function $g \circ f$.
-\begin{equation}
-\frac{\partial g(f(\vz))}{\partial \vz} = \frac{\partial g(f(\vz))}{\partial f(\vz)}\frac{\partial f(\vz)}{\partial \vz}
+If a non-analytic, real-valued function $g: \Z^N \rightarrow \R$ is paired with analytic function $f: \Z^M \rightarrow \Z^N$, then the chain rule can safely be applied for composite function $g \circ f$, treating the Hermitian transpose of the gradient as a derivative.
+\begin{equation} \label{equation:Complex Chain Rule}
+\left(\nabla_{\vz} g(f(\vz))\right)^H = \left( \nabla_{f(\vz)} g(f(\vz))\right)^H \frac{\partial f(\vz)}{\partial \vz}
 \end{equation}
 
 To see that this is true, the key is to split the complex numbers into real and complex components, and apply the chain rule:
@@ -355,10 +356,10 @@ To see that this is true, the key is to split the complex numbers into real and 
 \end{equation}
 By definition,
 \begin{equation}
-\frac{\partial g(f(\vz))}{\partial \real(f(\vz))} = \real\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\right)
+\frac{\partial g(f(\vz))}{\partial \real(f(\vz))} = \real\left(\left(\nabla_{f(\vz)} g(f(\vz))\right)^H\right)
 \end{equation}
 \begin{equation}
-\frac{\partial g(f(\vz))}{\partial \imag(f(\vz))} = -\imag\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\right)
+\frac{\partial g(f(\vz))}{\partial \imag(f(\vz))} = -\imag\left(\left(\nabla_{f(\vz)} g(f(\vz))\right)^H\right)
 \end{equation}
 Using the fact that $\frac{\partial f(\vz)}{\partial \vz} = \lim_{\Delta \vz \rightarrow \vzero} \frac{f(\vz + \Delta \vz) - f(z)}{\Delta \vz}$,
 \begin{equation}
@@ -369,13 +370,14 @@ Using the fact that $\frac{\partial f(\vz)}{\partial \vz} = \lim_{\Delta \vz \ri
 \end{equation}
 Therefore,
 \begin{equation}
-\frac{\partial g(f(\vz))}{\partial \real(\vz)} = \real\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\right)\real\left(\frac{\partial f(\vz)}{\partial \vz}\right) - \imag\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\right)\imag\left(\frac{\partial f(\vz)}{\partial \vz}\right)
+\frac{\partial g(f(\vz))}{\partial \real(\vz)} = \real\left(\left(\nabla_{f(\vz)} g(f(\vz))\right)^H\right)\real\left(\frac{\partial f(\vz)}{\partial \vz}\right) - \imag\left(\left(\nabla_{f(\vz)} g(f(\vz))\right)^H\right)\imag\left(\frac{\partial f(\vz)}{\partial \vz}\right)
 \end{equation}
 \begin{equation} \label{equation:Partial Derivative for Real Component}
-\frac{\partial g(f(\vz))}{\partial \real(\vz)} = \real\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\frac{\partial f(\vz)}{\partial \vz}\right)
+\frac{\partial g(f(\vz))}{\partial \real(\vz)} = \real\left(\left(\nabla_{f(\vz)} g(f(\vz))\right)^H\frac{\partial f(\vz)}{\partial \vz}\right)
 \end{equation}
 
-Note this agrees with the definition in equation \ref{equation:Derivative Definition}. Still, it is important to check that the partial derivative in respect to the imaginary component also adheres to the same equation. Following the same process using the chain rule,
+Having computed the partial derivative in respect to the real component, it is necessary to now compute the partial derivative in respect to the imaginary component. Following the same process using the chain rule,
+
 \begin{equation}
 \frac{\partial g(f(\vz))}{\partial \imag(\vz)} = \frac{\partial g(f(\vz))}{\partial \real(f(\vz))}\frac{\partial \real(f(\vz))}{\partial \imag(\vz)} + \frac{\partial g(f(\vz))}{\partial \imag(f(\vz))}\frac{\partial \imag(f(\vz))}{\partial \imag(\vz)}
 \end{equation}
@@ -387,16 +389,13 @@ Using the fact that $\frac{\partial f(\vz)}{\partial \vz} = \lim_{\Delta \vz \ri
 \frac{\partial \imag(f(\vz))}{\partial \imag(\vz)} = \real\left(\frac{\partial f(\vz)}{\partial \vz}\right)
 \end{equation}
 Therefore,
-\begin{equation}
-\frac{\partial g(f(\vz))}{\partial \imag(\vz)} = -\real\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\right)\imag\left(\frac{\partial f(\vz)}{\partial \vz}\right) - \imag\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\right)\real\left(\frac{\partial f(\vz)}{\partial \vz}\right)
-\end{equation}
-\begin{equation} \label{equation:Partial Derivative for Imaginary Component}
-\frac{\partial g(f(\vz))}{\partial \imag(\vz)} = -\imag\left(\frac{\partial g(f(\vz))}{\partial f(\vz)}\frac{\partial f(\vz)}{\partial \vz}\right)
+\begin{equation}\label{equation:Partial Derivative for Imaginary Component}
+\frac{\partial g(f(\vz))}{\partial \imag(\vz)} = -\real\left(\left(\nabla_{f(\vz)} g(f(\vz))\right)^H\right)\imag\left(\frac{\partial f(\vz)}{\partial \vz}\right) - \imag\left(\left(\nabla_{f(\vz)} g(f(\vz))\right)^H\right)\real\left(\frac{\partial f(\vz)}{\partial \vz}\right)
 \end{equation}
 
-Finally, combining equations \ref{equation:Partial Derivative for Real Component} and \ref{equation:Partial Derivative for Imaginary Component} demonstrates that the computations using the chain rule satisfy the definition in equation \ref{equation:Derivative Definition}.
+Finally, combining equations \ref{equation:Partial Derivative for Real Component} and \ref{equation:Partial Derivative for Imaginary Component} demonstrates that the computations using the gradient-based chain rule satisfy the definition in equation \ref{equation:Gradient Definition}.
 \begin{equation}
-\frac{\partial g(f(\vz))}{\partial \vz} = \frac{\partial g(f(\vz))}{\partial \real(\vz)} - j\frac{\partial g(f(\vz))}{\partial \imag(\vz)}
+\nabla_{\vz} g(f(\vz)) = \left(\frac{\partial g(f(\vz))}{\partial \real(\vz)} - j\frac{\partial g(f(\vz))}{\partial \imag(\vz)}\right)^H
 \end{equation}
 
 \section{Partial Derivatives}
@@ -539,104 +538,104 @@ are very similar to that of $f_{\hat{\mD}}$. Let $\mQ_g = \rho\mId + \mD\mD^H$. 
 \section{Backpropagation of Loss Function}
 To backpropagate the loss function $\loss$ through component function $f_{\hat{\mD}}(\vb)$, the partial derivative in respect to the input of function $f_{\hat{\mD}}(\vb)$ is necessary to reach earlier layers, as explained in section \ref{section:Chain Rule}. If $\vb$ only influenced $\loss$ through $f_{\hat{\mD}}$, then
 \begin{equation}
-\frac{\partial \loss}{\partial \vb} = \frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb}
+\nabla_{\vb} \loss = \left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb}
 \end{equation}
 
 If the dictionary $\hat{\mD}$ is only used in component function $f_{\hat{\mD}}$, then\footnote{These equations can be derived through chain rule. Note that the function of $\hat{\mD}_{c,m}$ is non-analytic, so to apply chain rule properly, it is important to work with the real and imaginary components, rather than directly with complex numbers.}
 \begin{equation}
-\frac{\partial \loss}{\partial \real(\hat{D}_{c,m})} = \real\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})}\right)
+\frac{\partial \loss}{\partial \real(\hat{D}_{c,m})} = \real\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})}\right)
 \end{equation}
 \begin{equation}
-\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \real\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})}\right)
+\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \real\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})}\right)
 \end{equation}
 
-If the dictionary $\hat{\mD}$ is used in multiple component functions, the expressions $\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})}$ and $\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})}$ still must be calculated so that the results can be aggregated later. Similarly, if $\vb$ affects $\loss$ through multiple branches,\footnote{That is, not just through function $f_{\hat{\mD}}$} the expression $\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb}$ still must be calculated, and $\frac{\partial \loss}{\partial \vb}$ is just an aggregation of the results across all branches.
+If the dictionary $\hat{\mD}$ is used in multiple component functions, the expressions $\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})}$ and $\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})}$ still must be calculated so that the results can be aggregated later. Similarly, if $\vb$ affects $\loss$ through multiple branches,\footnote{That is, not just through function $f_{\hat{\mD}}$} the expression $\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb}$ still must be calculated, and $\nabla_{\vb} \loss$ is just an aggregation of the results across all branches.
 
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb^H} = \frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}
-\end{equation}
-
-\begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}(-\ve_m\ve_c^T\hat{\mD} - \hat{\mD}^H\ve_c\ve_m^T)\mQ^{-1}\vb
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb^H} =\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}
 \end{equation}
 
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = -\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\ve_m\right)(\ve_c^T\hat{\mD}\mQ^{-1}\vb) - \left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\hat{\mD}^H\ve_c\right)(\ve_m^T\mQ^{-1}\vb)
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}(-\ve_m\ve_c^T\hat{\mD} - \hat{\mD}^H\ve_c\ve_m^T)\mQ^{-1}\vb
 \end{equation}
 
-Note that $\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\hat{\mD}^H\ve_c$ and $\ve_m^T\mQ^{-1}\vb$ are scalars and $\mQ^{-1}$ is Hermitian, so using the fact that the Hermitian transpose of a scalar is its complex conjugate
+\begin{equation}
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = -\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\ve_m\right)(\ve_c^T\hat{\mD}\mQ^{-1}\vb) - \left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\hat{\mD}^H\ve_c\right)(\ve_m^T\mQ^{-1}\vb)
+\end{equation}
+
+Note that $\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\hat{\mD}^H\ve_c$ and $\ve_m^T\mQ^{-1}\vb$ are scalars and $\mQ^{-1}$ is Hermitian, so using the fact that the Hermitian transpose of a scalar is its complex conjugate
 \begin{equation}
 \begin{split}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\hat{\mD}^H\ve_c = & \left(\ve_c^T\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^*
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\hat{\mD}^H\ve_c = & \left(\ve_c^T\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*
 \\
 \ve_m^T\mQ^{-1}\vb = & (\vb^H\mQ^{-1}\ve_m)^*
 \end{split}
 \end{equation}
 Therefore,
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = -\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\ve_m\right)(\ve_c^T\hat{\mD}\mQ^{-1}\vb) - \left(\ve_c^T\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^* (\vb^H\mQ^{-1}\ve_m)^*
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = -\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\ve_m\right)(\ve_c^T\hat{\mD}\mQ^{-1}\vb) - \left(\ve_c^T\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1}\ve_m)^*
 \end{equation}
 Scalar multiplication commutes, so
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = -(\ve_c^T\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\ve_m\right) - \left(\ve_c^T\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^* (\vb^H\mQ^{-1}\ve_m)^*
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = -(\ve_c^T\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\ve_m\right) - \left(\ve_c^T\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1}\ve_m)^*
 \end{equation}
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \ve_c^T(-(\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^* (\vb^H\mQ^{-1})^*)\ve_m
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \ve_c^T(-(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*)\ve_m
 \end{equation}
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \left(-(\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
-\end{equation}
-
-\begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = \frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}(j\ve_m\ve_c^T\hat{\mD} - j\hat{\mD}^H\ve_c\ve_m^T)\mQ^{-1}\vb
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \left(-(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
 \end{equation}
 
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\ve_m\ve_c^T\hat{\mD}\mQ^{-1}\vb - j\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\hat{\mD}^H\ve_c\ve_m^T\mQ^{-1}\vb
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = \left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}(j\ve_m\ve_c^T\hat{\mD} - j\hat{\mD}^H\ve_c\ve_m^T)\mQ^{-1}\vb
 \end{equation}
 
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\ve_m\right)(\ve_c^T\hat{\mD}\mQ^{-1}\vb) - j\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\hat{\mD}^H\ve_c\right)(\ve_m^T\mQ^{-1}\vb)
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\ve_m\ve_c^T\hat{\mD}\mQ^{-1}\vb - j\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\hat{\mD}^H\ve_c\ve_m^T\mQ^{-1}\vb
 \end{equation}
 
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j(\ve_c^T\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\ve_m\right) - j\left(\ve_c^T\mD\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^*(\vb^H\mQ^{-1}\ve_m)^*
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\ve_m\right)(\ve_c^T\hat{\mD}\mQ^{-1}\vb) - j\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\hat{\mD}^H\ve_c\right)(\ve_m^T\mQ^{-1}\vb)
+\end{equation}
+
+\begin{equation}
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j(\ve_c^T\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\ve_m\right) - j\left(\ve_c^T\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*(\vb^H\mQ^{-1}\ve_m)^*
 \end{equation}
 
 
 \begin{equation}
-\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j\left(-\left(\mD\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^*(\vb^H\mQ^{-1})^* + (\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right)\right)_{c,m}
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j\left(-\left(\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*(\vb^H\mQ^{-1})^* + (\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
 \end{equation}
 
 
 
 Assuming that $\hat{D}_{c,m}$ only affects $\loss$ through $f_{\mD}(\vb)$,
 \begin{equation}
-\frac{\partial \loss}{\partial \real(\hat{D}_{c,m})} = \real\left(-(\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
+\frac{\partial \loss}{\partial \real(\hat{D}_{c,m})} = \real\left(-(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
 \end{equation}
 \begin{equation}
-\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \real\left(j\left(-\mD\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^*(\vb^H\mQ^{-1})^* + j(\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right)\right)_{c,m}
+\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \real\left(j\left(-\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*(\vb^H\mQ^{-1})^* + j(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
 \end{equation}
 \begin{equation}
-\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \imag\left(-\left(\mD\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)(\vb^H\mQ^{-1}) - (\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right)\right)_{c,m}
+\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \imag\left(-\left(\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)(\vb^H\mQ^{-1}) - (\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
 \end{equation}
 Therefore,
 \begin{equation}
-\frac{\partial \loss}{\partial \hat{D}_{c,m}} = \left(-(\hat{\mD}\mQ^{-1}\vb)^*\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right)^* - \left(\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
+\frac{\partial \loss}{\partial \hat{D}_{c,m}} = \left(-(\hat{\mD}\mQ^{-1}\vb)^*\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)^* - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
 \end{equation}
 \begin{equation}
-\nabla_{\hat{\mD}} \loss = -(\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right) (\vb^H\mQ^{-1})
+\nabla_{\hat{\mD}} \loss = -(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right) (\vb^H\mQ^{-1})
 \end{equation}
 
 If $\hat{\mD}$ affects $\loss$ through other functions (rather than just through $f_{\mD}(\vb)$),
 \begin{equation}
-\nabla^{(\vb \rightarrow f_{\mD}(\vb))}_{\hat{\mD}} \loss = -(\hat{\mD}\mQ^{-1}\vb)\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\left(\frac{\partial \loss}{\partial f_{\hat{\mD}}(\vb)}\right)^H\right) (\vb^H\mQ^{-1})
+\nabla^{(\vb \rightarrow f_{\mD}(\vb))}_{\hat{\mD}} \loss = -(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right) (\vb^H\mQ^{-1})
 \end{equation}
 
 
 Using similar derivations for the function $g_{\hat{\mD}}(\vy)$ yields the following equation for the gradient term:
 \begin{equation}
-\nabla^{(\vy \rightarrow g_{\mD}(\vy))}_{\hat{\mD}} \loss = -\left(\mQ_g^{-1}\left(\frac{\partial \loss}{\partial g_{\hat{\mD}}(\vb)}\right)^H\right)(\vb^H\mQ_g^{-1}\hat{\mD}) - (\mQ_g^{-1}\vb)\left(\frac{\partial \loss}{\partial g_{\hat{\mD}}(\vb)}\mQ_g^{-1}\hat{\mD}\right)
+\nabla^{(\vy \rightarrow g_{\mD}(\vy))}_{\hat{\mD}} \loss = -\left(\mQ_g^{-1}\nabla_{g_{\hat{\mD}}(\vy)} \loss\right)(\vy^H\mQ_g^{-1}\hat{\mD}) - (\mQ_g^{-1}\vy)\left(\left(\nabla_{g_{\hat{\mD}}(\vy)} \loss\right)^H\mQ_g^{-1}\hat{\mD}\right)
 \end{equation}
 
 

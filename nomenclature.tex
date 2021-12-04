@@ -4,7 +4,7 @@
 \vspace{\baselineskip}
 \end{centering}
 \begin{singlespace}
-\section{Acronyms}
+\section*{Acronyms}
 
 \begin{tabular}{cp{0.8\textwidth}}
 ADMM & The Alternating Directions Method of Multipliers algorithm\np
@@ -16,7 +16,7 @@ FFT & The discrete Fourier transform \np
 DCT & Type-II discrete cosine transform
 \end{tabular}
 
-\section{Integer Constants}
+\section*{Integer Constants}
 Capital letters that are not bold are used to denote integer constants.\np
 \begin{tabular}{cp{0.8\textwidth}}
 $M$ & The number of filters\np
@@ -26,7 +26,7 @@ $\reflectbox{R}$ & A small integer that specifies the rank of the dictionary upd
 $L$ & The number of layers
 \end{tabular}
 
-\section{Matrices}
+\section*{Matrices}
 Bold capital letters are used to denote matrices.\np
 \begin{tabular}{cp{0.8\textwidth}}
 $\mD$ & The dictionary. For most of the dissertation, $\mD$ has circulant matrix blocks. \np
@@ -39,11 +39,11 @@ $\mA$, $\mB$  & The linear operators appearing the the affine constraints for AD
 %
 $\mU$, $\mV$ & Arbitrary matrices used for discussing general linear algebra principles and low-rank updates. \np
 %
-$\mPhi$ & An arbitrary linear operator (This matrix is also listed under operators, since matrices are linear operators). \np
+$\mPhi$ & An arbitrary linear operator \np
 %
-$\mT$ & A diagonal matrix that has diagonal elements of $1$ for dictionary elements that are not constrained to be zero, and zeros for the other diagonal elements (This matrix is also listed under operators since matrices are linear operators). \np
+$\mT$ & A diagonal matrix that has diagonal elements of $1$ for dictionary elements that are not constrained to be zero, and zeros for the other diagonal elements \np
 %
-$\mW$ & A matrix which converts an image vector from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. This matrix also appears under operators. \np
+$\mW$ & A matrix which converts an image vector from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. \np
 %
 $\mSS$ & Part of the dictionary for the product dictionary model \np
 %
@@ -54,7 +54,7 @@ $\mXi$ & Used to denote the matrix $\rho\mId + \hat{\mD}\hat{\mD}^H$ \np
 $\mR$ & A rescaling matrix, used to scale a normalized dictionary back to its unnormalized form
 \end{tabular}
 
-\section{Vectors}
+\section*{Vectors}
 Bold, lower-case letters are used to denote vectors.\np
 \begin{tabular}{cp{0.8\textwidth}}
 $\vx$, $\vy$ & the primal variables for ADMM. \np
@@ -90,7 +90,7 @@ $\vomega$ & an eigenvector.
 
 
 
-\section{Non-Integer Scalars}
+\section*{Non-Integer Scalars}
 Lower-case letters that are not bold are generally used to denote scalars that are not integer constants. $\mathbb{L}$ and $\loss$ are the exceptions.\np
 \begin{tabular}{cp{0.8\textwidth}}
 $a$, $b$ & arbitrary scalars. \np
@@ -105,12 +105,18 @@ $\mathbb{L}$ & an estimate of the Lipshitz constant, used to determine stepsize 
 %
 $\tau$ & the eigenvalue \np
 %
+$\eta_{\vu,\vv}$ & used to represent $\vu^H\hat{\mD}\vv$ \np
+%
+$\eta_{\vu}$ & used to represent $\|\mD^H\vu\|_2^2$ \np
+%
+$\eta_{\vv}$ & used to represent $\|\vv\|_2^2$ \np
+%
 $r$, $\omega$ & used to specify momentum stepsize in FISTA and a FISTA-like algorithm. Both always appear with superscripts specifying iteration. \np
 %
 $\loss$ & loss (as in the loss function)
 \end{tabular}
 
-\section{Indexing Integers}
+\section*{Indexing Integers}
 Lower case letters that are not bold are also used to denote indexing integers.\np
 \begin{tabular}{cp{0.8\textwidth}}
 $n$ & selects the dictionary update or corresponding signal \np
@@ -125,7 +131,7 @@ $\hat{k}$ & specifies the frequency \np
 \end{tabular}
 
 
-\section{Functions and Operations}
+\section*{Functions and Operations}
 \begin{tabular}{cp{0.8\textwidth}}
 $*$ & Circular convolution \np
 %
@@ -159,7 +165,7 @@ $\mT$ & Zeros out all dictionary elements that are constrained to be zero. (This
 %
 $\mW$ & Converts from RGB to YUV, downsamples the UV channels, and computes the DCT  of $8 \times 8$ blocks. (This operator also appears under matrices.)
 \end{tabular}
-\section{Superscripts}
+\section*{Superscripts}
 \begin{tabular}{cp{0.8\textwidth}}
 $a^b$ & An exponent: the $b^{\text{th}}$ power of $a$ \np
 %
@@ -176,7 +182,7 @@ $\mD^{(n)}$ & The value of dictionary $\mD$ at the $n^{\text{th}}$ dictionary up
 $\nabla_a^{(\vx \rightarrow \vy)} \loss$ & The gradient term of $\loss$ in respect to $a$ that corresponds to the computation of $\vy$ from $\vx$. The gradient of $\loss$ in respect to $a$ is the sum of all the gradient terms.
 \end{tabular}
 
-\section{Subscripts}
+\section*{Subscripts}
 \begin{tabular}{cp{0.8\textwidth}}
 subscript $m$ & specifies the filter. If there are multiple layers, $[m]$ will be used instead of subscript $m$. \np
 %
