@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  4 DEC 2021 11:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  4 DEC 2021 12:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1243,21 +1243,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Chapter 4.
 [42
 
-] [43]
-Overfull \hbox (3.20084pt too wide) detected at line 67
-\OML/cmm/b/it/12 z[] \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 ^^Z^^V[]\OT1/cmr/bx/n/
-12 I \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 ^^V[]\OML/cmm/b/it/12 R[]\OT1/cmr/m/n/1
-2 )[]\OML/cmm/b/it/12 R[] [][] []
- []
-
-[44] [45]
-Overfull \hbox (22.55806pt too wide) detected at line 123
-[]\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 x[]\OT1/cmr/m/n/12 ) = \OML/cmm/b/it/12 W\O
-T1/cmr/m/n/12 (\OML/cmm/b/it/12 v \OMS/cmsy/m/n/12 ^^@ \OML/cmm/b/it/12 D[]x[] 
-\OMS/cmsy/m/n/12 ^^@ \OML/cmm/b/it/12 s[]\OT1/cmr/m/n/12 ) = []
- []
-
-
+] [43] [44] [45]
 <figures/multi-layer_ADMM-node-dependencies-JPEG.png, id=1032, 787.44188pt x 50
 8.90125pt>
 File: figures/multi-layer_ADMM-node-dependencies-JPEG.png Graphic file (type pn
@@ -1271,11 +1257,6 @@ ed on input line 131.
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 155.
-
-
-Overfull \hbox (31.19618pt too wide) in paragraph at lines 158--166
- [] 
- []
 
 <figures/ADMM_Recon_Err.png, id=1068, 419.5675pt x 296.10625pt>
 File: figures/ADMM_Recon_Err.png Graphic file (type png)
@@ -1324,15 +1305,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 Appendix A.
 [62
 
-] [63]
-Overfull \hbox (36.28339pt too wide) detected at line 88
-\OML/cmm/b/it/12 M[]M[] \OT1/cmr/m/n/12 = \OML/cmm/b/it/12 L[]L[] \OT1/cmr/m/n/
-12 + []\OML/cmm/b/it/12 l[]l[] \OT1/cmr/m/n/12 + []\OML/cmm/b/it/12 v[]v[] \OMS
-/cmsy/m/n/12 ^^@ []\OML/cmm/b/it/12 l[]v[] \OMS/cmsy/m/n/12 ^^@ []\OML/cmm/b/it
-/12 v[]l[]
- []
-
-[64] [65]
+] [63] [64] [65]
 Overfull \hbox (1.65634pt too wide) in paragraph at lines 183--184
 []\OT1/ptm/m/n/12 The rank-$\OT1/cmr/m/n/12 1$ \OT1/ptm/m/n/12 Her-mi-tian up-d
 ate to a Cholesky de-com-po-si-tion can be com-puted in quadratic
@@ -1346,82 +1319,15 @@ Appendix B.
 Appendix C.
 [70
 
-] [71] [72]
-Overfull \hbox (38.01768pt too wide) detected at line 374
-[] \OT1/cmr/m/n/12 = [] [] [] [] \OMS/cmsy/m/n/12 ^^@ [] [] [] []
- []
-
-[73]
-Overfull \hbox (54.05093pt too wide) detected at line 394
-[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@ [] [] [] [] ^^@ [] [] [] []
- []
-
-[74] [75] [76] [77]
-Overfull \hbox (60.90677pt too wide) in paragraph at lines 552--553
+] [71] [72] [73] [74] [75] [76] [77]
+Underfull \hbox (badness 1436) in paragraph at lines 552--553
 []\OT1/ptm/m/n/12 If the dic-tio-nary $[]$ is used in mul-ti-ple com-po-nent fu
-nc-tions, the ex-pres-sions $[][] []$
+nc-tions, the ex-pres-sions
  []
 
-
-Overfull \hbox (11.58293pt too wide) in paragraph at lines 552--553
-\OT1/ptm/m/n/12 later. Sim-i-larly, if $\OML/cmm/b/it/12 b$ \OT1/ptm/m/n/12 af-
-fects $\U/rsfs/m/n/12 L$ \OT1/ptm/m/n/12 through mul-ti-ple branches,[][][] the
- ex-pres-sion $[][] []$
- []
-
-[78]
-Overfull \hbox (102.03114pt too wide) detected at line 564
-[][] [] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/b/i
-t/12 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/c
-mm/b/it/12 e[]Q[]b\OT1/cmr/m/n/12 )
- []
-
-
-Overfull \hbox (92.88026pt too wide) detected at line 577
-[][] [] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 (\OML/cmm/b/i
-t/12 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ [][] \OT1/cmr/m/n/12 (\OML
-/cmm/b/it/12 b[]Q[]e[]\OT1/cmr/m/n/12 )[]
- []
-
-
-Overfull \hbox (90.8803pt too wide) detected at line 581
-[][] [] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 (\OML/cmm/b/it/12
- e[][]Q[]b\OT1/cmr/m/n/12 ) [] \OMS/cmsy/m/n/12 ^^@ [][] \OT1/cmr/m/n/12 (\OML/
-cmm/b/it/12 b[]Q[]e[]\OT1/cmr/m/n/12 )[]
- []
-
-
-Overfull \hbox (72.08463pt too wide) detected at line 584
-[][] [] \OT1/cmr/m/n/12 = \OML/cmm/b/it/12 e[]\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12
- ^^@\OT1/cmr/m/n/12 ([]\OML/cmm/b/it/12 Q[]b\OT1/cmr/m/n/12 ) [] \OMS/cmsy/m/n/
-12 ^^@ [][] \OT1/cmr/m/n/12 (\OML/cmm/b/it/12 b[]Q[]\OT1/cmr/m/n/12 )[])\OML/cm
-m/b/it/12 e[]
- []
-
-
+[78] [79]
 Overfull \hbox (68.73929pt too wide) detected at line 587
 [][] [] \OT1/cmr/m/n/12 = [][]
- []
-
-[79]
-Overfull \hbox (60.86397pt too wide) detected at line 595
-[][] [] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [][] \OML/cmm/b/it/12 Q[]e[]e[][]Q
-[]b \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 j [][] \OML/cmm/b/it/12 Q[][]e[]e[]Q[
-]b
- []
-
-
-Overfull \hbox (111.80824pt too wide) detected at line 599
-[][] [] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [] \OT1/cmr/m/n/12 (\OML/cmm/b/it/
-12 e[][]Q[]b\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 j [] \OT1/c
-mr/m/n/12 (\OML/cmm/b/it/12 e[]Q[]b\OT1/cmr/m/n/12 )
- []
-
-
-Overfull \hbox (97.32408pt too wide) detected at line 603
-[][] [] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 e
-[][]Q[]b\OT1/cmr/m/n/12 ) [] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 j [][] \OT1/
-cmr/m/n/12 (\OML/cmm/b/it/12 b[]Q[]e[]\OT1/cmr/m/n/12 )[]
  []
 
 
@@ -1429,7 +1335,7 @@ Overfull \hbox (80.78566pt too wide) detected at line 608
 [][] [] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [][]
  []
 
-
+[80]
 Overfull \hbox (22.78506pt too wide) detected at line 615
 [] \OT1/cmr/m/n/12 = [] [][]
  []
@@ -1439,25 +1345,25 @@ Overfull \hbox (38.36765pt too wide) detected at line 618
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
-[80]
+
 Overfull \hbox (24.02786pt too wide) detected at line 621
 [] \OT1/cmr/m/n/12 = [] [][]
  []
 
-) [81] [82
+[81]) [82] [83
 
 ]
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 300.
- [83]
+ [84]
 Overfull \hbox (2.5002pt too wide) in paragraph at lines 300--300
 []\OT1/ptm/m/n/12 I. Good-fel-low, Y. Ben-gio, and A. Courville, \OT1/ptm/m/it/
 12 Deep Learn-ing\OT1/ptm/m/n/12 . MIT Press, 2016, []$\OT1/pcr/m/n/12 http :
  []
 
-[84] [85]
+[85] [86]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 313.
- [86]
+ [87]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 313.
  (./dissertation.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 313.
@@ -1470,8 +1376,8 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
  )
 (\end occurred when \iftrue on line 101 was incomplete) 
 Here is how much of TeX's memory you used:
- 16589 strings out of 493029
- 260636 string characters out of 6136233
+ 16590 strings out of 493029
+ 260643 string characters out of 6136233
  473805 words of memory out of 5000000
  19221 multiletter control sequences out of 15000+600000
  34433 words of font info for 96 fonts, out of 8000000 for 9000
@@ -1511,10 +1417,10 @@ texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on dissertation.pdf (102 pages, 686274 bytes).
+Output written on dissertation.pdf (103 pages, 687148 bytes).
 PDF statistics:
- 1710 PDF objects out of 1728 (max. 8388607)
- 1542 compressed objects within 16 object streams
- 602 named destinations out of 1000 (max. 500000)
+ 1715 PDF objects out of 1728 (max. 8388607)
+ 1546 compressed objects within 16 object streams
+ 603 named destinations out of 1000 (max. 500000)
  615 words of extra memory for PDF output out of 10000 (max. 10000000)
 

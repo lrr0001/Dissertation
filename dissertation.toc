@@ -148,4 +148,4 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {C.3}Backpropagation of Loss Function}{78}{section.1.C.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{86}{chapter*.16}
+\contentsline {chapter}{References}{87}{chapter*.16}
