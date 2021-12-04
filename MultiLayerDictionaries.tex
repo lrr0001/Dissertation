@@ -174,12 +174,14 @@ For the sake of brevity, I will now drop the indexing:
 \vz_{\ell} = \operatorname{S}_{\frac{\lambda_{\ell}}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}}\left(\frac{\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}(\vx_{\ell} - \frac{\mR_{\ell}\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}})}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\right)
 \end{equation}
 %
-\begin{equation}
+\begin{equation} \label{equation:z-update with implicit index}
 \vz_{\ell} = \frac{1}{\mu_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-2}}\operatorname{S}_{\lambda_{\ell}}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1} + \rho\mu_{\ell}\mR_{\ell}^{-1}\left(\mR_{\ell}^{-1}\vx_{\ell} - \frac{\vgamma_{\ell}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
 %
+Putting things back in matrix form,\footnote{Recall, while indexing was dropped for brevity, equation \ref{equation:z-update with implicit index} is implicitly indexed.}
+%
 \begin{equation}
-\vz_{\ell}^{(t + 1)} = (\rho\mu_{\ell}\mId + \mu_{\ell + 1}\mR_{\ell}^2)^{-1}\mR_{\ell}^2\operatorname{S}_{\lambda_{\ell}}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}^{(t + 1)} + \rho\mu_{\ell}\mR_{\ell}^{-1}\left(\mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} - \frac{\vgamma_{\ell}^{(t + \frac{1}{2})}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
+\vz_{\ell}^{(t + 1)} = (\mu_{\ell + 1}\mId + \rho\mu_{\ell}\mR_{\ell}^{-2})^{-1}\operatorname{S}_{\lambda_{\ell}}\left(\mu_{\ell + 1}\mD_{\ell + 1}\vx_{\ell + 1}^{(t + 1)} + \rho\mu_{\ell}\mR_{\ell}^{-1}\left(\mR_{\ell}^{-1}\vx_{\ell}^{(t + 1)} - \frac{\vgamma_{\ell}^{(t + \frac{1}{2})}}{\rho\sqrt{\mu_{\ell}}}\right)\right)
 \end{equation}
 %
 Note there is a dependence on $\mR_{\ell + 1}^{-1}\vx_{\ell + 1}$. The last layer will have to be considered separately. Using the same procedure, the update for $\vz_L$ can be derived. Given how similar the derivations are to those used for the other $\vz$ layers, I will skip to the result.
