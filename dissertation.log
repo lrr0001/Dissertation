@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  4 DEC 2021 12:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  4 DEC 2021 14:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -993,13 +993,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--132
 LaTeX Font Info:    Try loading font information for U+bbm on input line 152.
 (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [15] [16] [17])
-(./summary.tex) [18
+)
+LaTeX Font Info:    Try loading font information for U+euf on input line 168.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+) [15]
+Overfull \vbox (16.4528pt too high) has occurred while \output is active []
+
+
+[16] [17]) (./summary.tex) [18
 
 
 ] (./Intro.tex
 Chapter 1.
-<figures/convolutionalDictionary.png, id=483, 1031.855pt x 401.5pt>
+<figures/convolutionalDictionary.png, id=484, 1031.855pt x 401.5pt>
 File: figures/convolutionalDictionary.png Graphic file (type png)
 
 <use figures/convolutionalDictionary.png>
@@ -1222,7 +1230,7 @@ Chapter 3.
 [30
 
 ] [31] [32] [33] [34] [35]
-<figures/multi-layer_ADMM-node-dependencies-Sparse-Coding.png, id=931, 767.8687
+<figures/multi-layer_ADMM-node-dependencies-Sparse-Coding.png, id=932, 767.8687
 4pt x 418.56375pt>
 File: figures/multi-layer_ADMM-node-dependencies-Sparse-Coding.png Graphic file
  (type png)
@@ -1244,7 +1252,7 @@ Chapter 4.
 [42
 
 ] [43] [44] [45]
-<figures/multi-layer_ADMM-node-dependencies-JPEG.png, id=1032, 787.44188pt x 50
+<figures/multi-layer_ADMM-node-dependencies-JPEG.png, id=1033, 787.44188pt x 50
 8.90125pt>
 File: figures/multi-layer_ADMM-node-dependencies-JPEG.png Graphic file (type pn
 g)
@@ -1258,14 +1266,14 @@ ed on input line 131.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 155.
 
-<figures/ADMM_Recon_Err.png, id=1068, 419.5675pt x 296.10625pt>
+<figures/ADMM_Recon_Err.png, id=1069, 419.5675pt x 296.10625pt>
 File: figures/ADMM_Recon_Err.png Graphic file (type png)
 
 <use figures/ADMM_Recon_Err.png>
 Package pdftex.def Info: figures/ADMM_Recon_Err.png used on input line 174.
 (pdftex.def)             Requested size: 173.44865pt x 122.40738pt.
 
-<figures/FISTA_Recon_Err.png, id=1069, 424.58624pt x 296.10625pt>
+<figures/FISTA_Recon_Err.png, id=1070, 424.58624pt x 296.10625pt>
 File: figures/FISTA_Recon_Err.png Graphic file (type png)
 
 <use figures/FISTA_Recon_Err.png>
@@ -1276,7 +1284,7 @@ Overfull \hbox (2.28001pt too wide) in paragraph at lines 172--184
 []$[]$ $[]$ 
  []
 
-<figures/Sparse_Coding_Comparison.png, id=1074, 408.52625pt x 296.10625pt>
+<figures/Sparse_Coding_Comparison.png, id=1075, 408.52625pt x 296.10625pt>
 File: figures/Sparse_Coding_Comparison.png Graphic file (type png)
 
 <use figures/Sparse_Coding_Comparison.png>
@@ -1305,13 +1313,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 Appendix A.
 [62
 
-] [63] [64] [65]
-Overfull \hbox (1.65634pt too wide) in paragraph at lines 183--184
-[]\OT1/ptm/m/n/12 The rank-$\OT1/cmr/m/n/12 1$ \OT1/ptm/m/n/12 Her-mi-tian up-d
-ate to a Cholesky de-com-po-si-tion can be com-puted in quadratic
- []
-
-[66] [67]
+] [63] [64] [65] [66] [67]
 Appendix B.
 [68
 
@@ -1320,37 +1322,12 @@ Appendix C.
 [70
 
 ] [71] [72] [73] [74] [75] [76] [77]
-Underfull \hbox (badness 1436) in paragraph at lines 552--553
+Underfull \hbox (badness 1436) in paragraph at lines 551--552
 []\OT1/ptm/m/n/12 If the dic-tio-nary $[]$ is used in mul-ti-ple com-po-nent fu
 nc-tions, the ex-pres-sions
  []
 
-[78] [79]
-Overfull \hbox (68.73929pt too wide) detected at line 587
-[][] [] \OT1/cmr/m/n/12 = [][]
- []
-
-
-Overfull \hbox (80.78566pt too wide) detected at line 608
-[][] [] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 j [][]
- []
-
-[80]
-Overfull \hbox (22.78506pt too wide) detected at line 615
-[] \OT1/cmr/m/n/12 = [] [][]
- []
-
-
-Overfull \hbox (38.36765pt too wide) detected at line 618
-[] \OT1/cmr/m/n/12 = [] [][]
- []
-
-
-Overfull \hbox (24.02786pt too wide) detected at line 621
-[] \OT1/cmr/m/n/12 = [] [][]
- []
-
-[81]) [82] [83
+[78] [79] [80] [81]) [82] [83
 
 ]
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
@@ -1376,11 +1353,11 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
  )
 (\end occurred when \iftrue on line 101 was incomplete) 
 Here is how much of TeX's memory you used:
- 16590 strings out of 493029
- 260643 string characters out of 6136233
- 473805 words of memory out of 5000000
- 19221 multiletter control sequences out of 15000+600000
- 34433 words of font info for 96 fonts, out of 8000000 for 9000
+ 16606 strings out of 493029
+ 260917 string characters out of 6136233
+ 473859 words of memory out of 5000000
+ 19231 multiletter control sequences out of 15000+600000
+ 35849 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,19n,48p,1697b,1205s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/lrr/.texmf-var/f
@@ -1410,17 +1387,18 @@ e1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
-mri8a.pfb>
-Output written on dissertation.pdf (103 pages, 687148 bytes).
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri
+8a.pfb>
+Output written on dissertation.pdf (103 pages, 688719 bytes).
 PDF statistics:
- 1715 PDF objects out of 1728 (max. 8388607)
- 1546 compressed objects within 16 object streams
+ 1719 PDF objects out of 1728 (max. 8388607)
+ 1549 compressed objects within 16 object streams
  603 named destinations out of 1000 (max. 500000)
  615 words of extra memory for PDF output out of 10000 (max. 10000000)
 

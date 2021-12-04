@@ -581,9 +581,9 @@ Scalar multiplication commutes, so
 \begin{multline}
 \left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \ve_c^T(-(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) \\- \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*)\ve_m
 \end{multline}
-\begin{equation}
-\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = \left(-(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
-\end{equation}
+\begin{multline}
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})} = -\left((\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m} \\-  \left(\left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
+\end{multline}
 
 \begin{equation}
 \left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = \left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}(j\ve_m\ve_c^T\hat{\mD} - j\hat{\mD}^H\ve_c\ve_m^T)\mQ^{-1}\vb
@@ -602,18 +602,18 @@ Scalar multiplication commutes, so
 \end{multline}
 
 
-\begin{equation}
-\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = j\left(-\left(\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*(\vb^H\mQ^{-1})^* + (\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
-\end{equation}
+\begin{multline}
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})} = -j\left(\left(\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*(\vb^H\mQ^{-1})^*\right)_{c,m} \\+ j\left((\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
+\end{multline}
 
 
 
 Assuming that $\hat{D}_{c,m}$ only affects $\loss$ through $f_{\mD}(\vb)$,
 \begin{equation}
-\frac{\partial \loss}{\partial \real(\hat{D}_{c,m})} = \real\left(-(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - \left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^* (\vb^H\mQ^{-1})^*\right)_{c,m}
+\frac{\partial \loss}{\partial \real(\hat{D}_{c,m})} = -\real\left(\left(\hat{\mD}\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right) (\vb^H\mQ^{-1}) + (\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
 \end{equation}
 \begin{equation}
-\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \real\left(j\left(-\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*(\vb^H\mQ^{-1})^* + j(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
+\frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \real\left(j(\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right) - j\left(\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^*(\vb^H\mQ^{-1})^*\right)_{c,m}
 \end{equation}
 \begin{equation}
 \frac{\partial \loss}{\partial \imag(\hat{D}_{c,m})} = \imag\left(-\left(\mD\mQ^{-1}\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)(\vb^H\mQ^{-1}) - (\hat{\mD}\mQ^{-1}\vb)\left(\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}\right)\right)_{c,m}
