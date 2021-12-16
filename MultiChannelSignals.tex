@@ -664,13 +664,13 @@ Use the low-rank approximation to update the Cholesky decomposition of $\rho\mId
 
 Since $\hat{\mU}$ does not vary with frequency, the first step can be computed in spatial domain. Just as in the frequency domain, the bracket indexing indicates $\mG[k]$ is a $C \times M$ matrix, corresponding to $k^{\text{th}}$ element for each filter and channel.
 \begin{equation}
-\mU,\mSigma,\mV_{\text{normalized}} = \operatorname{SVD}\left(\begin{bmatrix}\mG^{(n + 1)}[0] - \mR\mD^{(n)}[0] & \cdots & \mG^{(n + 1)}[K] - \mR\mD^{(n)}[K]    \end{bmatrix}\right)
+\mU,\mSigma,\mV_{\text{normalized}} = \operatorname{TruncSVD}\left(\begin{bmatrix}\mG^{(n + 1)}[0] - \mR\mD^{(n)}[0] & \cdots & \mG^{(n + 1)}[K] - \mR\mD^{(n)}[K]    \end{bmatrix}\right)
 \end{equation}
 \begin{equation}
 \mV = \mV_{\text{normalized}}\mSigma
 \end{equation}
 
-In many applications, the filter size $K$ will be much smaller than the signal size $\hat{K}$.  The computational cost of this operation is $\bigO(C^2KM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$. Replacing the SVD computation with a randomized SVD reduces the computational cost even further $\bigO(\reflectbox{R}CKM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$.
+In many applications, the filter size $K$ will be much smaller than the signal size $\hat{K}$.  The computational cost of this operation is $\bigO(C^2KM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$. Estimating the truncated SVD computation using randomized SVD reduces the computational cost even further $\bigO(\reflectbox{R}CKM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$.
 
 The second step applies $3\reflectbox{R}$ rank-$1$ Hermitian updates to the Cholesky decomposition. Each update can be computed in $\bigO(\hat{K}M^2)$ time.\footnote{Similar to in the direct computation case, the Woodbury matrix lemma can be used to replace the $M^2$ with $C^2$ in the computational complexity. However, it is important to account for the fact that $\hat{\mV}$ is not an orthogonal matrix, since it loses its orthogonality in the Fourier transform. (A unitary transform applied to the columns of a matrix whose rows are orthogonal does not necessarily preserve that orthogonality.) Fortunately, $\hat{\mV}^H[\hat{k}]\hat{\mV}[\hat{k}]$ can be diagonalized in $\bigO(M\reflectbox{R}^2)$ time using the eigendecomposition, which can subsequently be used to diagonalize $\hat{\mU}\hat{\mV}^H\hat{\mV}\hat{\mU}$ in $\bigO(C\reflectbox{R}^2$. Since this must be done for each frequency, these diagonalizations would require $\bigO(M\reflectbox{R}^2\hat{K}) + \bigO(C\reflectbox{R}^2\hat{K})$.}  
 
