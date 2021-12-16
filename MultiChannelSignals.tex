@@ -653,7 +653,7 @@ Recall once again, the dictionary update under consideration:
 %
 This update must be of rank $\reflectbox{R}$ at every frequency. Furthermore, the dictionary filter is spatially or temporally limited to its filter size. This second constraint is met if $\hat{\mV}^H[\hat{k}]$ is similarly spatially limited.
 
-\subsection{Computational Tradeoffs}
+\subsection{Computational Cost}
 Given an updated dictionary $\mG^{(n + 1)}$ from some standard dictionary learning update, directly computing the Cholesky decomposition of $\rho\mId + \left(\hat{\mG}^{(n + 1)}\right)^H\hat{\mG}^{(n + 1)}$ is of computational cost $\bigO(\hat{K}M^3)$.\footnote{With the use of the Woodbury matrix lemma, this can be instead computed in $\bigO(\hat{K}C^3)$.} The novel approach for the inverse update presented in the previous section replaces the direct computation with low-rank updates to the Cholesky decomposition. This involves two steps:
 \begin{enumerate}
 \item
@@ -662,7 +662,7 @@ Approximate a standard dictionary update with a low-rank approximation: $\hat{\m
 Use the low-rank approximation to update the Cholesky decomposition of $\rho\mId + (\mR\hat{\mD})^H\mR\hat{\mD}$.
 \end{enumerate}
 
-Since $\mU$ does not depend on frequency, the first step can be computed in spatial domain:
+Since $\hat{\mU}$ does not vary with frequency, the first step can be computed in spatial domain. Just as in the frequency domain, the bracket indexing indicates $\mG[k]$ is a $C \times M$ matrix, corresponding to $k^{\text{th}}$ element for each filter and channel.
 \begin{equation}
 \mU,\mSigma,\mV_{\text{normalized}} = \operatorname{SVD}\left(\begin{bmatrix}\mG^{(n + 1)}[0] - \mR\mD^{(n)}[0] & \cdots & \mG^{(n + 1)}[K] - \mR\mD^{(n)}[K]    \end{bmatrix}\right)
 \end{equation}
@@ -672,10 +672,17 @@ Since $\mU$ does not depend on frequency, the first step can be computed in spat
 
 In many applications, the filter size $K$ will be much smaller than the signal size $\hat{K}$.  The computational cost of this operation is $\bigO(C^2KM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$. Replacing the SVD computation with a randomized SVD reduces the computational cost even further $\bigO(\reflectbox{R}CKM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$.
 
-The second step applies $3\reflectbox{R}$ rank-$1$ Hermitian updates to the Cholesky decomposition. Each update can be computed in $\bigO(\hat{K}M^2)$ time.\footnote{Similar to in the direct computation case, the Woodbury matrix lemma can be used to replace the $M^2$ with $C^2$ in the computational complexity. However, it is important to account for the fact that $\hat{\mV}$ is not an orthogonal matrix, since it loses its orthogonality in the Fourier transform. (A unitary transform applied to the columns of a matrix whose rows are orthogonal does not necessarily preserve that orthogonality.) Fortunately, $\hat{\mV}^H[\hat{k}]\hat{\mV}[\hat{k}]$ can be diagonalized in $\bigO(M\reflectbox{R}^2)$ time using the eigendecomposition, which can subsequently be used to diagonalize $\hat{\mU}\hat{\mV}^H\hat{\mV}\hat{\mU}$ in $\bigO(C\reflectbox{R}^2$. Since this must be done for each frequency, these diagonalizations would require $\bigO(M\reflectbox{R}^2\hat{K}) + \bigO(C\reflectbox{R}^2\hat{K})$}  
+The second step applies $3\reflectbox{R}$ rank-$1$ Hermitian updates to the Cholesky decomposition. Each update can be computed in $\bigO(\hat{K}M^2)$ time.\footnote{Similar to in the direct computation case, the Woodbury matrix lemma can be used to replace the $M^2$ with $C^2$ in the computational complexity. However, it is important to account for the fact that $\hat{\mV}$ is not an orthogonal matrix, since it loses its orthogonality in the Fourier transform. (A unitary transform applied to the columns of a matrix whose rows are orthogonal does not necessarily preserve that orthogonality.) Fortunately, $\hat{\mV}^H[\hat{k}]\hat{\mV}[\hat{k}]$ can be diagonalized in $\bigO(M\reflectbox{R}^2)$ time using the eigendecomposition, which can subsequently be used to diagonalize $\hat{\mU}\hat{\mV}^H\hat{\mV}\hat{\mU}$ in $\bigO(C\reflectbox{R}^2$. Since this must be done for each frequency, these diagonalizations would require $\bigO(M\reflectbox{R}^2\hat{K}) + \bigO(C\reflectbox{R}^2\hat{K})$.}  
 
 So, the dictionary update computational cost for this novel approach requires $\bigO(\reflectbox{R}CKM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K})) + \bigO(\reflectbox{R}\hat{K}M^2)$.\footnote{If $C$ is smaller than $M$, this computational complexity can be reduced using the Woodbury matrix lemma.}
 
+Using filter size $K = 5$ and signal size $\hat{K} = 64$, I compared the update times of the full Cholesky decomposition from scratch to the Cholesky update described in the previous section. For this comparison, I used a rank-$1$ approximation $\reflectbox{R} = 1$ and kept the number of filters equal to the number of channels $M = C$. Computations were computed on a CPU. The results are shown in Figure \ref{Figure:Computational Comparison}. As the number of channels and filters grow, the computation time for directly computing the Cholesky decomposition from scratch grows faster than the computation time for updating it using a previous decomposition.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{figures/computationtimes.png}
+\caption{This plot shows a comparison of computation times for computing the Cholesky decompostion directly versus updating it instead. In all runs, the number of channels is the same as the number of filters.}
+\label{Figure:Computational Comparison}
+\end{figure}
 
 
 \subsection{Handling Dictionary Normalization}

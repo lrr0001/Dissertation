@@ -23,7 +23,7 @@
 \BOOKMARK [1][-]{section.2.7}{Dictionary Learning}{chapter.2}% 23
 \BOOKMARK [1][-]{section.2.8}{A Novel Approach to Sparse Coding: ADMM with Low-Rank Dictionary Updates}{chapter.2}% 24
 \BOOKMARK [2][-]{subsection.2.8.1}{Updating the Inverse Representation}{section.2.8}% 25
-\BOOKMARK [2][-]{subsection.2.8.2}{Computational Tradeoffs}{section.2.8}% 26
+\BOOKMARK [2][-]{subsection.2.8.2}{Computational Cost}{section.2.8}% 26
 \BOOKMARK [2][-]{subsection.2.8.3}{Handling Dictionary Normalization}{section.2.8}% 27
 \BOOKMARK [1][-]{section.2.9}{Conclusion}{chapter.2}% 28
 \BOOKMARK [0][-]{chapter.3}{Learning Multi-Layer Dictionaries}{}% 29
@@ -71,4 +71,4 @@
 \BOOKMARK [2][-]{subsection.1.C.2.1}{Partial Derivatives in Respect to Inputs}{section.1.C.2}% 71
 \BOOKMARK [2][-]{subsection.1.C.2.2}{Partial Derivatives in Respect to Dictionary}{section.1.C.2}% 72
 \BOOKMARK [1][-]{section.1.C.3}{Backpropagation of Loss Function}{Appendix.1.C}% 73
-\BOOKMARK [0][-]{chapter*.16}{References}{}% 74
+\BOOKMARK [0][-]{chapter*.17}{References}{}% 74
