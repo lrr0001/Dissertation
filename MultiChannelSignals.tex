@@ -508,38 +508,38 @@ Then $\hat{\mD}[\hat{k}]$ is a $C \times M$ matrix collecting the $\hat{k}^{\tex
 Consider the update equation.
 %
 \begin{equation}
-\hat{\mD}[\hat{k}]^{(n + 1)} = \hat{\mD}[\hat{k}]^{(n)} + \mU\mV[\hat{k}]^H
+\hat{\mD}[\hat{k}]^{(n + 1)} = \hat{\mD}[\hat{k}]^{(n)} + \hat{\mU}\hat{\mV}[\hat{k}]^H
 \end{equation}
 %
-where $\mU$ is an orthogonal matrix of size $C \times 
-\reflectbox{R}$ and $\mV[\hat{k}]$ is an orthogonal matrix of size $M \times 
-\reflectbox{R}$.\footnote{$\mU$ and $\mV$ are also iteration specific, but to notate that would over-clutter the equations. For efficient, low-rank updates to the inverse representation, it is possible for both $\mU$ and $\mV$ to vary in respect to frequency $\hat{k}$ (instead of just $\mV$). However, most convolutional models limit spatial or temporal support of the dictionary (so that the filter size is smaller than the signal), and preventing $\mU$ from varying across frequency is part of a means to satisfy that constraint.}
+where $\hat{\mU}$ is an orthogonal matrix of size $C \times 
+\reflectbox{R}$ and $\hat{\mV}[\hat{k}]$ is an matrix of size $M \times 
+\reflectbox{R}$.\footnote{$\hat{\mU}$ and $\hat{\mV}$ are also iteration specific, but to notate that would over-clutter the equations. For efficient, low-rank updates to the inverse representation, it is possible for both $\hat{\mU}$ and $\hat{\mV}$ to vary in respect to frequency $\hat{k}$ (instead of just $\mV$). However, most convolutional models limit spatial or temporal support of the dictionary (so that the filter size is smaller than the signal), and preventing $\mU$ from varying across frequency is part of a means to satisfy that constraint.}
 
 Then,
 %
 \begin{equation} \label{equation:Inverse Representation Update}
-\rho\mId + (\hat{\mD}^{(n + 1)})^H[\hat{k}]\hat{\mD}^{(n + 1)}[\hat{k}] = \rho\mId + (\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])^H(\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])
+\rho\mId + (\hat{\mD}^{(n + 1)})^H[\hat{k}]\hat{\mD}^{(n + 1)}[\hat{k}] = \rho\mId + (\mD^{(n)}[\hat{k}] + \hat{\mU}\hat{\mV}^H[\hat{k}])^H(\hat{\mD}^{(n)}[\hat{k}] + \hat{\mU}\hat{\mV}^H[\hat{k}])
 \end{equation}
 %
 For brevity and simplicity, I will drop the notation indexing the frequency $\hat{k}$ and selecting the iteration $n$ for matrix $\hat{\mD}^{(n)}[\hat{k}]$ and simply use $\hat{\mD}$ instead. However, the reader should keep in mind the $\hat{\mD}$ here is a dense $C \times M$ matrix capturing the component of the dictionary $\mD$ for implicit frequency $\hat{k}$, only a submatrix of the sparsely banded $\hat{\mD}$ of size $\hat{K}C \times M$ from earlier in this section.
 %
 \begin{equation}
-\rho\mId + (\hat{\mD}^{(n + 1)})^H\hat{\mD}^{(n + 1)} = \rho\mId + (\hat{\mD}^{(n)})^H\hat{\mD}^{(n)} + \mV\mU^H \mU\mV^H + \mV\mU^H\hat{\mD}^{(n)} + (\hat{\mD}^{(n)})^H\mU\mV^H
+\rho\mId + (\hat{\mD}^{(n + 1)})^H\hat{\mD}^{(n + 1)} = \rho\mId + (\hat{\mD}^{(n)})^H\hat{\mD}^{(n)} + \hat{\mV}\hat{\mU}^H \hat{\mU}\hat{\mV}^H + \hat{\mV}\hat{\mU}^H\hat{\mD}^{(n)} + (\hat{\mD}^{(n)})^H\hat{\mU}\hat{\mV}^H
 \end{equation}
 %
-Given that $\mV$ and $\mU$ are orthogonal matrices, $\mV\mU^H\mU\mV^H$ can easily be broken into $
+Given that $\hat{\mU}$ is an orthogonal matrix, $\hat{\mV}\hat{\mU}^H\hat{\mU}\hat{\mV}^H$ can easily be broken into $
 \reflectbox{R}$ rank-one Hermitian updates.
 %
 \begin{equation}
-\mV\mU^H\mU\mV^H = \sum_{i = 1}^{
+\hat{\mV}\hat{\mU}^H\hat{\mU}\hat{\mV}^H = \sum_{i = 1}^{
 \reflectbox{R}} \vu_{i}^H\vu_{i}\vv_{i}\vv_{i}^H
 \end{equation}
 %
-Similarly, $\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H$ can be broken into $
+Similarly, $\hat{\mV}\hat{\mU}^H\hat{\mD} + \hat{\mD}^H\hat{\mU}\hat{\mV}^H$ can be broken into $
 \reflectbox{R}$ Hermitian, rank-two updates:
 %
 \begin{equation}
-\mV\mU^H\hat{\mD} + \hat{\mD}^H\mU\mV^H = \sum_{\ell = 1}^{
+\hat{\mV}\hat{\mU}^H\hat{\mD} + \hat{\mD}^H\hat{\mU}\hat{\mV}^H = \sum_{\ell = 1}^{
 \reflectbox{R}} \left( \vv_i\vu_i^H\hat{\mD} + \hat{\mD}^H\vu_i\vv_i^H \right)
 \end{equation}
 %
@@ -642,16 +642,41 @@ Assuming that the matrix is diagonalizable and that the eigenvectors are orthono
 So, the rank-$2$ updates can be split into $2$ rank-$1$ components that can be used to update the inverse representation for $\rho\mId + \hat{\mD}^H[\hat{k}]\hat{\mD}[\hat{k}]$.
 Therefore, the update from equation \ref{equation:Inverse Representation Update}
 \begin{equation}
-\rho\mId + (\hat{\mD}^{(n + 1)})^H[\hat{k}]\hat{\mD}^{(n + 1)}[\hat{k}] = \rho\mId + (\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])^H(\mD^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}])
+\rho\mId + (\hat{\mD}^{(n + 1)})^H[\hat{k}]\hat{\mD}^{(n + 1)}[\hat{k}] = \rho\mId + (\mD^{(n)}[\hat{k}] + \hat{\mU}\hat{\mV}^H[\hat{k}])^H(\hat{\mD}^{(n)}[\hat{k}] + \hat{\mU}\hat{\mV}^H[\hat{k}])
 \end{equation}
 consists of $3\reflectbox{R}$ rank-$1$ Hermitian updates, and the updates must be computed for each frequency $\hat{k}$. Appendix A explains how to update a Cholesky decomposition with rank-$1$ Hermitian updates.
 
 Recall once again, the dictionary update under consideration:
 \begin{equation}
-\hat{\mD}^{(n + 1)}[\hat{k}] = \hat{\mD}^{(n)}[\hat{k}] + \mU\mV^H[\hat{k}]
+\hat{\mD}^{(n + 1)}[\hat{k}] = \hat{\mD}^{(n)}[\hat{k}] + \hat{\mU}\hat{\mV}^H[\hat{k}]
 \end{equation}
 %
-This update must be of rank $\reflectbox{R}$ at every frequency. Furthermore, the dictionary filter is spatially or temporally limited to its filter size. This second constraint is met if $\mV^H[\hat{k}]$ is similarly spatially limited.
+This update must be of rank $\reflectbox{R}$ at every frequency. Furthermore, the dictionary filter is spatially or temporally limited to its filter size. This second constraint is met if $\hat{\mV}^H[\hat{k}]$ is similarly spatially limited.
+
+\subsection{Computational Tradeoffs}
+Given an updated dictionary $\mG^{(n + 1)}$ from some standard dictionary learning update, directly computing the Cholesky decomposition of $\rho\mId + \left(\hat{\mG}^{(n + 1)}\right)^H\hat{\mG}^{(n + 1)}$ is of computational cost $\bigO(\hat{K}M^3)$.\footnote{With the use of the Woodbury matrix lemma, this can be instead computed in $\bigO(\hat{K}C^3)$.} The novel approach for the inverse update presented in the previous section replaces the direct computation with low-rank updates to the Cholesky decomposition. This involves two steps:
+\begin{enumerate}
+\item
+Approximate a standard dictionary update with a low-rank approximation: $\hat{\mU}\hat{\mV}[\hat{k}]^H \approx \hat{\mG}^{(n + 1)}[\hat{k}] - \mR\hat{\mD}^{(n)}[\hat{k}]$
+\item
+Use the low-rank approximation to update the Cholesky decomposition of $\rho\mId + (\mR\hat{\mD})^H\mR\hat{\mD}$.
+\end{enumerate}
+
+Since $\mU$ does not depend on frequency, the first step can be computed in spatial domain:
+\begin{equation}
+\mU,\mSigma,\mV_{\text{normalized}} = \operatorname{SVD}\left(\begin{bmatrix}\mG^{(n + 1)}[0] - \mR\mD^{(n)}[0] & \cdots & \mG^{(n + 1)}[K] - \mR\mD^{(n)}[K]    \end{bmatrix}\right)
+\end{equation}
+\begin{equation}
+\mV = \mV_{\text{normalized}}\mSigma
+\end{equation}
+
+In many applications, the filter size $K$ will be much smaller than the signal size $\hat{K}$.  The computational cost of this operation is $\bigO(C^2KM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$. Replacing the SVD computation with a randomized SVD reduces the computational cost even further $\bigO(\reflectbox{R}CKM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K}))$.
+
+The second step applies $3\reflectbox{R}$ rank-$1$ Hermitian updates to the Cholesky decomposition. Each update can be computed in $\bigO(\hat{K}M^2)$ time.\footnote{Similar to in the direct computation case, the Woodbury matrix lemma can be used to replace the $M^2$ with $C^2$ in the computational complexity. However, it is important to account for the fact that $\hat{\mV}$ is not an orthogonal matrix, since it loses its orthogonality in the Fourier transform. (A unitary transform applied to the columns of a matrix whose rows are orthogonal does not necessarily preserve that orthogonality.) Fortunately, $\hat{\mV}^H[\hat{k}]\hat{\mV}[\hat{k}]$ can be diagonalized in $\bigO(M\reflectbox{R}^2)$ time using the eigendecomposition, which can subsequently be used to diagonalize $\hat{\mU}\hat{\mV}^H\hat{\mV}\hat{\mU}$ in $\bigO(C\reflectbox{R}^2$. Since this must be done for each frequency, these diagonalizations would require $\bigO(M\reflectbox{R}^2\hat{K}) + \bigO(C\reflectbox{R}^2\hat{K})$}  
+
+So, the dictionary update computational cost for this novel approach requires $\bigO(\reflectbox{R}CKM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K})) + \bigO(\reflectbox{R}\hat{K}M^2)$.\footnote{If $C$ is smaller than $M$, this computational complexity can be reduced using the Woodbury matrix lemma.}
+
+
 
 \subsection{Handling Dictionary Normalization}
 Consider the optimization problem:
@@ -782,7 +807,7 @@ Thus, with this modification to the sparse coding optimization problem, the inve
    \tcp{Updating the Dictionary:} 
    $\tilde{\mD} = \operatorname{StandardDictionaryUpdate}(\mD,\mS,\mX)$ \\
    $\tilde{\mD} = \operatorname{Normalize}(\tilde{\mD})$ \\
-   $\mDelta\mD = \operatorname{RandomizedSVD}(\tilde{\mD} - \mD\mR)$ \\
+   $\mDelta\mD = \operatorname{LowRankApprox}(\tilde{\mD} - \mD\mR)$ \\
    $\mD\mR = \mD\mR + \mDelta\mD$ \\
    \For{$m \in \{1,\hdots M\}$}
    {
@@ -795,9 +820,7 @@ Thus, with this modification to the sparse coding optimization problem, the inve
 
 
 \section{Conclusion}
-In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently ($\mathcal{O}(\hat{K}
-\reflectbox{R}M^2)$, $
-\reflectbox{R} << M$) when used within a dictionary-learning algorithm. This is an improvement to existing methods, whose inverse updates require cubic complexity $\mathcal{O}(\hat{K}M^3)$.
+In this chapter, I have derived a novel sparse coding algorithm for signals with a large number of channels. One of the steps in the iterative algorithm involves solving an inverse problem, but the optimization is constructed such that the representation of the inverse can be updated efficiently $\bigO(\reflectbox{R}CKM) + \bigO(CM\hat{K}\operatorname{log}(\hat{K})) + \bigO(\reflectbox{R}\hat{K}M^2)$ when used within a dictionary-learning algorithm. For certain problems with a large number of channels, this is an improvement to existing methods, whose inverse updates require cubic complexity $\mathcal{O}(\hat{K}M^3)$.
 % This is a figure in landscape orientation
 %\begin{sidewaysfigure}
 %\includegraphics[width=\textwidth]{figures/exampleFigure.png}

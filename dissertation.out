@@ -23,51 +23,52 @@
 \BOOKMARK [1][-]{section.2.7}{Dictionary Learning}{chapter.2}% 23
 \BOOKMARK [1][-]{section.2.8}{A Novel Approach to Sparse Coding: ADMM with Low-Rank Dictionary Updates}{chapter.2}% 24
 \BOOKMARK [2][-]{subsection.2.8.1}{Updating the Inverse Representation}{section.2.8}% 25
-\BOOKMARK [2][-]{subsection.2.8.2}{Handling Dictionary Normalization}{section.2.8}% 26
-\BOOKMARK [1][-]{section.2.9}{Conclusion}{chapter.2}% 27
-\BOOKMARK [0][-]{chapter.3}{Learning Multi-Layer Dictionaries}{}% 28
-\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 29
-\BOOKMARK [1][-]{section.3.2}{Literature Review}{chapter.3}% 30
-\BOOKMARK [1][-]{section.3.3}{Multi-Layer ADMM with Low-Rank Updates}{chapter.3}% 31
-\BOOKMARK [2][-]{subsection.3.3.1}{Coefficients Update Equation}{section.3.3}% 32
-\BOOKMARK [2][-]{subsection.3.3.2}{Proximal Updates}{section.3.3}% 33
-\BOOKMARK [2][-]{subsection.3.3.3}{Dual Updates}{section.3.3}% 34
-\BOOKMARK [1][-]{section.3.4}{Pursuit Algorithm Summary}{chapter.3}% 35
-\BOOKMARK [1][-]{section.3.5}{Dictionary Learning}{chapter.3}% 36
-\BOOKMARK [1][-]{section.3.6}{Summary}{chapter.3}% 37
-\BOOKMARK [0][-]{chapter.4}{JPEG Artifact Removal}{}% 38
-\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 39
-\BOOKMARK [1][-]{section.4.2}{JPEG Algorithm}{chapter.4}% 40
-\BOOKMARK [1][-]{section.4.3}{Modeling Compressed JPEG Images}{chapter.4}% 41
-\BOOKMARK [1][-]{section.4.4}{Handling Quantization}{chapter.4}% 42
-\BOOKMARK [1][-]{section.4.5}{Backpropagation Approximation}{chapter.4}% 43
-\BOOKMARK [1][-]{section.4.6}{Experiment}{chapter.4}% 44
-\BOOKMARK [2][-]{subsection.4.6.1}{Experiment Setup}{section.4.6}% 45
-\BOOKMARK [2][-]{subsection.4.6.2}{Network Architecture}{section.4.6}% 46
-\BOOKMARK [2][-]{subsection.4.6.3}{Results}{section.4.6}% 47
-\BOOKMARK [1][-]{section.4.7}{Conclusion}{chapter.4}% 48
-\BOOKMARK [0][-]{chapter.5}{Practical Considerations}{}% 49
-\BOOKMARK [1][-]{section.5.1}{Boundary Handling}{chapter.5}% 50
-\BOOKMARK [1][-]{section.5.2}{Removing Low-Frequency Signal Content}{chapter.5}% 51
-\BOOKMARK [2][-]{subsection.5.2.1}{JPEG Artifact Removal}{section.5.2}% 52
-\BOOKMARK [1][-]{section.5.3}{Inverse Representation Drift}{chapter.5}% 53
-\BOOKMARK [1][-]{section.5.4}{Tensorflow and Keras}{chapter.5}% 54
-\BOOKMARK [2][-]{subsection.5.4.1}{Why Not Use Gradient Tape and TensorFlow-1-Style Code?}{section.5.4}% 55
-\BOOKMARK [2][-]{subsection.5.4.2}{Shared Weights Between Layers}{section.5.4}% 56
-\BOOKMARK [2][-]{subsection.5.4.3}{Custom Partial Gradients}{section.5.4}% 57
-\BOOKMARK [2][-]{subsection.5.4.4}{Updating TensorFlow Variables After Applying Gradients}{section.5.4}% 58
-\BOOKMARK [2][-]{subsection.5.4.5}{The Perils of Using Built-In Functions for Complex Tensors and Arrays}{section.5.4}% 59
-\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 60
-\BOOKMARK [0][-]{Appendix.1.A}{Hermitian Rank-1 Updates for the Cholesky Decomposition}{}% 61
-\BOOKMARK [0][-]{Appendix.1.B}{Rank-2 Eigendecomposition Edge Cases}{}% 62
-\BOOKMARK [1][-]{section.1.B.1}{Less than 2 Independent Eigenvectors}{Appendix.1.B}% 63
-\BOOKMARK [1][-]{section.1.B.2}{Eigenvalues are Not Distinct}{Appendix.1.B}% 64
-\BOOKMARK [0][-]{Appendix.1.C}{Differentiating the Inverse Function}{}% 65
-\BOOKMARK [1][-]{section.1.C.1}{Chain Rule}{Appendix.1.C}% 66
-\BOOKMARK [2][-]{subsection.1.C.1.1}{Matrix Calculus}{section.1.C.1}% 67
-\BOOKMARK [2][-]{subsection.1.C.1.2}{Complex Numbers}{section.1.C.1}% 68
-\BOOKMARK [1][-]{section.1.C.2}{Partial Derivatives}{Appendix.1.C}% 69
-\BOOKMARK [2][-]{subsection.1.C.2.1}{Partial Derivatives in Respect to Inputs}{section.1.C.2}% 70
-\BOOKMARK [2][-]{subsection.1.C.2.2}{Partial Derivatives in Respect to Dictionary}{section.1.C.2}% 71
-\BOOKMARK [1][-]{section.1.C.3}{Backpropagation of Loss Function}{Appendix.1.C}% 72
-\BOOKMARK [0][-]{chapter*.16}{References}{}% 73
+\BOOKMARK [2][-]{subsection.2.8.2}{Computational Tradeoffs}{section.2.8}% 26
+\BOOKMARK [2][-]{subsection.2.8.3}{Handling Dictionary Normalization}{section.2.8}% 27
+\BOOKMARK [1][-]{section.2.9}{Conclusion}{chapter.2}% 28
+\BOOKMARK [0][-]{chapter.3}{Learning Multi-Layer Dictionaries}{}% 29
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 30
+\BOOKMARK [1][-]{section.3.2}{Literature Review}{chapter.3}% 31
+\BOOKMARK [1][-]{section.3.3}{Multi-Layer ADMM with Low-Rank Updates}{chapter.3}% 32
+\BOOKMARK [2][-]{subsection.3.3.1}{Coefficients Update Equation}{section.3.3}% 33
+\BOOKMARK [2][-]{subsection.3.3.2}{Proximal Updates}{section.3.3}% 34
+\BOOKMARK [2][-]{subsection.3.3.3}{Dual Updates}{section.3.3}% 35
+\BOOKMARK [1][-]{section.3.4}{Pursuit Algorithm Summary}{chapter.3}% 36
+\BOOKMARK [1][-]{section.3.5}{Dictionary Learning}{chapter.3}% 37
+\BOOKMARK [1][-]{section.3.6}{Summary}{chapter.3}% 38
+\BOOKMARK [0][-]{chapter.4}{JPEG Artifact Removal}{}% 39
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.2}{JPEG Algorithm}{chapter.4}% 41
+\BOOKMARK [1][-]{section.4.3}{Modeling Compressed JPEG Images}{chapter.4}% 42
+\BOOKMARK [1][-]{section.4.4}{Handling Quantization}{chapter.4}% 43
+\BOOKMARK [1][-]{section.4.5}{Backpropagation Approximation}{chapter.4}% 44
+\BOOKMARK [1][-]{section.4.6}{Experiment}{chapter.4}% 45
+\BOOKMARK [2][-]{subsection.4.6.1}{Experiment Setup}{section.4.6}% 46
+\BOOKMARK [2][-]{subsection.4.6.2}{Network Architecture}{section.4.6}% 47
+\BOOKMARK [2][-]{subsection.4.6.3}{Results}{section.4.6}% 48
+\BOOKMARK [1][-]{section.4.7}{Conclusion}{chapter.4}% 49
+\BOOKMARK [0][-]{chapter.5}{Practical Considerations}{}% 50
+\BOOKMARK [1][-]{section.5.1}{Boundary Handling}{chapter.5}% 51
+\BOOKMARK [1][-]{section.5.2}{Removing Low-Frequency Signal Content}{chapter.5}% 52
+\BOOKMARK [2][-]{subsection.5.2.1}{JPEG Artifact Removal}{section.5.2}% 53
+\BOOKMARK [1][-]{section.5.3}{Inverse Representation Drift}{chapter.5}% 54
+\BOOKMARK [1][-]{section.5.4}{Tensorflow and Keras}{chapter.5}% 55
+\BOOKMARK [2][-]{subsection.5.4.1}{Why Not Use Gradient Tape and TensorFlow-1-Style Code?}{section.5.4}% 56
+\BOOKMARK [2][-]{subsection.5.4.2}{Shared Weights Between Layers}{section.5.4}% 57
+\BOOKMARK [2][-]{subsection.5.4.3}{Custom Partial Gradients}{section.5.4}% 58
+\BOOKMARK [2][-]{subsection.5.4.4}{Updating TensorFlow Variables After Applying Gradients}{section.5.4}% 59
+\BOOKMARK [2][-]{subsection.5.4.5}{The Perils of Using Built-In Functions for Complex Tensors and Arrays}{section.5.4}% 60
+\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 61
+\BOOKMARK [0][-]{Appendix.1.A}{Hermitian Rank-1 Updates for the Cholesky Decomposition}{}% 62
+\BOOKMARK [0][-]{Appendix.1.B}{Rank-2 Eigendecomposition Edge Cases}{}% 63
+\BOOKMARK [1][-]{section.1.B.1}{Less than 2 Independent Eigenvectors}{Appendix.1.B}% 64
+\BOOKMARK [1][-]{section.1.B.2}{Eigenvalues are Not Distinct}{Appendix.1.B}% 65
+\BOOKMARK [0][-]{Appendix.1.C}{Differentiating the Inverse Function}{}% 66
+\BOOKMARK [1][-]{section.1.C.1}{Chain Rule}{Appendix.1.C}% 67
+\BOOKMARK [2][-]{subsection.1.C.1.1}{Matrix Calculus}{section.1.C.1}% 68
+\BOOKMARK [2][-]{subsection.1.C.1.2}{Complex Numbers}{section.1.C.1}% 69
+\BOOKMARK [1][-]{section.1.C.2}{Partial Derivatives}{Appendix.1.C}% 70
+\BOOKMARK [2][-]{subsection.1.C.2.1}{Partial Derivatives in Respect to Inputs}{section.1.C.2}% 71
+\BOOKMARK [2][-]{subsection.1.C.2.2}{Partial Derivatives in Respect to Dictionary}{section.1.C.2}% 72
+\BOOKMARK [1][-]{section.1.C.3}{Backpropagation of Loss Function}{Appendix.1.C}% 73
+\BOOKMARK [0][-]{chapter*.16}{References}{}% 74

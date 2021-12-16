@@ -8,15 +8,15 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.1}{\ignorespaces This diagram shows interactions between layers across iterations. The double-sided arrows at the top of the diagram go both directions because $\bm {x}_{\ell + 1}$ influences $\bm {z}_{\ell }$ during initialization.\relax }}{37}{figure.caption.9}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces This diagram shows interactions between layers across iterations. The double-sided arrows at the top of the diagram go both directions because $\bm {x}_{\ell + 1}$ influences $\bm {z}_{\ell }$ during initialization.\relax }}{38}{figure.caption.9}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces This diagram shows interactions between layers across iterations for the ADMM pursuit algorithm applied to JPEG artifact removal. The double-sided arrows at the top of the diagram go both directions because $\bm {x}_{\ell + 1}$ influences $\bm {z}_{\ell }$ during initialization.\relax }}{47}{figure.caption.12}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces This diagram shows interactions between layers across iterations for the ADMM pursuit algorithm applied to JPEG artifact removal. The double-sided arrows at the top of the diagram go both directions because $\bm {x}_{\ell + 1}$ influences $\bm {z}_{\ell }$ during initialization.\relax }}{48}{figure.caption.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces This is the reconstruction error for the multi-layer dictionary model measured on the validation set shown as a function of training time. Subfigure \ref {figure:Train Error Curve ADMM} shows the error for the ADMM algorithm and Subfigure \ref {figure:Train Error Curve FISTA} shows the error for the FISTA algorithm.\relax }}{50}{figure.caption.14}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces This is the reconstruction error for the multi-layer dictionary model measured on the validation set shown as a function of training time. Subfigure \ref {figure:Train Error Curve ADMM} shows the error for the ADMM algorithm and Subfigure \ref {figure:Train Error Curve FISTA} shows the error for the FISTA algorithm.\relax }}{51}{figure.caption.14}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces This plots the objective function from equation \ref {equation:JPEG Sparse Coding Objective} in respect to iterations, using $\bm {z}_{\ell }$ for the coefficients of the ADMM approach.\relax }}{51}{figure.caption.15}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces This plots the objective function from equation \ref {equation:JPEG Sparse Coding Objective} in respect to iterations, using $\bm {z}_{\ell }$ for the coefficients of the ADMM approach.\relax }}{52}{figure.caption.15}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

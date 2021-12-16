@@ -301,7 +301,7 @@ With these equations it is possible to compute dictionary updates through backpr
    \For{$\ell \in \{1,\hdots,L\}$}
    {
       $\tilde{\mD} = \operatorname{Normalize}(\hat{\mD}_{\ell} + \mDelta \hat{\mD}_{\ell})$ \\
-      $\mDelta \mD_{\ell} = \operatorname{Truncate}(\F^{-1}\operatorname{RandomizedSVD}(\tilde{\mD} - \hat{\mD}_{\ell}))$ \\
+      $\mDelta \mD_{\ell} = \operatorname{Truncate}(\F^{-1}\operatorname{LowRankApprox}(\tilde{\mD} - \hat{\mD}_{\ell}))$ \\
       $\left(\rho\mId + \mD_{\ell}^T\mD_{\ell}\right) = \operatorname{UpdateDecomp}\left(\left(\rho\mId + \mD_{\ell}^T\mD_{\ell}\right),\rho,\mD_s,\mDelta\mD \right)$ \\
       $\mD_{\ell} = \mD + \mDelta\mD$ \\
       $\hat{\mD}_{\ell} = \F(\mD_{\ell})$
