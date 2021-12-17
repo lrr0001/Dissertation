@@ -679,7 +679,7 @@ So, the dictionary update computational cost for this novel approach requires $\
 Using filter size $K = 5$ and signal size $\hat{K} = 64$, I compared the update times of the full Cholesky decomposition from scratch to the Cholesky update described in the previous section. For this comparison, I used a rank-$1$ approximation $\reflectbox{R} = 1$ and kept the number of filters equal to the number of channels $M = C$. Computations were computed on a CPU. The results are shown in Figure \ref{Figure:Computational Comparison}. For a large number of channels and filters, the computation time for directly computing the Cholesky decomposition from scratch exceeds the computation time for updating a previous decomposition.
 
 \begin{figure}
-\includegraphics[width=\textwidth]{figures/computationtimes.png}
+\includegraphics[width=\textwidth]{figures/computationtime_s.PNG}
 \caption{This plot shows a comparison of computation times for computing the Cholesky decompostion directly versus updating it instead. In all runs, the number of channels is the same as the number of filters.}
 \label{Figure:Computational Comparison}
 \end{figure}

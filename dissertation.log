@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  16 DEC 2021 17:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  17 DEC 2021 01:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1214,6 +1214,12 @@ Overfull \hbox (6.30841pt too wide) in paragraph at lines 660--662
 ap-prox-i-ma-tion: $[][]\OT1/cmr/m/n/12 [[]][] \OMS/cmsy/m/n/12 ^^Y
  []
 
+
+Overfull \hbox (6.3669pt too wide) detected at line 668
+\OML/cmm/b/it/12 U\OML/cmm/m/it/12 ; \OT1/cmr/bx/n/12 ^^F\OML/cmm/m/it/12 ; \OM
+L/cmm/b/it/12 V[] \OT1/cmr/m/n/12 = [] []
+ []
+
 [25]
 Overfull \hbox (17.39313pt too wide) in paragraph at lines 677--678
 []\OT1/ptm/m/n/12 So, the dic-tio-nary up-date com-pu-ta-tional cost for this n
@@ -1221,14 +1227,13 @@ ovel ap-proach re-quires $\OMS/cmsy/m/n/12 O\OT1/cmr/m/n/12 ([]\OML/cmm/m/it/12
  CKM\OT1/cmr/m/n/12 ) +
  []
 
-<figures/computationtimes.png, id=818, 949.5475pt x 527.9725pt>
-File: figures/computationtimes.png Graphic file (type png)
+<figures/computationtime_s.PNG, id=818, 810.02625pt x 453.19313pt>
+File: figures/computationtime_s.PNG Graphic file (type png)
 
-<use figures/computationtimes.png>
-Package pdftex.def Info: figures/computationtimes.png used on input line 682.
-(pdftex.def)             Requested size: 433.62001pt x 241.10599pt.
- [26] [27 <./figures/computationtimes.png>]
-[28]
+<use figures/computationtime_s.PNG>
+Package pdftex.def Info: figures/computationtime_s.PNG used on input line 682.
+(pdftex.def)             Requested size: 433.62001pt x 242.6046pt.
+ [26] [27 <./figures/computationtime_s.PNG>] [28]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1245,7 +1250,7 @@ Chapter 3.
 [32
 
 ] [33] [34] [35] [36] [37]
-<figures/multi-layer_ADMM-node-dependencies-Sparse-Coding.png, id=962, 767.8687
+<figures/multi-layer_ADMM-node-dependencies-Sparse-Coding.png, id=963, 767.8687
 4pt x 418.56375pt>
 File: figures/multi-layer_ADMM-node-dependencies-Sparse-Coding.png Graphic file
  (type png)
@@ -1267,7 +1272,7 @@ Chapter 4.
 [44
 
 ] [45] [46] [47]
-<figures/multi-layer_ADMM-node-dependencies-JPEG.png, id=1062, 787.44188pt x 50
+<figures/multi-layer_ADMM-node-dependencies-JPEG.png, id=1063, 787.44188pt x 50
 8.90125pt>
 File: figures/multi-layer_ADMM-node-dependencies-JPEG.png Graphic file (type pn
 g)
@@ -1281,14 +1286,14 @@ ed on input line 131.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 155.
 
-<figures/ADMM_Recon_Err.png, id=1099, 419.5675pt x 296.10625pt>
+<figures/ADMM_Recon_Err.png, id=1100, 419.5675pt x 296.10625pt>
 File: figures/ADMM_Recon_Err.png Graphic file (type png)
 
 <use figures/ADMM_Recon_Err.png>
 Package pdftex.def Info: figures/ADMM_Recon_Err.png used on input line 174.
 (pdftex.def)             Requested size: 173.44865pt x 122.40738pt.
 
-<figures/FISTA_Recon_Err.png, id=1100, 424.58624pt x 296.10625pt>
+<figures/FISTA_Recon_Err.png, id=1101, 424.58624pt x 296.10625pt>
 File: figures/FISTA_Recon_Err.png Graphic file (type png)
 
 <use figures/FISTA_Recon_Err.png>
@@ -1299,7 +1304,7 @@ Overfull \hbox (2.28001pt too wide) in paragraph at lines 172--184
 []$[]$ $[]$ 
  []
 
-<figures/Sparse_Coding_Comparison.png, id=1105, 408.52625pt x 296.10625pt>
+<figures/Sparse_Coding_Comparison.png, id=1106, 408.52625pt x 296.10625pt>
 File: figures/Sparse_Coding_Comparison.png Graphic file (type png)
 
 <use figures/Sparse_Coding_Comparison.png>
@@ -1368,9 +1373,9 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
  )
 (\end occurred when \iftrue on line 101 was incomplete) 
 Here is how much of TeX's memory you used:
- 16618 strings out of 493029
- 261089 string characters out of 6136233
- 474057 words of memory out of 5000000
+ 16619 strings out of 493029
+ 261098 string characters out of 6136233
+ 474059 words of memory out of 5000000
  19231 multiletter control sequences out of 15000+600000
  35849 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1410,9 +1415,9 @@ live/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri
 8a.pfb>
-Output written on dissertation.pdf (105 pages, 742167 bytes).
+Output written on dissertation.pdf (105 pages, 729170 bytes).
 PDF statistics:
- 1751 PDF objects out of 2073 (max. 8388607)
+ 1752 PDF objects out of 2073 (max. 8388607)
  1578 compressed objects within 16 object streams
  614 named destinations out of 1000 (max. 500000)
  628 words of extra memory for PDF output out of 10000 (max. 10000000)
