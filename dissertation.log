@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  17 DEC 2021 01:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  17 DEC 2021 02:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1349,24 +1349,25 @@ nc-tions, the ex-pres-sions
 
 [80] [81] [82] [83]) [84] [85
 
+
 ]
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 300.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 301.
  [86]
-Overfull \hbox (2.5002pt too wide) in paragraph at lines 300--300
+Overfull \hbox (2.5002pt too wide) in paragraph at lines 301--301
 []\OT1/ptm/m/n/12 I. Good-fel-low, Y. Ben-gio, and A. Courville, \OT1/ptm/m/it/
 12 Deep Learn-ing\OT1/ptm/m/n/12 . MIT Press, 2016, []$\OT1/pcr/m/n/12 http :
  []
 
 [87] [88]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 313.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 314.
  [89]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 313.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 314.
  (./dissertation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 313.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 313.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 314.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 314.
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: 688F7AEB9EC56A09F321D6EA63618A8C;5340.
+(rerunfilecheck)             Checksum: 472A152F7B123B3DC2A24E494DAE7869;5346.
 Package logreq Info: Writing requests to 'dissertation.run.xml'.
 \openout1 = `dissertation.run.xml'.
 
@@ -1374,7 +1375,7 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 (\end occurred when \iftrue on line 101 was incomplete) 
 Here is how much of TeX's memory you used:
  16619 strings out of 493029
- 261098 string characters out of 6136233
+ 261104 string characters out of 6136233
  474059 words of memory out of 5000000
  19231 multiletter control sequences out of 15000+600000
  35849 words of font info for 102 fonts, out of 8000000 for 9000
@@ -1415,7 +1416,7 @@ live/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri
 8a.pfb>
-Output written on dissertation.pdf (105 pages, 729170 bytes).
+Output written on dissertation.pdf (105 pages, 729185 bytes).
 PDF statistics:
  1752 PDF objects out of 2073 (max. 8388607)
  1578 compressed objects within 16 object streams
