@@ -13,7 +13,9 @@ FISTA & the Fast Iterative Shrinkage Tresholding Algorithm \np
 RGB & Describes an image with red, green, and blue channels \np
 JPEG & an image compression standard developed by the Joint Photographic Experts Group \np
 FFT & the discrete Fourier transform \np
-DCT & type-II discrete cosine transform
+DCT & type-II discrete cosine transform \np
+CPU & central processing unit \np
+RAM & random-access memory
 \end{tabular}
 
 \section*{Integer Constants}
@@ -22,6 +24,7 @@ Capital letters that are not bold are used to denote integer constants.\np
 $M$ & the number of filters\np
 $C$ & the number of channels\np
 $\hat{K}$ & the number of elements in a single channel of the signal\np
+$K$ & the number of elements in a single channel of a filter \np
 $\reflectbox{R}$ & a small integer that specifies the rank of the dictionary updates \np
 $L$ & the number of layers
 \end{tabular}
@@ -99,7 +102,9 @@ $\rho$ & a scalar for the ADMM alrogithm that specifies both the weighting of th
 %
 $\alpha$ & the over-relaxation or under-relaxation factor for ADMM \np
 %
-$\lambda$ & the factor for $\operatorname{L}_1$ penalty.  $\lambda$ is also used as the factor for the $\operatorname{L}_2$ penalty on the image gradients for Tikhonov regularization. Context will make clear. \np
+$\lambda$ & the factor for the $\operatorname{L}_1$ penalty.  $\lambda$ is also used as the factor for the $\operatorname{L}_2$ penalty on the image gradients for Tikhonov regularization. Context will make clear. \np
+%
+$\mu$ & the factor for the $\operatorname{L}_2$ penalty for the reconstruction of the signal or coefficients from the previous layer. \np
 %
 $\mathbb{L}$ & an estimate of the Lipshitz constant, used to determine stepsize in the ISTA and FISTA algorithms. \np
 %
@@ -155,9 +160,9 @@ $\arg \min$ & the argument minimum of an expression \np
 %
 $\nabla_{a} b$ & the gradient of $b$ in respect to $a$ \np
 %
-$L_1$ & the $L_1$ norm \np
+$L_1$,$\|\cdot\|_1$ & the $L_1$ norm \np
 %
-$L_2$ & the $L_2$ norm \np
+$L_2$,$\|\cdot\|_2$ & the $L_2$ norm \np
 %
 $\mPhi$ & n arbitrary linear operator (this operator is also listed under matrices, since matrices are linear operators) \np
 %
