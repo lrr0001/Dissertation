@@ -551,7 +551,7 @@ If the dictionary $\hat{\mD}$ is only used in component function $f_{\hat{\mD}}$
 \sloppy If the dictionary $\hat{\mD}$ is used in multiple component functions, the expressions $\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \real(\hat{D}_{c,m})}$ and $\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \imag(\hat{D}_{c,m})}$ still must be calculated so that the results can be aggregated later. Similarly, if $\vb$ affects $\loss$ through multiple branches,\footnote{That is, not just through function $f_{\hat{\mD}}$} the expression $\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb}$ still must be calculated, and $\nabla_{\vb} \loss$ is just an aggregation of the results across all branches.
 
 \begin{equation}
-\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb^H} =\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}
+\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\frac{\partial f_{\hat{\mD}}(\vb)}{\partial \vb} =\left(\nabla_{f_{\hat{\mD}}(\vb)} \loss\right)^H\mQ^{-1}
 \end{equation}
 
 \begin{equation}
